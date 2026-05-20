@@ -1,0 +1,1 @@
+<?php die("Access Denied"); ?>#x#a:3:{s:4:"body";s:0:"";s:7:"pathway";a:1:{i:0;O:8:"stdClass":2:{s:4:"name";s:6:"Search";s:4:"link";s:50:"index.php?option=com_finder&view=search&Itemid=115";}}s:6:"module";a:0:{}}

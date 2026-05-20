@@ -1,0 +1,26 @@
+<?php
+defined('_JEXEC') or die;
+return array (
+  'COM_FINDER_ADVANCED_SEARCH' => 'Расширенные параметры',
+  'COM_FINDER_FILTER_BRANCH_LABEL' => 'Поиск по %s',
+  'COM_FINDER_FILTER_SELECT_ALL_LABEL' => '- Все -',
+  'COM_FINDER_SELECT_SEARCH_FILTER' => '- Выбор фильтра поиска -',
+  'MOD_FINDER' => 'Умный поиск',
+  'MOD_FINDER_CONFIG_OPTION_BOTTOM' => 'Снизу',
+  'MOD_FINDER_CONFIG_OPTION_TOP' => 'Сверху',
+  'MOD_FINDER_FIELD_OPENSEARCH_LABEL' => 'Включить OpenSearch',
+  'MOD_FINDER_FIELD_OPENSEARCH_TEXT_LABEL' => 'Заголовок OpenSearch',
+  'MOD_FINDER_FIELDSET_ADVANCED_ALT_LABEL' => 'Альтернативный заголовок',
+  'MOD_FINDER_FIELDSET_ADVANCED_SETITEMID_LABEL' => 'Пункт меню',
+  'MOD_FINDER_FIELDSET_ADVANCED_SHOW_BUTTON_LABEL' => 'Кнопка поиска',
+  'MOD_FINDER_FIELDSET_ADVANCED_SHOW_LABEL_LABEL' => 'Заголовок поля',
+  'MOD_FINDER_FIELDSET_BASIC_AUTOSUGGEST_LABEL' => 'Подсказки при поиске',
+  'MOD_FINDER_FIELDSET_BASIC_SEARCHFILTER_LABEL' => 'Фильтр поиска',
+  'MOD_FINDER_FIELDSET_BASIC_SHOW_ADVANCED_LABEL' => 'Расширенные параметры поиска',
+  'MOD_FINDER_FIELDSET_BASIC_SHOW_ADVANCED_OPTION_LINK' => 'Ссылка на компонент',
+  'MOD_FINDER_OPENSEARCH_NAME' => 'OpenSearch',
+  'MOD_FINDER_SEARCH_VALUE' => 'Введите текст...',
+  'MOD_FINDER_SEARCHBUTTON_TEXT' => 'Поиск',
+  'MOD_FINDER_SELECT_MENU_ITEMID' => '- Выбор пункта меню -',
+  'MOD_FINDER_XML_DESCRIPTION' => 'Модуль для отображения формы умного поиска.',
+);

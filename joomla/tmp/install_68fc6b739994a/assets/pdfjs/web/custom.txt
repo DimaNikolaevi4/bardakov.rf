@@ -1,0 +1,8 @@
+
+
+add to viewer.html
+class hidden to :
+open, current page and bookmarks buttons
+
+
+viewer.mjs 17056:  if (fileOrigin === fileOrigin) {

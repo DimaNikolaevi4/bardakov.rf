@@ -1,0 +1,12 @@
+<?php
+return [
+    '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
+    'filename' => '/home/m/mitiba/bardakov.rf/public_html/templates/rt_elixir/custom/config/24/styles.yaml',
+    'modified' => 1685343845,
+    'data' => [
+        'preset' => 'preset3',
+        'feature' => [
+            'background-image' => 'gantry-media://new_foto/base_1c685aaaf9.jpg'
+        ]
+    ]
+];

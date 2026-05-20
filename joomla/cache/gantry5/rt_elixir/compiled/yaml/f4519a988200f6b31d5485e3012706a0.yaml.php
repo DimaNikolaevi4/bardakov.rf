@@ -1,0 +1,227 @@
+<?php
+return [
+    '@class' => 'Gantry\\Component\\File\\CompiledYamlFile',
+    'filename' => '/home/m/mitiba/bardakov.rf/public_html/templates/rt_elixir/custom/config/21/index.yaml',
+    'modified' => 1773043189,
+    'data' => [
+        'name' => '21',
+        'timestamp' => 1773043189,
+        'version' => 7,
+        'preset' => [
+            'image' => 'gantry-admin://images/layouts/default.png',
+            'name' => 'home_-_particles',
+            'timestamp' => 1666521226
+        ],
+        'positions' => [
+            'poisk' => 'Module Position',
+            'footer-a' => 'Module Position',
+            '00' => 'Module Position',
+            '01' => 'Module Position',
+            '02' => 'Module Position',
+            '03' => 'Module Position',
+            '04' => 'Module Position',
+            '05' => 'Module Position',
+            '06' => 'Module Position',
+            '07' => 'Module Position',
+            '08' => 'Module Position',
+            'МДК 03.02_3' => 'Module Position',
+            'МДК 03.02_4' => 'Module Position',
+            'пр_ит_кип4' => 'Module Position',
+            'ПР_МДК02_01_КИП4' => 'Module Position',
+            '09' => 'Module Position',
+            '010' => 'Module Position',
+            '011' => 'Module Position',
+            '012' => 'Module Position',
+            '014' => 'Module Position',
+            '015' => 'Module Position',
+            0 => 'Module Position',
+            1 => 'Module Position',
+            2 => 'Module Position',
+            3 => 'Module Position',
+            4 => 'Module Position',
+            5 => 'Module Position',
+            6 => 'Module Position',
+            7 => 'Module Position',
+            8 => 'Module Position',
+            9 => 'Module Position',
+            22 => 'Module Position',
+            10 => 'Module Position',
+            11 => 'Module Position',
+            12 => 'Module Position',
+            13 => 'Module Position',
+            14 => 'Module Position',
+            15 => 'Module Position',
+            16 => 'Module Position',
+            17 => 'Module Position',
+            18 => 'Module Position'
+        ],
+        'sections' => [
+            'top' => 'Top',
+            'navigation' => 'Navigation',
+            'slideshow' => 'Slideshow',
+            'above' => 'Above',
+            'feature' => 'Feature',
+            'showcase' => 'Showcase',
+            'utility' => 'Utility',
+            'expanded' => 'Expanded',
+            'extension' => 'Extension',
+            'bottom' => 'Bottom',
+            'copyright' => 'Copyright',
+            'header' => 'Header',
+            'sidebar' => 'Sidebar',
+            'aside' => 'Aside',
+            'mainbar' => 'Main',
+            'footer' => 'Footer',
+            'offcanvas' => 'Offcanvas'
+        ],
+        'particles' => [
+            'messages' => [
+                'system-messages-7858' => 'System Messages'
+            ],
+            'position' => [
+                'position-position-8765' => 'Module Position',
+                'position-position-6061' => 'Module Position',
+                'position-position-6644' => 'Module Position',
+                'position-position-6211' => 'Module Position',
+                'position-position-6712' => 'Module Position',
+                'position-position-1443' => 'Module Position',
+                'position-position-8342' => 'Module Position',
+                'position-position-9789' => 'Module Position',
+                'position-position-7447' => 'Module Position',
+                'position-position-9506' => 'Module Position',
+                'position-position-5490' => 'Module Position',
+                'position-position-2903' => 'Module Position',
+                'position-position-8983' => 'Module Position',
+                'position-position-1130' => 'Module Position',
+                'position-position-9466' => 'Module Position',
+                'position-position-2289' => 'Module Position',
+                'position-position-1071' => 'Module Position',
+                'position-position-2570' => 'Module Position',
+                'position-position-6494' => 'Module Position',
+                'position-position-4493' => 'Module Position',
+                'position-position-1753' => 'Module Position',
+                'position-position-7970' => 'Module Position',
+                'position-position-4346' => 'Module Position',
+                'position-position-5050' => 'Module Position',
+                'position-position-3293' => 'Module Position',
+                'position-position-3383' => 'Module Position',
+                'position-position-9349' => 'Module Position',
+                'position-position-2299' => 'Module Position',
+                'position-position-7404' => 'Module Position',
+                'position-position-5843' => 'Module Position',
+                'position-position-8561' => 'Module Position',
+                'position-position-4867' => 'Module Position',
+                'position-position-9785' => 'Module Position',
+                'position-position-1849' => 'Module Position',
+                'position-position-2065' => 'Module Position',
+                'position-position-9091' => 'Module Position',
+                'position-position-9931' => 'Module Position',
+                'position-position-7104' => 'Module Position',
+                'position-position-1385' => 'Module Position',
+                'position-position-1548' => 'Module Position',
+                'position-position-7770' => 'Module Position'
+            ],
+            'menu' => [
+                'menu-3775' => 'Menu'
+            ],
+            'slideshow' => [
+                'slideshow-4169' => 'Слайд'
+            ],
+            'social' => [
+                'social-2632' => 'Social',
+                'social-7680' => 'Social'
+            ],
+            'video' => [
+                'video-3605' => 'Video'
+            ],
+            'quickmenu' => [
+                'quickmenu-1783' => 'Quick Menu'
+            ],
+            'image' => [
+                'image-8214' => 'Image'
+            ],
+            'module' => [
+                'position-module-8274' => 'Module Instance'
+            ],
+            'locations' => [
+                'locations-3441' => 'Location Pins'
+            ],
+            'spacer' => [
+                'spacer-8015' => 'Spacer',
+                'spacer-6523' => 'Spacer'
+            ],
+            'simplecontent' => [
+                'simplecontent-5255' => 'Simple Content'
+            ],
+            'content' => [
+                'system-content-1120' => 'Page Content'
+            ],
+            'flipster' => [
+                'flipster-1723' => 'Flipster Cover Flow'
+            ],
+            'custom' => [
+                'custom-3094' => 'Custom HTML'
+            ],
+            'copyright' => [
+                'copyright-4731' => 'Copyright'
+            ],
+            'mobile-menu' => [
+                'mobile-menu-2576' => 'Mobile Menu'
+            ]
+        ],
+        'inherit' => [
+            'default' => [
+                'top' => 'top',
+                'system-messages-7858' => 'system-messages-9828',
+                'navigation' => 'navigation',
+                'position-position-8765' => 'position-position-5716',
+                'menu-3775' => 'menu-2872',
+                'footer' => 'footer',
+                'position-position-6061' => 'position-position-1848',
+                'position-position-6644' => 'position-position-2446',
+                'position-position-6211' => 'position-position-1945',
+                'position-position-6712' => 'position-position-2546',
+                'position-position-1443' => 'position-position-8551',
+                'position-position-8342' => 'position-position-8646',
+                'position-position-9789' => 'position-position-5856',
+                'position-position-7447' => 'position-position-1880',
+                'position-position-9506' => 'position-position-2121',
+                'position-position-5490' => 'position-position-9550',
+                'position-position-2903' => 'position-position-8269',
+                'position-position-8983' => 'position-position-5323',
+                'position-position-1130' => 'position-position-3898',
+                'position-position-9466' => 'position-position-4518',
+                'position-position-2289' => 'position-position-3262',
+                'position-position-1071' => 'position-position-3379',
+                'position-position-2570' => 'position-position-9597',
+                'position-position-6494' => 'position-position-5988',
+                'position-position-4493' => 'position-position-2490',
+                'position-position-1753' => 'position-position-3914',
+                'position-position-7970' => 'position-position-3950',
+                'position-position-4346' => 'position-position-7016',
+                'position-position-5050' => 'position-position-9518',
+                'position-position-3293' => 'position-position-2022',
+                'position-position-3383' => 'position-position-3811',
+                'position-position-9349' => 'position-position-9911',
+                'position-position-2299' => 'position-position-8849',
+                'position-position-7404' => 'position-position-1429',
+                'position-position-5843' => 'position-position-8491',
+                'position-position-8561' => 'position-position-3009',
+                'position-position-4867' => 'position-position-5226',
+                'position-position-9785' => 'position-position-7954',
+                'position-position-1849' => 'position-position-7697',
+                'position-position-2065' => 'position-position-6851',
+                'position-position-9091' => 'position-position-5674',
+                'position-position-9931' => 'position-position-1691',
+                'position-position-7104' => 'position-position-3652',
+                'position-position-1385' => 'position-position-3316',
+                'position-position-1548' => 'position-position-3738',
+                'position-position-7770' => 'position-position-4078',
+                'copyright' => 'copyright',
+                'social-7680' => 'social-8176',
+                'custom-3094' => 'custom-7038',
+                'copyright-4731' => 'copyright-6444'
+            ]
+        ]
+    ]
+];

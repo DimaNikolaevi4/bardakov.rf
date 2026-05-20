@@ -1,0 +1,9 @@
+<?php
+defined('_JEXEC') or die;
+return array (
+  'PLG_SYSTEM_COOKIEHINT_INFO' => 'Мы используем файлы cookie для улучшения вашего взаимодействия на нашем веб-сайте. Просматривая этот веб-сайт, вы соглашаетесь на использование нами файлов cookie.',
+  'PLG_SYSTEM_COOKIEHINT_BTN_OK' => 'Принять',
+  'PLG_SYSTEM_COOKIEHINT_BTN_NOTOK' => 'Отклонить',
+  'PLG_SYSTEM_COOKIEHINT_BTN_INFO' => 'Политика в отношении обработки персональных данных',
+  'PLG_SYSTEM_COOKIEHINT_HEAD' => 'Мы используем файлы cookie',
+);
