@@ -1,0 +1,72 @@
+<?php
+/**
+ * Шаблон конфигурации Joomla 5
+ * Скопируйте этот файл в configuration.php и заполните свои данные
+ * Файл configuration.php исключён из Git через .gitignore
+ */
+class JConfig {
+    /* --- База данных --- */
+    public $host       = 'localhost';       // Хост БД (обычно localhost)
+    public $user       = 'db_user';         // Пользователь БД
+    public $password   = 'db_password';     // Пароль БД
+    public $db         = 'db_name';         // Имя базы данных
+    public $dbprefix   = 'jos_';            // Префикс таблиц
+    public $dbtype     = 'mysqli';          // Тип драйвера: mysqli, pdo_mysql
+
+    /* --- Сервер --- */
+    public $secret     = 'your_secret_key_change_this';  // Секретный ключ (сгенерируйте уникальный)
+    public $live_site  = '';                // URL сайта (пустой = автоопределение)
+    public $gzip       = '0';              // GZIP-сжатие (0 = выкл, 1 = вкл)
+    public $error_reporting = 'default';   // Уровень отчётов об ошибках
+    public $debug      = '0';              // Режим отладки (0 = выкл)
+
+    /* --- Пути --- */
+    public $log_path   = '/tmp';           // Путь к логам
+    public $tmp_path   = '/tmp';           // Путь к временным файлам
+
+    /* --- Кэш --- */
+    public $caching    = '0';              // Кэширование (0 = выкл, 1 = вкл, 2 = продвинутый)
+    public $cachetime  = '15';             // Время жизни кэша (минуты)
+    public $cache_handler = 'file';        // Обработчик кэша
+
+    /* --- Сессия --- */
+    public $lifetime   = '15';             // Время жизни сессии (минуты)
+    public $session_handler = 'database';  // Обработчик сессий
+
+    /* --- Почта --- */
+    public $mailer     = 'mail';           // Метод: mail, smtp, sendmail
+    public $mailfrom   = '';               // Email отправителя
+    public $fromname   = '';               // Имя отправителя
+    public $sendmail   = '/usr/sbin/sendmail'; // Путь к sendmail
+    public $smtpauth   = '0';             // SMTP-авторизация
+    public $smtpuser   = '';              // SMTP-пользователь
+    public $smtppass   = '';              // SMTP-пароль
+    public $smtphost   = 'localhost';     // SMTP-сервер
+    public $smtpsecure = 'none';          // none, ssl, tls
+    public $smtpport   = '25';           // SMTP-порт
+
+    /* --- Мета --- */
+    public $MetaDesc   = '';              // Мета-описание сайта
+    public $MetaKeys   = '';              // Ключевые слова
+    public $MetaTitle  = '1';            // Показывать заголовок в мета
+    public $MetaAuthor = '1';            // Показывать автора в мета
+
+    /* --- SEO --- */
+    public $sef        = '1';            // ЧПУ (0 = выкл, 1 = вкл)
+    public $sef_rewrite = '0';           // Переписывание URL (требует .htaccess)
+    public $sef_suffix = '0';            // Добавлять суффикс (.html)
+    public $unicodeslugs = '0';          // Unicode в URL (1 = кириллица)
+
+    /* --- Безопасность --- */
+    public $force_ssl  = '0';            // Принудительный SSL (0 = выкл, 1 = админка, 2 = весь сайт)
+
+    /* --- Разное --- */
+    public $offline    = '0';            // Сайт на обслуживании
+    public $offline_message = 'Сайт на техническом обслуживании. Пожалуйста, зайдите позже.';
+    public $display_offline_message = '1';
+    public $sitename   = '';             // Название сайта
+    public $editor     = 'tinymce';      // Редактор по умолчанию
+    public $list_limit = '20';           // Элементов в списке
+    public $access     = '1';            // Уровень доступа по умолчанию
+    public $debug_lang = '0';           // Отладка языковых файлов
+}
