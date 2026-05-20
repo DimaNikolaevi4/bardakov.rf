@@ -1,0 +1,54 @@
+<!-- Шапка сайта — подключается через JS-include -->
+<nav class="navbar navbar-expand-lg navbar-dark site-header">
+  <div class="container">
+    <a class="navbar-brand" href="/">бардаков.рф</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/obo-mne/">Обо мне</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/obuchenie/" id="navObuchenie"
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Обучение
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navObuchenie">
+            <li><a class="dropdown-item" href="/obuchenie/elektromonter.html">Электромонтер</a></li>
+            <li><a class="dropdown-item" href="/obuchenie/kip/">КИП</a></li>
+            <li><a class="dropdown-item" href="/obuchenie/ksk.html">КСК</a></li>
+            <li><a class="dropdown-item" href="/obuchenie/pm02/lektsii/">ПМ.02 Лекции</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/abiturientu/" id="navAbiturient"
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Абитуриенту
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navAbiturient">
+            <li><a class="dropdown-item" href="/abiturientu/professii/">Профессии</a></li>
+            <li><a class="dropdown-item" href="/abiturientu/spetsialnosti/">Специальности</a></li>
+            <li><a class="dropdown-item" href="/abiturientu/dokumentatsiya.html">Документация</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/vospitanie/">Воспитание</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn-search" title="Поиск" aria-label="Открыть поиск">&#128269;</button>
+        <button class="btn btn-outline-light btn-sm" id="a11y-toggle"
+                title="Версия для слабовидящих" aria-label="Версия для слабовидящих">
+          <span class="d-none d-lg-inline">A+</span>
+          <span class="d-lg-none">A+</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

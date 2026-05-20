@@ -1,139 +1,123 @@
-# Чек-лист: Создание сайта бардаков.рф на новом стеке (Eleventy)
+# Чек-лист: Создание сайта бардаков.рф на простом HTML-стеке
 
-> **Стек:** Eleventy 3.x + Nunjucks + Bootstrap 5 + Decap CMS + Lunr.js  
-> **Референс:** https://github.com/DimaNikolaevi4/site  
+> **Стек:** HTML5 + Bootstrap 5 (CDN) + Pagefind + JS-include  
 > **Подробности:** см. INFO.md в этой же папке
 
 ---
 
-## Этап 1. Аудит текущего сайта (Joomla)
+## Этап 1. Подготовка ✅
 
-- [ ] Составить полный список всех разделов и подразделов бардаков.рф
-- [ ] Зафиксировать URL-структуру (какие URL существуют сейчас)
-- [ ] Определить типы страниц: главная, разделы, статьи, специальные страницы
-- [ ] Составить список всех используемых модулей и плагинов Joomla
-- [ ] Определить интерактивные элементы: формы, поиск, галереи, комментарии
-- [ ] Собрать медиафайлы: изображения, PDF, DOC — оценить объём
-- [ ] Зафиксировать текущие настройки SEO: мета-теги, sitemap, robots.txt
+- [x] Определён стек: HTML + Bootstrap CDN + Pagefind + JS-include
+- [x] Создана структура папок проекта
+- [x] Созданы базовые файлы: style.css, main.js, header.html, footer.html
+- [x] Создан шаблон страницы (page-template.html)
+- [x] Создана главная страница (index.html)
+- [x] Создана страница поиска (search/index.html)
+- [x] Создана страница 404
+- [x] Созданы .htaccess, robots.txt, sitemap.xml
 
-## Этап 2. Проектирование структуры нового сайта
+## Этап 2. Аудит текущего сайта (Joomla)
 
-- [ ] Создать файл `src/_data/rubrics.yaml` — иерархия рубрик (аналогично сайту-референсу)
-- [ ] Создать файл `src/_data/site.yaml` — название, контакты, ссылки, реквизиты
-- [ ] Создать файл `src/_data/menu.yaml` — структура навигационного меню
-- [ ] Определить типы страниц (A/B/C) для каждого раздела
-- [ ] Спроектировать URL-структуру нового сайта (с учётом 301-редиректов)
-- [ ] Составить карту соответствия: старый URL → новый URL
+- [ ] Составить полный список всех страниц бардаков.рф с URL
+- [ ] Сохранить текстовый контент каждой страницы
+- [ ] Сохранить все изображения и вложения (PDF, DOC)
+- [ ] Зафиксировать текущую структуру меню
+- [ ] Записать мета-теги (description) для каждой страницы
 
-## Этап 3. Инициализация проекта
+## Этап 3. Создание страниц — Обо мне
 
-- [ ] Создать папку проекта и `package.json`
-- [ ] Установить зависимости: `@11ty/eleventy`, `@11ty/eleventy-navigation`, `js-yaml`, `lunr`, `bootstrap`, `bootstrap-icons`, `aos`, `glightbox`, `swiper`, `@srexi/purecounterjs`
-- [ ] Установить dev-зависимости: `clean-css`, `html-minifier-terser`, `sharp`
-- [ ] Создать `.eleventy.js` — конфигурация Eleventy (вход `src/`, выход `public/`, шаблоны `njk`)
-- [ ] Настроить скрипты в `package.json`: `dev`, `build`
-- [ ] Создать `.gitignore` (public/, node_modules/, .env*, *.zip)
-- [ ] Проверить: `npm run build` — сборка без ошибок
+- [ ] `/obo-mne/index.html` — Обо мне (обзорная)
+- [ ] `/obo-mne/dostizheniya.html` — Достижения
+- [ ] `/obo-mne/khobbi.html` — Хобби
+- [ ] `/obo-mne/kontakty.html` — Контакты
+- [ ] `/obo-mne/metodicheskaya-rabota.html` — Методическая работа
 
-## Этап 4. Разработка базовых шаблонов (Layouts)
+## Этап 4. Создание страниц — Обучение
 
-- [ ] Создать `src/_includes/layouts/base.njk` — базовый макет:
-  - `<head>`: мета, CSS (Bootstrap + main.css), фавиконы
-  - `<body>`: header, main, footer
-  - Скрипты: Bootstrap JS, AOS, GLightbox, PureCounter, main.js
-- [ ] Создать `src/index.njk` — главная страница (Тип A)
-- [ ] Создать `layouts/page-full.njk` — страница раздела (Тип B, канонический)
-- [ ] Создать `layouts/post.njk` — страница материала (Тип C)
-- [ ] Создать `layouts/listing.njk` — список материалов (с пагинацией)
+- [ ] `/obuchenie/index.html` — Обучение (обзорная)
+- [ ] `/obuchenie/elektromonter.html` — Электромонтер
+- [ ] `/obuchenie/kip/index.html` — КИП
+- [ ] `/obuchenie/kip/prakticheskie-kip.html` — Практические КИП
+- [ ] `/obuchenie/ksk.html` — КСК
+- [ ] `/obuchenie/pm02/lektsii/index.html` — ПМ.02 Лекции (список)
+- [ ] `/obuchenie/pm02/lektsii/razdel-1.html` — Раздел 1
+- [ ] `/obuchenie/pm02/lektsii/tema-1-1.html` — Тема 1.1
+- [ ] `/obuchenie/pm02/lektsii/...` — Остальные темы лекций
 
-## Этап 5. Разработка компонентов (8 секций)
+## Этап 5. Создание страниц — Абитуриенту
 
-- [ ] `components/header.njk` — шапка: логотип, меню (адаптивное, бургер), контакты, поиск
-- [ ] `components/hero.njk` — баннер с названием рубрики/материала
-- [ ] `components/breadcrumbs.njk` — хлебные крошки
-- [ ] `components/about.njk` — информационный блок (режимы home/razdel)
-- [ ] `components/news.njk` — карточки материалов
-- [ ] `components/popular.njk` — блок «Популярное»
-- [ ] `components/sidebar.njk` — сайдбар с баннерами
-- [ ] `components/footer.njk` — подвал: контакты, реквизиты, ссылки
-- [ ] Вспомогательные partials: `card.njk`, `pagination.njk`, `share.njk`, `related.njk`
+- [ ] `/abiturientu/index.html` — Абитуриенту (обзорная)
+- [ ] `/abiturientu/dokumentatsiya.html` — Документация
+- [ ] `/abiturientu/professii/index.html` — Профессии (список)
+- [ ] `/abiturientu/professii/08-01-07-master-obshchestroitelnykh-rabot.html`
+- [ ] `/abiturientu/professii/13-01-10-elektromonter.html`
+- [ ] `/abiturientu/professii/15-01-05-svarshchik.html`
+- [ ] `/abiturientu/professii/15-01-31-master-kip.html`
+- [ ] `/abiturientu/professii/43-01-09-povar-konditer.html`
+- [ ] `/abiturientu/professii/prodavets-kontroler-kassir.html`
+- [ ] `/abiturientu/spetsialnosti/index.html` — Специальности (список)
+- [ ] `/abiturientu/spetsialnosti/ekonomika-i-bukhgalterskij-uchet.html`
+- [ ] `/abiturientu/spetsialnosti/kompyuternye-sistemy-i-kompleksy.html`
 
-## Этап 6. Стилизация
+## Этап 6. Создание страниц — Воспитание
 
-- [ ] Создать `src/styles/main.css` — единый CSS-файл проекта
-- [ ] Настроить CSS-переменные: цвета, шрифты, отступы, тени
-- [ ] Адаптивная вёрстка: Mobile First (Bootstrap breakpoints: xs/sm/md/lg/xl/xxl)
-- [ ] Переключатель «Версия для слабовидящих» (увеличение шрифта, контраст, отключение анимаций)
-- [ ] Скролл-анимации через AOS (`data-aos` атрибуты)
-- [ ] Проверка: нет горизонтального скролла на мобильных
+- [ ] `/vospitanie/index.html` — Воспитание (обзорная)
+- [ ] `/vospitanie/dlya-roditelej.html` — Для родителей
+- [ ] `/vospitanie/razgovory-o-vazhnom.html` — Разговоры о важном
 
-## Этап 7. Миграция контента
+## Этап 7. Перенос медиафайлов
 
-- [ ] Экспорт статей из Joomla (через phpMyAdmin или скрипт конвертации)
-- [ ] Конвертация HTML → Markdown (с сохранением форматирования)
-- [ ] Создание front matter для каждого .md файла (title, date, tags, rubric, layout)
-- [ ] Размещение файлов в `src/content/` по рубрикам
-- [ ] Перенос изображений в `src/assets/images/` и `src/assets/uploads/`
-- [ ] Перенос документов (PDF, DOC) — в репозиторий или на хостинг
-- [ ] Проверка внутренних ссылок (скрипт `scripts/check-links.mjs`)
+- [ ] Перенести изображения в `/assets/images/`
+- [ ] Перенести PDF/DOC вложения в `/assets/docs/`
+- [ ] Обновить ссылки на файлы в HTML-страницах
+- [ ] Проверить, что все файлы открываются
 
-## Этап 8. Поиск (Lunr.js)
+## Этап 8. Поиск (Pagefind)
 
-- [ ] Настроить генерацию поискового индекса при сборке (фильтр `lunr-index` в `.eleventy.js`)
-- [ ] Создать страницу поиска `src/pages/search.njk`
-- [ ] Настроить русскую морфологию (lunr-languages)
-- [ ] Проверить: поиск работает на русском языке, результаты релевантны
+- [ ] Убедиться, что на всех страницах есть `data-pagefind-body` на `<main>`
+- [ ] Установить Pagefind: `npx pagefind --site .` (из корня сайта)
+- [ ] Проверить поиск: ввести запрос на `/search/`
+- [ ] Проверить русский язык: поиск по кириллице работает
+- [ ] Добавить `pagefind/` в `.gitignore` (уже добавлено)
 
-## Этап 9. Decap CMS (контент-редактор)
+## Этап 9. Настройка хостинга и деплой
 
-- [ ] Создать `src/admin/index.html` — точка входа CMS
-- [ ] Создать `src/admin/config.yml` — конфигурация коллекций и виджетов
-- [ ] Настроить коллекции: новости, страницы, документы
-- [ ] Настроить медиа-библиотеку для загрузки изображений
-- [ ] Протестировать: создание и редактирование материала через /admin/
+- [ ] Загрузить файлы на хостинг (FTP / файловый менеджер)
+- [ ] Настроить `.htaccess` (редиректы, кэширование)
+- [ ] Настроить 301-редиректы со старых URL Joomla:
+  - `/index.php/...` → `/...` (убрать index.php)
+  - Старые URL → новые URL
+- [ ] Запустить Pagefind на хостинге (или локально + загрузить индекс)
+- [ ] Проверить сайт: все страницы открываются, поиск работает
+- [ ] Проверить на мобильном: адаптивность, меню-бургер
 
-## Этап 10. Деплой
+## Этап 10. Финальная проверка
 
-- [ ] Создать `deploy.sh` — скрипт деплоя на хостинг:
-  - Клонирование репозитория
-  - Установка зависимостей (`npm ci`)
-  - Сборка (`npm run build`)
-  - Копирование `public/` в `public_html`
-  - Настройка прав доступа
-- [ ] Настроить `.htaccess` — редиректы, кэширование, сжатие
-- [ ] Настроить 301-редиректы со старых URL на новые (SEO-миграция)
-- [ ] Настроить HTTPS (SSL-сертификат)
-- [ ] Протестировать сайт на продакшене
-
-## Этап 11. Тестирование и аудит
-
-- [ ] Lighthouse аудит: Performance ≥90, Accessibility ≥95, SEO ≥90
-- [ ] Проверка на мобильных устройствах (Chrome DevTools + реальные)
-- [ ] Навигация с клавиатуры (Tab, Enter, Esc)
-- [ ] Валидация HTML/CSS (W3C Validator)
-- [ ] Проверка всех внутренних ссылок (0 битых)
-- [ ] Кроссбраузерная проверка (Chrome, Firefox, Safari, Edge)
+- [ ] Все внутренние ссылки работают (0 битых)
+- [ ] Все файлы (PDF, DOC) скачиваются
+- [ ] Поиск находит релевантные результаты
+- [ ] Версия для слабовидящих работает (A+)
+- [ ] 404-страница показывается для несуществующих URL
+- [ ] Мобильная адаптивность — нет горизонтального скролла
+- [ ] Favicon отображается в браузере
 
 ---
 
-## Метрики успеха
+## Как добавить новую страницу (памятка)
 
-| Метрика | Цель |
-|---------|------|
-| Lighthouse Performance | ≥90 |
-| Lighthouse Accessibility | ≥95 |
-| Время загрузки страницы | <1 сек |
-| Битые ссылки | 0 |
-| Контент мигрирован | 100% |
-| Поиск работает | Да |
-| Decap CMS доступна | Да |
+1. Скопировать `assets/components/page-template.html` в нужную папку
+2. Заменить: `ЗАМЕНИТЬ_ЗАГОЛОВОК`, `ЗАМЕНИТЬ_ОПИСАНИЕ`, `ЗАМЕНИТЬ_РАЗДЕЛ`
+3. Заполнить контент внутри `<main data-pagefind-body>`
+4. Обновить хлебные крошки
+5. Добавить ссылку в `header.html` (если нужно)
+6. Запустить `npx pagefind --site .`
+7. Закоммитить и запушить
 
-## Полезные ссылки
+## Как обновить Pagefind-индекс
 
-- Подробности о стеке и архитектуре: `INFO.md` в этой же папке
-- Репозиторий-референс: https://github.com/DimaNikolaevi4/site
-- Документация Eleventy: https://www.11ty.dev/docs/
-- Документация Nunjucks: https://mozilla.github.io/nunjucks/
-- Документация Bootstrap 5: https://getbootstrap.com/docs/5.3/
-- Документация Decap CMS: https://decapcms.org/docs/intro/
-- Документация Lunr.js: https://lunrjs.com/
+```bash
+cd new-stack/site/
+npx pagefind --site .
+```
+
+Папка `pagefind/` создастся автоматически. Она в `.gitignore`, не коммитится.

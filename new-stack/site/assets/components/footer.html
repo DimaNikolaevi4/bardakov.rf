@@ -1,0 +1,33 @@
+<!-- Подвал сайта — подключается через JS-include -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5>бардаков.рф</h5>
+        <p class="small">Персональный сайт преподавателя. Методические материалы, лекции, учебные пособия.</p>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5>Разделы</h5>
+        <ul class="list-unstyled small">
+          <li><a href="/obo-mne/">Обо мне</a></li>
+          <li><a href="/obuchenie/">Обучение</a></li>
+          <li><a href="/abiturientu/">Абитуриенту</a></li>
+          <li><a href="/vospitanie/">Воспитание</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-3">
+        <h5>Контакты</h5>
+        <ul class="list-unstyled small">
+          <li>Email: info@бардаков.рф</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <p>&copy; <span id="footer-year">2026</span> бардаков.рф. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+<script>
+  // Автогод в подвале
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
