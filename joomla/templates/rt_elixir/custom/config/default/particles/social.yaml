@@ -1,0 +1,57 @@
+enabled: '1'
+css:
+  class: ''
+title: ''
+target: _blank
+display: icons_only
+items:
+  -
+    icon: 'fa fa-vk'
+    text: 'ВКонтакте Бардаков Дмитрий Николаевич'
+    link: 'https://vk.com/id514588431'
+    name: 'VK Бардаков'
+  -
+    icon: 'fa fa-mail-forward'
+    text: 'ГБПОУ РО "СИТ"'
+    link: 'https://sit-salsk.ru/'
+    name: СИТ
+  -
+    icon: 'fas fa-graduation-cap'
+    text: 'Электронная образовательная система ГБПОУ РО "СИТ"'
+    link: 'https://эос.сит-сальск.рф/'
+    name: 'Электронная образовательная системаГБПОУ РО "СИТ"'
+  -
+    icon: 'fa fa-legal'
+    text: 'нормативно-правовая база ГБПОУ РО "СИТ"'
+    link: 'https://sit-salsk.ru/?p=15146'
+    name: СИТ
+  -
+    icon: 'fa fa-child'
+    text: 'Дон молодой'
+    link: 'https://донмолодой.рф/'
+    name: 'Дон молодой'
+  -
+    icon: 'fa fa-handshake-o'
+    text: 'Министерство общего и профессионального образования Ростовской области'
+    link: 'https://minobr.donland.ru/'
+    name: Министерство
+  -
+    icon: 'fa fa-users'
+    text: 'Я доброволец'
+    link: 'https://dobro.ru/'
+    name: 'Я доброволец'
+  -
+    icon: 'fa fa-map-o'
+    text: 'Живу на Дону'
+    link: 'https://живунадону.рф/'
+    name: 'Живу на Дону'
+  -
+    icon: 'fa fa-vk'
+    text: 'ВКонтакте ГБПОУ РО "СИТ"'
+    link: 'https://vk.com/sitsalsksit'
+    name: 'VK СИТ'
+  -
+    icon: 'fab fa-telegram'
+    text: 'хобби - Нейро Мульт Студия'
+    link: 'https://t.me/Neuro_Animation_Studio'
+    name: 'ТГ хобби'

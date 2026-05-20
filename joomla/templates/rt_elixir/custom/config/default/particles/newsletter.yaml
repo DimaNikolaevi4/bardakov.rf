@@ -1,0 +1,9 @@
+enabled: '1'
+action: ''
+class: ''
+layout: g-newsletter-aside
+title: ''
+headtext: ''
+inputboxtext: 'What''s your email address?'
+buttontext: Subscribe
+buttonclass: button

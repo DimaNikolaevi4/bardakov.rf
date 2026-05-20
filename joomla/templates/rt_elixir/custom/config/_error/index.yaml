@@ -1,0 +1,172 @@
+name: _error
+timestamp: 1728137135
+version: 7
+preset:
+  image: 'gantry-admin://images/layouts/default.png'
+  name: _error
+  timestamp: 1666521226
+positions:
+  poisk: 'Module Position'
+  footer-a: 'Module Position'
+  '00': 'Module Position'
+  '01': 'Module Position'
+  '02': 'Module Position'
+  '03': 'Module Position'
+  '04': 'Module Position'
+  '05': 'Module Position'
+  '06': 'Module Position'
+  '07': 'Module Position'
+  '08': 'Module Position'
+  'МДК 03.02_3': 'Module Position'
+  'МДК 03.02_4': 'Module Position'
+  ПР_МДК02_01_КИП4: 'Module Position'
+  '09': 'Module Position'
+  '010': 'Module Position'
+  '011': 'Module Position'
+  '012': 'Module Position'
+  '014': 'Module Position'
+  '015': 'Module Position'
+  0: 'Module Position'
+  1: 'Module Position'
+  2: 'Module Position'
+  3: 'Module Position'
+  4: 'Module Position'
+  5: 'Module Position'
+  6: 'Module Position'
+  7: 'Module Position'
+  8: 'Module Position'
+  9: 'Module Position'
+  22: 'Module Position'
+  10: 'Module Position'
+  11: 'Module Position'
+  12: 'Module Position'
+  13: 'Module Position'
+  14: 'Module Position'
+  15: 'Module Position'
+  16: 'Module Position'
+  17: 'Module Position'
+  18: 'Module Position'
+sections:
+  top: Top
+  navigation: Navigation
+  slideshow: Slideshow
+  above: Above
+  showcase: Showcase
+  utility: Utility
+  feature: Feature
+  expanded: Expanded
+  extension: Extension
+  bottom: Bottom
+  copyright: Copyright
+  header: Header
+  sidebar: Sidebar
+  aside: Aside
+  mainbar: Main
+  footer: Footer
+  offcanvas: Offcanvas
+particles:
+  messages:
+    system-messages-9828: 'System Messages'
+  custom:
+    custom-6124: 'Custom HTML'
+    custom-3985: 'Custom HTML'
+  position:
+    position-position-1277: 'Module Position'
+    position-position-6364: 'Module Position'
+    position-position-6793: 'Module Position'
+    position-position-9834: 'Module Position'
+    position-position-5507: 'Module Position'
+    position-position-7576: 'Module Position'
+    position-position-3585: 'Module Position'
+    position-position-6660: 'Module Position'
+    position-position-4887: 'Module Position'
+    position-position-2366: 'Module Position'
+    position-position-9072: 'Module Position'
+    position-position-1602: 'Module Position'
+    position-position-4489: 'Module Position'
+    position-position-5342: 'Module Position'
+    position-position-8725: 'Module Position'
+    position-position-2977: 'Module Position'
+    position-position-1864: 'Module Position'
+    position-position-1065: 'Module Position'
+    position-position-3006: 'Module Position'
+    position-position-7309: 'Module Position'
+    position-position-3176: 'Module Position'
+    position-position-6385: 'Module Position'
+    position-position-2279: 'Module Position'
+    position-position-7819: 'Module Position'
+    position-position-1685: 'Module Position'
+    position-position-7977: 'Module Position'
+    position-position-5153: 'Module Position'
+    position-position-5591: 'Module Position'
+    position-position-1579: 'Module Position'
+    position-position-8939: 'Module Position'
+    position-position-1506: 'Module Position'
+    position-position-4297: 'Module Position'
+    position-position-2453: 'Module Position'
+    position-position-5875: 'Module Position'
+    position-position-4441: 'Module Position'
+    position-position-1688: 'Module Position'
+    position-position-4457: 'Module Position'
+    position-position-5968: 'Module Position'
+    position-position-9371: 'Module Position'
+    position-position-9257: 'Module Position'
+  menu:
+    menu-9870: Menu
+  social:
+    social-5917: Social
+  copyright:
+    copyright-2139: Copyright
+  mobile-menu:
+    mobile-menu-3314: 'Mobile Menu'
+inherit:
+  default:
+    navigation: navigation
+    footer: footer
+    copyright: copyright
+    offcanvas: offcanvas
+    position-position-1277: position-position-5716
+    menu-9870: menu-2872
+    position-position-6364: position-position-1848
+    position-position-6793: position-position-2446
+    position-position-9834: position-position-1945
+    position-position-5507: position-position-2546
+    position-position-7576: position-position-8551
+    position-position-3585: position-position-8646
+    position-position-6660: position-position-5856
+    position-position-4887: position-position-1880
+    position-position-2366: position-position-2121
+    position-position-9072: position-position-9550
+    position-position-1602: position-position-8269
+    position-position-4489: position-position-5323
+    position-position-5342: position-position-4518
+    position-position-8725: position-position-3262
+    position-position-2977: position-position-3379
+    position-position-1864: position-position-9597
+    position-position-1065: position-position-5988
+    position-position-3006: position-position-2490
+    position-position-7309: position-position-3914
+    position-position-3176: position-position-3950
+    position-position-6385: position-position-7016
+    position-position-2279: position-position-9518
+    position-position-7819: position-position-2022
+    position-position-1685: position-position-3811
+    position-position-7977: position-position-9911
+    position-position-5153: position-position-8849
+    position-position-5591: position-position-1429
+    position-position-1579: position-position-8491
+    position-position-8939: position-position-3009
+    position-position-1506: position-position-5226
+    position-position-4297: position-position-7954
+    position-position-2453: position-position-7697
+    position-position-5875: position-position-6851
+    position-position-4441: position-position-5674
+    position-position-1688: position-position-1691
+    position-position-4457: position-position-3652
+    position-position-5968: position-position-3316
+    position-position-9371: position-position-3738
+    position-position-9257: position-position-4078
+    social-5917: social-8176
+    custom-3985: custom-7038
+    copyright-2139: copyright-6444
+    mobile-menu-3314: mobile-menu-2576
