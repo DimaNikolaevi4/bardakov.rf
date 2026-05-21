@@ -765,3 +765,360 @@ a:hover {
 /* --- Bootstrap override: text-success → theme green --- */
 .text-success { color: var(--color-primary) !important; }
 .bg-success   { background-color: var(--color-primary) !important; }
+
+/* ============================================
+   HERO SLIDER
+   ============================================ */
+
+.hero-slider-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-swiper {
+  width: 100%;
+}
+
+.hero-slide {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(21,31,26,0.94) 45%, rgba(47,110,75,0.45) 100%);
+  z-index: 0;
+}
+
+.hero-slide-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  border-left: 3px solid var(--color-accent);
+  padding-left: 0.75rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.hero-slide-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.hero-slide-subtitle {
+  font-size: 1.05rem;
+  color: rgba(216,232,223,0.85);
+  margin-bottom: 1.75rem;
+  max-width: 520px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Swiper hero controls */
+.hero-pagination {
+  bottom: 1.25rem !important;
+}
+
+.hero-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.4);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.hero-pagination .swiper-pagination-bullet-active {
+  background: var(--color-accent);
+  width: 28px;
+  border-radius: 5px;
+}
+
+.hero-prev, .hero-next {
+  color: rgba(255,255,255,0.8) !important;
+  width: 44px !important;
+  height: 44px !important;
+  background: rgba(30,45,36,0.55);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  transition: background var(--transition), color var(--transition);
+}
+
+.hero-prev:after, .hero-next:after {
+  font-size: 1rem !important;
+  font-weight: 700;
+}
+
+.hero-prev:hover, .hero-next:hover {
+  background: var(--color-primary);
+  color: #fff !important;
+}
+
+.hero-prev { left: 1.25rem !important; }
+.hero-next { right: 1.25rem !important; }
+
+/* ============================================
+   STATISTICS BAR — animated counters
+   ============================================ */
+
+.stat-item {
+  text-align: center;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  display: inline;
+}
+
+.stat-suffix {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  display: inline;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(216,232,223,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+/* ============================================
+   GALLERY SWIPER
+   ============================================ */
+
+.gallery-section {
+  padding: 3.5rem 0 2rem;
+  background: var(--color-bg-alt);
+}
+
+.gallery-swiper-outer {
+  padding: 0 0 2.5rem;
+  position: relative;
+}
+
+.gallery-swiper {
+  padding: 0.5rem 1.5rem 3rem !important;
+}
+
+.gallery-slide {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s, box-shadow 0.3s;
+  aspect-ratio: 4/3;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gallery-slide:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-swiper .swiper-slide-active,
+.gallery-swiper .swiper-slide-next,
+.gallery-swiper .swiper-slide-prev {
+  box-shadow: var(--shadow-lg);
+}
+
+.gallery-pagination {
+  bottom: 0.5rem !important;
+}
+
+.gallery-pagination .swiper-pagination-bullet {
+  background: var(--color-primary);
+  opacity: 0.4;
+}
+
+.gallery-pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--color-primary);
+}
+
+.gallery-prev, .gallery-next {
+  color: var(--color-primary) !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), color var(--transition);
+  top: 45% !important;
+}
+
+.gallery-prev:after, .gallery-next:after {
+  font-size: 0.9rem !important;
+  font-weight: 800;
+}
+
+.gallery-prev:hover, .gallery-next:hover {
+  background: var(--color-primary);
+  color: #fff !important;
+}
+
+.gallery-prev { left: 0.5rem !important; }
+.gallery-next { right: 0.5rem !important; }
+
+/* ============================================
+   PROMO SECTION
+   ============================================ */
+
+.promo-section {
+  padding: 4rem 0;
+  background: var(--color-bg);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+  background: rgba(47,110,75,0.1);
+  border-radius: 2rem;
+  padding: 0.25rem 0.9rem;
+  margin-bottom: 0.85rem;
+}
+
+.promo-title {
+  font-family: var(--font-heading);
+  font-size: 2.1rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.promo-text {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 460px;
+}
+
+.promo-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.promo-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+}
+
+.promo-list li i {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.promo-img-wrap {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: visible;
+}
+
+.promo-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+  display: block;
+}
+
+.promo-img-badge {
+  position: absolute;
+  bottom: -1rem;
+  left: 1.5rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-md);
+}
+
+.promo-img-badge i {
+  font-size: 1.3rem;
+}
+
+/* ============================================
+   RESPONSIVE OVERRIDES
+   ============================================ */
+
+@media (max-width: 991.98px) {
+  .hero-slide {
+    min-height: 420px;
+  }
+  .hero-slide-title {
+    font-size: 2.2rem;
+  }
+  .promo-img {
+    height: 260px;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-slide {
+    min-height: 360px;
+  }
+  .hero-slide-title {
+    font-size: 1.75rem;
+  }
+  .hero-slide-subtitle {
+    font-size: 0.95rem;
+  }
+  .gallery-swiper {
+    padding: 0.5rem 0.5rem 3rem !important;
+  }
+}
