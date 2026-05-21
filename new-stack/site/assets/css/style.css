@@ -81,6 +81,9 @@ a:hover {
 
 /* Логотип */
 .site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--color-accent);
   font-family: var(--font-heading);
   font-weight: 700;
@@ -92,6 +95,13 @@ a:hover {
 }
 .site-header__brand:hover {
   color: var(--color-accent-light);
+}
+.site-header__logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(180deg) brightness(1.4);
+  flex-shrink: 0;
 }
 
 /* --- Центральная навигация (desktop) --- */
