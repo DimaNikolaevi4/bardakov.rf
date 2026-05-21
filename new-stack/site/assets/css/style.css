@@ -1448,14 +1448,14 @@ body.no-animations *::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: transparent;
   border-radius: 10px;
-  border: 1px solid var(--footer-border);
+  border: none;
   color: var(--footer-accent);
   font-size: 1.1rem;
   flex-shrink: 0;
   overflow: hidden;
-  padding: 4px;
+  padding: 2px;
 }
 .site-footer .footer-resource-icon img {
   width: 100%;
