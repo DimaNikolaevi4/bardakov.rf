@@ -1448,12 +1448,20 @@ body.no-animations *::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--footer-icon-bg);
+  background: #fff;
   border-radius: 10px;
   border: 1px solid var(--footer-border);
   color: var(--footer-accent);
   font-size: 1.1rem;
   flex-shrink: 0;
+  overflow: hidden;
+  padding: 4px;
+}
+.site-footer .footer-resource-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .site-footer .footer-resource-text {
