@@ -7,19 +7,19 @@
 
 /* --- CSS-переменные --- */
 :root {
-  --color-base:          #1e2d24;
-  --color-base-dark:     #151f1a;
-  --color-primary:       #2f6e4b;
-  --color-primary-dark:  #1e4a33;
-  --color-accent:        #81ae90;
-  --color-accent-light:  #a8c8b2;
-  --color-text:          #d8e8df;
-  --color-text-dark:     #333d36;
-  --color-text-muted:    #7a9982;
-  --color-bg:            #f2fff7;
-  --color-bg-alt:        #e8f4ec;
-  --color-border:        rgba(129, 174, 144, 0.25);
-  --color-border-light:  rgba(129, 174, 144, 0.15);
+  --color-base:          #1a2540;
+  --color-base-dark:     #111829;
+  --color-primary:       #2d5fa6;
+  --color-primary-dark:  #1e3f7a;
+  --color-accent:        #7aaece;
+  --color-accent-light:  #a8c8e0;
+  --color-text:          #cce0f5;
+  --color-text-dark:     #1e3048;
+  --color-text-muted:    #6a8fa8;
+  --color-bg:            #f2f7ff;
+  --color-bg-alt:        #e8f0fb;
+  --color-border:        rgba(100, 160, 200, 0.25);
+  --color-border-light:  rgba(100, 160, 200, 0.15);
   --font-heading:        'Averia Serif Libre', Georgia, serif;
   --font-main:           'Open Sans', 'Segoe UI', Tahoma, sans-serif;
   --shadow-sm:           0 2px 8px rgba(0, 0, 0, 0.15);
@@ -114,7 +114,7 @@ a:hover {
 .main-nav__link:hover,
 .main-nav__link.active {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.12);
+  background-color: rgba(100, 160, 200, 0.12);
 }
 .main-nav__chevron {
   font-size: 0.7rem;
@@ -156,7 +156,7 @@ a:hover {
   white-space: nowrap;
 }
 .main-nav__sub-link:hover {
-  background-color: rgba(129, 174, 144, 0.15);
+  background-color: rgba(100, 160, 200, 0.15);
   color: var(--color-accent);
 }
 
@@ -181,12 +181,12 @@ a:hover {
 }
 .header-icon-btn:hover {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.14);
+  background-color: rgba(100, 160, 200, 0.14);
 }
 .header-icon-btn.active,
 .header-icon-btn[aria-expanded="true"] {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.18);
+  background-color: rgba(100, 160, 200, 0.18);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -268,7 +268,7 @@ a:hover {
 .oc-nav__link:hover,
 .oc-nav__link.active {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.1);
+  background-color: rgba(100, 160, 200, 0.1);
 }
 
 /* Группа с подменю */
@@ -296,11 +296,11 @@ a:hover {
 }
 .oc-nav__toggle:hover {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.1);
+  background-color: rgba(100, 160, 200, 0.1);
 }
 .oc-nav__toggle[aria-expanded="true"] {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.08);
+  background-color: rgba(100, 160, 200, 0.08);
 }
 .oc-nav__toggle[aria-expanded="true"] .bi-chevron-right {
   transform: rotate(90deg);
@@ -328,7 +328,7 @@ a:hover {
 }
 .oc-nav__sub-link:hover {
   color: var(--color-accent);
-  background-color: rgba(129, 174, 144, 0.1);
+  background-color: rgba(100, 160, 200, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -532,8 +532,8 @@ body.no-animations *::after {
 .hero {
   background-color: var(--color-base);
   background-image:
-    radial-gradient(ellipse at 70% 50%, rgba(47, 110, 75, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 80%, rgba(30, 45, 36, 0.9) 0%, transparent 50%);
+    radial-gradient(ellipse at 70% 50%, rgba(30, 90, 166, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(15, 25, 55, 0.9) 0%, transparent 50%);
   color: var(--color-text);
   padding: 0;
   position: relative;
@@ -547,7 +547,7 @@ body.no-animations *::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2381ae90' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237aaece' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
   pointer-events: none;
 }
 
@@ -621,7 +621,7 @@ body.no-animations *::after {
   right: 2rem;
   width: 320px;
   height: 380px;
-  border: 2px solid rgba(129, 174, 144, 0.3);
+  border: 2px solid rgba(100, 160, 200, 0.3);
   border-radius: 0.5rem 0.5rem 0 0;
   transform: translate(12px, -12px);
   z-index: 0;
@@ -649,17 +649,17 @@ body.no-animations *::after {
   background-color: var(--color-accent);
   color: var(--color-base);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(129, 174, 144, 0.35);
+  box-shadow: 0 6px 20px rgba(100, 160, 200, 0.35);
 }
 
 .hero-btn-outline {
   background-color: transparent;
-  border-color: rgba(129, 174, 144, 0.5);
+  border-color: rgba(100, 160, 200, 0.5);
   color: var(--color-accent-light);
 }
 
 .hero-btn-outline:hover {
-  background-color: rgba(129, 174, 144, 0.15);
+  background-color: rgba(100, 160, 200, 0.15);
   border-color: var(--color-accent);
   color: var(--color-accent);
   transform: translateY(-2px);
@@ -777,9 +777,9 @@ body.no-animations *::after {
 
 .card-nav {
   background: #fff;
-  border: 1px solid rgba(47, 110, 75, 0.15);
+  border: 1px solid rgba(30, 90, 166, 0.15);
   border-radius: 0.625rem;
-  box-shadow: 0 2px 12px rgba(30, 45, 36, 0.07);
+  box-shadow: 0 2px 12px rgba(15, 25, 55, 0.07);
   transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
   height: 100%;
   overflow: hidden;
@@ -787,9 +787,9 @@ body.no-animations *::after {
 }
 
 .card-nav:hover {
-  box-shadow: 0 8px 32px rgba(30, 45, 36, 0.14);
+  box-shadow: 0 8px 32px rgba(15, 25, 55, 0.14);
   transform: translateY(-4px);
-  border-color: rgba(47, 110, 75, 0.35);
+  border-color: rgba(30, 90, 166, 0.35);
 }
 
 .card-nav-icon {
@@ -965,19 +965,19 @@ body.no-animations *::after {
 
 /* --- Подвал --- */
 .site-footer {
-  --footer-bg-1:              #1b2620;
-  --footer-bg-2:              #243029;
-  --footer-glow-1:            rgba(129, 174, 144, 0.12);
-  --footer-glow-2:            rgba(129, 174, 144, 0.07);
-  --footer-text:              rgba(216, 232, 223, 0.80);
-  --footer-text-strong:       #d8e8df;
-  --footer-muted:             rgba(216, 232, 223, 0.50);
-  --footer-border:            rgba(129, 174, 144, 0.14);
+  --footer-bg-1:              #192035;
+  --footer-bg-2:              #20294a;
+  --footer-glow-1:            rgba(100, 160, 200, 0.12);
+  --footer-glow-2:            rgba(100, 160, 200, 0.07);
+  --footer-text:              rgba(204, 224, 245, 0.80);
+  --footer-text-strong:       #cce0f5;
+  --footer-muted:             rgba(204, 224, 245, 0.50);
+  --footer-border:            rgba(100, 160, 200, 0.14);
   --footer-card-bg:           rgba(255, 255, 255, 0.04);
-  --footer-card-bg-hover:     rgba(129, 174, 144, 0.10);
+  --footer-card-bg-hover:     rgba(100, 160, 200, 0.10);
   --footer-card-shadow:       none;
   --footer-card-shadow-hover: none;
-  --footer-icon-bg:           rgba(129, 174, 144, 0.18);
+  --footer-icon-bg:           rgba(100, 160, 200, 0.18);
   --footer-accent:            var(--color-accent);
 
   position: relative;
@@ -1030,9 +1030,9 @@ body.no-animations *::after {
   border-radius: 999px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(129, 174, 144, 0.4) 15%,
+    rgba(100, 160, 200, 0.4) 15%,
     var(--color-accent) 50%,
-    rgba(129, 174, 144, 0.4) 85%,
+    rgba(100, 160, 200, 0.4) 85%,
     transparent 100%);
 }
 
@@ -1161,7 +1161,7 @@ body.no-animations *::after {
   border-color: var(--footer-accent);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(129, 174, 144, 0.35);
+  box-shadow: 0 6px 16px rgba(100, 160, 200, 0.35);
 }
 
 /* === Карточка контактов (аналог корпуса) === */
@@ -1181,7 +1181,7 @@ body.no-animations *::after {
 
 .site-footer .footer-corp-card:hover {
   background: var(--footer-card-bg-hover);
-  border-color: rgba(129, 174, 144, 0.30);
+  border-color: rgba(100, 160, 200, 0.30);
   transform: translateY(-2px);
 }
 
@@ -1319,8 +1319,8 @@ body.no-animations *::after {
   margin-top: 2.5rem;
   padding: 2rem 2rem 2.25rem;
   border-radius: 16px;
-  background: rgba(129, 174, 144, 0.06);
-  border: 1px solid rgba(129, 174, 144, 0.15);
+  background: rgba(100, 160, 200, 0.06);
+  border: 1px solid rgba(100, 160, 200, 0.15);
 }
 
 .site-footer .footer-resources-title {
@@ -1360,8 +1360,8 @@ body.no-animations *::after {
 .site-footer .footer-resource:focus-visible {
   transform: translateY(-2px);
   background: var(--footer-card-bg-hover);
-  border-color: rgba(129, 174, 144, 0.35);
-  box-shadow: 0 6px 20px rgba(129, 174, 144, 0.15);
+  border-color: rgba(100, 160, 200, 0.35);
+  box-shadow: 0 6px 20px rgba(100, 160, 200, 0.15);
   color: var(--footer-text-strong);
 }
 
@@ -1495,14 +1495,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* CSS-переменные для тёмной темы */
 :root.dark-theme {
-  --color-bg:           #0f1a13;
-  --color-bg-alt:       #142019;
-  --color-text-dark:    #d8e8df;
-  --color-text-muted:   #81ae90;
-  --color-primary-dark: #81ae90;
-  --color-primary:      #6fa880;
-  --color-border:       rgba(129, 174, 144, 0.25);
-  --color-border-light: rgba(129, 174, 144, 0.15);
+  --color-bg:           #080e1a;
+  --color-bg-alt:       #0d1428;
+  --color-text-dark:    #cce0f5;
+  --color-text-muted:   #7aaece;
+  --color-primary-dark: #7aaece;
+  --color-primary:      #6a9ec0;
+  --color-border:       rgba(100, 160, 200, 0.25);
+  --color-border-light: rgba(100, 160, 200, 0.15);
 }
 
 /* Основные элементы */
@@ -1550,19 +1550,19 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-bg);
 }
 .dark-theme .card-nav {
-  background: #1a2b20;
-  border-color: rgba(129, 174, 144, 0.2);
+  background: #162040;
+  border-color: rgba(100, 160, 200, 0.2);
 }
 .dark-theme .card-nav:hover {
-  border-color: rgba(129, 174, 144, 0.45);
+  border-color: rgba(100, 160, 200, 0.45);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 .dark-theme .card-nav .card-title {
   color: var(--color-accent-light);
 }
 .dark-theme .card-custom {
-  background: #1a2b20;
-  border-color: rgba(129, 174, 144, 0.2);
+  background: #162040;
+  border-color: rgba(100, 160, 200, 0.2);
 }
 .dark-theme .card-custom .card-title {
   color: var(--color-accent-light);
@@ -1582,14 +1582,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dark-theme .table {
   --bs-table-color: var(--color-text-dark);
-  --bs-table-bg: #1a2b20;
-  --bs-table-border-color: rgba(129, 174, 144, 0.2);
-  --bs-table-striped-bg: #162219;
+  --bs-table-bg: #162040;
+  --bs-table-border-color: rgba(100, 160, 200, 0.2);
+  --bs-table-striped-bg: #0e1830;
 }
 .dark-theme .table thead th {
   background-color: var(--color-primary-dark);
   color: #fff;
-  border-color: rgba(129, 174, 144, 0.2);
+  border-color: rgba(100, 160, 200, 0.2);
 }
 
 /* Поиск */
@@ -1675,7 +1675,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(21,31,26,0.94) 45%, rgba(47,110,75,0.45) 100%);
+  background: linear-gradient(120deg, rgba(8,14,30,0.94) 45%, rgba(30,90,166,0.45) 100%);
   z-index: 0;
 }
 
@@ -1742,7 +1742,7 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255,255,255,0.8) !important;
   width: 44px !important;
   height: 44px !important;
-  background: rgba(30,45,36,0.55);
+  background: rgba(10,20,45,0.55);
   border-radius: 50%;
   backdrop-filter: blur(4px);
   transition: background var(--transition), color var(--transition);
@@ -1897,7 +1897,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--color-primary);
-  background: rgba(47,110,75,0.1);
+  background: rgba(30,90,166,0.1);
   border-radius: 2rem;
   padding: 0.25rem 0.9rem;
   margin-bottom: 0.85rem;
