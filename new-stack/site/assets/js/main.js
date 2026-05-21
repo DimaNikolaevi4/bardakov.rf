@@ -37,6 +37,15 @@ function updateThemeButton(isDark) {
   }
 }
 
+/* Глобальная функция версии для слабовидящих */
+function toggleA11y() {
+  var isOn = document.body.classList.toggle('high-contrast');
+  document.body.classList.toggle('large-font', isOn);
+  localStorage.setItem('a11y-mode', isOn ? 'on' : 'off');
+  var btn = document.getElementById('a11y-toggle');
+  if (btn) btn.classList.toggle('active', isOn);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   /* -------------------------------------------
@@ -77,22 +86,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     initSearchLink();
 
-    // Кнопка переключения тёмной темы
-    var themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) {
-      updateThemeButton(document.documentElement.classList.contains('dark-theme'));
-      themeBtn.addEventListener('click', toggleDarkTheme);
-    }
+    // Кнопка переключения тёмной темы — инициализация иконки
+    updateThemeButton(document.documentElement.classList.contains('dark-theme'));
 
-    // Версия для слабовидящих — кнопка в шапке
-    const a11yBtn = document.getElementById('a11y-toggle');
-    if (a11yBtn) {
-      a11yBtn.addEventListener('click', function () {
-        document.body.classList.toggle('high-contrast');
-        document.body.classList.toggle('large-font');
-        localStorage.setItem('a11y-mode',
-          document.body.classList.contains('high-contrast') ? 'on' : 'off');
-      });
+    // Кнопка версии для слабовидящих — инициализация активного состояния
+    var a11yBtn = document.getElementById('a11y-toggle');
+    if (a11yBtn && document.body.classList.contains('high-contrast')) {
+      a11yBtn.classList.add('active');
     }
   });
 
@@ -104,11 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
      3. Поиск
      ------------------------------------------- */
   function initSearchLink() {
-    document.querySelectorAll('.btn-search').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+    var searchBtn = document.getElementById('search-btn');
+    if (searchBtn) {
+      searchBtn.addEventListener('click', function () {
         window.location.href = '/search/';
       });
-    });
+    }
   }
 
   /* -------------------------------------------

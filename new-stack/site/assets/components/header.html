@@ -41,17 +41,20 @@
           <a class="nav-link" href="/vospitanie/">Воспитание</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center gap-2">
-        <button class="btn-search" title="Поиск" aria-label="Открыть поиск">
-          <i class="bi bi-search"></i>
+      <div class="d-flex align-items-center gap-1">
+        <button class="header-icon-btn" id="search-btn"
+                title="Поиск" aria-label="Открыть поиск">
+          <i class="bi bi-search" aria-hidden="true"></i>
         </button>
-        <button class="btn-theme-toggle" id="theme-toggle"
-                title="Тёмная тема" aria-label="Тёмная тема">
-          <i class="bi bi-moon-fill"></i>
+        <button class="header-icon-btn" id="theme-toggle"
+                title="Тёмная тема" aria-label="Тёмная тема"
+                onclick="return toggleDarkTheme(),!1">
+          <i class="bi bi-moon-fill" aria-hidden="true"></i>
         </button>
-        <button class="btn-a11y" id="a11y-toggle"
-                title="Версия для слабовидящих" aria-label="Версия для слабовидящих">
-          A+
+        <button class="header-icon-btn" id="a11y-toggle"
+                title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
+                onclick="return toggleA11y(),!1">
+          <i class="bi bi-eye" aria-hidden="true"></i>
         </button>
       </div>
     </div>

@@ -125,38 +125,33 @@ a:hover {
   filter: brightness(0) invert(1);
 }
 
-/* --- Кнопки в шапке --- */
-.site-header .btn-search {
+/* --- Кнопки-иконки в шапке --- */
+.site-header .header-icon-btn {
   color: rgba(255, 255, 255, 0.75);
   border: none;
   background: transparent;
   font-size: 1.1rem;
-  padding: 0.4rem 0.6rem;
-  cursor: pointer;
-  transition: color var(--transition);
-  line-height: 1;
-}
-
-.site-header .btn-search:hover {
-  color: var(--color-accent);
-}
-
-.site-header .btn-a11y {
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(129, 174, 144, 0.4);
-  background: transparent;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.3rem 0.65rem;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: color var(--transition), background-color var(--transition);
+  line-height: 1;
+  flex-shrink: 0;
 }
 
-.site-header .btn-a11y:hover {
-  background: rgba(129, 174, 144, 0.15);
+.site-header .header-icon-btn:hover {
   color: var(--color-accent);
-  border-color: var(--color-accent);
+  background-color: rgba(129, 174, 144, 0.12);
+}
+
+.site-header .header-icon-btn.active {
+  color: var(--color-accent);
+  background-color: rgba(129, 174, 144, 0.18);
 }
 
 /* --- Hero-секция --- */
