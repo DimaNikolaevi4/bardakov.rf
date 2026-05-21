@@ -1,0 +1,90 @@
+# ============================================
+# бардаков.рф — .gitignore для файлов Joomla
+# ============================================
+# Правило: коммитим только КАСТОМНЫЕ файлы сайта.
+# Стандартные файлы Joomla 5 не нужны в Git —
+# их можно восстановить из дистрибутива.
+# ============================================
+
+# --- Конфигурация (СЕКРЕТЫ) ---
+configuration.php
+
+# --- Стандартные папки Joomla ---
+administrator/
+api/
+cache/
+cli/
+includes/
+language/
+layouts/
+libraries/
+media/
+modules/
+plugins/
+tmp/
+logs/
+
+# --- Все стандартные компоненты ---
+components/com_ajax/
+components/com_banners/
+components/com_config/
+components/com_contact/
+components/com_content/
+components/com_contenthistory/
+components/com_fields/
+components/com_finder/
+components/com_gantry5/
+components/com_media/
+components/com_menus/
+components/com_modules/
+components/com_newsfeeds/
+components/com_privacy/
+components/com_tags/
+components/com_users/
+components/com_wrapper/
+
+# --- Стандартные шаблоны ---
+templates/cassiopeia/
+templates/cassiopeia_extended/
+templates/system/
+templates/scss/
+
+# --- Системные файлы ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- IDE ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Бэкапы и архивы ---
+*.sql
+*.sql.gz
+*.sql.bz2
+*.zip
+*.tar
+*.tar.gz
+
+# --- Старый gitignore.txt ---
+gitignore.txt
+
+# ============================================
+# ЧТО КОММИТИМ (не исключено выше):
+# ============================================
+# .htaccess
+# configuration.php.example
+# components/com_akeebabackup/   — Akeeba Backup
+# components/com_phocadownload/  — Phoca Download
+# components/com_phocapdf/       — Phoca PDF
+# templates/rt_elixir/           — Кастомный шаблон сайта
+# images/                        — Изображения и медиа
+# dok24/                         — Документы
+# files/                         — Загрузки
+# phocadownload*/                — Файлы Phoca Download
+# favicon.ico, robots.txt, sitemap.xml
+# ПР МДК*.docx                   — Файлы практических работ
+# yandex_*.html                  — Верификация Яндекс

@@ -1,7 +1,0 @@
-<?php
-defined('_JEXEC') or die;
-return array (
-  'GANTRY5_ENGINE_SORRY_NO_CONTENT' => 'Извините, нет контента',
-  'GANTRY5_ENGINE_UNKNOWN_ERROR' => 'Неизвестная ошибка',
-  'GANTRY5_X_DAYS' => 'дней: %s',
-);
