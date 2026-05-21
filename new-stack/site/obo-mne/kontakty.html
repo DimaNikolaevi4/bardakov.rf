@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Контакты преподавателя Бардакова Дмитрия Николаевича — адрес, график работы, форма обратной связи.">
+  <title>Контакты — бардаков.рф</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Главная</a></li>
+          <li class="breadcrumb-item"><a href="/obo-mne/">Обо мне</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Контакты</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+  <main class="content-section" data-pagefind-body>
+    <div class="container">
+
+      <h1 class="mb-4">Контакты</h1>
+
+      <!-- Цитата -->
+      <div class="card bg-light mb-4">
+        <div class="card-body text-center">
+          <i class="bi bi-quote fs-1 text-muted"></i>
+          <blockquote class="blockquote mb-0">
+            <p>Уважать всякого человека, как самого себя, и поступать с ним так, как мы желаем, чтобы с нами поступали, — вот самое верное средство жить хорошо.</p>
+            <footer class="blockquote-footer">Конфуций</footer>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Вводный текст -->
+      <section class="mb-5">
+        <p>Моя цель — передача знаний и развитие умений студентов, подготовка квалифицированных специалистов, готовых к профессиональной деятельности в современных условиях. Я всегда открыт для диалога с коллегами, студентами и их родителями. Если у вас есть вопросы, предложения или вы хотите обсудить образовательные возможности — свяжитесь со мной любым удобным способом.</p>
+      </section>
+
+      <div class="row g-4 mb-5">
+        <!-- Контактная информация -->
+        <div class="col-lg-5">
+          <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-person-vcard me-2"></i>Контактная информация</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <strong><i class="bi bi-person me-2"></i>ФИО:</strong><br>
+                  Бардаков Дмитрий Николаевич
+                </li>
+                <li class="list-group-item">
+                  <strong><i class="bi bi-briefcase me-2"></i>Должность:</strong><br>
+                  Преподаватель
+                </li>
+                <li class="list-group-item">
+                  <strong><i class="bi bi-building me-2"></i>Место работы:</strong><br>
+                  ГБПОУ РО «СИТ» (Сальский индустриальный техникум)
+                </li>
+                <li class="list-group-item">
+                  <strong><i class="bi bi-geo-alt me-2"></i>Адрес:</strong><br>
+                  ул. Ленина, д. 27, Сальск, Ростовская область, 347630
+                </li>
+                <li class="list-group-item">
+                  <strong><i class="bi bi-clock me-2"></i>График работы:</strong><br>
+                  пн–пт 8:00–16:00, сб 08:00–12:00<br>
+                  <span class="text-danger">Выходной: воскресенье</span>
+                </li>
+                <li class="list-group-item">
+                  <strong><i class="bi bi-globe me-2"></i>Сайт:</strong><br>
+                  <a href="https://бардаков.рф" target="_blank" rel="noopener noreferrer">https://бардаков.рф</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Форма обратной связи -->
+        <div class="col-lg-7">
+          <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-chat-dots me-2"></i>Обратная связь</h5>
+            </div>
+            <div class="card-body">
+              <form action="#" method="POST">
+                <div class="mb-3">
+                  <label for="contact-name" class="form-label">Ваше имя <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="contact-name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="mb-3">
+                  <label for="contact-email" class="form-label">Электронная почта <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" id="contact-email" name="email" placeholder="example@mail.ru" required>
+                </div>
+                <div class="mb-3">
+                  <label for="contact-subject" class="form-label">Тема сообщения</label>
+                  <input type="text" class="form-control" id="contact-subject" name="subject" placeholder="Укажите тему сообщения">
+                </div>
+                <div class="mb-3">
+                  <label for="contact-message" class="form-label">Сообщение <span class="text-danger">*</span></label>
+                  <textarea class="form-control" id="contact-message" name="message" rows="5" placeholder="Введите текст сообщения" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <div class="alert alert-warning small mb-0">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    <strong>Внимание:</strong> форма обратной связи в данный момент не функционирует. Для связи воспользуйтесь контактными данными, указанными слева, или напишите на электронную почту.
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" disabled>
+                  <i class="bi bi-send me-1"></i>Отправить
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

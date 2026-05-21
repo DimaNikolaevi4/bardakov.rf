@@ -12,14 +12,14 @@
 - [x] Доступ к хостингу (файловый менеджер)
 - [x] Доступ к базе данных (phpMyAdmin)
 
-## Этап 2. Копирование файлов сайта
+## Этап 2. Копирование файлов сайта ✅
 
-- [ ] Зайти в файловый менеджер хостинга
-- [ ] Запаковать все файлы сайта в zip-архив
-- [ ] Скачать zip-архив локально
-- [ ] В репозитории https://github.com/DimaNikolaevi4/bardakov.rf создана папка `joomla/`
-- [ ] Разархивировать файлы сайта в папку `joomla/` (кроме `configuration.php`)
-- [ ] Убедиться, что скрытые файлы (`.htaccess`) также скопированы
+- [x] Зайти в файловый менеджер хостинга
+- [x] Запаковать все файлы сайта в zip-архив
+- [x] Скачать zip-архив локально
+- [x] В репозитории https://github.com/DimaNikolaevi4/bardakov.rf создана папка `joomla/`
+- [x] Разархивировать файлы сайта в папку `joomla/` (кроме `configuration.php`)
+- [x] Убедиться, что скрытые файлы (`.htaccess`) также скопированы
 - [ ] Проверить целостность: количество файлов и размеры ключевых директорий (большие файлы Бардаков_самопризентация.mp4 и 2-1-2400.mp4 - вне репозитория)
 
 ## Этап 3. Настройка .gitignore и конфигурации ✅
@@ -29,6 +29,9 @@
   - `cache/`, `tmp/`, `logs/` — временные файлы
   - `*.sql`, `*.zip`, `*.tar.gz` — бэкапы и архивы
   - `.idea/`, `.vscode/`, `.DS_Store` — IDE и системные файлы
+  - Стандартные папки Joomla (administrator/, api/, cli/, includes/, language/, layouts/, libraries/, media/, modules/, plugins/)
+  - Стандартные компоненты (com_gantry5 и др.)
+  - Стандартные шаблоны (cassiopeia, system)
 - [x] Создан файл `joomla/configuration.php.example` — шаблон конфигурации с плейсхолдерами для:
   - Настроек базы данных (host, user, password, db, dbprefix)
   - Секретного ключа
@@ -49,6 +52,13 @@
 
 ---
 
+## Безопасность ✅
+
+- [x] Удалён Google API Key из истории Git (com_gantry5/js/main.js) — git filter-repo + force push
+- [x] .gitignore обновлён для исключения стандартных компонентов Joomla с секретами
+
+---
+
 ## Структура репозитория
 
 ```
@@ -57,20 +67,26 @@ bardakov.rf/
 ├── бардаков.рф.txt                   # Исходная идея
 ├── new-stack/                        # План создания сайта на новом стеке
 │   ├── INFO.md                       # Информационный файл
-│   └── CHECKLIST.md                  # Чек-лист по новому стеку
-└── joomla/                           # Файлы сайта на Joomla 5
+│   ├── CHECKLIST.md                  # Чек-лист по новому стеку
+│   └── site/                         # Файлы статического сайта (49 HTML-страниц)
+│       ├── index.html                # Главная
+│       ├── 404.html                  # Страница 404
+│       ├── obo-mne/                  # Обо мне (5 страниц)
+│       ├── obuchenie/                # Обучение (16 страниц)
+│       ├── abiturientu/              # Абитуриенту (12 страниц)
+│       ├── vospitanie/               # Воспитание (10 страниц)
+│       ├── search/                   # Поиск (Pagefind)
+│       └── assets/                   # CSS, JS, компоненты
+└── joomla/                           # Файлы сайта на Joomla 5 (только кастомные)
     ├── .gitignore                    # Исключения Git
     ├── configuration.php.example     # Шаблон конфигурации
-    ├── configuration.php             # Актуальная конфигурация (в Git НЕ попадает)
-    ├── .htaccess                     # Настройки Apache
-    ├── administrator/                # Панель администратора
-    ├── components/                   # Компоненты Joomla
-    ├── modules/                      # Модули
-    ├── plugins/                      # Плагины
-    ├── templates/                    # Шаблоны
-    ├── images/                       # Изображения и медиа
-    ├── language/                     # Языковые файлы
-    └── ...                           # Остальные файлы Joomla
+    ├── templates/rt_elixir/          # Кастомный шаблон сайта
+    ├── components/com_akeebabackup/  — Akeeba Backup
+    ├── components/com_phocadownload/ — Phoca Download
+    ├── components/com_phocapdf/      — Phoca PDF
+    ├── images/                       — Изображения и медиа
+    ├── dok24/                        — Документы
+    └── files/                        — Загрузки
 ```
 
 ## Примечания
@@ -79,3 +95,4 @@ bardakov.rf/
 - Дамп БД хранится локально и исключён из Git через `.gitignore`
 - Для локального развёртывания: скопировать `configuration.php.example` → `configuration.php` и заполнить данными локальной БД, затем импортировать дамп
 - Ссылка на аналогичный репозиторий: https://github.com/DimaNikolaevi4/site
+- **Внимание:** GitHub token, использовавшийся ранее в чате, рекомендуется заменить (ротация) из соображений безопасности
