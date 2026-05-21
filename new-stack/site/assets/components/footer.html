@@ -1,33 +1,40 @@
 <!-- Подвал сайта — подключается через JS-include -->
 <footer class="site-footer">
   <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <h5>бардаков.рф</h5>
-        <p class="small">Персональный сайт преподавателя. Методические материалы, лекции, учебные пособия.</p>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <span class="footer-brand">бардаков.рф</span>
+        <p class="small" style="color: rgba(216,232,223,0.65); line-height: 1.7;">
+          Персональный сайт преподавателя.<br>
+          Методические материалы, лекции,<br>
+          учебные пособия для студентов.
+        </p>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4">
         <h5>Разделы</h5>
         <ul class="list-unstyled small">
-          <li><a href="/obo-mne/">Обо мне</a></li>
-          <li><a href="/obuchenie/">Обучение</a></li>
-          <li><a href="/abiturientu/">Абитуриенту</a></li>
-          <li><a href="/vospitanie/">Воспитание</a></li>
+          <li><a href="/obo-mne/"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i>Обо мне</a></li>
+          <li><a href="/obuchenie/"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i>Обучение</a></li>
+          <li><a href="/abiturientu/"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i>Абитуриенту</a></li>
+          <li><a href="/vospitanie/"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i>Воспитание</a></li>
+          <li><a href="/search/"><i class="bi bi-chevron-right me-1" style="font-size:0.7rem;"></i>Поиск по сайту</a></li>
         </ul>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-4">
         <h5>Контакты</h5>
         <ul class="list-unstyled small">
-          <li>Email: info@бардаков.рф</li>
+          <li class="mb-2">
+            <i class="bi bi-envelope me-2" style="color: var(--color-accent);"></i>
+            <a href="mailto:info@бардаков.рф">info@бардаков.рф</a>
+          </li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom text-center">
-      <p>&copy; <span id="footer-year">2026</span> бардаков.рф. Все права защищены.</p>
+    <div class="footer-bottom">
+      <p style="margin:0;">&copy; <span id="footer-year">2026</span> бардаков.рф. Все права защищены.</p>
     </div>
   </div>
 </footer>
 <script>
-  // Автогод в подвале
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
