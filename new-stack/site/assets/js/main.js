@@ -7,7 +7,9 @@
    Тёмная / светлая тема — применяется до рендера
    ============================================ */
 (function () {
-  if (localStorage.getItem('dark-theme') === 'on') {
+  var saved = localStorage.getItem('dark-theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (saved === 'on' || (saved === null && prefersDark)) {
     document.documentElement.classList.add('dark-theme');
   }
 })();
