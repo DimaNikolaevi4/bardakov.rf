@@ -12,9 +12,16 @@
   if (saved === 'on' || (saved === null && prefersDark)) {
     document.documentElement.classList.add('dark-theme');
   }
+  // Восстанавливаем a11y из localStorage
+  try {
+    var a11y = JSON.parse(localStorage.getItem('bardakov-a11y') || '{}');
+    if (a11y.hc) document.documentElement.classList.add('a11y-hc');
+    if (a11y.lf) document.documentElement.classList.add('a11y-lf');
+    if (a11y.na) document.documentElement.classList.add('a11y-na');
+  } catch (e) {}
 })();
 
-/* Глобальная функция переключения темы */
+/* --- Переключение тёмной темы (глобальная функция) --- */
 function toggleDarkTheme() {
   var isDark = document.documentElement.classList.toggle('dark-theme');
   localStorage.setItem('dark-theme', isDark ? 'on' : 'off');
@@ -22,28 +29,34 @@ function toggleDarkTheme() {
 }
 
 function updateThemeButton(isDark) {
-  var btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-  var icon = btn.querySelector('i');
-  if (!icon) return;
-  if (isDark) {
-    icon.className = 'bi bi-sun-fill';
-    btn.title = 'Светлая тема';
-    btn.setAttribute('aria-label', 'Светлая тема');
-  } else {
-    icon.className = 'bi bi-moon-fill';
-    btn.title = 'Тёмная тема';
-    btn.setAttribute('aria-label', 'Тёмная тема');
-  }
+  ['theme-toggle', 'theme-toggle-mobile'].forEach(function (id) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    var icon = btn.querySelector('i');
+    if (icon) icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+    btn.title = isDark ? 'Светлая тема' : 'Тёмная тема';
+    btn.setAttribute('aria-label', isDark ? 'Светлая тема' : 'Тёмная тема');
+  });
 }
 
-/* Глобальная функция версии для слабовидящих */
+/* --- Панель доступности (глобальная функция) --- */
 function toggleA11y() {
-  var isOn = document.body.classList.toggle('high-contrast');
-  document.body.classList.toggle('large-font', isOn);
-  localStorage.setItem('a11y-mode', isOn ? 'on' : 'off');
-  var btn = document.getElementById('a11y-toggle');
-  if (btn) btn.classList.toggle('active', isOn);
+  var panel = document.getElementById('a11yPanel');
+  if (!panel) return;
+  if (panel.hidden) {
+    panel.hidden = false;
+    var btn = document.getElementById('a11y-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    // фокус на первый чекбокс
+    setTimeout(function () {
+      var cb = panel.querySelector('input[type="checkbox"]');
+      if (cb) cb.focus();
+    }, 60);
+  } else {
+    panel.hidden = true;
+    var btn = document.getElementById('a11y-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -52,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
      1. JS-include: загрузка header и footer
      ------------------------------------------- */
   function loadComponent(placeholderId, componentUrl) {
-    const placeholder = document.getElementById(placeholderId);
+    var placeholder = document.getElementById(placeholderId);
     if (!placeholder) return;
     fetch(componentUrl)
       .then(function (r) {
@@ -63,57 +76,264 @@ document.addEventListener('DOMContentLoaded', function () {
         placeholder.innerHTML = html;
         placeholder.dispatchEvent(new CustomEvent('componentLoaded', { bubbles: true }));
       })
-      .catch(function (err) {
-        console.error(err);
-      });
+      .catch(function (err) { console.error(err); });
   }
 
   loadComponent('header-placeholder', '/assets/components/header.html');
   loadComponent('footer-placeholder', '/assets/components/footer.html');
 
   /* -------------------------------------------
-     2. Подсветка текущего пункта меню
+     2. Инициализация после загрузки header
      ------------------------------------------- */
   document.addEventListener('componentLoaded', function (e) {
     if (e.target.id !== 'header-placeholder') return;
-    const currentPath = window.location.pathname;
-    e.target.querySelectorAll('.nav-link').forEach(function (link) {
-      const href = link.getAttribute('href');
+
+    var currentPath = window.location.pathname;
+
+    // --- Подсветка активных ссылок ---
+    e.target.querySelectorAll('.main-nav__link, .oc-nav__link, .oc-nav__sub-link').forEach(function (link) {
+      var href = link.getAttribute('href');
       if (!href) return;
       if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
         link.classList.add('active');
       }
     });
-    initSearchLink();
 
-    // Кнопка переключения тёмной темы — инициализация иконки
+    // --- Открываем подменю offcanvas если текущий раздел активен ---
+    e.target.querySelectorAll('.oc-nav__group').forEach(function (group) {
+      if (group.querySelector('.oc-nav__sub-link.active')) {
+        var sub = group.querySelector('.oc-nav__sub');
+        var toggle = group.querySelector('.oc-nav__toggle');
+        if (sub) sub.hidden = false;
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // --- Инициализация иконки темы ---
     updateThemeButton(document.documentElement.classList.contains('dark-theme'));
 
-    // Кнопка версии для слабовидящих — инициализация активного состояния
-    var a11yBtn = document.getElementById('a11y-toggle');
-    if (a11yBtn && document.body.classList.contains('high-contrast')) {
-      a11yBtn.classList.add('active');
-    }
+    // --- Compact-шапка при скролле ---
+    initHeaderCompact();
+
+    // --- Offcanvas подменю-аккордеон ---
+    initOffcanvasNav();
+
+    // --- Панель доступности ---
+    initA11yPanel();
+
+    // --- Поисковый модал ---
+    initSearchModal();
   });
 
-  if (localStorage.getItem('a11y-mode') === 'on') {
-    document.body.classList.add('high-contrast', 'large-font');
+  /* -------------------------------------------
+     3. Compact-шапка при скролле
+     ------------------------------------------- */
+  function initHeaderCompact() {
+    var header = document.getElementById('header');
+    if (!header) return;
+    function update() {
+      header.classList.toggle('header--compact', window.scrollY > 24);
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
   }
 
   /* -------------------------------------------
-     3. Поиск
+     4. Offcanvas: аккордеон подменю
      ------------------------------------------- */
-  function initSearchLink() {
-    var searchBtn = document.getElementById('search-btn');
-    if (searchBtn) {
-      searchBtn.addEventListener('click', function () {
-        window.location.href = '/search/';
+  function initOffcanvasNav() {
+    var offcanvasEl = document.getElementById('offcanvasNav');
+    if (!offcanvasEl) return;
+
+    offcanvasEl.querySelectorAll('.oc-nav__toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        var controlId = toggle.getAttribute('aria-controls');
+        var sub = controlId ? document.getElementById(controlId) : null;
+        if (!sub) return;
+        var isOpen = !sub.hidden;
+        sub.hidden = isOpen;
+        toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+      });
+    });
+
+    // Поиск внутри offcanvas (мобильный) → открываем модал
+    var mobileSearchBtn = document.getElementById('search-btn-mobile');
+    if (mobileSearchBtn) {
+      mobileSearchBtn.addEventListener('click', function () {
+        // Закрываем offcanvas
+        if (typeof bootstrap !== 'undefined') {
+          var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
+          if (bsOc) {
+            offcanvasEl.addEventListener('hidden.bs.offcanvas', function once() {
+              offcanvasEl.removeEventListener('hidden.bs.offcanvas', once);
+              openSearchModal();
+            });
+            bsOc.hide();
+            return;
+          }
+        }
+        openSearchModal();
       });
     }
   }
 
   /* -------------------------------------------
-     4. AOS — анимации при прокрутке
+     5. Панель доступности (a11y)
+     ------------------------------------------- */
+  function initA11yPanel() {
+    var panel   = document.getElementById('a11yPanel');
+    var toggle  = document.getElementById('a11y-toggle');
+    var cbLF    = document.getElementById('a11yLargeFont');
+    var cbHC    = document.getElementById('a11yHighContrast');
+    var cbNA    = document.getElementById('a11yNoAnimations');
+    var btnReset = document.getElementById('a11yReset');
+    var btnClose = document.getElementById('a11yClose');
+
+    if (!panel) return;
+
+    var PREFS_KEY = 'bardakov-a11y';
+
+    function loadPrefs() {
+      try {
+        var raw = localStorage.getItem(PREFS_KEY);
+        if (raw) return JSON.parse(raw);
+        // совместимость со старым ключом
+        var old = localStorage.getItem('a11y-mode');
+        return { hc: old === 'on', lf: old === 'on', na: false };
+      } catch (e) { return { hc: false, lf: false, na: false }; }
+    }
+
+    function savePrefs(p) {
+      try { localStorage.setItem(PREFS_KEY, JSON.stringify(p)); } catch (e) {}
+    }
+
+    function applyPrefs(p) {
+      document.body.classList.toggle('high-contrast',  p.hc);
+      document.body.classList.toggle('large-font',     p.lf);
+      document.body.classList.toggle('no-animations',  p.na);
+    }
+
+    var prefs = loadPrefs();
+    applyPrefs(prefs);
+
+    function syncCheckboxes() {
+      if (cbHC) cbHC.checked = prefs.hc;
+      if (cbLF) cbLF.checked = prefs.lf;
+      if (cbNA) cbNA.checked = prefs.na;
+    }
+    syncCheckboxes();
+
+    var justOpened = false;
+
+    function openPanel() {
+      panel.hidden = false;
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+      justOpened = true;
+      setTimeout(function () { justOpened = false; }, 150);
+      setTimeout(function () { if (cbLF) cbLF.focus(); }, 60);
+    }
+
+    function closePanel() {
+      panel.hidden = true;
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    // toggleA11y теперь делегирует сюда
+    window.toggleA11y = function () {
+      panel.hidden ? openPanel() : closePanel();
+    };
+
+    if (cbLF) cbLF.addEventListener('change', function () {
+      prefs.lf = cbLF.checked; applyPrefs(prefs); savePrefs(prefs);
+    });
+    if (cbHC) cbHC.addEventListener('change', function () {
+      prefs.hc = cbHC.checked; applyPrefs(prefs); savePrefs(prefs);
+    });
+    if (cbNA) cbNA.addEventListener('change', function () {
+      prefs.na = cbNA.checked; applyPrefs(prefs); savePrefs(prefs);
+    });
+
+    if (btnReset) btnReset.addEventListener('click', function () {
+      prefs = { hc: false, lf: false, na: false };
+      applyPrefs(prefs); savePrefs(prefs); syncCheckboxes();
+    });
+    if (btnClose) btnClose.addEventListener('click', closePanel);
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && !panel.hidden) closePanel();
+    });
+    document.addEventListener('click', function (ev) {
+      if (!panel.hidden && !justOpened
+          && !panel.contains(ev.target)
+          && ev.target !== toggle) {
+        closePanel();
+      }
+    });
+  }
+
+  /* -------------------------------------------
+     6. Поисковый модал
+     ------------------------------------------- */
+  var _searchModal    = null;
+  var _searchOverlay  = null;
+  var _searchClose    = null;
+  var _searchInput    = null;
+  var _searchPrevFocus = null;
+
+  function openSearchModal() {
+    if (!_searchModal) {
+      _searchModal   = document.getElementById('searchModal');
+      _searchOverlay = document.getElementById('searchModalOverlay');
+      _searchClose   = document.getElementById('searchModalClose');
+      _searchInput   = document.getElementById('searchModalInput');
+    }
+    if (!_searchModal) return;
+    _searchPrevFocus = document.activeElement;
+    _searchModal.classList.add('is-open');
+    _searchModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var btn = document.getElementById('search-btn');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    setTimeout(function () { if (_searchInput) _searchInput.focus(); }, 100);
+  }
+
+  function closeSearchModal() {
+    if (!_searchModal) return;
+    _searchModal.classList.remove('is-open');
+    _searchModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    var btn = document.getElementById('search-btn');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (_searchPrevFocus) { _searchPrevFocus.focus(); _searchPrevFocus = null; }
+  }
+
+  function initSearchModal() {
+    var searchBtn = document.getElementById('search-btn');
+    if (searchBtn) {
+      searchBtn.addEventListener('click', function () {
+        _searchModal && _searchModal.classList.contains('is-open')
+          ? closeSearchModal() : openSearchModal();
+      });
+    }
+
+    // Инициализируем ссылки на элементы
+    _searchModal   = document.getElementById('searchModal');
+    _searchOverlay = document.getElementById('searchModalOverlay');
+    _searchClose   = document.getElementById('searchModalClose');
+    _searchInput   = document.getElementById('searchModalInput');
+
+    if (_searchOverlay) _searchOverlay.addEventListener('click', closeSearchModal);
+    if (_searchClose)   _searchClose.addEventListener('click', closeSearchModal);
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && _searchModal && _searchModal.classList.contains('is-open')) {
+        closeSearchModal();
+      }
+    });
+  }
+
+  /* -------------------------------------------
+     7. AOS — анимации при прокрутке
      ------------------------------------------- */
   if (typeof AOS !== 'undefined') {
     AOS.init({
@@ -125,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* -------------------------------------------
-     5. Swiper — Hero Slider
+     8. Swiper — Hero Slider
      ------------------------------------------- */
   if (typeof Swiper !== 'undefined' && document.querySelector('.hero-swiper')) {
     new Swiper('.hero-swiper', {
@@ -169,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* -------------------------------------------
-     6. Swiper — Gallery
+     9. Swiper — Gallery
      ------------------------------------------- */
   if (typeof Swiper !== 'undefined' && document.querySelector('.gallery-swiper')) {
     new Swiper('.gallery-swiper', {
@@ -192,16 +412,16 @@ document.addEventListener('DOMContentLoaded', function () {
         prevEl: '.gallery-prev',
       },
       breakpoints: {
-        576: { slidesPerView: 1.8, spaceBetween: 20 },
-        768: { slidesPerView: 2.4, spaceBetween: 24 },
-        992: { slidesPerView: 3,   spaceBetween: 28 },
+        576:  { slidesPerView: 1.8, spaceBetween: 20 },
+        768:  { slidesPerView: 2.4, spaceBetween: 24 },
+        992:  { slidesPerView: 3,   spaceBetween: 28 },
         1200: { slidesPerView: 3.5, spaceBetween: 30 },
       },
     });
   }
 
   /* -------------------------------------------
-     7. Анимированные счётчики (stats-bar)
+     10. Анимированные счётчики (stats-bar)
      ------------------------------------------- */
   function animateCounter(el, target, duration) {
     var start = 0;
@@ -237,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (statsSection) statsObserver.observe(statsSection);
 
   /* -------------------------------------------
-     8. Плавная прокрутка к якорям
+     11. Плавная прокрутка к якорям
      ------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
@@ -250,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* -------------------------------------------
-     9. Кнопка «Наверх»
+     12. Кнопка «Наверх»
      ------------------------------------------- */
   var scrollBtn = document.createElement('button');
   scrollBtn.innerHTML = '<i class="bi bi-chevron-up"></i>';

@@ -1,62 +1,217 @@
 <!-- Шапка сайта — подключается через JS-include -->
-<nav class="navbar navbar-expand-lg navbar-dark site-header">
-  <div class="container">
-    <a class="navbar-brand" href="/">бардаков.рф</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-            aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/">Главная</a>
+<header id="header" class="site-header d-flex align-items-center">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+    <!-- Логотип -->
+    <a class="site-header__brand flex-shrink-0" href="/">бардаков.рф</a>
+
+    <!-- Основная навигация (desktop ≥992px) -->
+    <nav class="main-nav d-none d-lg-flex mx-auto" role="navigation" aria-label="Основная навигация">
+      <ul class="d-flex list-unstyled align-items-center m-0 p-0">
+        <li>
+          <a href="/" class="main-nav__link">Главная</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/obo-mne/">Обо мне</a>
+        <li>
+          <a href="/obo-mne/" class="main-nav__link">Обо мне</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/obuchenie/" id="navObuchenie"
-             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Обучение
+        <li class="main-nav__item--has-sub">
+          <a href="/obuchenie/" class="main-nav__link main-nav__link--has-sub">
+            Обучение <i class="bi bi-chevron-down main-nav__chevron" aria-hidden="true"></i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navObuchenie">
-            <li><a class="dropdown-item" href="/obuchenie/elektromonter.html">Электромонтер</a></li>
-            <li><a class="dropdown-item" href="/obuchenie/kip/">КИП</a></li>
-            <li><a class="dropdown-item" href="/obuchenie/ksk.html">КСК</a></li>
-            <li><a class="dropdown-item" href="/obuchenie/pm02/lektsii/">ПМ.02 Лекции</a></li>
+          <ul class="main-nav__sub list-unstyled">
+            <li><a href="/obuchenie/elektromonter.html" class="main-nav__sub-link">Электромонтер</a></li>
+            <li><a href="/obuchenie/kip/" class="main-nav__sub-link">КИП</a></li>
+            <li><a href="/obuchenie/ksk.html" class="main-nav__sub-link">КСК</a></li>
+            <li><a href="/obuchenie/pm02/lektsii/" class="main-nav__sub-link">ПМ.02 Лекции</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/abiturientu/" id="navAbiturient"
-             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Абитуриенту
+        <li class="main-nav__item--has-sub">
+          <a href="/abiturientu/" class="main-nav__link main-nav__link--has-sub">
+            Абитуриенту <i class="bi bi-chevron-down main-nav__chevron" aria-hidden="true"></i>
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navAbiturient">
-            <li><a class="dropdown-item" href="/abiturientu/professii/">Профессии</a></li>
-            <li><a class="dropdown-item" href="/abiturientu/spetsialnosti/">Специальности</a></li>
-            <li><a class="dropdown-item" href="/abiturientu/dokumentatsiya.html">Документация</a></li>
+          <ul class="main-nav__sub list-unstyled">
+            <li><a href="/abiturientu/professii/" class="main-nav__sub-link">Профессии</a></li>
+            <li><a href="/abiturientu/spetsialnosti/" class="main-nav__sub-link">Специальности</a></li>
+            <li><a href="/abiturientu/dokumentatsiya.html" class="main-nav__sub-link">Документация</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/vospitanie/">Воспитание</a>
+        <li>
+          <a href="/vospitanie/" class="main-nav__link">Воспитание</a>
         </li>
       </ul>
-      <div class="d-flex align-items-center gap-1">
-        <button class="header-icon-btn" id="search-btn"
-                title="Поиск" aria-label="Открыть поиск">
-          <i class="bi bi-search" aria-hidden="true"></i>
-        </button>
-        <button class="header-icon-btn" id="theme-toggle"
-                title="Тёмная тема" aria-label="Тёмная тема"
-                onclick="return toggleDarkTheme(),!1">
-          <i class="bi bi-moon-fill" aria-hidden="true"></i>
-        </button>
-        <button class="header-icon-btn" id="a11y-toggle"
-                title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
-                onclick="return toggleA11y(),!1">
-          <i class="bi bi-eye" aria-hidden="true"></i>
-        </button>
-      </div>
+    </nav>
+
+    <!-- Иконки действий (desktop ≥992px) -->
+    <div class="header-icons d-none d-lg-flex align-items-center gap-1 flex-shrink-0">
+      <button class="header-icon-btn" id="search-btn"
+              type="button" title="Поиск" aria-label="Поиск"
+              aria-expanded="false" aria-controls="searchModal">
+        <i class="bi bi-search" aria-hidden="true"></i>
+      </button>
+      <button class="header-icon-btn" id="theme-toggle"
+              type="button" title="Тёмная тема" aria-label="Тёмная тема"
+              onclick="return toggleDarkTheme(),!1">
+        <i class="bi bi-moon-fill" aria-hidden="true"></i>
+      </button>
+      <button class="header-icon-btn" id="a11y-toggle"
+              type="button" title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
+              aria-expanded="false" aria-controls="a11yPanel"
+              onclick="return toggleA11y(),!1">
+        <i class="bi bi-eye" aria-hidden="true"></i>
+      </button>
+      <button class="header-icon-btn" id="offcanvas-toggle"
+              type="button"
+              data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav"
+              aria-controls="offcanvasNav"
+              title="Все разделы" aria-label="Все разделы">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="currentColor" aria-hidden="true">
+          <rect x="3" y="0"  width="14" height="2" rx="1"/>
+          <rect x="0" y="7"  width="20" height="2" rx="1"/>
+          <rect x="3" y="14" width="14" height="2" rx="1"/>
+        </svg>
+      </button>
     </div>
+
+    <!-- Гамбургер (мобильные <992px) -->
+    <button class="header-icon-btn d-flex d-lg-none ms-auto"
+            type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav"
+            aria-controls="offcanvasNav"
+            aria-label="Открыть меню" title="Меню">
+      <i class="bi bi-list" style="font-size:1.5rem" aria-hidden="true"></i>
+    </button>
+
   </div>
-</nav>
+</header>
+
+<!-- Панель доступности (position:fixed, поверх всего) -->
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Настройки доступности" hidden>
+  <p class="a11y-panel__title"><i class="bi bi-eye me-2"></i>Версия для слабовидящих</p>
+  <div class="a11y-options">
+    <label class="a11y-option">
+      <input type="checkbox" id="a11yLargeFont">
+      <span>Крупный шрифт</span>
+    </label>
+    <label class="a11y-option">
+      <input type="checkbox" id="a11yHighContrast">
+      <span>Высокий контраст</span>
+    </label>
+    <label class="a11y-option">
+      <input type="checkbox" id="a11yNoAnimations">
+      <span>Без анимаций</span>
+    </label>
+  </div>
+  <div class="a11y-panel__footer">
+    <button type="button" class="a11y-reset" id="a11yReset">↩ Сбросить</button>
+    <button type="button" class="a11y-close" id="a11yClose">✕ Закрыть</button>
+  </div>
+</div>
+
+<!-- Offcanvas навигация -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+  <div class="offcanvas-header oc-header">
+    <a href="/" class="oc-header__brand" data-bs-dismiss="offcanvas">
+      <span class="oc-header__title" id="offcanvasNavLabel">бардаков.рф</span>
+      <span class="oc-header__sub">Персональный сайт преподавателя</span>
+    </a>
+    <button type="button" class="oc-dismiss-btn" data-bs-dismiss="offcanvas" aria-label="Закрыть">
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="offcanvas-body p-0">
+
+    <!-- Иконки действий (только мобильные <992px) -->
+    <div class="offcanvas-actions d-flex d-lg-none align-items-center gap-1 px-3 py-2 border-bottom border-dark-subtle">
+      <button class="header-icon-btn" id="theme-toggle-mobile"
+              type="button" title="Тёмная тема" aria-label="Тёмная тема"
+              onclick="return toggleDarkTheme(),!1">
+        <i class="bi bi-moon-fill" aria-hidden="true"></i>
+      </button>
+      <button class="header-icon-btn"
+              type="button" title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
+              onclick="return toggleA11y(),!1">
+        <i class="bi bi-eye" aria-hidden="true"></i>
+      </button>
+      <button class="header-icon-btn" id="search-btn-mobile"
+              type="button" title="Поиск" aria-label="Поиск">
+        <i class="bi bi-search" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Разделы навигации -->
+    <nav class="oc-nav" aria-label="Разделы сайта">
+
+      <a href="/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+        <span>Главная</span>
+      </a>
+      <a href="/obo-mne/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+        <span>Обо мне</span>
+      </a>
+
+      <div class="oc-nav__group">
+        <div class="oc-nav__row">
+          <a href="/obuchenie/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+            <span>Обучение</span>
+          </a>
+          <button class="oc-nav__toggle" type="button"
+                  aria-expanded="false" aria-controls="ocSubObuchenie"
+                  aria-label="Подразделы: Обучение">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <ul class="oc-nav__sub list-unstyled" id="ocSubObuchenie" hidden>
+          <li><a href="/obuchenie/elektromonter.html" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">Электромонтер</a></li>
+          <li><a href="/obuchenie/kip/" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">КИП</a></li>
+          <li><a href="/obuchenie/ksk.html" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">КСК</a></li>
+          <li><a href="/obuchenie/pm02/lektsii/" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">ПМ.02 Лекции</a></li>
+        </ul>
+      </div>
+
+      <div class="oc-nav__group">
+        <div class="oc-nav__row">
+          <a href="/abiturientu/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+            <span>Абитуриенту</span>
+          </a>
+          <button class="oc-nav__toggle" type="button"
+                  aria-expanded="false" aria-controls="ocSubAbiturient"
+                  aria-label="Подразделы: Абитуриенту">
+            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <ul class="oc-nav__sub list-unstyled" id="ocSubAbiturient" hidden>
+          <li><a href="/abiturientu/professii/" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">Профессии</a></li>
+          <li><a href="/abiturientu/spetsialnosti/" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">Специальности</a></li>
+          <li><a href="/abiturientu/dokumentatsiya.html" class="oc-nav__sub-link" data-bs-dismiss="offcanvas">Документация</a></li>
+        </ul>
+      </div>
+
+      <a href="/vospitanie/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+        <span>Воспитание</span>
+      </a>
+      <a href="/search/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+        <i class="bi bi-search me-2 opacity-75" aria-hidden="true"></i><span>Поиск</span>
+      </a>
+
+    </nav>
+  </div>
+</div>
+
+<!-- Модальное окно поиска -->
+<div class="search-modal" id="searchModal" aria-hidden="true">
+  <div class="search-modal__overlay" id="searchModalOverlay"></div>
+  <div class="search-modal__dialog" role="dialog" aria-modal="true" aria-label="Поиск по сайту">
+    <button class="search-modal__close" id="searchModalClose" aria-label="Закрыть" type="button">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <h2 class="search-modal__heading">Поиск по сайту</h2>
+    <form class="search-modal__form" role="search" action="/search/" method="get">
+      <div class="search-modal__input-wrap">
+        <i class="bi bi-search search-modal__icon" aria-hidden="true"></i>
+        <input type="search" name="q" class="search-modal__input" id="searchModalInput"
+               placeholder="Введите запрос..." autocomplete="off" autocorrect="off">
+        <button type="submit" class="search-modal__submit">Найти</button>
+      </div>
+    </form>
+  </div>
+</div>
