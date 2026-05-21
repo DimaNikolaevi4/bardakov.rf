@@ -8,77 +8,153 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
 
   <div id="header-placeholder"></div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="container">
-        <div class="row align-items-end">
-          <div class="col-lg-7">
-            <span class="hero-name">Бардаков Дмитрий Николаевич</span>
-            <h1>бардаков.рф</h1>
-            <p class="hero-subtitle">Персональный сайт преподавателя</p>
-            <p class="hero-desc">
-              Методические материалы, лекции и учебные пособия для студентов
-              технических специальностей. Здесь собраны все материалы по дисциплинам
-              и полезная информация для абитуриентов.
-            </p>
-            <div>
-              <a href="/obuchenie/" class="hero-btn">
-                <i class="bi bi-book"></i> Материалы
-              </a>
-              <a href="/obo-mne/" class="hero-btn hero-btn-outline">
-                <i class="bi bi-person"></i> Обо мне
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-5 d-none d-lg-flex">
-            <div class="hero-photo-wrap w-100">
-              <div class="hero-photo-frame"></div>
-              <img
-                src="/assets/images/teacher.jpg"
-                alt="Бардаков Дмитрий Николаевич — преподаватель"
-                class="hero-photo"
-              >
+  <!-- ===== Hero Swiper Slider ===== -->
+  <section class="hero-slider-wrap">
+    <div class="swiper hero-swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Слайд 1: Главный -->
+        <div class="swiper-slide">
+          <div class="hero-slide" style="background-image: url('/assets/images/kabinet/lab1.jpg');">
+            <div class="hero-slide-overlay"></div>
+            <div class="container hero-slide-content">
+              <div class="row align-items-center" style="min-height:520px;">
+                <div class="col-lg-7">
+                  <span class="hero-tag" data-swiper-parallax="-200">Персональный сайт</span>
+                  <h1 class="hero-slide-title" data-swiper-parallax="-300">бардаков.рф</h1>
+                  <p class="hero-slide-subtitle" data-swiper-parallax="-400">Бардаков Дмитрий Николаевич — преподаватель технических дисциплин</p>
+                  <div data-swiper-parallax="-500">
+                    <a href="/obuchenie/" class="hero-btn me-2">
+                      <i class="bi bi-book me-2"></i>Учебные материалы
+                    </a>
+                    <a href="/obo-mne/" class="hero-btn hero-btn-outline">
+                      <i class="bi bi-person me-2"></i>Обо мне
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-5 d-none d-lg-flex justify-content-end align-items-end" data-swiper-parallax="-150">
+                  <div class="hero-photo-wrap">
+                    <div class="hero-photo-frame"></div>
+                    <img src="/assets/images/teacher.jpg" alt="Преподаватель" class="hero-photo">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Слайд 2: Обучение -->
+        <div class="swiper-slide">
+          <div class="hero-slide" style="background-image: url('/assets/images/kip-foto/slide2.jpg');">
+            <div class="hero-slide-overlay" style="background: linear-gradient(120deg, rgba(21,31,26,0.92) 50%, rgba(47,110,75,0.5) 100%);"></div>
+            <div class="container hero-slide-content">
+              <div class="row align-items-center" style="min-height:520px;">
+                <div class="col-lg-7">
+                  <span class="hero-tag" data-swiper-parallax="-200">Обучение</span>
+                  <h1 class="hero-slide-title" data-swiper-parallax="-300">Учебные материалы</h1>
+                  <p class="hero-slide-subtitle" data-swiper-parallax="-400">Лекции, практические работы и методические пособия по специальностям КИП, Электромонтёр, КСК и ПМ.02</p>
+                  <div data-swiper-parallax="-500">
+                    <a href="/obuchenie/" class="hero-btn">
+                      <i class="bi bi-folder2-open me-2"></i>Перейти к материалам
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 3: Абитуриентам -->
+        <div class="swiper-slide">
+          <div class="hero-slide" style="background-image: url('/assets/images/kabinet/lab2.jpg');">
+            <div class="hero-slide-overlay" style="background: linear-gradient(120deg, rgba(21,31,26,0.92) 50%, rgba(47,110,75,0.45) 100%);"></div>
+            <div class="container hero-slide-content">
+              <div class="row align-items-center" style="min-height:520px;">
+                <div class="col-lg-7">
+                  <span class="hero-tag" data-swiper-parallax="-200">Абитуриентам</span>
+                  <h1 class="hero-slide-title" data-swiper-parallax="-300">Поступай к нам!</h1>
+                  <p class="hero-slide-subtitle" data-swiper-parallax="-400">Профессии, специальности, условия поступления и вся необходимая документация для будущих студентов</p>
+                  <div data-swiper-parallax="-500">
+                    <a href="/abiturientu/" class="hero-btn">
+                      <i class="bi bi-mortarboard me-2"></i>Информация для поступающих
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Слайд 4: Воспитание -->
+        <div class="swiper-slide">
+          <div class="hero-slide" style="background-image: url('/assets/images/kabinet/lab3.jpg');">
+            <div class="hero-slide-overlay" style="background: linear-gradient(120deg, rgba(21,31,26,0.92) 50%, rgba(47,110,75,0.45) 100%);"></div>
+            <div class="container hero-slide-content">
+              <div class="row align-items-center" style="min-height:520px;">
+                <div class="col-lg-7">
+                  <span class="hero-tag" data-swiper-parallax="-200">Воспитание</span>
+                  <h1 class="hero-slide-title" data-swiper-parallax="-300">Воспитательная работа</h1>
+                  <p class="hero-slide-subtitle" data-swiper-parallax="-400">Материалы для родителей, разговоры о важном, советы студентам и воспитательные мероприятия</p>
+                  <div data-swiper-parallax="-500">
+                    <a href="/vospitanie/" class="hero-btn">
+                      <i class="bi bi-people me-2"></i>Перейти в раздел
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+      <!-- Навигация -->
+      <div class="swiper-pagination hero-pagination"></div>
+      <div class="swiper-button-prev hero-prev"></div>
+      <div class="swiper-button-next hero-next"></div>
     </div>
   </section>
 
-  <!-- Статистика -->
+  <!-- ===== Статистика с анимацией ===== -->
   <div class="section-divider"></div>
-  <section class="stats-bar">
+  <section class="stats-bar" id="stats-section">
     <div class="container">
       <div class="row g-3 justify-content-center">
         <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number">15+</div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
+            <div class="stat-number" data-count="15">0</div>
+            <div class="stat-suffix">+</div>
             <div class="stat-label">Лет опыта</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number">4</div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="stat-number" data-count="4">0</div>
+            <div class="stat-suffix"></div>
             <div class="stat-label">Специальности</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number">100+</div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="stat-number" data-count="120">0</div>
+            <div class="stat-suffix">+</div>
             <div class="stat-label">Учебных материалов</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number">∞</div>
-            <div class="stat-label">Знаний для студентов</div>
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="stat-number" data-count="500">0</div>
+            <div class="stat-suffix">+</div>
+            <div class="stat-label">Студентов обучено</div>
           </div>
         </div>
       </div>
@@ -86,112 +162,149 @@
   </section>
   <div class="section-divider" style="background: linear-gradient(90deg,#81ae90,#2f6e4b);"></div>
 
-  <!-- Основные разделы -->
+  <!-- ===== Разделы сайта (карточки с AOS) ===== -->
   <section class="section-cards" data-pagefind-body>
     <div class="container">
-      <div class="section-heading">
+      <div class="section-heading" data-aos="fade-up">
         <h2>Разделы сайта</h2>
         <div class="section-line"></div>
         <p>Выберите интересующий раздел</p>
       </div>
 
       <div class="row g-4">
-
-        <!-- Обо мне -->
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
           <div class="card-nav h-100">
             <div class="card-nav-icon"></div>
             <div class="card-body">
-              <div class="card-icon">
-                <i class="bi bi-person-fill"></i>
-              </div>
-              <h3 class="card-title">
-                <a href="/obo-mne/">Обо мне</a>
-              </h3>
+              <div class="card-icon"><i class="bi bi-person-fill"></i></div>
+              <h3 class="card-title"><a href="/obo-mne/">Обо мне</a></h3>
               <p class="card-text">Достижения, хобби, методическая работа, контакты.</p>
-              <a href="/obo-mne/" class="card-arrow">
-                Подробнее <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="/obo-mne/" class="card-arrow">Подробнее <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Обучение -->
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
           <div class="card-nav h-100">
             <div class="card-nav-icon"></div>
             <div class="card-body">
-              <div class="card-icon">
-                <i class="bi bi-book-fill"></i>
-              </div>
-              <h3 class="card-title">
-                <a href="/obuchenie/">Обучение</a>
-              </h3>
+              <div class="card-icon"><i class="bi bi-book-fill"></i></div>
+              <h3 class="card-title"><a href="/obuchenie/">Обучение</a></h3>
               <p class="card-text">Лекции, практические работы, методические материалы по специальностям.</p>
-              <a href="/obuchenie/" class="card-arrow">
-                Подробнее <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="/obuchenie/" class="card-arrow">Подробнее <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Абитуриенту -->
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
           <div class="card-nav h-100">
             <div class="card-nav-icon"></div>
             <div class="card-body">
-              <div class="card-icon">
-                <i class="bi bi-mortarboard-fill"></i>
-              </div>
-              <h3 class="card-title">
-                <a href="/abiturientu/">Абитуриенту</a>
-              </h3>
+              <div class="card-icon"><i class="bi bi-mortarboard-fill"></i></div>
+              <h3 class="card-title"><a href="/abiturientu/">Абитуриенту</a></h3>
               <p class="card-text">Профессии, специальности, документация для поступления.</p>
-              <a href="/abiturientu/" class="card-arrow">
-                Подробнее <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="/abiturientu/" class="card-arrow">Подробнее <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Воспитание -->
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
           <div class="card-nav h-100">
             <div class="card-nav-icon"></div>
             <div class="card-body">
-              <div class="card-icon">
-                <i class="bi bi-people-fill"></i>
-              </div>
-              <h3 class="card-title">
-                <a href="/vospitanie/">Воспитание</a>
-              </h3>
+              <div class="card-icon"><i class="bi bi-people-fill"></i></div>
+              <h3 class="card-title"><a href="/vospitanie/">Воспитание</a></h3>
               <p class="card-text">Для родителей, разговоры о важном, воспитательная работа.</p>
-              <a href="/vospitanie/" class="card-arrow">
-                Подробнее <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="/vospitanie/" class="card-arrow">Подробнее <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
-        <!-- Поиск -->
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
           <div class="card-nav h-100">
             <div class="card-nav-icon"></div>
             <div class="card-body">
-              <div class="card-icon">
-                <i class="bi bi-search"></i>
-              </div>
-              <h3 class="card-title">
-                <a href="/search/">Поиск по сайту</a>
-              </h3>
+              <div class="card-icon"><i class="bi bi-search"></i></div>
+              <h3 class="card-title"><a href="/search/">Поиск по сайту</a></h3>
               <p class="card-text">Найдите нужный материал, лекцию или документ.</p>
-              <a href="/search/" class="card-arrow">
-                Найти <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="/search/" class="card-arrow">Найти <i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===== Галерея — Swiper фото лаборатории ===== -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="section-heading" data-aos="fade-up">
+        <h2>Фотогалерея</h2>
+        <div class="section-line"></div>
+        <p>Учебные лаборатории и занятия</p>
+      </div>
+    </div>
+    <div class="gallery-swiper-outer" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper gallery-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kip-foto/slide1.jpg" alt="Занятие КИП">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kip-foto/slide2.jpg" alt="Практическая работа">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kip-foto/slide3.jpg" alt="Учебная лаборатория">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kip-foto/slide4.jpg" alt="Занятие">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kip-foto/slide6.jpg" alt="Практика">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kabinet/lab1.jpg" alt="Лаборатория электротехники">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kabinet/lab2.jpg" alt="Лаборатория IT">
+          </div>
+          <div class="swiper-slide gallery-slide">
+            <img src="/assets/images/kabinet/lab3.jpg" alt="Лаборатория КСК">
+          </div>
+        </div>
+        <div class="swiper-pagination gallery-pagination"></div>
+        <div class="swiper-button-prev gallery-prev"></div>
+        <div class="swiper-button-next gallery-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Анонс раздела Обучение ===== -->
+  <section class="promo-section">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <span class="section-tag">Для студентов</span>
+          <h2 class="promo-title">Все учебные<br>материалы — здесь</h2>
+          <p class="promo-text">
+            Лекции, конспекты, практические работы и методические пособия по всем дисциплинам.
+            Доступны для скачивания в форматах PDF и DOC.
+          </p>
+          <ul class="promo-list">
+            <li data-aos="fade-right" data-aos-delay="100"><i class="bi bi-check-circle-fill"></i> Лекции по КИП и А</li>
+            <li data-aos="fade-right" data-aos-delay="150"><i class="bi bi-check-circle-fill"></i> Практические работы Электромонтёра</li>
+            <li data-aos="fade-right" data-aos-delay="200"><i class="bi bi-check-circle-fill"></i> Материалы по КСК</li>
+            <li data-aos="fade-right" data-aos-delay="250"><i class="bi bi-check-circle-fill"></i> Лекции ПМ.02</li>
+          </ul>
+          <a href="/obuchenie/" class="hero-btn mt-2">
+            <i class="bi bi-folder2-open me-2"></i>Перейти к материалам
+          </a>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+          <div class="promo-img-wrap">
+            <img src="/assets/images/kip-foto/slide3.jpg" alt="Учебные занятия" class="promo-img">
+            <div class="promo-img-badge">
+              <i class="bi bi-journal-richtext"></i>
+              <span>100+ материалов</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -199,6 +312,10 @@
   <div id="footer-placeholder"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="/assets/js/main.js"></script>
 </body>
 </html>
