@@ -3,6 +3,38 @@
    Стек: HTML + Bootstrap 5 + Swiper + AOS
    ============================================ */
 
+/* ============================================
+   Тёмная / светлая тема — применяется до рендера
+   ============================================ */
+(function () {
+  if (localStorage.getItem('dark-theme') === 'on') {
+    document.documentElement.classList.add('dark-theme');
+  }
+})();
+
+/* Глобальная функция переключения темы */
+function toggleDarkTheme() {
+  var isDark = document.documentElement.classList.toggle('dark-theme');
+  localStorage.setItem('dark-theme', isDark ? 'on' : 'off');
+  updateThemeButton(isDark);
+}
+
+function updateThemeButton(isDark) {
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  var icon = btn.querySelector('i');
+  if (!icon) return;
+  if (isDark) {
+    icon.className = 'bi bi-sun-fill';
+    btn.title = 'Светлая тема';
+    btn.setAttribute('aria-label', 'Светлая тема');
+  } else {
+    icon.className = 'bi bi-moon-fill';
+    btn.title = 'Тёмная тема';
+    btn.setAttribute('aria-label', 'Тёмная тема');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   /* -------------------------------------------
@@ -42,6 +74,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
     initSearchLink();
+
+    // Кнопка переключения тёмной темы
+    var themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) {
+      updateThemeButton(document.documentElement.classList.contains('dark-theme'));
+      themeBtn.addEventListener('click', toggleDarkTheme);
+    }
 
     // Версия для слабовидящих — кнопка в шапке
     const a11yBtn = document.getElementById('a11y-toggle');

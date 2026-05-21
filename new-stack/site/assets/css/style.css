@@ -686,6 +686,142 @@ a:hover {
   }
 }
 
+/* ============================================
+   ТЁМНАЯ ТЕМА
+   ============================================ */
+
+/* Плавный переход при смене темы */
+body,
+.breadcrumb-section,
+.content-section,
+.section-cards,
+.card-nav,
+.card-custom,
+.section-heading h2,
+h1, h2, h3, h4, h5, h6 {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* CSS-переменные для тёмной темы */
+:root.dark-theme {
+  --color-bg:           #0f1a13;
+  --color-bg-alt:       #142019;
+  --color-text-dark:    #d8e8df;
+  --color-text-muted:   #81ae90;
+  --color-primary-dark: #81ae90;
+  --color-primary:      #6fa880;
+  --color-border:       rgba(129, 174, 144, 0.25);
+  --color-border-light: rgba(129, 174, 144, 0.15);
+}
+
+/* Основные элементы */
+.dark-theme body {
+  color: var(--color-text-dark);
+  background-color: var(--color-bg);
+}
+
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme h5,
+.dark-theme h6 {
+  color: var(--color-accent-light);
+}
+
+/* Хлебные крошки */
+.dark-theme .breadcrumb-section {
+  background-color: var(--color-bg-alt);
+  border-bottom-color: var(--color-border);
+}
+.dark-theme .breadcrumb-item a {
+  color: var(--color-accent);
+}
+.dark-theme .breadcrumb-item.active {
+  color: var(--color-text-muted);
+}
+
+/* Контент-секции */
+.dark-theme .content-section {
+  background-color: var(--color-bg);
+}
+.dark-theme .content-section h1,
+.dark-theme .content-section h2,
+.dark-theme .content-section h3 {
+  color: var(--color-accent-light);
+}
+.dark-theme .content-section h2 {
+  border-bottom-color: var(--color-border);
+}
+
+/* Карточки разделов */
+.dark-theme .section-cards {
+  background-color: var(--color-bg);
+}
+.dark-theme .card-nav {
+  background: #1a2b20;
+  border-color: rgba(129, 174, 144, 0.2);
+}
+.dark-theme .card-nav:hover {
+  border-color: rgba(129, 174, 144, 0.45);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+.dark-theme .card-nav .card-title {
+  color: var(--color-accent-light);
+}
+.dark-theme .card-custom {
+  background: #1a2b20;
+  border-color: rgba(129, 174, 144, 0.2);
+}
+.dark-theme .card-custom .card-title {
+  color: var(--color-accent-light);
+}
+
+/* Заголовок секции */
+.dark-theme .section-heading h2 {
+  color: var(--color-accent-light);
+}
+.dark-theme .section-heading p {
+  color: var(--color-text-muted);
+}
+
+/* Таблицы */
+.dark-theme table {
+  color: var(--color-text-dark);
+}
+.dark-theme .table {
+  --bs-table-color: var(--color-text-dark);
+  --bs-table-bg: #1a2b20;
+  --bs-table-border-color: rgba(129, 174, 144, 0.2);
+  --bs-table-striped-bg: #162219;
+}
+.dark-theme .table thead th {
+  background-color: var(--color-primary-dark);
+  color: #fff;
+  border-color: rgba(129, 174, 144, 0.2);
+}
+
+/* Поиск */
+.dark-theme .search-container {
+  background-color: var(--color-bg);
+}
+
+/* Кнопка переключения темы */
+.site-header .btn-theme-toggle {
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  background: transparent;
+  font-size: 1.05rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: color var(--transition), transform 0.3s ease;
+  line-height: 1;
+}
+.site-header .btn-theme-toggle:hover {
+  color: var(--color-accent);
+  transform: rotate(20deg);
+}
+
 /* --- Версия для слабовидящих --- */
 .high-contrast {
   --color-bg:        #000;
