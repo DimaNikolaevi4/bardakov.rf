@@ -18,8 +18,8 @@
   --color-text-muted:    #6a8fa8;
   --color-bg:            #f2f7ff;
   --color-bg-alt:        #e8f0fb;
-  --color-border:        rgba(100, 160, 200, 0.25);
-  --color-border-light:  rgba(100, 160, 200, 0.15);
+  --color-border:        rgba(96, 165, 250, 0.25);
+  --color-border-light:  rgba(96, 165, 250, 0.15);
   --font-heading:        'Averia Serif Libre', Georgia, serif;
   --font-main:           'Open Sans', 'Segoe UI', Tahoma, sans-serif;
   --shadow-sm:           0 2px 8px rgba(0, 0, 0, 0.15);
@@ -126,7 +126,7 @@ a:hover {
 .main-nav__link:hover,
 .main-nav__link.active {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.12);
+  background-color: rgba(96, 165, 250, 0.12);
 }
 .main-nav__chevron {
   font-size: 0.7rem;
@@ -168,7 +168,7 @@ a:hover {
   white-space: nowrap;
 }
 .main-nav__sub-link:hover {
-  background-color: rgba(100, 160, 200, 0.15);
+  background-color: rgba(96, 165, 250, 0.15);
   color: var(--color-accent);
 }
 
@@ -193,12 +193,12 @@ a:hover {
 }
 .header-icon-btn:hover {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.14);
+  background-color: rgba(96, 165, 250, 0.14);
 }
 .header-icon-btn.active,
 .header-icon-btn[aria-expanded="true"] {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.18);
+  background-color: rgba(96, 165, 250, 0.18);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -280,7 +280,7 @@ a:hover {
 .oc-nav__link:hover,
 .oc-nav__link.active {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.1);
+  background-color: rgba(96, 165, 250, 0.1);
 }
 
 /* Группа с подменю */
@@ -308,11 +308,11 @@ a:hover {
 }
 .oc-nav__toggle:hover {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.1);
+  background-color: rgba(96, 165, 250, 0.1);
 }
 .oc-nav__toggle[aria-expanded="true"] {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.08);
+  background-color: rgba(96, 165, 250, 0.08);
 }
 .oc-nav__toggle[aria-expanded="true"] .bi-chevron-right {
   transform: rotate(90deg);
@@ -340,7 +340,7 @@ a:hover {
 }
 .oc-nav__sub-link:hover {
   color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.1);
+  background-color: rgba(96, 165, 250, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -633,7 +633,7 @@ body.no-animations *::after {
   right: 2rem;
   width: 320px;
   height: 380px;
-  border: 2px solid rgba(100, 160, 200, 0.3);
+  border: 2px solid rgba(96, 165, 250, 0.3);
   border-radius: 0.5rem 0.5rem 0 0;
   transform: translate(12px, -12px);
   z-index: 0;
@@ -661,17 +661,17 @@ body.no-animations *::after {
   background-color: var(--color-accent);
   color: var(--color-base);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(100, 160, 200, 0.35);
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.35);
 }
 
 .hero-btn-outline {
   background-color: transparent;
-  border-color: rgba(100, 160, 200, 0.5);
+  border-color: rgba(96, 165, 250, 0.5);
   color: var(--color-accent-light);
 }
 
 .hero-btn-outline:hover {
-  background-color: rgba(100, 160, 200, 0.15);
+  background-color: rgba(96, 165, 250, 0.15);
   border-color: var(--color-accent);
   color: var(--color-accent);
   transform: translateY(-2px);
@@ -1041,19 +1041,19 @@ body.no-animations *::after {
 
 /* --- Подвал --- */
 .site-footer {
-  --footer-bg-1:              #192035;
-  --footer-bg-2:              #20294a;
-  --footer-glow-1:            rgba(100, 160, 200, 0.12);
-  --footer-glow-2:            rgba(100, 160, 200, 0.07);
-  --footer-text:              rgba(204, 224, 245, 0.80);
-  --footer-text-strong:       #cce0f5;
-  --footer-muted:             rgba(204, 224, 245, 0.50);
-  --footer-border:            rgba(100, 160, 200, 0.14);
+  --footer-bg-1:              #0d1a38;
+  --footer-bg-2:              #111f45;
+  --footer-glow-1:            rgba(96, 165, 250, 0.10);
+  --footer-glow-2:            rgba(96, 165, 250, 0.06);
+  --footer-text:              rgba(191, 219, 254, 0.80);
+  --footer-text-strong:       #bfdbfe;
+  --footer-muted:             rgba(191, 219, 254, 0.50);
+  --footer-border:            rgba(96, 165, 250, 0.14);
   --footer-card-bg:           rgba(255, 255, 255, 0.04);
-  --footer-card-bg-hover:     rgba(100, 160, 200, 0.10);
+  --footer-card-bg-hover:     rgba(96, 165, 250, 0.10);
   --footer-card-shadow:       none;
   --footer-card-shadow-hover: none;
-  --footer-icon-bg:           rgba(100, 160, 200, 0.18);
+  --footer-icon-bg:           rgba(96, 165, 250, 0.16);
   --footer-accent:            var(--color-accent);
 
   position: relative;
@@ -1106,9 +1106,9 @@ body.no-animations *::after {
   border-radius: 999px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(100, 160, 200, 0.4) 15%,
+    rgba(96, 165, 250, 0.35) 15%,
     var(--color-accent) 50%,
-    rgba(100, 160, 200, 0.4) 85%,
+    rgba(96, 165, 250, 0.35) 85%,
     transparent 100%);
 }
 
@@ -1237,7 +1237,7 @@ body.no-animations *::after {
   border-color: var(--footer-accent);
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(100, 160, 200, 0.35);
+  box-shadow: 0 6px 16px rgba(96, 165, 250, 0.35);
 }
 
 /* === Карточка контактов (аналог корпуса) === */
@@ -1257,7 +1257,7 @@ body.no-animations *::after {
 
 .site-footer .footer-corp-card:hover {
   background: var(--footer-card-bg-hover);
-  border-color: rgba(100, 160, 200, 0.30);
+  border-color: rgba(96, 165, 250, 0.30);
   transform: translateY(-2px);
 }
 
@@ -1395,8 +1395,8 @@ body.no-animations *::after {
   margin-top: 2.5rem;
   padding: 2rem 2rem 2.25rem;
   border-radius: 16px;
-  background: rgba(100, 160, 200, 0.06);
-  border: 1px solid rgba(100, 160, 200, 0.15);
+  background: rgba(96, 165, 250, 0.06);
+  border: 1px solid rgba(96, 165, 250, 0.15);
 }
 
 .site-footer .footer-resources-title {
@@ -1436,8 +1436,8 @@ body.no-animations *::after {
 .site-footer .footer-resource:focus-visible {
   transform: translateY(-2px);
   background: var(--footer-card-bg-hover);
-  border-color: rgba(100, 160, 200, 0.35);
-  box-shadow: 0 6px 20px rgba(100, 160, 200, 0.15);
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.15);
   color: var(--footer-text-strong);
 }
 
@@ -1603,7 +1603,7 @@ body.no-animations *::after {
 /* Блок цитаты в тёмной теме */
 .dark-theme .content-section blockquote {
   border-left-color: var(--color-accent);
-  background: linear-gradient(135deg, rgba(100, 160, 200, 0.08) 0%, rgba(100, 160, 200, 0.04) 100%);
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.08) 0%, rgba(96, 165, 250, 0.04) 100%);
   color: var(--color-text-dark);
 }
 
@@ -1675,8 +1675,8 @@ h1, h2, h3, h4, h5, h6 {
   --color-text-muted:   #7aaece;
   --color-primary-dark: #7aaece;
   --color-primary:      #6a9ec0;
-  --color-border:       rgba(100, 160, 200, 0.25);
-  --color-border-light: rgba(100, 160, 200, 0.15);
+  --color-border:       rgba(96, 165, 250, 0.25);
+  --color-border-light: rgba(96, 165, 250, 0.15);
 }
 
 /* Основные элементы */
@@ -1725,10 +1725,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dark-theme .card-nav {
   background: #162040;
-  border-color: rgba(100, 160, 200, 0.2);
+  border-color: rgba(96, 165, 250, 0.2);
 }
 .dark-theme .card-nav:hover {
-  border-color: rgba(100, 160, 200, 0.45);
+  border-color: rgba(96, 165, 250, 0.45);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 .dark-theme .card-nav .card-title {
@@ -1736,7 +1736,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dark-theme .card-custom {
   background: #162040;
-  border-color: rgba(100, 160, 200, 0.2);
+  border-color: rgba(96, 165, 250, 0.2);
 }
 .dark-theme .card-custom .card-title {
   color: var(--color-accent-light);
@@ -1757,13 +1757,13 @@ h1, h2, h3, h4, h5, h6 {
 .dark-theme .table {
   --bs-table-color: var(--color-text-dark);
   --bs-table-bg: #162040;
-  --bs-table-border-color: rgba(100, 160, 200, 0.2);
+  --bs-table-border-color: rgba(96, 165, 250, 0.2);
   --bs-table-striped-bg: #0e1830;
 }
 .dark-theme .table thead th {
   background-color: var(--color-primary-dark);
   color: #fff;
-  border-color: rgba(100, 160, 200, 0.2);
+  border-color: rgba(96, 165, 250, 0.2);
 }
 
 /* Поиск */
@@ -2211,7 +2211,7 @@ body {
   background-image:
     url('/assets/images/banners/bg-schematic.svg'),
     radial-gradient(ellipse at 0% 0%,   rgba(29, 86, 208, 0.06) 0%, transparent 55%),
-    radial-gradient(ellipse at 100% 100%, rgba(56, 189, 248, 0.04) 0%, transparent 55%);
+    radial-gradient(ellipse at 100% 100%, rgba(96, 165, 250, 0.04) 0%, transparent 55%);
   background-size: 680px 680px, cover, cover;
   background-position: right top, center center, center center;
   background-attachment: fixed, fixed, fixed;
@@ -2691,13 +2691,13 @@ body {
 
 /* ── Подвал — насыщеннее ───────────────────────────────────── */
 .site-footer {
-  --footer-bg-1: #050c1e !important;
-  --footer-bg-2: #0a1632 !important;
+  --footer-bg-1: #0d1a38 !important;
+  --footer-bg-2: #111f45 !important;
   background:
     url('/assets/images/banners/bg-schematic.svg') right bottom / 500px no-repeat,
-    radial-gradient(ellipse at top left, rgba(29, 86, 208, 0.18), transparent 55%),
-    radial-gradient(ellipse at bottom right, rgba(56, 189, 248, 0.08), transparent 60%),
-    linear-gradient(180deg, #0a1632 0%, #050c1e 100%) !important;
+    radial-gradient(ellipse at top left, rgba(37, 99, 235, 0.15), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.07), transparent 60%),
+    linear-gradient(180deg, #111f45 0%, #0d1a38 100%) !important;
 }
 .site-footer .footer-decoration {
   background: linear-gradient(90deg,
