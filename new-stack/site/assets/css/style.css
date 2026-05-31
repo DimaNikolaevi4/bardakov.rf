@@ -1269,9 +1269,9 @@ body.no-animations *::after {
   padding-bottom: 0.75rem;
   background-image: linear-gradient(90deg,
     transparent 0%,
-    rgba(129, 174, 144, 0.3) 20%,
+    rgba(96, 165, 250, 0.25) 20%,
     var(--color-accent) 50%,
-    rgba(129, 174, 144, 0.3) 80%,
+    rgba(96, 165, 250, 0.25) 80%,
     transparent 100%);
   background-repeat: no-repeat;
   background-position: bottom left;
@@ -2188,20 +2188,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Новая палитра ──────────────────────────────────────────── */
 :root {
-  --color-base:          #060d1f;
-  --color-base-dark:     #040912;
-  --color-primary:       #1d56d0;
-  --color-primary-dark:  #0f3490;
-  --color-accent:        #38bdf8;
-  --color-accent-light:  #7dd3fc;
-  --color-gold:          #f59e0b;
-  --color-text:          #bde0f7;
-  --color-text-dark:     #1a2d50;
-  --color-text-muted:    #5a8aaa;
-  --color-bg:            #f0f6ff;
-  --color-bg-alt:        #e4effc;
-  --color-border:        rgba(56, 189, 248, 0.18);
-  --color-border-light:  rgba(56, 189, 248, 0.10);
+  --color-base:          #1e3a6e;
+  --color-base-dark:     #162d55;
+  --color-primary:       #2563eb;
+  --color-primary-dark:  #1d4ed8;
+  --color-accent:        #60a5fa;
+  --color-accent-light:  #93c5fd;
+  --color-text:          #bfdbfe;
+  --color-text-dark:     #1e3a6e;
+  --color-text-muted:    #5b8db8;
+  --color-bg:            #f0f7ff;
+  --color-bg-alt:        #ddeeff;
+  --color-border:        rgba(37, 99, 235, 0.15);
+  --color-border-light:  rgba(37, 99, 235, 0.08);
   --radius:              0.5rem;
   --transition:          0.28s ease;
 }
@@ -2221,29 +2220,44 @@ body {
 
 /* Тёмная тема: насыщенный фон */
 :root.dark-theme {
-  --color-bg:     #070e1d;
-  --color-bg-alt: #0a1428;
+  --color-base:          #0d1632;
+  --color-base-dark:     #080f22;
+  --color-bg:            #070e1d;
+  --color-bg-alt:        #0a1428;
+  --color-text-dark:     #bfdbfe;
+  --color-text-muted:    #5b8db8;
+  --color-primary-dark:  #60a5fa;
+  --color-border:        rgba(96, 165, 250, 0.18);
+  --color-border-light:  rgba(96, 165, 250, 0.10);
 }
 .dark-theme body {
   background-color: var(--color-bg);
   background-image:
     url('/assets/images/banners/bg-schematic.svg'),
-    radial-gradient(ellipse at 20% 20%, rgba(29, 86, 208, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(56, 189, 248, 0.10) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(96, 165, 250, 0.08) 0%, transparent 50%);
   background-size: 600px 600px, cover, cover;
   background-attachment: fixed, fixed, fixed;
 }
 
-/* ── Шапка — glassmorphism ─────────────────────────────────── */
+/* ── Шапка — светлая тема ──────────────────────────────────── */
 .site-header {
-  background: rgba(6, 13, 31, 0.82) !important;
-  backdrop-filter: blur(18px) saturate(1.6);
-  -webkit-backdrop-filter: blur(18px) saturate(1.6);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
-  box-shadow: 0 1px 32px rgba(0, 0, 0, 0.45) !important;
+  background: rgba(30, 58, 110, 0.97) !important;
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+  box-shadow: 0 1px 24px rgba(30, 58, 110, 0.35) !important;
 }
 .site-header.header--compact {
-  background: rgba(4, 9, 18, 0.90) !important;
+  background: rgba(22, 45, 85, 0.99) !important;
+}
+.dark-theme .site-header {
+  background: rgba(8, 15, 34, 0.92) !important;
+  border-bottom-color: rgba(96, 165, 250, 0.12) !important;
+  box-shadow: 0 1px 32px rgba(0, 0, 0, 0.55) !important;
+}
+.dark-theme .site-header.header--compact {
+  background: rgba(5, 10, 22, 0.97) !important;
 }
 
 /* Навигационные ссылки */
@@ -2254,36 +2268,39 @@ body {
 .main-nav__link:hover,
 .main-nav__link.active {
   color: var(--color-accent) !important;
-  background-color: rgba(56, 189, 248, 0.1) !important;
+  background-color: rgba(96, 165, 250, 0.15) !important;
 }
 
 /* Подменю шапки */
 .main-nav__sub {
-  background: rgba(6, 13, 31, 0.96) !important;
-  border-color: rgba(56, 189, 248, 0.14) !important;
+  background: rgba(22, 45, 85, 0.97) !important;
+  border-color: rgba(96, 165, 250, 0.14) !important;
   backdrop-filter: blur(12px);
 }
+.dark-theme .main-nav__sub {
+  background: rgba(8, 15, 34, 0.97) !important;
+}
 
-/* ── Hero слайдер — мощнее ─────────────────────────────────── */
+/* ── Hero слайдер ──────────────────────────────────────────── */
 .hero-slide {
   min-height: 560px;
 }
 .hero-slide-overlay {
   background: linear-gradient(
     125deg,
-    rgba(4, 9, 20, 0.72) 0%,
-    rgba(15, 50, 140, 0.38) 55%,
-    rgba(56, 189, 248, 0.08) 100%
+    rgba(4, 10, 28, 0.72) 0%,
+    rgba(29, 78, 216, 0.35) 55%,
+    rgba(96, 165, 250, 0.06) 100%
   ) !important;
 }
 .hero-slide-title {
   font-size: 3.2rem;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(56,189,248,0.15);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(96,165,250,0.2);
 }
 .hero-tag {
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(96, 165, 250, 0.18);
   border-left: 3px solid var(--color-accent);
   border-radius: 0 4px 4px 0;
   padding: 0.2rem 0.85rem 0.2rem 0.75rem;
@@ -2291,24 +2308,24 @@ body {
   letter-spacing: 0.14em;
 }
 .hero-btn {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #1a48b8 100%) !important;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
   border: none !important;
   border-radius: 0.6rem !important;
-  box-shadow: 0 4px 20px rgba(29, 86, 208, 0.45);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45);
   padding: 0.75rem 1.75rem !important;
   font-size: 0.88rem !important;
   letter-spacing: 0.06em !important;
   transition: all 0.25s ease !important;
 }
 .hero-btn:hover {
-  background: linear-gradient(135deg, var(--color-accent) 0%, #0ea5d6 100%) !important;
-  box-shadow: 0 6px 28px rgba(56, 189, 248, 0.5) !important;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%) !important;
+  box-shadow: 0 6px 28px rgba(96, 165, 250, 0.45) !important;
   transform: translateY(-3px) !important;
-  color: #040912 !important;
+  color: #fff !important;
 }
 .hero-prev, .hero-next {
-  background: rgba(6, 13, 31, 0.65) !important;
-  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  background: rgba(22, 45, 85, 0.7) !important;
+  border: 1px solid rgba(96, 165, 250, 0.25) !important;
   backdrop-filter: blur(6px);
 }
 .hero-prev:hover, .hero-next:hover {
@@ -2329,10 +2346,11 @@ body {
   opacity: 0.6;
 }
 
-/* ── Stats-bar — тёмный, акцентированный ──────────────────── */
+/* ── Stats-bar — светлая / тёмная тема ────────────────────── */
 .stats-bar {
-  background: linear-gradient(135deg, #0d1a38 0%, #0a1428 100%) !important;
-  border: none !important;
+  background: linear-gradient(135deg, #ddeeff 0%, #e8f2ff 100%) !important;
+  border-top: 1px solid rgba(37, 99, 235, 0.12) !important;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.12) !important;
   position: relative;
   overflow: hidden;
 }
@@ -2341,11 +2359,11 @@ body {
   position: absolute;
   inset: 0;
   background: url('/assets/images/banners/bg-schematic.svg') center / 400px repeat;
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
 }
 .timeline-item {
-  color: #fff !important;
+  color: var(--color-text-dark) !important;
   position: relative;
 }
 .timeline-item::after {
@@ -2355,32 +2373,41 @@ body {
   top: 15%;
   height: 70%;
   width: 1px;
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(37, 99, 235, 0.15);
 }
 .timeline-item:last-child::after { display: none; }
 .timeline-icon {
   font-size: 2.2rem !important;
-  color: var(--color-accent) !important;
-  text-shadow: 0 0 16px rgba(56,189,248,0.6);
+  color: var(--color-primary) !important;
+  text-shadow: none;
 }
 .timeline-title {
-  color: rgba(189, 224, 247, 0.7) !important;
+  color: var(--color-text-muted) !important;
   font-size: 0.76rem !important;
 }
 .timeline-date {
-  color: #fff !important;
+  color: var(--color-primary-dark) !important;
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.03em;
-  text-shadow: 0 0 12px rgba(56,189,248,0.3);
+  text-shadow: none;
 }
 .stat-number, .stat-suffix {
-  color: var(--color-accent) !important;
-  text-shadow: 0 0 20px rgba(56,189,248,0.5);
+  color: var(--color-primary) !important;
+  text-shadow: none;
 }
-.stat-label { color: rgba(189,224,247,0.65) !important; }
+.stat-label { color: var(--color-text-muted) !important; }
 /* Тёмная тема stats */
-.dark-theme .stats-bar { background: linear-gradient(135deg, #050c1c 0%, #08111f 100%) !important; }
+.dark-theme .stats-bar {
+  background: linear-gradient(135deg, #0a1428 0%, #070e1d 100%) !important;
+  border-color: transparent !important;
+}
+.dark-theme .timeline-item { color: #bfdbfe !important; }
+.dark-theme .timeline-icon { color: var(--color-accent) !important; }
+.dark-theme .timeline-title { color: rgba(191, 219, 254, 0.65) !important; }
+.dark-theme .timeline-date { color: #fff !important; }
+.dark-theme .stat-number, .dark-theme .stat-suffix { color: var(--color-accent) !important; }
+.dark-theme .stat-label { color: rgba(191, 219, 254, 0.65) !important; }
 
 /* ── Section heading — градиентный текст ──────────────────── */
 .section-heading {
@@ -2388,7 +2415,7 @@ body {
 }
 .section-heading h2 {
   font-size: 2.2rem;
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2409,10 +2436,10 @@ body {
 .section-heading .section-line::before,
 .section-heading .section-line::after {
   background: var(--color-accent);
-  box-shadow: 0 0 6px rgba(56,189,248,0.8);
+  box-shadow: 0 0 6px rgba(96,165,250,0.6);
 }
 
-/* ── Карточки разделов — glassmorphism ─────────────────────── */
+/* ── Карточки разделов ─────────────────────────────────────── */
 .section-cards {
   background: transparent !important;
   padding: 4rem 0 !important;
@@ -2422,7 +2449,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(224, 237, 255, 0.55);
+  background: rgba(221, 238, 255, 0.5);
   backdrop-filter: blur(0px);
   pointer-events: none;
   z-index: 0;
@@ -2433,19 +2460,19 @@ body {
 .section-cards .container { position: relative; z-index: 1; }
 
 .card-nav {
-  background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(37, 99, 235, 0.15) !important;
   border-radius: 1rem !important;
-  box-shadow: 0 4px 24px rgba(15, 52, 144, 0.08) !important;
+  box-shadow: 0 4px 24px rgba(29, 78, 216, 0.08) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: all 0.28s ease !important;
 }
 .card-nav:hover {
   transform: translateY(-6px) !important;
-  box-shadow: 0 16px 48px rgba(29, 86, 208, 0.18) !important;
-  border-color: rgba(56, 189, 248, 0.45) !important;
-  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 16px 48px rgba(37, 99, 235, 0.15) !important;
+  border-color: rgba(96, 165, 250, 0.4) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 .card-nav-icon {
   height: 4px !important;
@@ -2461,11 +2488,11 @@ body {
   width: 68px !important;
   height: 68px !important;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%) !important;
-  box-shadow: 0 6px 20px rgba(29, 86, 208, 0.35);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
 }
 .card-nav .card-icon i {
   font-size: 1.7rem !important;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 .card-nav .card-title {
   font-size: 1.25rem !important;
@@ -2481,23 +2508,23 @@ body {
 
 /* Тёмная тема карточки */
 .dark-theme .card-nav {
-  background: rgba(14, 26, 58, 0.75) !important;
-  border-color: rgba(56, 189, 248, 0.18) !important;
+  background: rgba(13, 24, 50, 0.80) !important;
+  border-color: rgba(96, 165, 250, 0.15) !important;
 }
 .dark-theme .card-nav:hover {
-  background: rgba(18, 34, 74, 0.92) !important;
-  border-color: rgba(56, 189, 248, 0.4) !important;
+  background: rgba(18, 34, 74, 0.95) !important;
+  border-color: rgba(96, 165, 250, 0.35) !important;
   box-shadow: 0 16px 48px rgba(0,0,0,0.5) !important;
 }
 .dark-theme .card-nav .card-title a { color: var(--color-accent-light) !important; }
 .dark-theme .card-custom {
-  background: rgba(14, 26, 58, 0.75) !important;
-  border-color: rgba(56, 189, 248, 0.18) !important;
+  background: rgba(13, 24, 50, 0.80) !important;
+  border-color: rgba(96, 165, 250, 0.15) !important;
 }
 
 /* ── Promo секция ──────────────────────────────────────────── */
 .promo-section {
-  background: linear-gradient(135deg, #eaf3ff 0%, #ddeeff 100%) !important;
+  background: linear-gradient(135deg, #e8f2ff 0%, #ddeeff 100%) !important;
   position: relative;
   overflow: hidden;
 }
@@ -2506,7 +2533,7 @@ body {
   position: absolute;
   inset: 0;
   background: url('/assets/images/banners/bg-schematic.svg') right center / 500px;
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
 }
 .dark-theme .promo-section {
@@ -2526,15 +2553,15 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .section-tag {
-  background: rgba(29, 86, 208, 0.12) !important;
+  background: rgba(37, 99, 235, 0.1) !important;
   color: var(--color-primary) !important;
-  border: 1px solid rgba(29, 86, 208, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.18);
   letter-spacing: 0.1em !important;
 }
 .promo-list li i { color: var(--color-accent) !important; }
 .promo-img-badge {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
-  box-shadow: 0 8px 24px rgba(29, 86, 208, 0.5) !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4) !important;
 }
 
 /* ── Галерея ───────────────────────────────────────────────── */
@@ -2543,12 +2570,12 @@ body {
 }
 .gallery-slide {
   border-radius: 0.75rem !important;
-  box-shadow: 0 6px 28px rgba(15, 52, 144, 0.14) !important;
+  box-shadow: 0 6px 28px rgba(29, 78, 216, 0.12) !important;
 }
 .gallery-prev, .gallery-next {
-  background: rgba(255,255,255,0.9) !important;
-  border: 1px solid rgba(29, 86, 208, 0.2) !important;
-  box-shadow: 0 2px 12px rgba(29, 86, 208, 0.15) !important;
+  background: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(37, 99, 235, 0.2) !important;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.12) !important;
   backdrop-filter: blur(4px);
 }
 .gallery-prev:hover, .gallery-next:hover {
@@ -2557,8 +2584,8 @@ body {
   color: #fff !important;
 }
 .dark-theme .gallery-prev, .dark-theme .gallery-next {
-  background: rgba(14, 26, 58, 0.85) !important;
-  border-color: rgba(56, 189, 248, 0.2) !important;
+  background: rgba(13, 24, 50, 0.88) !important;
+  border-color: rgba(96, 165, 250, 0.2) !important;
 }
 
 /* ── Контент-секция — лучше ────────────────────────────────── */
@@ -2592,32 +2619,71 @@ body {
 }
 .dark-theme .breadcrumb-section {
   background: rgba(10, 18, 38, 0.85) !important;
-  border-bottom-color: rgba(56, 189, 248, 0.12) !important;
+  border-bottom-color: rgba(96, 165, 250, 0.12) !important;
 }
 
 /* ── Кнопка «Наверх» ───────────────────────────────────────── */
 .btn-scroll-top {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
-  box-shadow: 0 4px 20px rgba(29, 86, 208, 0.45) !important;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4) !important;
   border-radius: 12px !important;
 }
 .btn-scroll-top:hover {
   transform: translateY(-3px) !important;
-  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 8px 28px rgba(96, 165, 250, 0.45) !important;
 }
 
 /* ── Поиск — dialog ────────────────────────────────────────── */
 .search-modal__dialog {
-  background: rgba(8, 16, 36, 0.96) !important;
+  background: rgba(240, 247, 255, 0.98) !important;
   backdrop-filter: blur(20px);
-  border-color: rgba(56, 189, 248, 0.2) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+.dark-theme .search-modal__dialog {
+  background: rgba(8, 15, 34, 0.97) !important;
+  border-color: rgba(96, 165, 250, 0.2) !important;
 }
 .search-modal__overlay {
+  background: rgba(30, 58, 110, 0.5) !important;
+}
+.dark-theme .search-modal__overlay {
   background: rgba(0, 0, 0, 0.75) !important;
+}
+.search-modal__heading {
+  color: var(--color-primary-dark) !important;
+}
+.dark-theme .search-modal__heading {
+  color: rgba(191, 219, 254, 0.9) !important;
+}
+.search-modal__input {
+  color: var(--color-text-dark) !important;
+}
+.dark-theme .search-modal__input {
+  color: rgba(191, 219, 254, 0.9) !important;
+}
+.search-modal__input-wrap {
+  background-color: #fff !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+}
+.dark-theme .search-modal__input-wrap {
+  background-color: rgba(13, 24, 50, 0.8) !important;
+  border-color: rgba(96, 165, 250, 0.2) !important;
+}
+.search-modal__icon {
+  color: var(--color-primary) !important;
+}
+.dark-theme .search-modal__icon {
+  color: rgba(191, 219, 254, 0.5) !important;
+}
+.search-modal__close {
+  color: var(--color-text-muted) !important;
+}
+.dark-theme .search-modal__close {
+  color: rgba(191, 219, 254, 0.5) !important;
 }
 .search-modal__submit {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
-  color: #040912 !important;
+  color: #fff !important;
 }
 .search-modal__submit:hover {
   background: linear-gradient(135deg, var(--color-accent), var(--color-primary)) !important;
@@ -2648,29 +2714,58 @@ body {
 
 /* ── Оффканвас навигация ───────────────────────────────────── */
 #offcanvasNav {
-  background: rgba(6, 13, 31, 0.97) !important;
+  background: rgba(22, 45, 85, 0.98) !important;
   backdrop-filter: blur(24px);
-  border-left-color: rgba(56, 189, 248, 0.12) !important;
+  border-left-color: rgba(96, 165, 250, 0.14) !important;
+}
+.dark-theme #offcanvasNav {
+  background: rgba(7, 14, 29, 0.98) !important;
+  border-left-color: rgba(96, 165, 250, 0.10) !important;
 }
 .oc-header {
-  background: rgba(4, 9, 18, 0.95) !important;
-  border-bottom-color: rgba(56, 189, 248, 0.12) !important;
+  background: rgba(14, 30, 60, 0.98) !important;
+  border-bottom-color: rgba(96, 165, 250, 0.12) !important;
+}
+.dark-theme .oc-header {
+  background: rgba(5, 10, 22, 0.98) !important;
 }
 .oc-nav__link:hover, .oc-nav__link.active {
   color: var(--color-accent) !important;
-  background-color: rgba(56, 189, 248, 0.08) !important;
+  background-color: rgba(96, 165, 250, 0.1) !important;
 }
 
 /* ── Accessibility panel ────────────────────────────────────── */
 .a11y-panel {
-  background: rgba(6, 13, 31, 0.96) !important;
-  border-color: rgba(56, 189, 248, 0.16) !important;
+  background: rgba(240, 247, 255, 0.97) !important;
+  border-color: rgba(37, 99, 235, 0.18) !important;
   backdrop-filter: blur(20px);
+}
+.dark-theme .a11y-panel {
+  background: rgba(8, 15, 34, 0.97) !important;
+  border-color: rgba(96, 165, 250, 0.16) !important;
+}
+.a11y-panel__title {
+  color: var(--color-primary-dark) !important;
+}
+.dark-theme .a11y-panel__title {
+  color: rgba(191, 219, 254, 0.9) !important;
+}
+.a11y-option {
+  color: var(--color-text-dark) !important;
+}
+.dark-theme .a11y-option {
+  color: rgba(191, 219, 254, 0.8) !important;
+}
+.a11y-reset {
+  color: var(--color-text-muted) !important;
+}
+.dark-theme .a11y-reset {
+  color: rgba(191, 219, 254, 0.6) !important;
 }
 .a11y-close {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
   border-color: transparent !important;
-  color: #040912 !important;
+  color: #fff !important;
 }
 
 /* ── Глобальный акцент ссылок ──────────────────────────────── */
