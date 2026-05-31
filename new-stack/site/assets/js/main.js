@@ -23,9 +23,12 @@
 
 /* --- Переключение тёмной темы (глобальная функция) --- */
 function toggleDarkTheme() {
-  var isDark = document.documentElement.classList.toggle('dark-theme');
+  var html = document.documentElement;
+  html.classList.add('theme-changing');
+  var isDark = html.classList.toggle('dark-theme');
   localStorage.setItem('dark-theme', isDark ? 'on' : 'off');
   updateThemeButton(isDark);
+  setTimeout(function () { html.classList.remove('theme-changing'); }, 420);
 }
 
 function updateThemeButton(isDark) {
