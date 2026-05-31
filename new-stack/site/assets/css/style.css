@@ -1049,11 +1049,11 @@ body.no-animations *::after {
   --footer-text-strong:       #1d4ed8;
   --footer-muted:             #5b7db1;
   --footer-border:            rgba(37, 99, 235, 0.14);
-  --footer-card-bg:           rgba(255, 255, 255, 0.65);
-  --footer-card-bg-hover:     rgba(37, 99, 235, 0.06);
-  --footer-card-shadow:       0 2px 12px rgba(37, 99, 235, 0.08);
-  --footer-card-shadow-hover: 0 4px 20px rgba(37, 99, 235, 0.14);
-  --footer-icon-bg:           rgba(37, 99, 235, 0.10);
+  --footer-card-bg:           rgba(30, 58, 110, 0.38);
+  --footer-card-bg-hover:     rgba(30, 58, 110, 0.52);
+  --footer-card-shadow:       0 2px 12px rgba(30, 58, 110, 0.12);
+  --footer-card-shadow-hover: 0 4px 20px rgba(30, 58, 110, 0.20);
+  --footer-icon-bg:           rgba(30, 58, 110, 0.28);
   --footer-accent:            var(--color-primary);
 
   position: relative;
@@ -2721,6 +2721,34 @@ body {
 }
 .search-modal__submit:hover {
   background: linear-gradient(135deg, var(--color-accent), var(--color-primary)) !important;
+}
+
+/* ── Блоки ресурсов в подвале: тёмный фон → белый текст ──── */
+.site-footer .footer-resource {
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+.site-footer .footer-resource:hover,
+.site-footer .footer-resource:focus-visible {
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(30, 58, 110, 0.25) !important;
+}
+.site-footer .footer-resource-text {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+.dark-theme .site-footer .footer-resource {
+  color: var(--footer-text-strong) !important;
+  border-color: var(--footer-border) !important;
+}
+.dark-theme .site-footer .footer-resource:hover,
+.dark-theme .site-footer .footer-resource:focus-visible {
+  color: var(--footer-text-strong) !important;
+  border-color: rgba(96, 165, 250, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.15) !important;
+}
+.dark-theme .site-footer .footer-resource-text {
+  color: var(--footer-text) !important;
 }
 
 /* ── Подвал — светлая тема ─────────────────────────────────── */
