@@ -84,7 +84,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--color-accent);
+  color: var(--color-primary-dark);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.25rem;
@@ -94,13 +94,13 @@ a:hover {
   transition: color var(--transition);
 }
 .site-header__brand:hover {
-  color: var(--color-accent-light);
+  color: var(--color-primary);
 }
 .site-header__logo-img {
   width: 32px;
   height: 32px;
   object-fit: contain;
-  filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(180deg) brightness(1.4);
+  filter: brightness(0) saturate(100%) invert(22%) sepia(85%) saturate(1200%) hue-rotate(210deg) brightness(85%);
   flex-shrink: 0;
 }
 
@@ -111,7 +111,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-primary-dark);
   padding: 0.45rem 0.8rem;
   font-size: 0.88rem;
   font-weight: 600;
@@ -125,8 +125,8 @@ a:hover {
 }
 .main-nav__link:hover,
 .main-nav__link.active {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.12);
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.08);
 }
 .main-nav__chevron {
   font-size: 0.7rem;
@@ -143,10 +143,10 @@ a:hover {
   top: calc(100% + 4px);
   left: 0;
   min-width: 200px;
-  background-color: var(--color-base-dark);
-  border: 1px solid var(--color-border);
+  background-color: #fff;
+  border: 1px solid rgba(37, 99, 235, 0.15);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.12);
   padding: 6px 0;
   z-index: 1050;
 }
@@ -159,7 +159,7 @@ a:hover {
 }
 .main-nav__sub-link {
   display: block;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-primary-dark);
   padding: 0.45rem 1.1rem;
   font-size: 0.88rem;
   font-weight: 500;
@@ -168,13 +168,13 @@ a:hover {
   white-space: nowrap;
 }
 .main-nav__sub-link:hover {
-  background-color: rgba(96, 165, 250, 0.15);
-  color: var(--color-accent);
+  background-color: rgba(37, 99, 235, 0.06);
+  color: var(--color-primary);
 }
 
 /* --- Кнопки-иконки в шапке --- */
 .header-icon-btn {
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--color-primary);
   border: none;
   background: transparent;
   font-size: 1.05rem;
@@ -192,28 +192,28 @@ a:hover {
   text-decoration: none;
 }
 .header-icon-btn:hover {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.14);
+  color: var(--color-primary-dark);
+  background-color: rgba(37, 99, 235, 0.08);
 }
 .header-icon-btn.active,
 .header-icon-btn[aria-expanded="true"] {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.18);
+  color: var(--color-primary-dark);
+  background-color: rgba(37, 99, 235, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════
    OFFCANVAS НАВИГАЦИЯ
 ═══════════════════════════════════════════════════ */
 #offcanvasNav {
-  background-color: var(--color-base-dark);
-  border-left: 1px solid var(--color-border);
+  background-color: #f0f7ff;
+  border-left: 1px solid rgba(37, 99, 235, 0.15);
   width: 320px;
   max-width: 90vw;
 }
 
 .oc-header {
-  background-color: var(--color-base);
-  border-bottom: 1px solid var(--color-border);
+  background-color: #e8f2ff;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.15);
   padding: 14px 16px;
 }
 .oc-header__brand {
@@ -223,18 +223,18 @@ a:hover {
   gap: 2px;
 }
 .oc-header__title {
-  color: var(--color-accent);
+  color: var(--color-primary-dark);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: 0.02em;
 }
 .oc-header__sub {
-  color: rgba(255, 255, 255, 0.5);
+  color: #5b7db1;
   font-size: 0.75rem;
 }
 .oc-dismiss-btn {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-primary);
   background: transparent;
   border: none;
   width: 36px;
@@ -249,8 +249,8 @@ a:hover {
   flex-shrink: 0;
 }
 .oc-dismiss-btn:hover {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-primary-dark);
+  background-color: rgba(37, 99, 235, 0.08);
 }
 
 /* Действия внутри offcanvas */
@@ -270,7 +270,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-primary-dark);
   padding: 0.75rem 1.25rem;
   font-size: 0.94rem;
   font-weight: 500;
@@ -279,8 +279,8 @@ a:hover {
 }
 .oc-nav__link:hover,
 .oc-nav__link.active {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.1);
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.08);
 }
 
 /* Группа с подменю */
@@ -293,10 +293,10 @@ a:hover {
   flex: 1;
 }
 .oc-nav__toggle {
-  color: rgba(255, 255, 255, 0.5);
+  color: #5b7db1;
   background: transparent;
   border: none;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid rgba(37, 99, 235, 0.15);
   width: 44px;
   display: inline-flex;
   align-items: center;
@@ -307,12 +307,12 @@ a:hover {
   flex-shrink: 0;
 }
 .oc-nav__toggle:hover {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.1);
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.07);
 }
 .oc-nav__toggle[aria-expanded="true"] {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.08);
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.06);
 }
 .oc-nav__toggle[aria-expanded="true"] .bi-chevron-right {
   transform: rotate(90deg);
@@ -323,15 +323,15 @@ a:hover {
 
 /* Подменю */
 .oc-nav__sub {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  background-color: rgba(37, 99, 235, 0.04);
+  border-top: 1px solid rgba(37, 99, 235, 0.12);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.12);
   padding: 4px 0;
   margin: 0;
 }
 .oc-nav__sub-link {
   display: block;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-primary-dark);
   padding: 0.55rem 1.25rem 0.55rem 2.5rem;
   font-size: 0.88rem;
   font-weight: 400;
@@ -339,8 +339,8 @@ a:hover {
   transition: color var(--transition), background-color var(--transition);
 }
 .oc-nav__sub-link:hover {
-  color: var(--color-accent);
-  background-color: rgba(96, 165, 250, 0.1);
+  color: var(--color-primary);
+  background-color: rgba(37, 99, 235, 0.07);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -1039,22 +1039,22 @@ body.no-animations *::after {
   letter-spacing: 0.04em;
 }
 
-/* --- Подвал --- */
+/* --- Подвал (светлая тема по умолчанию) --- */
 .site-footer {
-  --footer-bg-1:              #0d1a38;
-  --footer-bg-2:              #111f45;
-  --footer-glow-1:            rgba(96, 165, 250, 0.10);
-  --footer-glow-2:            rgba(96, 165, 250, 0.06);
-  --footer-text:              rgba(191, 219, 254, 0.80);
-  --footer-text-strong:       #bfdbfe;
-  --footer-muted:             rgba(191, 219, 254, 0.50);
-  --footer-border:            rgba(96, 165, 250, 0.14);
-  --footer-card-bg:           rgba(255, 255, 255, 0.04);
-  --footer-card-bg-hover:     rgba(96, 165, 250, 0.10);
-  --footer-card-shadow:       none;
-  --footer-card-shadow-hover: none;
-  --footer-icon-bg:           rgba(96, 165, 250, 0.16);
-  --footer-accent:            var(--color-accent);
+  --footer-bg-1:              #e8f2ff;
+  --footer-bg-2:              #f0f7ff;
+  --footer-glow-1:            rgba(37, 99, 235, 0.07);
+  --footer-glow-2:            rgba(37, 99, 235, 0.04);
+  --footer-text:              #2c4e80;
+  --footer-text-strong:       #1d4ed8;
+  --footer-muted:             #5b7db1;
+  --footer-border:            rgba(37, 99, 235, 0.14);
+  --footer-card-bg:           rgba(255, 255, 255, 0.65);
+  --footer-card-bg-hover:     rgba(37, 99, 235, 0.06);
+  --footer-card-shadow:       0 2px 12px rgba(37, 99, 235, 0.08);
+  --footer-card-shadow-hover: 0 4px 20px rgba(37, 99, 235, 0.14);
+  --footer-icon-bg:           rgba(37, 99, 235, 0.10);
+  --footer-accent:            var(--color-primary);
 
   position: relative;
   margin-top: 5rem;
@@ -2242,22 +2242,34 @@ body {
 
 /* ── Шапка — светлая тема ──────────────────────────────────── */
 .site-header {
-  background: rgba(30, 58, 110, 0.97) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  border-bottom: 1px solid rgba(96, 165, 250, 0.18);
-  box-shadow: 0 1px 24px rgba(30, 58, 110, 0.35) !important;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.14) !important;
+  box-shadow: 0 1px 20px rgba(37, 99, 235, 0.10) !important;
 }
 .site-header.header--compact {
-  background: rgba(22, 45, 85, 0.99) !important;
+  background: rgba(248, 252, 255, 0.99) !important;
 }
+/* Тёмная тема — шапка */
 .dark-theme .site-header {
-  background: rgba(8, 15, 34, 0.92) !important;
+  background: rgba(8, 15, 34, 0.93) !important;
   border-bottom-color: rgba(96, 165, 250, 0.12) !important;
   box-shadow: 0 1px 32px rgba(0, 0, 0, 0.55) !important;
 }
 .dark-theme .site-header.header--compact {
-  background: rgba(5, 10, 22, 0.97) !important;
+  background: rgba(5, 10, 22, 0.98) !important;
+}
+
+/* Логотип — тёмная тема */
+.dark-theme .site-header__brand {
+  color: var(--color-accent) !important;
+}
+.dark-theme .site-header__brand:hover {
+  color: var(--color-accent-light) !important;
+}
+.dark-theme .site-header__logo-img {
+  filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(180deg) brightness(1.4) !important;
 }
 
 /* Навигационные ссылки */
@@ -2265,20 +2277,42 @@ body {
   letter-spacing: 0.04em;
   font-size: 0.82rem;
 }
-.main-nav__link:hover,
-.main-nav__link.active {
+/* Тёмная тема — ссылки навигации */
+.dark-theme .main-nav__link {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.dark-theme .main-nav__link:hover,
+.dark-theme .main-nav__link.active {
   color: var(--color-accent) !important;
-  background-color: rgba(96, 165, 250, 0.15) !important;
+  background-color: rgba(96, 165, 250, 0.14) !important;
 }
 
-/* Подменю шапки */
+/* Кнопки-иконки — тёмная тема */
+.dark-theme .header-icon-btn {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+.dark-theme .header-icon-btn:hover,
+.dark-theme .header-icon-btn.active,
+.dark-theme .header-icon-btn[aria-expanded="true"] {
+  color: var(--color-accent) !important;
+  background-color: rgba(96, 165, 250, 0.14) !important;
+}
+
+/* Подменю — светлая тема */
 .main-nav__sub {
-  background: rgba(22, 45, 85, 0.97) !important;
-  border-color: rgba(96, 165, 250, 0.14) !important;
   backdrop-filter: blur(12px);
 }
+/* Подменю — тёмная тема */
 .dark-theme .main-nav__sub {
   background: rgba(8, 15, 34, 0.97) !important;
+  border-color: rgba(96, 165, 250, 0.14) !important;
+}
+.dark-theme .main-nav__sub-link {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.dark-theme .main-nav__sub-link:hover {
+  background-color: rgba(96, 165, 250, 0.12) !important;
+  color: var(--color-accent) !important;
 }
 
 /* ── Hero слайдер ──────────────────────────────────────────── */
@@ -2689,15 +2723,37 @@ body {
   background: linear-gradient(135deg, var(--color-accent), var(--color-primary)) !important;
 }
 
-/* ── Подвал — насыщеннее ───────────────────────────────────── */
+/* ── Подвал — светлая тема ─────────────────────────────────── */
 .site-footer {
-  --footer-bg-1: #0d1a38 !important;
-  --footer-bg-2: #111f45 !important;
+  background:
+    url('/assets/images/banners/bg-schematic.svg') right bottom / 500px no-repeat,
+    radial-gradient(ellipse at top left, rgba(37, 99, 235, 0.06), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.04), transparent 60%),
+    linear-gradient(180deg, #f0f7ff 0%, #e8f2ff 100%) !important;
+  border-top: 1px solid rgba(37, 99, 235, 0.13) !important;
+}
+/* ── Подвал — тёмная тема ──────────────────────────────────── */
+.dark-theme .site-footer {
+  --footer-bg-1:              #0d1a38;
+  --footer-bg-2:              #111f45;
+  --footer-glow-1:            rgba(96, 165, 250, 0.10);
+  --footer-glow-2:            rgba(96, 165, 250, 0.06);
+  --footer-text:              rgba(191, 219, 254, 0.80);
+  --footer-text-strong:       #bfdbfe;
+  --footer-muted:             rgba(191, 219, 254, 0.50);
+  --footer-border:            rgba(96, 165, 250, 0.14);
+  --footer-card-bg:           rgba(255, 255, 255, 0.04);
+  --footer-card-bg-hover:     rgba(96, 165, 250, 0.10);
+  --footer-card-shadow:       none;
+  --footer-card-shadow-hover: none;
+  --footer-icon-bg:           rgba(96, 165, 250, 0.16);
+  --footer-accent:            var(--color-accent);
   background:
     url('/assets/images/banners/bg-schematic.svg') right bottom / 500px no-repeat,
     radial-gradient(ellipse at top left, rgba(37, 99, 235, 0.15), transparent 55%),
     radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.07), transparent 60%),
     linear-gradient(180deg, #111f45 0%, #0d1a38 100%) !important;
+  border-top-color: rgba(96, 165, 250, 0.10) !important;
 }
 .site-footer .footer-decoration {
   background: linear-gradient(90deg,
@@ -2714,24 +2770,57 @@ body {
 
 /* ── Оффканвас навигация ───────────────────────────────────── */
 #offcanvasNav {
-  background: rgba(22, 45, 85, 0.98) !important;
   backdrop-filter: blur(24px);
-  border-left-color: rgba(96, 165, 250, 0.14) !important;
 }
+/* Оффканвас — тёмная тема */
 .dark-theme #offcanvasNav {
   background: rgba(7, 14, 29, 0.98) !important;
   border-left-color: rgba(96, 165, 250, 0.10) !important;
 }
-.oc-header {
-  background: rgba(14, 30, 60, 0.98) !important;
-  border-bottom-color: rgba(96, 165, 250, 0.12) !important;
-}
 .dark-theme .oc-header {
   background: rgba(5, 10, 22, 0.98) !important;
+  border-bottom-color: rgba(96, 165, 250, 0.12) !important;
 }
-.oc-nav__link:hover, .oc-nav__link.active {
+.dark-theme .oc-header__title {
   color: var(--color-accent) !important;
-  background-color: rgba(96, 165, 250, 0.1) !important;
+}
+.dark-theme .oc-header__sub {
+  color: rgba(191, 219, 254, 0.55) !important;
+}
+.dark-theme .oc-dismiss-btn {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+.dark-theme .oc-dismiss-btn:hover {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.10) !important;
+}
+.dark-theme .oc-nav__link {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.dark-theme .oc-nav__link:hover,
+.dark-theme .oc-nav__link.active {
+  color: var(--color-accent) !important;
+  background-color: rgba(96, 165, 250, 0.10) !important;
+}
+.dark-theme .oc-nav__toggle {
+  color: rgba(255, 255, 255, 0.50) !important;
+  border-left-color: rgba(96, 165, 250, 0.14) !important;
+}
+.dark-theme .oc-nav__toggle:hover,
+.dark-theme .oc-nav__toggle[aria-expanded="true"] {
+  color: var(--color-accent) !important;
+  background-color: rgba(96, 165, 250, 0.08) !important;
+}
+.dark-theme .oc-nav__sub {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(96, 165, 250, 0.12) !important;
+}
+.dark-theme .oc-nav__sub-link {
+  color: rgba(255, 255, 255, 0.70) !important;
+}
+.dark-theme .oc-nav__sub-link:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(96, 165, 250, 0.09) !important;
 }
 
 /* ── Accessibility panel ────────────────────────────────────── */
