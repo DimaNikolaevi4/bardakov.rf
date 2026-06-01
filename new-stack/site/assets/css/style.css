@@ -405,7 +405,7 @@ a:hover {
   opacity: 0.75;
 }
 .oc-nav__link--parent.is-sub-open .oc-nav__arrow {
-  transform: translateX(3px);
+  transform: rotate(90deg);
   opacity: 1;
 }
 
