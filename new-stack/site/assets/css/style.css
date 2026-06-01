@@ -109,6 +109,15 @@ a:hover {
 }
 
 /* --- Центральная навигация (desktop) --- */
+/* Точный центр шапки: абсолютно по середине контейнера */
+@media (min-width: 992px) {
+  .main-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+}
 .main-nav ul { gap: 2px; }
 
 .main-nav__link {
