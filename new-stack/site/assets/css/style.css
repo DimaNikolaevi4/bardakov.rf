@@ -2779,16 +2779,23 @@ a:hover { color: var(--color-accent); }
     filter 0.28s ease !important;
 }
 
-/* ── Светлая тема — шапка ───────────────────────────────────────── */
+/* ── Светлая тема — шапка (плавающая) ───────────────────────────── */
 .site-header {
-  background: rgba(255, 255, 255, 0.96) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
   border-bottom: 1px solid rgba(37, 99, 235, 0.14) !important;
-  box-shadow: 0 1px 20px rgba(37, 99, 235, 0.10) !important;
+  box-shadow: 0 4px 30px rgba(37, 99, 235, 0.08) !important;
 }
 .dark-theme .site-header {
-  background: rgba(11, 21, 46, 0.97) !important;
+  background: rgba(11, 21, 46, 0.85) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
   border-bottom-color: rgba(100, 160, 200, 0.15) !important;
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.55) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45) !important;
 }
 
 /* Логотип и бренд в светлой теме */
