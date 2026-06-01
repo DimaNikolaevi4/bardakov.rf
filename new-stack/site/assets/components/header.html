@@ -34,14 +34,14 @@
             <li><a href="/abiturientu/dokumentatsiya.html" class="main-nav__sub-link">Документация</a></li>
           </ul>
         </li>
-        <li>
+        <li class="nav-xl-only">
           <a href="/vospitanie/" class="main-nav__link">Воспитание</a>
         </li>
       </ul>
     </nav>
 
-    <!-- Иконки действий (desktop ≥992px) -->
-    <div class="header-icons d-none d-lg-flex align-items-center gap-1 flex-shrink-0">
+    <!-- Иконки действий (≥768px) -->
+    <div class="header-icons d-none d-md-flex align-items-center gap-1 flex-shrink-0">
       <button class="header-icon-btn" id="search-btn"
               type="button" title="Поиск" aria-label="Поиск"
               aria-expanded="false" aria-controls="searchModal">
@@ -71,8 +71,8 @@
       </button>
     </div>
 
-    <!-- Гамбургер (мобильные <992px) -->
-    <button class="header-icon-btn d-flex d-lg-none ms-auto"
+    <!-- Гамбургер (только <768px, иначе виден в header-icons) -->
+    <button class="header-icon-btn d-flex d-md-none ms-auto"
             type="button"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav"
             aria-controls="offcanvasNav"
@@ -122,8 +122,8 @@
   <div class="offcanvas-body p-0">
     <div class="oc-panel__scroll">
 
-      <!-- Иконки действий (только мобильные <992px) -->
-      <div class="offcanvas-actions d-flex d-lg-none align-items-center gap-1 px-3 py-2 border-bottom border-dark-subtle">
+      <!-- Иконки действий (только <768px, при ≥768px они уже в шапке) -->
+      <div class="offcanvas-actions d-flex d-md-none align-items-center gap-1 px-3 py-2 border-bottom border-dark-subtle">
         <button class="header-icon-btn" id="theme-toggle-mobile"
                 type="button" title="Тёмная тема" aria-label="Тёмная тема"
                 onclick="return toggleDarkTheme(),!1">
