@@ -2734,22 +2734,54 @@ body {
   box-shadow: 0 8px 28px rgba(74, 158, 255, 0.5) !important;
 }
 
-/* ── Поиск — dialog ────────────────────────────────────────── */
+/* ── Поиск — dialog (светлая тема) ─────────────────────────── */
 .search-modal__dialog {
+  background: rgba(255, 255, 255, 0.97) !important;
+  backdrop-filter: blur(20px);
+  border-color: rgba(29, 86, 208, 0.18) !important;
+  box-shadow: 0 12px 48px rgba(15, 52, 144, 0.18) !important;
+}
+.search-modal__heading { color: var(--color-primary-dark) !important; }
+.search-modal__close { color: var(--color-text-muted) !important; }
+.search-modal__close:hover {
+  color: var(--color-primary) !important;
+  background-color: rgba(29, 86, 208, 0.08) !important;
+}
+.search-modal__input-wrap {
+  background-color: var(--color-bg-alt) !important;
+  border-color: rgba(29, 86, 208, 0.18) !important;
+}
+.search-modal__icon { color: var(--color-text-muted) !important; }
+.search-modal__input { color: var(--color-text-dark) !important; }
+.search-modal__input::placeholder { color: var(--color-text-muted) !important; }
+/* Тёмная тема */
+.dark-theme .search-modal__dialog {
   background: rgba(8, 16, 36, 0.96) !important;
   backdrop-filter: blur(20px);
   border-color: rgba(74, 158, 255, 0.2) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important;
 }
-.search-modal__overlay {
-  background: rgba(0, 0, 0, 0.75) !important;
+.dark-theme .search-modal__heading { color: rgba(255, 255, 255, 0.9) !important; }
+.dark-theme .search-modal__close { color: rgba(255, 255, 255, 0.5) !important; }
+.dark-theme .search-modal__close:hover {
+  color: #fff !important;
+  background-color: rgba(255,255,255,0.08) !important;
 }
+.dark-theme .search-modal__input-wrap {
+  background-color: var(--color-base-dark) !important;
+  border-color: var(--color-border) !important;
+}
+.dark-theme .search-modal__icon { color: rgba(255, 255, 255, 0.4) !important; }
+.dark-theme .search-modal__input { color: rgba(255, 255, 255, 0.9) !important; }
+.dark-theme .search-modal__input::placeholder { color: rgba(255,255,255,0.35) !important; }
 .search-modal__submit {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
-  color: #040912 !important;
+  color: #fff !important;
 }
 .search-modal__submit:hover {
   background: linear-gradient(135deg, var(--color-accent), var(--color-primary)) !important;
 }
+.dark-theme .search-modal__submit { color: #040912 !important; }
 
 /* ── Подвал — насыщеннее ───────────────────────────────────── */
 .site-footer {
@@ -2919,17 +2951,36 @@ body {
   background-color: rgba(100, 160, 200, 0.1) !important;
 }
 
-/* ── Accessibility panel ────────────────────────────────────── */
+/* ── Accessibility panel (светлая тема) ─────────────────────── */
 .a11y-panel {
-  background: rgba(6, 13, 31, 0.96) !important;
-  border-color: rgba(74, 158, 255, 0.16) !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-color: rgba(29, 86, 208, 0.15) !important;
   backdrop-filter: blur(20px);
+  box-shadow: 0 6px 28px rgba(15, 52, 144, 0.15) !important;
 }
+.a11y-panel__title { color: var(--color-primary-dark) !important; }
+.a11y-option { color: var(--color-text-dark) !important; }
+.a11y-reset { color: var(--color-text-muted) !important; border-color: rgba(29, 86, 208, 0.2) !important; }
+.a11y-reset:hover { background-color: rgba(29, 86, 208, 0.07) !important; color: var(--color-primary) !important; }
+.a11y-panel__footer { border-top-color: rgba(29, 86, 208, 0.12) !important; }
 .a11y-close {
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent)) !important;
   border-color: transparent !important;
-  color: #040912 !important;
+  color: #fff !important;
 }
+/* Тёмная тема */
+.dark-theme .a11y-panel {
+  background: rgba(6, 13, 31, 0.96) !important;
+  border-color: rgba(74, 158, 255, 0.16) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.4) !important;
+}
+.dark-theme .a11y-panel__title { color: rgba(255, 255, 255, 0.9) !important; }
+.dark-theme .a11y-option { color: rgba(255, 255, 255, 0.8) !important; }
+.dark-theme .a11y-reset { color: rgba(255, 255, 255, 0.6) !important; border-color: var(--color-border) !important; }
+.dark-theme .a11y-reset:hover { background-color: rgba(255,255,255,0.07) !important; color: #fff !important; }
+.dark-theme .a11y-panel__footer { border-top-color: var(--color-border) !important; }
+.dark-theme .a11y-close { color: #040912 !important; }
 
 /* ── Глобальный акцент ссылок ──────────────────────────────── */
 a { color: var(--color-primary); }
