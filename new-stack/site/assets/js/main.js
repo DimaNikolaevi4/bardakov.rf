@@ -205,43 +205,50 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Наведение мышкой на родительский пункт → показываем боковую панель
-    offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
-      btn.addEventListener('mouseenter', function () {
-        goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
-      });
-      // Запасной вариант для touch-устройств (нет hover)
-      btn.addEventListener('click', function (e) {
-        if (e.pointerType === 'touch') {
+    // Определяем: настоящая мышь (hover поддерживается) или touch-устройство
+    var hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (hasMouse) {
+      // ── МЫШЬ: наведение открывает/закрывает боковую панель ──────
+      offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
+        btn.addEventListener('mouseenter', function () {
           goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
-        }
+        });
       });
-    });
 
-    // Наведение на пункт БЕЗ подменю → закрываем боковую панель
-    offcanvasEl.querySelectorAll('.oc-nav__link:not(.oc-nav__link--parent)').forEach(function (link) {
-      link.addEventListener('mouseenter', function () {
-        goToMain();
-      });
-    });
-
-    // Закрываем боковую панель при уходе мыши из offcanvas (если курсор не в side panel)
-    var _closeHoverTimer = null;
-    function scheduleClose() {
-      _closeHoverTimer = setTimeout(function () {
-        if (sidePanel && !sidePanel.matches(':hover') && !offcanvasEl.matches(':hover')) {
+      // Наведение на пункт БЕЗ подменю → закрываем боковую панель
+      offcanvasEl.querySelectorAll('.oc-nav__link:not(.oc-nav__link--parent)').forEach(function (link) {
+        link.addEventListener('mouseenter', function () {
           goToMain();
-        }
-      }, 120);
-    }
-    function cancelClose() {
-      if (_closeHoverTimer) { clearTimeout(_closeHoverTimer); _closeHoverTimer = null; }
-    }
-    offcanvasEl.addEventListener('mouseleave', scheduleClose);
-    offcanvasEl.addEventListener('mouseenter', cancelClose);
-    if (sidePanel) {
-      sidePanel.addEventListener('mouseleave', scheduleClose);
-      sidePanel.addEventListener('mouseenter', cancelClose);
+        });
+      });
+
+      // Уход мыши из обеих панелей → закрываем боковую панель
+      var _closeHoverTimer = null;
+      function scheduleClose() {
+        _closeHoverTimer = setTimeout(function () {
+          if (sidePanel && !sidePanel.matches(':hover') && !offcanvasEl.matches(':hover')) {
+            goToMain();
+          }
+        }, 120);
+      }
+      function cancelClose() {
+        if (_closeHoverTimer) { clearTimeout(_closeHoverTimer); _closeHoverTimer = null; }
+      }
+      offcanvasEl.addEventListener('mouseleave', scheduleClose);
+      offcanvasEl.addEventListener('mouseenter', cancelClose);
+      if (sidePanel) {
+        sidePanel.addEventListener('mouseleave', scheduleClose);
+        sidePanel.addEventListener('mouseenter', cancelClose);
+      }
+
+    } else {
+      // ── TOUCH: только клик открывает боковую панель ─────────────
+      offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
+        });
+      });
     }
 
     // Кнопка «Назад» в боковой панели
