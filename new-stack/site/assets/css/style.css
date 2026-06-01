@@ -2192,16 +2192,16 @@ h1, h2, h3, h4, h5, h6 {
   --color-base-dark:     #040912;
   --color-primary:       #1d56d0;
   --color-primary-dark:  #0f3490;
-  --color-accent:        #38bdf8;
-  --color-accent-light:  #7dd3fc;
+  --color-accent:        #4a9eff;
+  --color-accent-light:  #7bb8ff;
   --color-gold:          #f59e0b;
   --color-text:          #bde0f7;
   --color-text-dark:     #1a2d50;
   --color-text-muted:    #5a8aaa;
   --color-bg:            #f0f6ff;
   --color-bg-alt:        #e4effc;
-  --color-border:        rgba(56, 189, 248, 0.18);
-  --color-border-light:  rgba(56, 189, 248, 0.10);
+  --color-border:        rgba(74, 158, 255, 0.18);
+  --color-border-light:  rgba(74, 158, 255, 0.10);
   --radius:              0.5rem;
   --transition:          0.28s ease;
 }
@@ -2212,7 +2212,7 @@ body {
   background-image:
     url('/assets/images/banners/bg-schematic.svg'),
     radial-gradient(ellipse at 0% 0%,   rgba(29, 86, 208, 0.06) 0%, transparent 55%),
-    radial-gradient(ellipse at 100% 100%, rgba(56, 189, 248, 0.04) 0%, transparent 55%);
+    radial-gradient(ellipse at 100% 100%, rgba(74, 158, 255, 0.04) 0%, transparent 55%);
   background-size: 680px 680px, cover, cover;
   background-position: right top, center center, center center;
   background-attachment: fixed, fixed, fixed;
@@ -2229,7 +2229,7 @@ body {
   background-image:
     url('/assets/images/banners/bg-schematic.svg'),
     radial-gradient(ellipse at 20% 20%, rgba(29, 86, 208, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(56, 189, 248, 0.10) 0%, transparent 50%);
+    radial-gradient(ellipse at 80% 80%, rgba(74, 158, 255, 0.10) 0%, transparent 50%);
   background-size: 600px 600px, cover, cover;
   background-attachment: fixed, fixed, fixed;
 }
@@ -2239,7 +2239,7 @@ body {
   background: rgba(6, 13, 31, 0.82) !important;
   backdrop-filter: blur(18px) saturate(1.6);
   -webkit-backdrop-filter: blur(18px) saturate(1.6);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+  border-bottom: 1px solid rgba(74, 158, 255, 0.12);
   box-shadow: 0 1px 32px rgba(0, 0, 0, 0.45) !important;
 }
 .site-header.header--compact {
@@ -2254,13 +2254,13 @@ body {
 .main-nav__link:hover,
 .main-nav__link.active {
   color: var(--color-accent) !important;
-  background-color: rgba(56, 189, 248, 0.1) !important;
+  background-color: rgba(74, 158, 255, 0.1) !important;
 }
 
 /* Подменю шапки */
 .main-nav__sub {
   background: rgba(6, 13, 31, 0.96) !important;
-  border-color: rgba(56, 189, 248, 0.14) !important;
+  border-color: rgba(74, 158, 255, 0.14) !important;
   backdrop-filter: blur(12px);
 }
 
@@ -2273,17 +2273,17 @@ body {
     125deg,
     rgba(4, 9, 20, 0.72) 0%,
     rgba(15, 50, 140, 0.38) 55%,
-    rgba(56, 189, 248, 0.08) 100%
+    rgba(74, 158, 255, 0.08) 100%
   ) !important;
 }
 .hero-slide-title {
   font-size: 3.2rem;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(56,189,248,0.15);
+  text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(74,158,255,0.15);
 }
 .hero-tag {
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(74, 158, 255, 0.15);
   border-left: 3px solid var(--color-accent);
   border-radius: 0 4px 4px 0;
   padding: 0.2rem 0.85rem 0.2rem 0.75rem;
@@ -2302,13 +2302,13 @@ body {
 }
 .hero-btn:hover {
   background: linear-gradient(135deg, var(--color-accent) 0%, #0ea5d6 100%) !important;
-  box-shadow: 0 6px 28px rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 6px 28px rgba(74, 158, 255, 0.5) !important;
   transform: translateY(-3px) !important;
   color: #040912 !important;
 }
 .hero-prev, .hero-next {
   background: rgba(6, 13, 31, 0.65) !important;
-  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  border: 1px solid rgba(74, 158, 255, 0.2) !important;
   backdrop-filter: blur(6px);
 }
 .hero-prev:hover, .hero-next:hover {
@@ -2355,13 +2355,13 @@ body {
   top: 15%;
   height: 70%;
   width: 1px;
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(74, 158, 255, 0.15);
 }
 .timeline-item:last-child::after { display: none; }
 .timeline-icon {
   font-size: 2.2rem !important;
   color: var(--color-accent) !important;
-  text-shadow: 0 0 16px rgba(56,189,248,0.6);
+  text-shadow: 0 0 16px rgba(74,158,255,0.6);
 }
 .timeline-title {
   color: rgba(189, 224, 247, 0.7) !important;
@@ -2372,11 +2372,11 @@ body {
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.03em;
-  text-shadow: 0 0 12px rgba(56,189,248,0.3);
+  text-shadow: 0 0 12px rgba(74,158,255,0.3);
 }
 .stat-number, .stat-suffix {
   color: var(--color-accent) !important;
-  text-shadow: 0 0 20px rgba(56,189,248,0.5);
+  text-shadow: 0 0 20px rgba(74,158,255,0.5);
 }
 .stat-label { color: rgba(189,224,247,0.65) !important; }
 /* Тёмная тема stats */
@@ -2409,7 +2409,7 @@ body {
 .section-heading .section-line::before,
 .section-heading .section-line::after {
   background: var(--color-accent);
-  box-shadow: 0 0 6px rgba(56,189,248,0.8);
+  box-shadow: 0 0 6px rgba(74,158,255,0.8);
 }
 
 /* ── Карточки разделов — glassmorphism ─────────────────────── */
@@ -2434,7 +2434,7 @@ body {
 
 .card-nav {
   background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+  border: 1px solid rgba(74, 158, 255, 0.2) !important;
   border-radius: 1rem !important;
   box-shadow: 0 4px 24px rgba(15, 52, 144, 0.08) !important;
   backdrop-filter: blur(8px);
@@ -2444,7 +2444,7 @@ body {
 .card-nav:hover {
   transform: translateY(-6px) !important;
   box-shadow: 0 16px 48px rgba(29, 86, 208, 0.18) !important;
-  border-color: rgba(56, 189, 248, 0.45) !important;
+  border-color: rgba(74, 158, 255, 0.45) !important;
   background: rgba(255, 255, 255, 0.92) !important;
 }
 .card-nav-icon {
@@ -2482,17 +2482,17 @@ body {
 /* Тёмная тема карточки */
 .dark-theme .card-nav {
   background: rgba(14, 26, 58, 0.75) !important;
-  border-color: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(74, 158, 255, 0.18) !important;
 }
 .dark-theme .card-nav:hover {
   background: rgba(18, 34, 74, 0.92) !important;
-  border-color: rgba(56, 189, 248, 0.4) !important;
+  border-color: rgba(74, 158, 255, 0.4) !important;
   box-shadow: 0 16px 48px rgba(0,0,0,0.5) !important;
 }
 .dark-theme .card-nav .card-title a { color: var(--color-accent-light) !important; }
 .dark-theme .card-custom {
   background: rgba(14, 26, 58, 0.75) !important;
-  border-color: rgba(56, 189, 248, 0.18) !important;
+  border-color: rgba(74, 158, 255, 0.18) !important;
 }
 
 /* ── Promo секция ──────────────────────────────────────────── */
@@ -2558,7 +2558,7 @@ body {
 }
 .dark-theme .gallery-prev, .dark-theme .gallery-next {
   background: rgba(14, 26, 58, 0.85) !important;
-  border-color: rgba(56, 189, 248, 0.2) !important;
+  border-color: rgba(74, 158, 255, 0.2) !important;
 }
 
 /* ── Контент-секция — лучше ────────────────────────────────── */
@@ -2592,7 +2592,7 @@ body {
 }
 .dark-theme .breadcrumb-section {
   background: rgba(10, 18, 38, 0.85) !important;
-  border-bottom-color: rgba(56, 189, 248, 0.12) !important;
+  border-bottom-color: rgba(74, 158, 255, 0.12) !important;
 }
 
 /* ── Кнопка «Наверх» ───────────────────────────────────────── */
@@ -2603,14 +2603,14 @@ body {
 }
 .btn-scroll-top:hover {
   transform: translateY(-3px) !important;
-  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.5) !important;
+  box-shadow: 0 8px 28px rgba(74, 158, 255, 0.5) !important;
 }
 
 /* ── Поиск — dialog ────────────────────────────────────────── */
 .search-modal__dialog {
   background: rgba(8, 16, 36, 0.96) !important;
   backdrop-filter: blur(20px);
-  border-color: rgba(56, 189, 248, 0.2) !important;
+  border-color: rgba(74, 158, 255, 0.2) !important;
 }
 .search-modal__overlay {
   background: rgba(0, 0, 0, 0.75) !important;
@@ -2630,7 +2630,7 @@ body {
   background:
     url('/assets/images/banners/bg-schematic.svg') right bottom / 500px no-repeat,
     radial-gradient(ellipse at top left, rgba(29, 86, 208, 0.18), transparent 55%),
-    radial-gradient(ellipse at bottom right, rgba(56, 189, 248, 0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(74, 158, 255, 0.08), transparent 60%),
     linear-gradient(180deg, #0a1632 0%, #050c1e 100%) !important;
 }
 .site-footer .footer-decoration {
@@ -2654,7 +2654,7 @@ body {
 }
 .dark-theme #offcanvasNav {
   background: rgba(6, 13, 31, 0.97) !important;
-  border-left-color: rgba(56, 189, 248, 0.12) !important;
+  border-left-color: rgba(74, 158, 255, 0.12) !important;
 }
 
 .oc-header {
@@ -2663,7 +2663,7 @@ body {
 }
 .dark-theme .oc-header {
   background: rgba(4, 9, 18, 0.95) !important;
-  border-bottom-color: rgba(56, 189, 248, 0.12) !important;
+  border-bottom-color: rgba(74, 158, 255, 0.12) !important;
 }
 
 .oc-header__title {
@@ -2703,7 +2703,7 @@ body {
 .dark-theme .oc-nav__link:hover,
 .dark-theme .oc-nav__link.active {
   color: var(--color-accent) !important;
-  background-color: rgba(56, 189, 248, 0.08) !important;
+  background-color: rgba(74, 158, 255, 0.08) !important;
 }
 
 .oc-nav__toggle {
@@ -2744,7 +2744,7 @@ body {
 /* ── Accessibility panel ────────────────────────────────────── */
 .a11y-panel {
   background: rgba(6, 13, 31, 0.96) !important;
-  border-color: rgba(56, 189, 248, 0.16) !important;
+  border-color: rgba(74, 158, 255, 0.16) !important;
   backdrop-filter: blur(20px);
 }
 .a11y-close {
@@ -2901,7 +2901,7 @@ a:hover { color: var(--color-accent); }
   --footer-bg-1: #050c1e !important;
   --footer-bg-2: #0a1632 !important;
   --footer-glow-1: rgba(29, 86, 208, 0.18) !important;
-  --footer-glow-2: rgba(56, 189, 248, 0.08) !important;
+  --footer-glow-2: rgba(74, 158, 255, 0.08) !important;
   --footer-text: rgba(204, 224, 245, 0.80) !important;
   --footer-text-strong: #cce0f5 !important;
   --footer-muted: rgba(204, 224, 245, 0.50) !important;
@@ -2915,7 +2915,7 @@ a:hover { color: var(--color-accent); }
   background:
     url('/assets/images/banners/bg-schematic.svg') right bottom / 500px no-repeat,
     radial-gradient(ellipse at top left, rgba(29, 86, 208, 0.18), transparent 55%),
-    radial-gradient(ellipse at bottom right, rgba(56, 189, 248, 0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(74, 158, 255, 0.08), transparent 60%),
     linear-gradient(180deg, #0a1632 0%, #050c1e 100%) !important;
   color: rgba(204, 224, 245, 0.80) !important;
 }
