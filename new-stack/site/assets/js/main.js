@@ -158,21 +158,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var offcanvasEl  = document.getElementById('offcanvasNav');
     if (!offcanvasEl) return;
 
-    var panelsWrap   = document.getElementById('ocPanelsWrap');
-    var panelSub     = document.getElementById('ocPanelSub');
+    var sidePanel    = document.getElementById('ocSidePanel');
     var subNav       = document.getElementById('ocSubNav');
-    var headerMain   = document.getElementById('ocHeaderMain');
-    var headerSub    = document.getElementById('ocHeaderSub');
     var subTitle     = document.getElementById('ocSubTitle');
     var backBtn      = document.getElementById('ocBackBtn');
+    var sideDismiss  = document.getElementById('ocSideDismiss');
 
     function goToSub(title, templateId) {
       var tpl = document.getElementById(templateId);
       if (!tpl) return;
-      // Заполняем подпанель из шаблона
+      // Заполняем боковую панель из шаблона
       subNav.innerHTML = '';
       subNav.appendChild(tpl.content.cloneNode(true));
-      // Подсвечиваем активные ссылки в подпанели
+      // Подсвечиваем активные ссылки
       var currentPath = window.location.pathname;
       subNav.querySelectorAll('a[href]').forEach(function (a) {
         var href = a.getAttribute('href');
@@ -180,34 +178,55 @@ document.addEventListener('DOMContentLoaded', function () {
           a.classList.add('active');
         }
       });
-      // Устанавливаем заголовок
+      // Заголовок боковой панели
       if (subTitle) subTitle.textContent = title;
-      // Сдвигаем обёртку вправо — подменю (слева) выезжает на экран
-      if (panelsWrap) panelsWrap.classList.add('oc-at-sub');
-      if (panelSub)   panelSub.removeAttribute('aria-hidden');
-      if (headerMain) headerMain.classList.add('d-none');
-      if (headerSub)  headerSub.classList.remove('d-none');
+      // Показываем боковую панель слева от основного offcanvas
+      if (sidePanel) {
+        sidePanel.classList.add('is-open');
+        sidePanel.removeAttribute('aria-hidden');
+      }
     }
 
     function goToMain() {
-      // Возвращаем обёртку — основное меню снова видно
-      if (panelsWrap) panelsWrap.classList.remove('oc-at-sub');
-      if (panelSub)   panelSub.setAttribute('aria-hidden', 'true');
-      if (headerMain) headerMain.classList.remove('d-none');
-      if (headerSub)  headerSub.classList.add('d-none');
+      // Скрываем боковую панель
+      if (sidePanel) {
+        sidePanel.classList.remove('is-open');
+        sidePanel.setAttribute('aria-hidden', 'true');
+      }
     }
 
-    // Клик по родительскому пункту → показываем подпанель
+    // Клик по родительскому пункту → показываем боковую панель
     offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
       btn.addEventListener('click', function () {
         goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
       });
     });
 
-    // Кнопка «Назад»
+    // Кнопка «Назад» в боковой панели
     if (backBtn) backBtn.addEventListener('click', goToMain);
 
-    // Сброс при закрытии offcanvas
+    // Кнопка «×» в боковой панели — закрываем и боковую, и основной offcanvas
+    if (sideDismiss) {
+      sideDismiss.addEventListener('click', function () {
+        goToMain();
+        var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
+        if (bsOc) bsOc.hide();
+      });
+    }
+
+    // Клик по ссылке в боковой панели → закрываем оба
+    if (sidePanel) {
+      sidePanel.addEventListener('click', function (e) {
+        var link = e.target.closest('a[href]');
+        if (link) {
+          goToMain();
+          var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
+          if (bsOc) bsOc.hide();
+        }
+      });
+    }
+
+    // Сброс при закрытии основного offcanvas
     offcanvasEl.addEventListener('hidden.bs.offcanvas', function () {
       goToMain();
     });
