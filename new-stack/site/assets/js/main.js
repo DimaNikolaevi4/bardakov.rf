@@ -231,6 +231,43 @@ document.addEventListener('DOMContentLoaded', function () {
       goToMain();
     });
 
+    // ── Свайп вправо на боковой панели → закрыть боковую ────
+    // ── Свайп вправо на основном offcanvas → закрыть всё ────
+    (function () {
+      var SWIPE_THRESHOLD = 60;  // пикселей
+
+      function addSwipe(el, onSwipeRight) {
+        var startX = 0, startY = 0;
+        el.addEventListener('touchstart', function (e) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }, { passive: true });
+        el.addEventListener('touchend', function (e) {
+          var dx = e.changedTouches[0].clientX - startX;
+          var dy = e.changedTouches[0].clientY - startY;
+          // Свайп вправо — горизонтальный (dx > 0, |dx| > |dy|, |dx| > порога)
+          if (dx > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+            onSwipeRight();
+          }
+        }, { passive: true });
+      }
+
+      if (sidePanel) {
+        addSwipe(sidePanel, function () {
+          goToMain();   // закрыть только боковую
+        });
+      }
+
+      addSwipe(offcanvasEl, function () {
+        if (sidePanel && sidePanel.classList.contains('is-open')) {
+          goToMain();   // есть боковая → закрыть только её
+        } else {
+          var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
+          if (bsOc) bsOc.hide();  // иначе закрыть всё
+        }
+      });
+    }());
+
     // Поиск внутри offcanvas (мобильный) → открываем модал
     var mobileSearchBtn = document.getElementById('search-btn-mobile');
     if (mobileSearchBtn) {
