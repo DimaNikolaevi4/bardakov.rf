@@ -102,6 +102,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
+    // --- Подсвечиваем родительский пункт десктопного меню если активна под-ссылка ---
+    e.target.querySelectorAll('.main-nav__item--has-sub').forEach(function (item) {
+      if (item.querySelector('.main-nav__sub-link.active')) {
+        var parentLink = item.querySelector('.main-nav__link');
+        if (parentLink) parentLink.classList.add('active');
+      }
+    });
+
     // --- Открываем подменю offcanvas если текущий раздел активен ---
     e.target.querySelectorAll('.oc-nav__group').forEach(function (group) {
       if (group.querySelector('.oc-nav__sub-link.active')) {
