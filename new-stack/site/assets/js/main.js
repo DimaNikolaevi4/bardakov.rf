@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var currentPath = window.location.pathname;
 
-    // --- Подсветка активных ссылок ---
-    e.target.querySelectorAll('.main-nav__link, .oc-nav__link, .oc-nav__sub-link').forEach(function (link) {
+    // --- Подсветка активных ссылок в основном меню ---
+    e.target.querySelectorAll('.main-nav__link, .oc-nav__link').forEach(function (link) {
       var href = link.getAttribute('href');
       if (!href) return;
       if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
@@ -110,14 +110,16 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // --- Открываем подменю offcanvas если текущий раздел активен ---
-    e.target.querySelectorAll('.oc-nav__group').forEach(function (group) {
-      if (group.querySelector('.oc-nav__sub-link.active')) {
-        var sub = group.querySelector('.oc-nav__sub');
-        var toggle = group.querySelector('.oc-nav__toggle');
-        if (sub) sub.hidden = false;
-        if (toggle) toggle.setAttribute('aria-expanded', 'true');
-      }
+    // --- Подсвечиваем кнопки-родители offcanvas по содержимому шаблона ---
+    e.target.querySelectorAll('.oc-nav__link--parent[data-oc-sub]').forEach(function (btn) {
+      var tplId = btn.getAttribute('data-oc-sub');
+      var tpl = document.getElementById(tplId);
+      if (!tpl) return;
+      var hasActive = Array.from(tpl.content.querySelectorAll('a[href]')).some(function (a) {
+        var href = a.getAttribute('href');
+        return href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)));
+      });
+      if (hasActive) btn.classList.add('active');
     });
 
     // --- Инициализация иконки темы ---
@@ -150,28 +152,69 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* -------------------------------------------
-     4. Offcanvas: аккордеон подменю
+     4. Offcanvas: двухпанельная навигация
      ------------------------------------------- */
   function initOffcanvasNav() {
-    var offcanvasEl = document.getElementById('offcanvasNav');
+    var offcanvasEl  = document.getElementById('offcanvasNav');
     if (!offcanvasEl) return;
 
-    offcanvasEl.querySelectorAll('.oc-nav__toggle').forEach(function (toggle) {
-      toggle.addEventListener('click', function () {
-        var controlId = toggle.getAttribute('aria-controls');
-        var sub = controlId ? document.getElementById(controlId) : null;
-        if (!sub) return;
-        var isOpen = !sub.hidden;
-        sub.hidden = isOpen;
-        toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    var panelMain    = document.getElementById('ocPanelMain');
+    var panelSub     = document.getElementById('ocPanelSub');
+    var subNav       = document.getElementById('ocSubNav');
+    var headerMain   = document.getElementById('ocHeaderMain');
+    var headerSub    = document.getElementById('ocHeaderSub');
+    var subTitle     = document.getElementById('ocSubTitle');
+    var backBtn      = document.getElementById('ocBackBtn');
+
+    function goToSub(title, templateId) {
+      var tpl = document.getElementById(templateId);
+      if (!tpl) return;
+      // Заполняем подпанель из шаблона
+      subNav.innerHTML = '';
+      subNav.appendChild(tpl.content.cloneNode(true));
+      // Подсвечиваем активные ссылки в подпанели
+      var currentPath = window.location.pathname;
+      subNav.querySelectorAll('a[href]').forEach(function (a) {
+        var href = a.getAttribute('href');
+        if (href && (currentPath === href || (href !== '/' && currentPath.startsWith(href)))) {
+          a.classList.add('active');
+        }
       });
+      // Устанавливаем заголовок
+      if (subTitle) subTitle.textContent = title;
+      // Слайд
+      if (panelMain) panelMain.classList.add('oc-slide-out');
+      if (panelSub)  { panelSub.classList.add('oc-slide-in'); panelSub.removeAttribute('aria-hidden'); }
+      if (headerMain) headerMain.classList.add('d-none');
+      if (headerSub)  headerSub.classList.remove('d-none');
+    }
+
+    function goToMain() {
+      if (panelMain) panelMain.classList.remove('oc-slide-out');
+      if (panelSub)  { panelSub.classList.remove('oc-slide-in'); panelSub.setAttribute('aria-hidden', 'true'); }
+      if (headerMain) headerMain.classList.remove('d-none');
+      if (headerSub)  headerSub.classList.add('d-none');
+    }
+
+    // Клик по родительскому пункту → показываем подпанель
+    offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
+      });
+    });
+
+    // Кнопка «Назад»
+    if (backBtn) backBtn.addEventListener('click', goToMain);
+
+    // Сброс при закрытии offcanvas
+    offcanvasEl.addEventListener('hidden.bs.offcanvas', function () {
+      goToMain();
     });
 
     // Поиск внутри offcanvas (мобильный) → открываем модал
     var mobileSearchBtn = document.getElementById('search-btn-mobile');
     if (mobileSearchBtn) {
       mobileSearchBtn.addEventListener('click', function () {
-        // Закрываем offcanvas
         if (typeof bootstrap !== 'undefined') {
           var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
           if (bsOc) {

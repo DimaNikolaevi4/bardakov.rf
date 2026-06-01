@@ -136,14 +136,14 @@ a:hover {
   transition: transform var(--transition);
 }
 
-/* Выпадающее подменю (desktop, CSS hover) */
+/* Выпадающее подменю (desktop, CSS hover — с анимацией) */
 .main-nav__item--has-sub {
   position: relative;
 }
 .main-nav__sub {
-  display: none;
+  display: block;
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
   min-width: 200px;
   background-color: var(--color-base-dark);
@@ -152,10 +152,18 @@ a:hover {
   box-shadow: var(--shadow-md);
   padding: 6px 0;
   z-index: 1050;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
 }
 .main-nav__item--has-sub:hover .main-nav__sub,
 .main-nav__item--has-sub:focus-within .main-nav__sub {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .main-nav__item--has-sub:hover .main-nav__chevron {
   transform: rotate(180deg);
@@ -286,60 +294,102 @@ a:hover {
   background-color: rgba(100, 160, 200, 0.1);
 }
 
-/* Группа с подменю */
-.oc-nav__group { display: flex; flex-direction: column; }
-.oc-nav__row {
-  display: flex;
-  align-items: stretch;
+/* ── Двухпанельный offcanvas ─────────────────────────────── */
+.oc-body {
+  position: relative;
+  overflow: hidden;
 }
-.oc-nav__row .oc-nav__link {
-  flex: 1;
+.oc-panel {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow-y: auto;
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.oc-nav__toggle {
-  color: rgba(255, 255, 255, 0.5);
-  background: transparent;
-  border: none;
-  border-left: 1px solid var(--color-border);
-  width: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: color var(--transition), background-color var(--transition);
-  flex-shrink: 0;
+.oc-panel--main {
+  transform: translateX(0);
 }
-.oc-nav__toggle:hover {
-  color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.1);
+.oc-panel--main.oc-slide-out {
+  transform: translateX(-100%);
 }
-.oc-nav__toggle[aria-expanded="true"] {
-  color: var(--color-accent);
-  background-color: rgba(100, 160, 200, 0.08);
+.oc-panel--sub {
+  transform: translateX(100%);
 }
-.oc-nav__toggle[aria-expanded="true"] .bi-chevron-right {
-  transform: rotate(90deg);
-}
-.oc-nav__toggle .bi-chevron-right {
-  transition: transform var(--transition);
+.oc-panel--sub.oc-slide-in {
+  transform: translateX(0);
 }
 
-/* Подменю */
-.oc-nav__sub {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  padding: 4px 0;
-  margin: 0;
+/* Родительский пункт с стрелкой */
+.oc-nav__link--parent {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
+.oc-nav__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.oc-nav__arrow {
+  font-size: 0.75rem;
+  margin-left: auto;
+  opacity: 0.45;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.oc-nav__link--parent:hover .oc-nav__arrow {
+  transform: translateX(3px);
+  opacity: 0.75;
+}
+
+/* Заголовок подпанели — кнопка «Назад» */
+.oc-header__main,
+.oc-header__sub-panel {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.oc-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: var(--radius);
+  transition: color var(--transition), background-color var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.82);
+}
+.oc-back-btn:hover {
+  background-color: rgba(100, 160, 200, 0.12);
+  color: #fff;
+}
+.oc-back-btn .bi-chevron-left {
+  flex-shrink: 0;
+}
+
+/* Ссылки подпанели */
 .oc-nav__sub-link {
-  display: block;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 0.55rem 1.25rem 0.55rem 2.5rem;
-  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.78);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.92rem;
   font-weight: 400;
   text-decoration: none;
   transition: color var(--transition), background-color var(--transition);
+  border-bottom: 1px solid rgba(100, 160, 200, 0.07);
+}
+.oc-nav__sub-link:last-child {
+  border-bottom: none;
 }
 .oc-nav__sub-link:hover {
   color: var(--color-accent);
@@ -2709,35 +2759,64 @@ body {
   background-color: rgba(74, 158, 255, 0.08) !important;
 }
 
-.oc-nav__toggle {
-  color: rgba(30, 58, 110, 0.45) !important;
-  border-left-color: rgba(37, 99, 235, 0.14) !important;
-}
-.dark-theme .oc-nav__toggle {
-  color: rgba(255, 255, 255, 0.5) !important;
-  border-left-color: var(--color-border) !important;
-}
-
-.oc-nav__sub {
-  background-color: rgba(224, 237, 255, 0.6) !important;
-  border-top-color: rgba(37, 99, 235, 0.12) !important;
-  border-bottom-color: rgba(37, 99, 235, 0.12) !important;
-}
-.dark-theme .oc-nav__sub {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  border-top-color: var(--color-border) !important;
-  border-bottom-color: var(--color-border) !important;
-}
-
-.oc-nav__sub-link {
+/* Двухпанельный offcanvas — светлая тема */
+.oc-nav__link--parent {
   color: var(--color-primary-dark) !important;
 }
-.dark-theme .oc-nav__sub-link {
-  color: rgba(255, 255, 255, 0.7) !important;
+.oc-nav__link--parent:hover {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+.oc-nav__link--parent.active {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+.oc-nav__icon {
+  opacity: 0.6;
+}
+.oc-nav__arrow {
+  color: rgba(30, 58, 110, 0.4) !important;
+}
+.oc-back-btn {
+  color: var(--color-primary-dark) !important;
+}
+.oc-back-btn:hover {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  color: var(--color-primary) !important;
+}
+.oc-nav__sub-link {
+  color: var(--color-primary-dark) !important;
+  border-bottom-color: rgba(37, 99, 235, 0.08) !important;
 }
 .oc-nav__sub-link:hover {
   color: var(--color-primary) !important;
   background-color: rgba(37, 99, 235, 0.06) !important;
+}
+/* Тёмная тема */
+.dark-theme .oc-nav__link--parent {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.dark-theme .oc-nav__link--parent:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(74, 158, 255, 0.08) !important;
+}
+.dark-theme .oc-nav__link--parent.active {
+  color: var(--color-accent) !important;
+  background-color: rgba(74, 158, 255, 0.08) !important;
+}
+.dark-theme .oc-nav__arrow {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+.dark-theme .oc-back-btn {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.dark-theme .oc-back-btn:hover {
+  background-color: rgba(100, 160, 200, 0.12) !important;
+  color: #fff !important;
+}
+.dark-theme .oc-nav__sub-link {
+  color: rgba(255, 255, 255, 0.78) !important;
+  border-bottom-color: rgba(100, 160, 200, 0.07) !important;
 }
 .dark-theme .oc-nav__sub-link:hover {
   color: var(--color-accent) !important;
