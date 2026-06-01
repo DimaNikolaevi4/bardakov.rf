@@ -218,6 +218,13 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+    // Наведение на пункт БЕЗ подменю → закрываем боковую панель
+    offcanvasEl.querySelectorAll('.oc-nav__link:not(.oc-nav__link--parent)').forEach(function (link) {
+      link.addEventListener('mouseenter', function () {
+        goToMain();
+      });
+    });
+
     // Закрываем боковую панель при уходе мыши из offcanvas (если курсор не в side panel)
     var _closeHoverTimer = null;
     function scheduleClose() {
