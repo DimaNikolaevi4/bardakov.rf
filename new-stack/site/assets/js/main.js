@@ -195,12 +195,37 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Клик по родительскому пункту → показываем боковую панель
+    // Наведение мышкой на родительский пункт → показываем боковую панель
     offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('mouseenter', function () {
         goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
       });
+      // Запасной вариант для touch-устройств (нет hover)
+      btn.addEventListener('click', function (e) {
+        if (e.pointerType === 'touch') {
+          goToSub(btn.getAttribute('data-oc-title'), btn.getAttribute('data-oc-sub'));
+        }
+      });
     });
+
+    // Закрываем боковую панель при уходе мыши из offcanvas (если курсор не в side panel)
+    var _closeHoverTimer = null;
+    function scheduleClose() {
+      _closeHoverTimer = setTimeout(function () {
+        if (sidePanel && !sidePanel.matches(':hover') && !offcanvasEl.matches(':hover')) {
+          goToMain();
+        }
+      }, 120);
+    }
+    function cancelClose() {
+      if (_closeHoverTimer) { clearTimeout(_closeHoverTimer); _closeHoverTimer = null; }
+    }
+    offcanvasEl.addEventListener('mouseleave', scheduleClose);
+    offcanvasEl.addEventListener('mouseenter', cancelClose);
+    if (sidePanel) {
+      sidePanel.addEventListener('mouseleave', scheduleClose);
+      sidePanel.addEventListener('mouseenter', cancelClose);
+    }
 
     // Кнопка «Назад» в боковой панели
     if (backBtn) backBtn.addEventListener('click', goToMain);
