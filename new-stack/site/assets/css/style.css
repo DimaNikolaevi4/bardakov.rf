@@ -404,6 +404,10 @@ a:hover {
   transform: translateX(3px);
   opacity: 0.75;
 }
+.oc-nav__link--parent.is-sub-open .oc-nav__arrow {
+  transform: translateX(3px);
+  opacity: 1;
+}
 
 /* Заголовок боковой панели — flex-строка с кнопкой «Назад» */
 .oc-side-panel .oc-header {
@@ -2832,6 +2836,11 @@ body {
   color: var(--color-primary) !important;
   background-color: rgba(37, 99, 235, 0.08) !important;
 }
+.oc-nav__link--parent.is-sub-open {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.14) !important;
+  border-left: 3px solid var(--color-primary);
+}
 .oc-nav__icon {
   opacity: 0.6;
 }
@@ -2875,6 +2884,11 @@ body {
 .dark-theme .oc-nav__link--parent.active {
   color: var(--color-accent) !important;
   background-color: rgba(74, 158, 255, 0.08) !important;
+}
+.dark-theme .oc-nav__link--parent.is-sub-open {
+  color: var(--color-accent) !important;
+  background-color: rgba(74, 158, 255, 0.14) !important;
+  border-left: 3px solid var(--color-accent);
 }
 .dark-theme .oc-nav__arrow {
   color: rgba(255, 255, 255, 0.4) !important;
