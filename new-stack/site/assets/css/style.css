@@ -2238,14 +2238,14 @@ body {
 }
 
 /* ── Шапка — glassmorphism ─────────────────────────────────── */
-.site-header {
+.dark-theme .site-header {
   background: rgba(6, 13, 31, 0.82) !important;
   backdrop-filter: blur(18px) saturate(1.6);
   -webkit-backdrop-filter: blur(18px) saturate(1.6);
   border-bottom: 1px solid rgba(74, 158, 255, 0.12);
   box-shadow: 0 1px 32px rgba(0, 0, 0, 0.45) !important;
 }
-.site-header.header--compact {
+.dark-theme .site-header.header--compact {
   background: rgba(4, 9, 18, 0.90) !important;
 }
 
