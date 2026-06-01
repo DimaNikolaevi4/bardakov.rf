@@ -180,6 +180,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       // Заголовок боковой панели
       if (subTitle) subTitle.textContent = title;
+      // Подсвечиваем родительский пункт как «открытый»
+      offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (b) {
+        b.classList.remove('is-sub-open');
+      });
+      var openBtn = offcanvasEl.querySelector('[data-oc-sub="' + templateId + '"]');
+      if (openBtn) openBtn.classList.add('is-sub-open');
       // Показываем боковую панель слева от основного offcanvas
       if (sidePanel) {
         sidePanel.classList.add('is-open');
@@ -188,6 +194,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function goToMain() {
+      // Снимаем подсветку со всех родительских пунктов
+      offcanvasEl.querySelectorAll('.oc-nav__link--parent').forEach(function (b) {
+        b.classList.remove('is-sub-open');
+      });
       // Скрываем боковую панель
       if (sidePanel) {
         sidePanel.classList.remove('is-open');
