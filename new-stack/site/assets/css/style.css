@@ -2711,6 +2711,42 @@ a:hover { color: var(--color-accent); }
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.55) !important;
 }
 
+/* Логотип и бренд в светлой теме */
+.site-header__brand {
+  color: var(--color-primary-dark) !important;
+}
+.site-header__brand:hover {
+  color: var(--color-primary) !important;
+}
+.site-header__logo-img {
+  filter: none !important;
+}
+.dark-theme .site-header__brand {
+  color: var(--color-accent) !important;
+}
+.dark-theme .site-header__brand:hover {
+  color: var(--color-accent-light) !important;
+}
+.dark-theme .site-header__logo-img {
+  filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(180deg) brightness(1.4) !important;
+}
+
+/* Иконки шапки (поиск, тема, глаз, бургер) — светлая тема */
+.header-icon-btn {
+  color: var(--color-primary-dark) !important;
+}
+.header-icon-btn:hover {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+.dark-theme .header-icon-btn {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.dark-theme .header-icon-btn:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(100, 160, 200, 0.14) !important;
+}
+
 /* Активное выделение меню — светлая тема */
 .main-nav__link {
   color: var(--color-primary-dark) !important;
@@ -2728,6 +2764,18 @@ a:hover { color: var(--color-accent); }
 .dark-theme .main-nav__link.active {
   color: var(--color-accent) !important;
   background-color: rgba(100, 160, 200, 0.12) !important;
+}
+
+/* Stats-bar — светлая тема */
+.stats-bar {
+  background: linear-gradient(135deg, #deeaf8 0%, #eaf2fb 100%) !important;
+  border-top: 1px solid rgba(30, 90, 166, 0.1) !important;
+  border-bottom: 1px solid rgba(30, 90, 166, 0.1) !important;
+}
+.dark-theme .stats-bar {
+  background: linear-gradient(135deg, #050c1c 0%, #08111f 100%) !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
 }
 
 /* Фильтр для government.svg — синий в светлой теме */
