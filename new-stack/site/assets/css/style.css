@@ -400,13 +400,14 @@ a:hover {
   opacity: 0.45;
   transition: transform var(--transition), opacity var(--transition);
 }
-.oc-nav__link--parent:hover .oc-nav__arrow {
+.oc-nav__link--parent:not(.is-sub-open):hover .oc-nav__arrow {
   transform: translateX(3px);
   opacity: 0.75;
 }
 .oc-nav__link--parent.is-sub-open .oc-nav__arrow {
   transform: rotate(90deg);
   opacity: 1;
+  transition: transform 0.28s cubic-bezier(.4,0,.2,1), opacity 0.28s ease;
 }
 
 /* Заголовок боковой панели — flex-строка с кнопкой «Назад» */
