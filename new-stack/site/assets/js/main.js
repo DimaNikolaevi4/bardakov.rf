@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var offcanvasEl  = document.getElementById('offcanvasNav');
     if (!offcanvasEl) return;
 
-    var panelMain    = document.getElementById('ocPanelMain');
+    var panelsWrap   = document.getElementById('ocPanelsWrap');
     var panelSub     = document.getElementById('ocPanelSub');
     var subNav       = document.getElementById('ocSubNav');
     var headerMain   = document.getElementById('ocHeaderMain');
@@ -182,16 +182,17 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       // Устанавливаем заголовок
       if (subTitle) subTitle.textContent = title;
-      // Слайд
-      if (panelMain) panelMain.classList.add('oc-slide-out');
-      if (panelSub)  { panelSub.classList.add('oc-slide-in'); panelSub.removeAttribute('aria-hidden'); }
+      // Сдвигаем обёртку вправо — подменю (слева) выезжает на экран
+      if (panelsWrap) panelsWrap.classList.add('oc-at-sub');
+      if (panelSub)   panelSub.removeAttribute('aria-hidden');
       if (headerMain) headerMain.classList.add('d-none');
       if (headerSub)  headerSub.classList.remove('d-none');
     }
 
     function goToMain() {
-      if (panelMain) panelMain.classList.remove('oc-slide-out');
-      if (panelSub)  { panelSub.classList.remove('oc-slide-in'); panelSub.setAttribute('aria-hidden', 'true'); }
+      // Возвращаем обёртку — основное меню снова видно
+      if (panelsWrap) panelsWrap.classList.remove('oc-at-sub');
+      if (panelSub)   panelSub.setAttribute('aria-hidden', 'true');
       if (headerMain) headerMain.classList.remove('d-none');
       if (headerSub)  headerSub.classList.add('d-none');
     }

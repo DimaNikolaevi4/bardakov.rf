@@ -130,62 +130,70 @@
   </div>
 
   <div class="offcanvas-body p-0 oc-body">
+    <!--
+      Горизонтальная обёртка: [Подменю | Основное меню]
+      Изначально сдвинута так, что видно основное меню (справа).
+      При выборе раздела — сдвигается вправо: подменю выезжает слева.
+    -->
+    <div class="oc-panels-wrap" id="ocPanelsWrap">
 
-    <!-- Панель 1: основное меню -->
-    <div class="oc-panel oc-panel--main" id="ocPanelMain">
-
-      <!-- Иконки действий (только мобильные <992px) -->
-      <div class="offcanvas-actions d-flex d-lg-none align-items-center gap-1 px-3 py-2 border-bottom border-dark-subtle">
-        <button class="header-icon-btn" id="theme-toggle-mobile"
-                type="button" title="Тёмная тема" aria-label="Тёмная тема"
-                onclick="return toggleDarkTheme(),!1">
-          <i class="bi bi-moon-fill" aria-hidden="true"></i>
-        </button>
-        <button class="header-icon-btn"
-                type="button" title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
-                onclick="return toggleA11y(),!1">
-          <i class="bi bi-eye" aria-hidden="true"></i>
-        </button>
-        <button class="header-icon-btn" id="search-btn-mobile"
-                type="button" title="Поиск" aria-label="Поиск">
-          <i class="bi bi-search" aria-hidden="true"></i>
-        </button>
+      <!-- Панель 2 (слева): подменю — заполняется из шаблонов через JS -->
+      <div class="oc-panel oc-panel--sub" id="ocPanelSub" aria-hidden="true">
+        <nav class="oc-nav" id="ocSubNav" aria-label="Подраздел"></nav>
       </div>
 
-      <nav class="oc-nav" aria-label="Разделы сайта">
-        <a href="/" class="oc-nav__link" data-bs-dismiss="offcanvas">
-          <i class="bi bi-person-circle oc-nav__icon" aria-hidden="true"></i>
-          <span>Обо мне</span>
-        </a>
+      <!-- Панель 1 (справа): основное меню -->
+      <div class="oc-panel oc-panel--main" id="ocPanelMain">
 
-        <button class="oc-nav__link oc-nav__link--parent" type="button"
-                data-oc-title="Обучение" data-oc-sub="ocSubObuchenie">
-          <i class="bi bi-book oc-nav__icon" aria-hidden="true"></i>
-          <span>Обучение</span>
-          <i class="bi bi-chevron-right oc-nav__arrow" aria-hidden="true"></i>
-        </button>
+        <!-- Иконки действий (только мобильные <992px) -->
+        <div class="offcanvas-actions d-flex d-lg-none align-items-center gap-1 px-3 py-2 border-bottom border-dark-subtle">
+          <button class="header-icon-btn" id="theme-toggle-mobile"
+                  type="button" title="Тёмная тема" aria-label="Тёмная тема"
+                  onclick="return toggleDarkTheme(),!1">
+            <i class="bi bi-moon-fill" aria-hidden="true"></i>
+          </button>
+          <button class="header-icon-btn"
+                  type="button" title="Версия для слабовидящих" aria-label="Версия для слабовидящих"
+                  onclick="return toggleA11y(),!1">
+            <i class="bi bi-eye" aria-hidden="true"></i>
+          </button>
+          <button class="header-icon-btn" id="search-btn-mobile"
+                  type="button" title="Поиск" aria-label="Поиск">
+            <i class="bi bi-search" aria-hidden="true"></i>
+          </button>
+        </div>
 
-        <button class="oc-nav__link oc-nav__link--parent" type="button"
-                data-oc-title="Абитуриенту" data-oc-sub="ocSubAbiturient">
-          <i class="bi bi-mortarboard oc-nav__icon" aria-hidden="true"></i>
-          <span>Абитуриенту</span>
-          <i class="bi bi-chevron-right oc-nav__arrow" aria-hidden="true"></i>
-        </button>
+        <nav class="oc-nav" aria-label="Разделы сайта">
+          <a href="/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+            <i class="bi bi-person-circle oc-nav__icon" aria-hidden="true"></i>
+            <span>Обо мне</span>
+          </a>
 
-        <a href="/vospitanie/" class="oc-nav__link" data-bs-dismiss="offcanvas">
-          <i class="bi bi-heart oc-nav__icon" aria-hidden="true"></i>
-          <span>Воспитание</span>
-        </a>
-        <a href="/search/" class="oc-nav__link" data-bs-dismiss="offcanvas">
-          <i class="bi bi-search oc-nav__icon" aria-hidden="true"></i>
-          <span>Поиск</span>
-        </a>
-      </nav>
-    </div>
+          <button class="oc-nav__link oc-nav__link--parent" type="button"
+                  data-oc-title="Обучение" data-oc-sub="ocSubObuchenie">
+            <i class="bi bi-book oc-nav__icon" aria-hidden="true"></i>
+            <span>Обучение</span>
+            <i class="bi bi-chevron-right oc-nav__arrow" aria-hidden="true"></i>
+          </button>
 
-    <!-- Панель 2: подменю (заполняется из шаблонов через JS) -->
-    <div class="oc-panel oc-panel--sub" id="ocPanelSub" aria-hidden="true">
-      <nav class="oc-nav" id="ocSubNav" aria-label="Подраздел"></nav>
+          <button class="oc-nav__link oc-nav__link--parent" type="button"
+                  data-oc-title="Абитуриенту" data-oc-sub="ocSubAbiturient">
+            <i class="bi bi-mortarboard oc-nav__icon" aria-hidden="true"></i>
+            <span>Абитуриенту</span>
+            <i class="bi bi-chevron-right oc-nav__arrow" aria-hidden="true"></i>
+          </button>
+
+          <a href="/vospitanie/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+            <i class="bi bi-heart oc-nav__icon" aria-hidden="true"></i>
+            <span>Воспитание</span>
+          </a>
+          <a href="/search/" class="oc-nav__link" data-bs-dismiss="offcanvas">
+            <i class="bi bi-search oc-nav__icon" aria-hidden="true"></i>
+            <span>Поиск</span>
+          </a>
+        </nav>
+      </div>
+
     </div>
 
     <!-- Шаблоны подменю -->
