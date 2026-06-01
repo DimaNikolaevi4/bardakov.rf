@@ -42,6 +42,7 @@ body {
                     radial-gradient(ellipse at 100% 100%, rgba(45, 95, 166, 0.03) 0%, transparent 50%);
   line-height: 1.7;
   font-size: 1rem;
+  padding-top: 64px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -67,8 +68,10 @@ a:hover {
 .site-header {
   background-color: var(--color-base);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1040;
   height: 64px;
   transition: height var(--transition), box-shadow var(--transition);
@@ -2781,8 +2784,10 @@ a:hover { color: var(--color-accent); }
 
 /* ── Светлая тема — шапка (плавающая) ───────────────────────────── */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1040;
   background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(12px) saturate(180%) !important;
