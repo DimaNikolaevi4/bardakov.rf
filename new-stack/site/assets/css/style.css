@@ -2648,17 +2648,97 @@ body {
 
 /* ── Оффканвас навигация ───────────────────────────────────── */
 #offcanvasNav {
-  background: rgba(6, 13, 31, 0.97) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
   backdrop-filter: blur(24px);
+  border-left-color: rgba(37, 99, 235, 0.14) !important;
+}
+.dark-theme #offcanvasNav {
+  background: rgba(6, 13, 31, 0.97) !important;
   border-left-color: rgba(56, 189, 248, 0.12) !important;
 }
+
 .oc-header {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-bottom-color: rgba(37, 99, 235, 0.14) !important;
+}
+.dark-theme .oc-header {
   background: rgba(4, 9, 18, 0.95) !important;
   border-bottom-color: rgba(56, 189, 248, 0.12) !important;
 }
-.oc-nav__link:hover, .oc-nav__link.active {
+
+.oc-header__title {
+  color: var(--color-primary-dark) !important;
+}
+.dark-theme .oc-header__title {
+  color: var(--color-accent) !important;
+}
+
+.oc-header__sub {
+  color: rgba(30, 58, 110, 0.55) !important;
+}
+.dark-theme .oc-header__sub {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.oc-dismiss-btn {
+  color: rgba(30, 58, 110, 0.55) !important;
+}
+.dark-theme .oc-dismiss-btn {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Ссылки оффканваса — светлая тема */
+.oc-nav__link {
+  color: var(--color-primary-dark) !important;
+}
+.oc-nav__link:hover,
+.oc-nav__link.active {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}
+/* Ссылки оффканваса — тёмная тема */
+.dark-theme .oc-nav__link {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.dark-theme .oc-nav__link:hover,
+.dark-theme .oc-nav__link.active {
   color: var(--color-accent) !important;
   background-color: rgba(56, 189, 248, 0.08) !important;
+}
+
+.oc-nav__toggle {
+  color: rgba(30, 58, 110, 0.45) !important;
+  border-left-color: rgba(37, 99, 235, 0.14) !important;
+}
+.dark-theme .oc-nav__toggle {
+  color: rgba(255, 255, 255, 0.5) !important;
+  border-left-color: var(--color-border) !important;
+}
+
+.oc-nav__sub {
+  background-color: rgba(224, 237, 255, 0.6) !important;
+  border-top-color: rgba(37, 99, 235, 0.12) !important;
+  border-bottom-color: rgba(37, 99, 235, 0.12) !important;
+}
+.dark-theme .oc-nav__sub {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-top-color: var(--color-border) !important;
+  border-bottom-color: var(--color-border) !important;
+}
+
+.oc-nav__sub-link {
+  color: var(--color-primary-dark) !important;
+}
+.dark-theme .oc-nav__sub-link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.oc-nav__sub-link:hover {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.06) !important;
+}
+.dark-theme .oc-nav__sub-link:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(100, 160, 200, 0.1) !important;
 }
 
 /* ── Accessibility panel ────────────────────────────────────── */
