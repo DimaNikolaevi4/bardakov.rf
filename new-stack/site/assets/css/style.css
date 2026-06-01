@@ -2260,8 +2260,8 @@ body {
   background-color: rgba(74, 158, 255, 0.1) !important;
 }
 
-/* Подменю шапки */
-.main-nav__sub {
+/* Подменю шапки — только тёмная тема */
+.dark-theme .main-nav__sub {
   background: rgba(6, 13, 31, 0.96) !important;
   border-color: rgba(74, 158, 255, 0.14) !important;
   backdrop-filter: blur(12px);
@@ -2839,23 +2839,67 @@ a:hover { color: var(--color-accent); }
   background-color: rgba(100, 160, 200, 0.14) !important;
 }
 
-/* Активное выделение меню — светлая тема */
+/* ── Светлая тема — навигация ─────────────────────────────── */
 .main-nav__link {
   color: var(--color-primary-dark) !important;
 }
-.main-nav__link:hover,
-.main-nav__link.active {
+.main-nav__link:hover {
   color: var(--color-primary) !important;
   background-color: rgba(37, 99, 235, 0.08) !important;
 }
-/* Активное выделение — тёмная тема */
+
+/* Активный пункт — подчёркивание-индикатор */
+.main-nav__link.active {
+  color: var(--color-primary) !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  position: relative;
+}
+.main-nav__link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  right: 0.5rem;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* Выпадающее подменю — светлая тема */
+.main-nav__sub {
+  background: #fff !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(30, 63, 122, 0.12) !important;
+}
+.main-nav__sub-link {
+  color: var(--color-primary-dark) !important;
+}
+.main-nav__sub-link:hover {
+  background-color: rgba(37, 99, 235, 0.06) !important;
+  color: var(--color-primary) !important;
+}
+
+/* ── Тёмная тема — навигация ─────────────────────────────── */
 .dark-theme .main-nav__link {
   color: rgba(255, 255, 255, 0.82) !important;
 }
-.dark-theme .main-nav__link:hover,
+.dark-theme .main-nav__link:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(100, 160, 200, 0.12) !important;
+}
 .dark-theme .main-nav__link.active {
   color: var(--color-accent) !important;
   background-color: rgba(100, 160, 200, 0.12) !important;
+}
+.dark-theme .main-nav__link.active::after {
+  background-color: var(--color-accent);
+}
+.dark-theme .main-nav__sub-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.dark-theme .main-nav__sub-link:hover {
+  background-color: rgba(100, 160, 200, 0.15) !important;
+  color: var(--color-accent) !important;
 }
 
 /* Stats-bar — светлая тема */
