@@ -48,7 +48,7 @@
   - `old/joomla/images/Animation/Бардаков_самопризентация.mp4` (большой файл)
   - `old/joomla/images/Animation/2-1-2400.mp4` (большой файл)
   - `node_modules/`
-  - `package-lock.json`
+  - ⚠️ **`package-lock.json` НЕ исключать** — он должен быть в репозитории для воспроизводимости сборок в CI/CD (см. Этап 6.3)
 - [ ] Составить таблицу «что лежит в `old/`» (краткая сводка по директориям: `joomla/`, `new-stack/site/`, `homepage/`, `attached_assets/`)
 - [ ] Зафиксировать в `README.md` (будущем) назначение папки `old/` — «Архив старой версии на Joomla 5 и промежуточных статических страниц. Не изменять, кроме критических багов.»
 
@@ -93,6 +93,13 @@
 - [ ] Контактные данные → `migration-source/contacts.yaml` (телефон, email, адрес СИТ, график работы, ссылки на ГБПОУ РО «СИТ»)
 - [ ] Yandex.Metrika ID → `migration-source/analytics.yaml`
 - [ ] Favicon → `migration-source/favicon.ico` + проверка всех размеров (16, 32, 48, 180, 192, 512)
+- [ ] 🔒 **Наследие старого сайта (конфигурация сервера):**
+  - [ ] Скачать текущий `.htaccess` с живого сайта `бардаков.рф` → `migration-source/htaccess-original.txt`
+  - [ ] Проанализировать правила: ЧПУ (SEF URLs), редиректы, защиты, кэширование, кодировки
+  - [ ] Зафиксировать правила, которые нужно перенести в новый `.htaccess` (например, запрет индексации админки, редирект `index.php` на `/`, gzip-сжатие, безопасность)
+  - [ ] Скачать текущий `robots.txt` с живого сайта → `migration-source/robots-original.txt`
+  - [ ] Сравнить с `old/joomla/robots.txt` и `old/new-stack/site/robots.txt`
+  - [ ] Зафиксировать директивы `Disallow`, `Host`, `Sitemap` для адаптации в новом `robots.txt`
 
 **Definition of Done (DoD) для Этапа 1:**
 - [ ] Папка `old/` изолирована и не мешает разработке
@@ -350,6 +357,13 @@
   - [ ] Lighthouse Performance ≥ 90
   - [ ] Шрифты загружаются с `font-display: swap`
   - [ ] Нет внешних CDN (кроме аналитики Yandex.Metrika)
+- [ ] 🌐 **Кроссбраузерная проверка** (отсутствие артефактов рендеринга):
+  - [ ] **Chrome / Edge (Blink)** — baseline, референс
+  - [ ] **Firefox (Gecko)** — проверить CSS-переменные, grid/flex, `aspect-ratio`, `gap` в flex
+  - [ ] **Safari (WebKit)** — проверить `backdrop-filter`, `position: sticky`, `font-display: swap`, размеры шрифтов (Safari может рендерить крупнее), flexbox-баги
+  - [ ] **Safari iOS** — проверить `100vh` (лучше использовать `100dvh`), тач-зоны ≥ 44×44px, `:hover` (не работает на тач-устройствах, нужен fallback)
+  - [ ] Зафиксировать минимально поддерживаемые версии браузеров в `docs/browser-support.md` (например: последние 2 версии каждого крупного браузера)
+  - [ ] Если найдены расхождения — добавить вендорные префиксы через `autoprefixer` или `@supports`
 - [ ] ⏸ **Точка утверждения**: пользователь (заказчик) подтверждает, что дизайн замораживается
 - [ ] Сделать скриншоты всех вариантов → сохранить в `docs/design-review/`
 - [ ] Зафиксировать версию дизайн-системы в `src/_data/site.json` → `"designVersion": "1.0.0"`
@@ -444,15 +458,40 @@
   - `page-upbringing.njk`: `materials: [...]` (ссылки на PDF)
   - `page-contacts.njk`: `phone, email, address, workHours, mapEmbed`
   
-- [ ] Создать JSON Schema в `docs/frontmatter.schema.json` для автоматической валидации в CI
-- [ ] Настроить кастомный Eleventy-плагин или скрипт проверки frontmatter в `scripts/validate-frontmatter.js`:
-  - [ ] Проверка обязательных полей
-  - [ ] Проверка типов и форматов (дата — ISO 8601, description — длина)
-  - [ ] Проверка `layout` на существование файла
-  - [ ] Проверка `permalink` на уникальность
+- [ ] Создать JSON Schema в `docs/frontmatter.schema.json` для автоматической валидации в CI:
+  - [ ] Использовать стандарт JSON Schema Draft 2020-12
+  - [ ] Схема должна покрывать все поля из спецификации (обязательные и опциональные)
+  - [ ] Добавить описание полей в `description` (для автодокументации и подсказок ИИ-агенту)
+- [ ] Настроить скрипт валидации `scripts/validate-frontmatter.js`:
+  - [ ] Использовать библиотеку **[`ajv`](https://www.npmjs.com/package/ajv)** (Another JSON Schema Validator) — это самый быстрый и стандартизованный валидатор JSON Schema для Node.js
+  - [ ] Установить: `npm install --save-dev ajv ajv-formats`
+  - [ ] Использовать `ajv-formats` для проверки форматов (date-time, uri, email)
+  - [ ] Парсить frontmatter из Markdown-файлов через `gray-matter` (или `js-yaml`)
+  - [ ] Проверка обязательных полей (`title`, `description`, `layout`, `date`)
+  - [ ] Проверка типов и форматов (дата — ISO 8601, description — длина 50–160 символов, permalink — валидный URL)
+  - [ ] Проверка `layout` на существование файла в `src/_includes/layouts/`
+  - [ ] Проверка `permalink` на уникальность (никаких дубликатов)
+  - [ ] Вывод понятных ошибок с указанием файла и поля (для человека и ИИ-агента)
+  - [ ] Код возврата ≠ 0 при любой ошибке (для блокировки CI)
 - [ ] Добавить в `package.json`:
   - [ ] `"check:frontmatter": "node scripts/validate-frontmatter.js"`
   - [ ] Включить в `"test"` скрипт
+- [ ] 🪝 **Настроить автоматический запуск через husky** (pre-commit hook):
+  - [ ] Установить: `npm install --save-dev husky lint-staged`
+  - [ ] Инициализировать: `npx husky init`
+  - [ ] Создать `.husky/pre-commit`, запускающий валидацию только изменённых `.md` и `.njk` файлов:
+    ```bash
+    npx lint-staged
+    ```
+  - [ ] Настроить `lint-staged` в `package.json`:
+    ```json
+    "lint-staged": {
+      "src/content/**/*.{md,njk}": "node scripts/validate-frontmatter.js --staged"
+    }
+    ```
+  - [ ] Добавить поддержку флага `--staged` в `validate-frontmatter.js` (через `lint-staged` получает список файлов)
+  - [ ] Проверить, что коммит блокируется при невалидном frontmatter
+  - [ ] Документировать в `docs/CONTRIBUTING.md`: «Перед коммитом автоматически проверяется frontmatter — если валидация упадёт, коммит будет отклонён»
 
 ### 4.3 Архитектура данных для навигации
 
@@ -835,6 +874,28 @@
 
 ### 7.3 Настройка деплоя
 
+- [ ] 🔑 **Настроить SSH-ключ для беспарольного доступа к Beget** (обязательно для rsync):
+  - [ ] Сгенерировать SSH-ключ (если ещё нет):
+    ```bash
+    ssh-keygen -t ed25519 -C "deploy@bardakov.rf" -f ~/.ssh/bardakov_deploy
+    ```
+  - [ ] ⚠️ Приватный ключ `~/.ssh/bardakov_deploy` **никогда** не должен попасть в репозиторий (проверить `.gitignore`)
+  - [ ] Зайти в панель управления Beget → раздел **«SSH доступ»** (или «SSH-ключи»)
+  - [ ] Добавить содержимое публичного ключа `~/.ssh/bardakov_deploy.pub` в форму
+  - [ ] Дождаться активации ключа (обычно до 15 минут)
+  - [ ] Проверить подключение:
+    ```bash
+    ssh -i ~/.ssh/bardakov_deploy user@server.beget.com "echo OK"
+    ```
+  - [ ] При необходимости добавить конфиг в `~/.ssh/config`:
+    ```
+    Host bardakov-beget
+      HostName server.beget.com
+      User your_username
+      IdentityFile ~/.ssh/bardakov_deploy
+      IdentitiesOnly yes
+    ```
+  - [ ] Для GitHub Actions: добавить приватный ключ как Repository Secret `DEPLOY_SSH_KEY` (Settings → Secrets and variables → Actions)
 - [ ] Создать `scripts/deploy.sh`:
   ```bash
   #!/bin/bash
@@ -844,10 +905,12 @@
   npm run build
   
   echo "Деплой на Beget..."
-  # Через rsync по SSH (рекомендуется)
-  rsync -avz --delete public/ user@server:~/bardakov.rf/public_html/
+  # Через rsync по SSH (рекомендуется, требует настроенный SSH-ключ — см. выше)
+  rsync -avz --delete \
+    -e "ssh -i ~/.ssh/bardakov_deploy -o StrictHostKeyChecking=no" \
+    public/ user@server.beget.com:~/bardakov.rf/public_html/
   
-  # Или через FTP (если rsync недоступен)
+  # Или через FTP (fallback, если rsync недоступен)
   # lftp -c "open ftp://user:pass@server; mirror -R public/ ~/bardakov.rf/public_html/"
   
   echo "Готово!"
@@ -858,9 +921,13 @@
   DEPLOY_HOST=server.beget.com
   DEPLOY_USER=your_username
   DEPLOY_PATH=~/bardakov.rf/public_html/
+  DEPLOY_SSH_KEY_PATH=~/.ssh/bardakov_deploy
   ```
 - [ ] Добавить `.env` в `.gitignore`
-- [ ] Опционально: настроить автодеплой через GitHub Actions при пуше в `main`
+- [ ] ⚠️ Зафиксировать в `docs/deploy.md`: «Приватный SSH-ключ хранится только локально (и в GitHub Secrets для CI). Никогда не коммитить.»
+- [ ] Опционально: настроить автодеплой через GitHub Actions при пуше в `main`:
+  - [ ] Использовать секрет `DEPLOY_SSH_KEY` в workflow
+  - [ ] Шаг деплоя: `appleboy/ssh-action` или напрямую `rsync` через `easingthemes/ssh-deploy`
 
 ### 7.4 Финальный релиз
 
@@ -959,6 +1026,12 @@
 ## 📝 Журнал изменений чек-листа
 
 - **2026-10-08** — Создан подробный чек-лист на основе дорожной карты миграции
+- **2026-10-08 (rev 2)** — Точечные улучшения по ревью:
+  - `package-lock.json` исключён из `.gitignore` (Этап 1.1) и зафиксирован как обязательный к коммиту (Этап 6.3) — гарантия воспроизводимости сборок в CI/CD
+  - Добавлен пункт про SSH-ключ для Beget в Этап 7.3 — обязателен для работы rsync по SSH (публичный ключ добавляется в панели Beget → раздел «SSH доступ»)
+  - Добавлен пункт про анализ старых `.htaccess` и `robots.txt` с живого сайта в Этап 1.3 — перенос полезных правил (ЧПУ, защиты, кэширование, Disallow и т.д.)
+  - Добавлена кроссбраузерная проверка в Этап 3.4 — Chrome (Blink), Firefox (Gecko), Safari (WebKit) + Safari iOS, фикс минимальных версий в `docs/browser-support.md`
+  - Уточнена автоматизация проверки frontmatter в Этап 4.2 — `ajv` + `ajv-formats` для JSON Schema Draft 2020-12, `gray-matter` для парсинга, `husky` + `lint-staged` для pre-commit хука
 
 ---
 
