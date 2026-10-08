@@ -1,0 +1,9 @@
+old_url,new_url,status,lastmod,priority,notes
+/private,/private/,301,2024-09-09T09:29:01+03:00,0.8,⚠️ проверить — возможно приватная страница Joomla (не переностится)
+/abiturientu/spetsialnosti/ekonomika-i-bukhgalterskij-uchet-po-otraslyam,/abiturientu/spetsialnosti/ekonomika-i-bukhgalterskij-uchet/,301,2024-09-09T09:28:52+03:00,0.4,✅ сопоставлено вручную — сокращено до ekonika-i-bukhgalterskij-uchet
+/abiturientu/professii/13-01-10-elektromonter-po-remontu-i-obsluzhivaniyu-elektrooborudovaniya-po-otraslyam,/abiturientu/professii/13-01-10-elektromonter/,301,2024-09-09T09:27:46+03:00,0.4,✅ сопоставлено вручную — сокращено до 13-01-10-elektromonter
+/obuchenie/pm02/lektsii/razdel-1/tema-1-1-organizatsiya-rabot-po-montazhu-sistem-avtomatizatsii/podgotovka-k-proizvodstvu-montazhnykh-rabot,/obuchenie/pm02/lektsii/razdel-1/,301,2024-09-09T09:28:11+03:00,0.1,⚠️ проверить —深层ая nested URL, редирект на раздел 1
+/abiturientu/professii/15-01-05-svarshchik-ruchnoj-i-chastichno-mekhanizirovannoj-svarki-naplavki,/abiturientu/professii/15-01-05-svarshchik/,301,2024-09-09T09:27:59+03:00,0.4,✅ сопоставлено вручную — сокращено до 15-01-05-svarshchik
+/obuchenie/pm02/lektsii/razdel-1/tema-1-1-organizatsiya-rabot-po-montazhu-sistem-avtomatizatsii/priemka-obekta-pod-montazh,/obuchenie/pm02/lektsii/razdel-1/,301,2024-09-09T09:28:14+03:00,0.1,⚠️ проверить — глубокая nested URL, редирект на раздел 1
+/obuchenie/pm02/lektsii/razdel-1/tema-1-1-organizatsiya-rabot-po-montazhu-sistem-avtomatizatsii,/obuchenie/pm02/lektsii/razdel-1/,301,2024-09-09T09:27:49+03:00,0.1,⚠️ проверить — глубокая nested URL, редирект на раздел 1
+/abiturientu/professii/15-01-31-master-kontrolno-izmeritelnykh-priborov-i-avtomatiki,/abiturientu/professii/15-01-31-master-kip/,301,2024-09-09T09:28:08+03:00,0.4,✅ сопоставлено вручную — сокращено до 15-01-31-master-kip
