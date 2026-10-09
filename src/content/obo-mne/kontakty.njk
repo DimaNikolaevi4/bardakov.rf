@@ -1,0 +1,56 @@
+---
+title: "Контакты"
+description: "Контактные данные преподавателя Бардакова Дмитрия Николаевича."
+layout: base.njk
+permalink: /obo-mne/kontakty/index.html
+date: 2026-10-09
+section: obo-mne
+order: 5
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container container-md">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Обо мне", "url": "/obo-mne/" },
+    { "title": "Контакты" }
+  ]) }}
+
+  <h1>Контакты</h1>
+
+  <div class="grid grid-2">
+    <div>
+      <h2 class="mb-2">
+        <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
+        Преподаватель
+      </h2>
+      <p>{{ contacts.person.full_name }}</p>
+      <p style="color: var(--color-text-muted);">{{ contacts.person.position }}</p>
+      <p style="color: var(--color-text-muted);">{{ contacts.person.organization }}</p>
+
+      <h2 class="mt-6 mb-2">
+        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+        Адрес
+      </h2>
+      <p>{{ contacts.person.city }}, {{ contacts.person.region }}, {{ contacts.person.country }}</p>
+    </div>
+
+    <div>
+      <h2 class="mb-2">
+        <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+        Электронная почта
+      </h2>
+      <p>
+        <a href="mailto:{{ contacts.contacts.email }}">{{ contacts.contacts.email_display }}</a>
+      </p>
+
+      <h2 class="mt-6 mb-2">
+        <i class="bi bi-clock-fill" aria-hidden="true"></i>
+        Режим работы
+      </h2>
+      <p>{{ contacts.contacts.work_hours }}</p>
+    </div>
+  </div>
+</div>

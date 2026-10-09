@@ -1,0 +1,55 @@
+{# card.njk — Карточка-ссылка
+   Источник: old/DESIGN.md §6.2
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Использование:
+   {% include "components/card.njk" %}
+
+   Или через макрос:
+   {% from "components/card.njk" import card %}
+   {{ card({
+     "category": "Обучение",
+     "title": "КИП",
+     "description": "Контрольно-измерительные приборы",
+     "link": "/obuchenie/kip/",
+     "icon": "bi-thermometer-half"
+   }) }}
+#}
+{% macro card(params) %}
+<a href="{{ params.link }}"
+   class="card{% if params.modifier %} card--{{ params.modifier }}{% endif %}"
+   {% if params.external %}target="_blank" rel="noopener"{% endif %}>
+  {% if params.image %}
+  <div class="card__image">
+    <img src="{{ params.image }}"
+         alt="{{ params.imageAlt or '' }}"
+         loading="lazy"
+         decoding="async"
+         width="400" height="225">
+  </div>
+  {% endif %}
+  <div class="card__body">
+    {% if params.category %}
+    <span class="card__category">{{ params.category }}</span>
+    {% endif %}
+    <h3 class="card__title">
+      {% if params.icon %}<i class="bi {{ params.icon }}" aria-hidden="true"></i> {% endif %}
+      {{ params.title }}
+    </h3>
+    {% if params.description %}
+    <p class="card__description">{{ params.description }}</p>
+    {% endif %}
+    {% if params.link %}
+    <span class="card__link">
+      Подробнее
+      <i class="bi bi-arrow-right" aria-hidden="true"></i>
+    </span>
+    {% endif %}
+  </div>
+</a>
+{% endmacro %}
+
+{# Если карточка вызывается через include без макроса — выводим переданные параметры #}
+{% if params %}
+{{ card(params) }}
+{% endif %}

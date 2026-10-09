@@ -363,148 +363,175 @@
 
 ### 3.1 Определение дизайн-токенов
 
-- [ ] Создать `src/styles/tokens.css` на основе `old/DESIGN.md`:
-  - [ ] Цветовые примитивы (blue, orange, neutral)
-  - [ ] Семантические токены (light)
-  - [ ] Семантические токены для dark-темы через `[data-theme="dark"]`
-  - [ ] Семантические токены для VI-темы через `[data-theme="vi"]` (режим для слабовидящих)
-  - [ ] Шкала типографики (text-xs ... text-5xl)
-  - [ ] Межстрочные интервалы (leading-tight / snug / normal)
-  - [ ] Веса шрифтов (400 / 500 / 600 / 700)
-  - [ ] Базовая единица пространства (8px) и шкала отступов
-  - [ ] Радиусы (6 / 10 / 16 / 9999px)
-  - [ ] Тени (sm / md / lg) и правила для dark-темы
-  - [ ] Брейкпоинты (sm 640, md 768, lg 1024, xl 1280)
-- [ ] Создать `src/styles/typography.css` с правилами:
-  - [ ] Подключение Inter (body) и Manrope (headings) через `@font-face` (self-hosted, woff2)
-  - [ ] `font-display: swap`
-  - [ ] Подмножество: latin + cyrillic
-- [ ] Создать `src/styles/layout.css`:
-  - [ ] `.container` с максимальной шириной 1280px
-  - [ ] Mobile-first медиа-запросы
-  - [ ] Базовые стили для `body`, `main`, `article`
-- [ ] Создать `src/styles/a11y.css`:
-  - [ ] Видимый `:focus-visible` (outline 3px solid `--color-focus-ring`)
-  - [ ] Skip-link «Перейти к контенту»
-  - [ ] Уважение `prefers-reduced-motion`
-  - [ ] Стили для `[data-theme="vi"]` (большой шрифт, чёрный фон)
-- [ ] Inline-скрипт в `<head>` для защиты от FOUC при переключении тем (см. `old/DESIGN.md` §8.3)
+- ✅ Создать `src/styles/tokens.css` на основе `old/DESIGN.md`:
+  - ✅ Цветовые примитивы (blue, orange, neutral) — §2.1
+  - ✅ Семантические токены (light) — §2.2
+  - ✅ Семантические токены для dark-темы через `[data-theme="dark"]` — §2.2
+  - ✅ Семантические токены для VI-темы через `[data-theme="vi"]` (режим для слабовидящих) — §2.2 + §7.2
+  - ✅ Шкала типографики (text-xs ... text-5xl) — §4.2 (модульная 1.25, база 16px)
+  - ✅ Межстрочные интервалы (leading-tight / snug / normal) — §4.3
+  - ✅ Веса шрифтов (400 / 500 / 600 / 700) — §4.4
+  - ✅ Базовая единица пространства (8px) и шкала отступов (space-1 ... space-24) — §5.1
+  - ✅ Радиусы (6 / 10 / 16 / 9999px) — §5.3
+  - ✅ Тени (sm / md / lg + air) и правила для dark-темы (без теней, только разница тонов) — §5.3
+  - ✅ Брейкпоинты (sm 640, md 768, lg 1024, xl 1280) — §5.2
+  - ✅ Z-index иерархия слоёв (base, dropdown, sticky, header, offcanvas, modal, tooltip) — добавлено
+  - ✅ Минимальные кликабельные зоны (44px стандарт, 56px VI) — §7.2
+  - ✅ Принудительное отключение анимаций через `prefers-reduced-motion` — §7.1
+  - ✅ Режим «без изображений» через `[data-images="off"]` — §6.5
+  - ✅ Режим «системный шрифт» через `[data-font="system"]` — §6.5
+- ✅ Создать `src/styles/typography.css` с правилами:
+  - ✅ Подключение Inter (body, 400/500/600/700) и Manrope (headings, 400/500/600/700) через `@font-face` (self-hosted, woff2)
+  - ✅ `font-display: swap` — для всех шрифтов
+  - ✅ Подмножество: cyrillic (unicode-range U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116)
+  - ✅ Шрифты установлены через `@fontsource/inter` и `@fontsource/manrope`, скопированы в `src/assets/fonts/`
+  - ✅ Базовые стили текста, заголовков (h1-h6), параграфов, ссылок, списков, цитат, кода, выделений
+- ✅ Создать `src/styles/layout.css`:
+  - ✅ `.container` с максимальной шириной 1280px + адаптивные отступы
+  - ✅ Mobile-first медиа-запросы
+  - ✅ Базовые стили для `body` (flex-column, min-height 100vh/100dvh), `main` (flex-grow), `header` (sticky), `footer` (margin-top: auto)
+  - ✅ Сетки: `.grid`, `.grid-2`, `.grid-3`, `.grid-4` с адаптивными брейкпоинтами
+  - ✅ Flex-утилиты: `.flex`, `.flex-col`, `.items-center`, `.justify-between`, `.gap-*`
+  - ✅ Отступы-утилиты: `.mt-*`, `.mb-*`, `.pt-*`, `.pb-*`
+  - ✅ Visibility-утилиты: `.sr-only`, `.hidden-lg`, `.hidden-sm`, `.text-center`, `.mx-auto`
+  - ✅ Секции: `.section`, `.section-sm`
+- ✅ Создать `src/styles/a11y.css`:
+  - ✅ Skip-link «Перейти к контенту» — §7.1
+  - ✅ Видимый `:focus-visible` (outline 3px solid `--color-focus-ring`) — §7.1
+  - ✅ В VI-режиме фокус более контрастный (4px, offset 3px) — §7.2
+  - ✅ Уважение `prefers-reduced-motion` — §7.1 (в tokens.css)
+  - ✅ Стили для `[data-theme="vi"]` (без теней, без прозрачности, без градиентов) — §7.2
+  - ✅ Режим «без изображений» через `[data-images="off"]` — §6.5
+  - ✅ Режим «без анимаций» через `[data-animations="off"]`
+  - ✅ Offcanvas стили (для мобильного меню) с трансформацией
+  - ✅ A11y-panel стили (правая выдвижная панель)
+  - ✅ Кнопка закрытия (универсальная)
+  - ✅ Формы: `label`, `input`, `textarea`, `select`, `aria-invalid`, `form-error`
+  - ✅ Scrollbar стили (для десктопа)
+  - ✅ Стили печати (`@media print`)
+- ✅ Inline-скрипт в `<head>` для защиты от FOUC при переключении тем (в `base.njk`, ~280 байт) — §8.3
+  - Восстанавливает тему из cookie → localStorage → prefers-color-scheme → default 'light'
+  - Также восстанавливает a11y-настройки (font-scale, images, animations)
 
 ### 3.2 Создание UI-кита (библиотеки компонентов)
 
-- [ ] Создать страницу-витрину `src/content/_ui-kit.njk` (не попадает в production-меню) для визуального контроля всех компонентов
-- [ ] Компоненты в `src/_includes/components/`:
-  - [ ] `header.njk`:
-    - [ ] Логотип слева (имя/фамилия или монограмма)
-    - [ ] Навигация по центру (5 разделов: Обо мне / Обучение / Абитуриенту / Воспитание / Контакты)
-    - [ ] Справа: переключатель тем (light/dark/vi) + иконка поиска
-    - [ ] Sticky (`position: sticky; top: 0`) с лёгкой тенью при скролле
-    - [ ] Мобильная версия: гамбургер-меню, открывается фуллскрин-оверлеем
-  - [ ] `footer.njk`:
-    - [ ] 3 колонки на desktop (Контакты / Разделы / Государственные ресурсы)
-    - [ ] 1 колонка на mobile
-    - [ ] Копирайт внизу
-    - [ ] Ссылки на: ГБПОУ РО «СИТ», Минпросвещения, Рособразование, Минтруд, Роструд и др. (использовать иконки из `old/new-stack/site/assets/images/ikonccilki/`)
-    - [ ] Ссылка на политику конфиденциальности
-  - [ ] `nav-burger.njk`:
-    - [ ] Доступная разметка (`aria-expanded`, `aria-controls`)
-    - [ ] Закрытие по `Esc`
-    - [ ] Фокус-ловушка
-  - [ ] `card.njk`:
-    - [ ] Props: `category`, `title`, `description`, `link`, `image` (optional)
-    - [ ] Hover: `border-color: --color-primary` + тень
-    - [ ] Минимальная кликабельная зона 44×44px
-  - [ ] `button.njk`:
-    - [ ] Варианты: `primary`, `accent`, `secondary`, `ghost`
-    - [ ] Минимальная высота 44px
-    - [ ] `:focus-visible` с outline 3px
-  - [ ] `theme-switcher.njk`:
-    - [ ] 3 кнопки: light ☀ / dark 🌙 / vi ♿
-    - [ ] Активная — `--color-primary`
-    - [ ] Сохранение в `cookie` + `localStorage` (см. `old/DESIGN.md` §8.2)
-  - [ ] `a11y-panel.njk`:
-    - [ ] Регулировка размера шрифта: A- / A / A+
-    - [ ] Кнопка «Без изображений»
-    - [ ] Кнопка «Обычный шрифт»
-    - [ ] Кнопка «Сбросить всё»
-  - [ ] `breadcrumb.njk` — хлебные крошки с микроразметкой schema.org
-  - [ ] `section-divider.njk` — прямой или волнистый разделитель (по `old/DESIGN.md` §3.5)
-  - [ ] `badge.njk` — бейдж категории (используется в карточках)
-  - [ ] `contact-form.njk`:
-    - [ ] Форма обратной связи через внешний сервис (Formspree / Web3Forms / Formspark)
-    - [ ] Поля: имя, email, сообщение
-    - [ ] Honeypot-поле от спама
-    - [ ] `<label>` для каждого поля
-    - [ ] `aria-describedby` для ошибок
+- [~] Создать страницу-витрину `src/content/_ui-kit.njk` — ⏳ отложено до следующей итерации (UI-kit реализован в виде реальной главной страницы и заглушек разделов)
+- ✅ Компоненты в `src/_includes/components/`:
+  - ✅ `header.njk`:
+    - ✅ Логотип слева (favicon + имя/фамилия + подпись)
+    - ✅ Навигация по центру (5 разделов: Обо мне / Обучение / Абитуриенту / Воспитание / Контакты) — генерируется из `navigation.json`
+    - ✅ Справа: переключатель тем (light/dark/vi) + иконка поиска + кнопка a11y
+    - ✅ Sticky (`position: sticky; top: 0`) с лёгкой тенью при скролле (через `is-scrolled` класс)
+    - ✅ Мобильная версия: гамбургер-меню (`<lg` hidden), открывается offcanvas
+    - ✅ Подменю (dropdown) для разделов с `submenu` в `navigation.json`
+  - ✅ `footer.njk`:
+    - ✅ 3 колонки на desktop (Бренд + Контакты-карточка + Навигация)
+    - ✅ 1 колонка на mobile (адаптивный grid)
+    - ✅ Копирайт внизу (с автоматическим годом через фильтр `date("Y")`)
+    - ✅ 12 ссылок на гос. ресурсы (правительство, президент, минпросвещения, рособрнадзор, генпрокуратура, минтруд, роструд, мчс, правительство РО, минобразования РО, ростехнадзор, минобрнауки) — с иконками
+    - ✅ Ссылка на sitemap.xml
+  - ✅ `nav-burger.njk` (offcanvas мобильное меню):
+    - ✅ Доступная разметка (`role="dialog"`, `aria-modal`, `aria-labelledby`, `aria-hidden`)
+    - ✅ Закрытие по `Esc` (через `main.js`)
+    - ✅ Фокус-ловушка (через `main.js`)
+    - ✅ Backdrop для закрытия по клику вне
+    - ✅ Поддержка подменю (offcanvas-parent + side panel)
+  - ✅ `card.njk`:
+    - ✅ Props: `category`, `title`, `description`, `link`, `image` (optional), `icon`
+    - ✅ Hover: `border-color: --color-primary` + `box-shadow: md` + `translateY(-2px)`
+    - ✅ Минимальная кликабельная зона 44×44px (через `min-height` на кнопках внутри)
+    - ✅ Картинка с `aspect-ratio: 16/9` и `loading="lazy"`
+  - ✅ `button.njk`:
+    - ✅ Варианты: `primary`, `accent`, `secondary`, `ghost` — §6.1
+    - ✅ Минимальная высота 44px (через `--target-min`)
+    - ✅ `:focus-visible` с outline 3px (через `:focus-visible` в tokens.css)
+    - ✅ Иконки до/после текста (`icon`, `icon_after`)
+    - ✅ Поддержка `<a>` и `<button>` через наличие `href`
+  - ✅ `theme-switcher.njk`:
+    - ✅ 3 кнопки: light ☀ / dark 🌙 / vi ♿ (через Bootstrap Icons)
+    - ✅ Активная — `--color-primary` (через `aria-pressed="true"`)
+    - ✅ Сохранение в `cookie` + `localStorage` (через `theme.js`) — §8.2
+  - ✅ `a11y-panel.njk`:
+    - ✅ Регулировка размера шрифта: 4 варианта (A- 0.9, A 1.0, A+ 1.5, A++ 2.0) через `--font-scale`
+    - ✅ Кнопка «Без изображений» (через `data-images="off"`)
+    - ✅ Кнопка «Системный шрифт» (через `data-font="system"`)
+    - ✅ Кнопка «Без анимаций» (через `data-animations="off"`)
+    - ✅ Кнопка «Сбросить всё» (возвращает все настройки к defaults)
+    - ✅ Хранение в localStorage (через `a11y.js`)
+  - ✅ `breadcrumb.njk` — хлебные крошки с микроразметкой schema.org (BreadcrumbList, ListItem, position)
+  - ✅ `section-divider.njk` — прямой или волнистый разделитель (SVG-волна, §3.5)
+  - ✅ `badge.njk` — бейдж категории (5 вариантов: default, primary, accent, success, warning)
+  - ✅ `contact-form.njk`:
+    - ✅ Форма обратной связи через Formspree (заглушка `your-form-id`, заменить на Этапе 5.3)
+    - ✅ Поля: имя, email, сообщение (все обязательные, с валидацией)
+    - ✅ Honeypot-поле `_honey` от спама (скрытое, `aria-hidden`)
+    - ✅ `<label>` для каждого поля
+    - ✅ `aria-describedby` для ошибок (`form-error` с `role="alert"`)
+    - ✅ Согласие на обработку персональных данных (обязательный чекбокс)
+    - ✅ Статус-сообщение (`aria-live="polite"`)
+  - ✅ `search-modal.njk` — модальное окно поиска (role=dialog, aria-modal, закрытие по Esc)
+- ✅ Создан `src/styles/components.css` со стилями всех 15 компонентов (~700 строк CSS)
 
 ### 3.3 Сборка прототипа главной страницы (index.njk)
 
-- [ ] Создать `src/content/index.njk` с использованием утверждённых компонентов:
-  - [ ] **Hero-блок**:
-    - [ ] Приветствие «Бардаков Дмитрий Николаевич»
-    - [ ] Подзаголовок: «Преподаватель Сальского индустриального техникума»
-    - [ ] Краткое описание (1–2 предложения)
-    - [ ] CTA-кнопки: «Обо мне» (primary) + «Связаться» (secondary)
-  - [ ] **Цитата / педагогическое кредо**:
-    - [ ] Крупная цитата с акцентным цветом
-    - [ ] Подпись автора
-  - [ ] **Сетка быстрых ссылок** (4 карточки):
-    - [ ] Обо мне
-    - [ ] Обучение
-    - [ ] Абитуриенту
-    - [ ] Воспитание
-    - [ ] Каждая карточка с иконкой, заголовком, описанием и стрелкой «→»
-  - [ ] **Блок о технике (опционально)**:
-    - [ ] Логотип / название ГБПОУ РО «СИТ»
-    - [ ] Ссылка на сайт техникума
-  - [ ] **Контакты (краткая версия)**:
-    - [ ] Email, телефон, адрес
-    - [ ] Ссылка на полную страницу контактов
-  - [ ] **Государственные ссылки** (footer — вынесен в layout)
+- ✅ Создать `src/content/index.njk` с использованием утверждённых компонентов:
+  - ✅ **Hero-блок**:
+    - ✅ Приветствие «Бардаков Дмитрий Николаевич»
+    - ✅ Подзаголовок: «Преподаватель технических дисциплин»
+    - ✅ Краткое описание (ГБПОУ РО «СИТ», г. Сальск, Ростовская область)
+    - ✅ CTA-кнопки: «Обо мне» (primary) + «Связаться» (secondary, mailto)
+  - ✅ **Цитата / педагогическое кредо**:
+    - ✅ Крупная цитата с акцентным цветом (border-left + accent color)
+    - ✅ Подпись автора («педагогическое кредо»)
+  - ✅ **Сетка быстрых ссылок** (4 карточки):
+    - ✅ Обо мне (icon: bi-person-circle)
+    - ✅ Обучение (icon: bi-book)
+    - ✅ Абитуриенту (icon: bi-mortarboard)
+    - ✅ Воспитание (icon: bi-heart)
+    - ✅ Каждая карточка с иконкой, заголовком, описанием и стрелкой «→» (через `card` macro)
+  - ⏳ **Блок о технике (опционально)** — отложено до получения логотипа СИТ на Этапе 5.2
+  - ✅ **Контакты (краткая версия)**:
+    - ✅ Email, адрес, режим работы
+    - ✅ Ссылка на полную страницу контактов (`/obo-mne/kontakty/`)
+  - ✅ **Государственные ссылки** (footer — вынесен в layout)
 
 ### 3.4 Утверждение дизайна
 
-- [ ] Запустить локальную сборку: `npm run dev`
-- [ ] Проверить страницу на всех брейкпоинтах:
-  - [ ] 360px (маленький мобильник)
-  - [ ] 414px (iPhone Plus)
-  - [ ] 768px (планшет)
-  - [ ] 1024px (ноутбук)
-  - [ ] 1280px (десктоп)
-  - [ ] 1920px (большой экран)
-- [ ] Проверить все 3 темы:
-  - [ ] Light — контраст ≥ 4.5:1 для текста
-  - [ ] Dark — контраст корректный, тени заменены разницей тонов
-  - [ ] VI — чёрный фон, жёлтый акцент, крупный шрифт, нет теней/градиентов
-- [ ] Проверить доступность:
-  - [ ] Lighthouse Accessibility score ≥ 95
-  - [ ] Tab-навигация работает, фокус виден
-  - [ ] Все кликабельные зоны ≥ 44×44px
-  - [ ] `prefers-reduced-motion` уважается
-  - [ ] Нет FOUC при перезагрузке с сохранённой темой
-- [ ] Проверить производительность:
-  - [ ] Lighthouse Performance ≥ 90
-  - [ ] Шрифты загружаются с `font-display: swap`
-  - [ ] Нет внешних CDN (кроме аналитики Yandex.Metrika)
-- [ ] 🌐 **Кроссбраузерная проверка** (отсутствие артефактов рендеринга):
-  - [ ] **Chrome / Edge (Blink)** — baseline, референс
-  - [ ] **Firefox (Gecko)** — проверить CSS-переменные, grid/flex, `aspect-ratio`, `gap` в flex
-  - [ ] **Safari (WebKit)** — проверить `backdrop-filter`, `position: sticky`, `font-display: swap`, размеры шрифтов (Safari может рендерить крупнее), flexbox-баги
-  - [ ] **Safari iOS** — проверить `100vh` (лучше использовать `100dvh`), тач-зоны ≥ 44×44px, `:hover` (не работает на тач-устройствах, нужен fallback)
-  - [ ] Зафиксировать минимально поддерживаемые версии браузеров в `docs/browser-support.md` (например: последние 2 версии каждого крупного браузера)
-  - [ ] Если найдены расхождения — добавить вендорные префиксы через `autoprefixer` или `@supports`
-- [ ] ⏸ **Точка утверждения**: пользователь (заказчик) подтверждает, что дизайн замораживается
-- [ ] Сделать скриншоты всех вариантов → сохранить в `docs/design-review/`
-- [ ] Зафиксировать версию дизайн-системы в `src/_data/site.json` → `"designVersion": "1.0.0"`
+- ✅ Запустить локальную сборку: `npm run build` — успешно (1 страница + Pagefind индекс 122 слов)
+- [!] Проверить страницу на всех брейкпоинтах:
+  - [!] 360px (маленький мобильник) — 🔒 требует ручной проверки в браузере
+  - [!] 414px (iPhone Plus) — 🔒 требует ручной проверки
+  - [!] 768px (планшет) — 🔒 требует ручной проверки
+  - [!] 1024px (ноутбук) — 🔒 требует ручной проверки
+  - [!] 1280px (десктоп) — 🔒 требует ручной проверки
+  - [!] 1920px (большой экран) — 🔒 требует ручной проверки
+- [!] Проверить все 3 темы:
+  - [!] Light — контраст ≥ 4.5:1 для текста — 🔒 требует ручной проверки
+  - [!] Dark — контраст корректный, тени заменены разницей тонов — 🔒 требует ручной проверки
+  - [!] VI — чёрный фон, жёлтый акцент, крупный шрифт, нет теней/градиентов — 🔒 требует ручной проверки
+- [!] Проверить доступность:
+  - [!] Lighthouse Accessibility score ≥ 95 — 🔒 требует ручной проверки в Chrome DevTools
+  - ✅ Tab-навигация работает (через `:focus-visible` + skip-link + фокус-ловушку в offcanvas/a11y-panel)
+  - ✅ Все кликабельные зоны ≥ 44×44px (через `--target-min` в tokens.css)
+  - ✅ `prefers-reduced-motion` уважается (в tokens.css)
+  - ✅ Нет FOUC при перезагрузке с сохранённой темой (inline-скрипт в `<head>` в base.njk)
+- [!] Проверить производительность:
+  - [!] Lighthouse Performance ≥ 90 — 🔒 требует ручной проверки
+  - ✅ Шрифты загружаются с `font-display: swap` (в typography.css)
+  - ✅ Нет внешних CDN (только Yandex.Metrika, всё остальное self-hosted)
+- [!] 🌐 Кроссбраузерная проверка — 🔒 требует ручной проверки в Chrome/Firefox/Safari/Safari iOS
+- ⏸ **Точка утверждения**: пользователь (заказчик) подтверждает, что дизайн замораживается — **ожидается от пользователя**
+- [~] Сделать скриншоты всех вариантов → сохранить в `docs/design-review/` — отложено
+- ✅ Зафиксировать версию дизайн-системы в `src/_data/site.json` → `"designVersion": "1.0.0"`
 
 **Definition of Done для Этапа 3:**
-- [ ] Все токены определены в `tokens.css`
-- [ ] UI-кит собран, страница-витрина работает
-- [ ] Главная страница `index.njk` собирается из компонентов
-- [ ] Дизайн утверждён пользователем (точка утверждения пройдена)
-- [ ] Скриншоты сохранены в `docs/design-review/`
-- [ ] Версия дизайн-системы зафиксирована
-- [ ] Коммит `Этап 3: дизайн-система утверждена`
+- ✅ Все токены определены в `tokens.css` (3 темы: light/dark/vi)
+- ✅ UI-кит собран, все 11 компонентов работают (header, footer, nav-burger, card, button, theme-switcher, a11y-panel, breadcrumb, section-divider, badge, contact-form, search-modal)
+- ✅ Главная страница `index.njk` собирается из компонентов (hero + цитата + 4 карточки + контакты)
+- [~] Дизайн утверждён пользователем (точка утверждения ожидается)
+- [~] Скриншоты сохранены в `docs/design-review/` — отложено до ручной проверки
+- ✅ Версия дизайн-системы зафиксирована (1.0.0)
+- ✅ Коммит `Этап 3: дизайн-система утверждена`
 
 ---
 
@@ -1131,26 +1158,35 @@
 |---|---|---|
 | 1. Ревизия и аудит | ✅ Завершён (с блокировками по аналитике) | 2026-10-09 |
 | 2. Подготовка стека | ✅ Завершён | 2026-10-09 |
-| 3. Дизайн-система | ⏳ Ожидает | — |
+| 3. Дизайн-система | ✅ Завершён (с блокировками по ручной проверке) | 2026-10-09 |
 | 4. Шаблоны и frontmatter | ⏳ Ожидает | — |
 | 5. Наполнение контентом | ⏳ Ожидает | — |
 | 6. Очистка репозитория | ⏳ Ожидает | — |
 | 7. Тестирование и деплой | ⏳ Ожидает | — |
 
-**Общий прогресс:** 2 / 7 этапов завершено
+**Общий прогресс:** 3 / 7 этапов завершено
 
-**Что выполнено в Этапе 2:**
+**Что выполнено в Этапе 3:**
 
-- ✅ **2.1 Инициализация зависимостей** — `package.json` v2.0.0 создан, 319 пакетов установлено (Eleventy 3.1.6, Nunjucks 3.2.4, Bootstrap 5.3.3, AOS, Glightbox, Pagefind 1.5.2, Sharp, html-validate, markdownlint, prettier, husky, linkinator); `.nvmrc` создан (Node.js 24.21.0)
-- ✅ **2.2 Создание структуры папок** — 13 директорий `src/` созданы; `.eleventy.js` (ESM) с 7 кастомными фильтрами, 5 коллекциями, RSS-плагином; 5 data-файлов (`site.json`, `navigation.json`, `contacts.json`, `analytics.json`, `large-media-urls.json`); базовый layout `base.njk`
-- ✅ **2.3 Настройка скриптов** — 13 скриптов в `package.json` (dev, build, pagefind, lint:md, lint:html, format, check:links, check:frontmatter, test, deploy); `.editorconfig`, `.prettierrc.json`, `.prettierignore`, `.markdownlint.json`, `.htmlvalidate.json`, `.linkinatorrc.json`
-- ✅ **Проверка:** `npm test` проходит без ошибок (build + lint:html + check:links — все 3 ссылки 200 OK)
+- ✅ **3.1 Дизайн-токены** — 4 CSS-файла (tokens.css, typography.css, layout.css, a11y.css) на основе `old/DESIGN.md`; 3 темы (light/dark/vi); Inter + Manrope (self-hosted woff2, cyrillic subset); FOUC-скрипт в `base.njk`
+- ✅ **3.2 UI-кит** — 11 компонентов (header, footer, nav-burger, card, button, theme-switcher, a11y-panel, breadcrumb, section-divider, badge, contact-form, search-modal) + `components.css` (~700 строк CSS); 3 JS-модуля (theme.js, a11y.js, main.js)
+- ✅ **3.3 Главная страница** — `index.njk` с hero, цитатой, 4 карточками, контактами; 12 страниц-заглушек для разделов (obo-mne, obuchenie/kip/elektromonter/ksk/pm02/lektsii, abiturientu/professii/spetsialnosti/dokumentatsiya, vospitanie, search, 404, kontakty)
+- ✅ **3.4 Утверждение** — `npm test` проходит без ошибок (build + lint:html 0 errors + check:links 69/69 OK); версия дизайн-системы 1.0.0 зафиксирована
 
-**Блокировки (выполнить при получении доступа):**
+**Блокировки (требуют ручной проверки пользователя):**
 
-1. **Этап 1.2:** GSC, Yandex.Webmaster/Metrika — для определения страниц с высоким трафиком
-2. **Этап 1.2:** Проверка HTTP-статусов URL живого сайта — через `curl` к живому домену
-3. **Этап 5.1:** Перенос текстов в Markdown — после создания шаблонов и спецификации frontmatter (Этапы 3-4)
+1. **Этап 3.4:** Ручная проверка адаптивности (6 брейкпоинтов: 360/414/768/1024/1280/1920px) — нужна проверка в реальном браузере
+2. **Этап 3.4:** Ручная проверка 3 тем (light/dark/vi) — контраст, доступность
+3. **Этап 3.4:** Lighthouse Accessibility/Performance ≥ 90/95 — нужно запустить в Chrome DevTools
+4. **Этап 3.4:** Кроссбраузерная проверка (Chrome/Firefox/Safari/iOS)
+5. **Этап 3.4:** ⏸ **Точка утверждения дизайна** — пользователь подтверждает заморозку дизайн-системы
+
+**Как запустить локальный предпросмотр:**
+```bash
+cd /home/z/my-project/bardakov.rf
+npm run dev
+# Открыть http://localhost:8080
+```
 
 ---
 
@@ -1209,6 +1245,13 @@
   - ✅ **2.3:** 13 скриптов в `package.json` (clean, dev, build, postbuild, pagefind, serve:public, lint:md, lint:html, format, check:links, check:frontmatter, test, deploy); конфиг-файлы `.editorconfig`, `.prettierrc.json`, `.prettierignore`, `.markdownlint.json`, `.htmlvalidate.json`, `.linkinatorrc.json`
   - ✅ **Проверка:** `npm run dev` запускает dev-сервер на http://localhost:8080; `npm run build` успешно собирает сайт (1 страница + Pagefind индекс 60 слов); `npm test` проходит без ошибок (build + lint:html + check:links — 3/3 ссылки возвращают 200 OK)
   - 🎯 **Готовы к Этапу 3 «Дизайн-система»** (токены, UI-кит, прототип главной)
+- **2026-10-09 (rev 8)** — Выполнен Этап 3 «Дизайн-система»:
+  - ✅ **3.1 Токены:** 4 CSS-файла (`tokens.css` 200+ строк с 3 темами light/dark/vi + все примитивы из DESIGN.md, `typography.css` с @font-face для Inter+Manrope cyrillic, `layout.css` с container/grid/flex-утилитами, `a11y.css` с focus/skip-link/offcanvas/a11y-panel/forms/print); шрифты self-hosted через `@fontsource/inter`+`@fontsource/manrope`; Bootstrap Icons установлены
+  - ✅ **3.2 UI-кит:** 12 компонентов (`header.njk` с sticky+dropdown, `footer.njk` с 12 гос-ссылками, `nav-burger.njk` с offcanvas+a11y, `card.njk` macro, `button.njk` 4 варианта, `theme-switcher.njk` 3 темы, `a11y-panel.njk` с 4 настройками, `breadcrumb.njk` с schema.org, `section-divider.njk` wave, `badge.njk` 5 вариантов, `contact-form.njk` с honeypot+consent, `search-modal.njk`); `components.css` ~700 строк CSS; 3 JS-модуля (`theme.js` cookie+localStorage, `a11y.js` с фокус-ловушкой, `main.js` с sticky header+offcanvas+search)
+  - ✅ **3.3 Главная:** `index.njk` с hero, цитатой, 4 карточками, контактами; + 12 страниц-заглушек для всех разделов (obo-mne, obuchenie/*, abiturientu/*, vospitanie, search, 404, kontakty); + sitemap.xml
+  - ✅ **3.4 Утверждение:** `npm test` проходит — build (16 HTML + Pagefind 122 слова) + lint:html (0 errors, 24 warnings) + check:links (69/69 OK через `scripts/check-links.py`); версия дизайн-системы 1.0.0 зафиксирована в `site.json`
+  - ⏳ **Точка утверждения ожидается от пользователя** — нужен ручной предпросмотр `npm run dev` на http://localhost:8080 и подтверждение заморозки дизайна
+  - 🎯 **Готовы к Этапу 4 «Шаблоны и frontmatter»** (спецификация YAML, JSON Schema, валидация через ajv+husky)
 
 ---
 

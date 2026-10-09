@@ -1,0 +1,100 @@
+{# a11y-panel.njk — Панель доступности
+   Источник: old/DESIGN.md §6.5
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Регулировки:
+   - Размер шрифта: A- / A / A+
+   - Без изображений
+   - Обычный шрифт (сброс к системному)
+   - Без анимаций
+   - Сбросить всё
+#}
+<div class="a11y-panel__backdrop" id="a11yBackdrop" aria-hidden="true"></div>
+
+<aside class="a11y-panel"
+       id="a11yPanel"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="a11yPanelTitle"
+       aria-hidden="true">
+  <div class="a11y-panel__header">
+    <h2 class="a11y-panel__title" id="a11yPanelTitle">
+      <i class="bi bi-eye" aria-hidden="true"></i>
+      Настройки доступности
+    </h2>
+    <button type="button"
+            class="close-btn"
+            aria-label="Закрыть панель"
+            data-action="close-a11y">
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="a11y-panel__body">
+
+    {# Размер шрифта === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Размер шрифта</h3>
+      <div class="a11y-font-controls" role="group" aria-label="Размер шрифта">
+        <button type="button" class="a11y-font-btn" data-font-scale="0.9" aria-label="Уменьшить шрифт">
+          <span style="font-size: 0.75rem;">A</span>
+          <span class="sr-only">Мелкий</span>
+        </button>
+        <button type="button" class="a11y-font-btn" data-font-scale="1" aria-label="Обычный шрифт" aria-pressed="true">
+          <span style="font-size: 0.875rem;">A</span>
+          <span class="sr-only">Обычный</span>
+        </button>
+        <button type="button" class="a11y-font-btn" data-font-scale="1.5" aria-label="Увеличенный шрифт">
+          <span style="font-size: 1.125rem;">A</span>
+          <span class="sr-only">Крупный</span>
+        </button>
+        <button type="button" class="a11y-font-btn" data-font-scale="2" aria-label="Очень крупный шрифт">
+          <span style="font-size: 1.5rem;">A</span>
+          <span class="sr-only">Очень крупный</span>
+        </button>
+      </div>
+    </section>
+
+    {# Изображения === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Изображения</h3>
+      <label class="a11y-toggle">
+        <input type="checkbox" id="a11yNoImages">
+        <span>Отключить изображения</span>
+      </label>
+    </section>
+
+    {# Шрифты === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Шрифты</h3>
+      <label class="a11y-toggle">
+        <input type="checkbox" id="a11ySystemFont">
+        <span>Использовать системный шрифт</span>
+      </label>
+    </section>
+
+    {# Анимации === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Анимации</h3>
+      <label class="a11y-toggle">
+        <input type="checkbox" id="a11yNoAnimations">
+        <span>Отключить анимации</span>
+      </label>
+    </section>
+
+    {# Тема === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Тема оформления</h3>
+      <p class="a11y-hint">Выберите подходящую тему:</p>
+      {% include "components/theme-switcher.njk" %}
+    </section>
+
+  </div>
+
+  <div class="a11y-panel__footer">
+    <button type="button" class="btn btn-secondary a11y-reset" data-action="reset-a11y">
+      <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+      Сбросить всё
+    </button>
+  </div>
+</aside>

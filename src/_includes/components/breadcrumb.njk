@@ -1,0 +1,39 @@
+{# breadcrumb.njk — Хлебные крошки с микроразметкой schema.org
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Использование:
+   {% include "components/breadcrumb.njk" %}
+
+   Или через макрос:
+   {% from "components/breadcrumb.njk" import breadcrumb %}
+   {{ breadcrumb([
+     { "title": "Главная", "url": "/" },
+     { "title": "Обучение", "url": "/obuchenie/" },
+     { "title": "КИП", "url": "/obuchenie/kip/" },
+     { "title": "Практическая работа №1" }
+   ]) }}
+#}
+{% macro breadcrumb(items) %}
+{% if items and items.length > 0 %}
+<nav class="breadcrumb" aria-label="Хлебные крошки">
+  <ol class="breadcrumb__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for item in items %}
+    <li class="breadcrumb__item"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem">
+      {% if not loop.last and item.url %}
+      <a href="{{ item.url }}" itemprop="item">
+        <span itemprop="name">{{ item.title }}</span>
+      </a>
+      <i class="bi bi-chevron-right breadcrumb__sep" aria-hidden="true"></i>
+      {% else %}
+      <span class="breadcrumb__current" aria-current="page" itemprop="name">{{ item.title }}</span>
+      {% endif %}
+      <meta itemprop="position" content="{{ loop.index }}">
+    </li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}
+{% endmacro %}

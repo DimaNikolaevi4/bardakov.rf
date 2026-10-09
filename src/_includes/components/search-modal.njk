@@ -1,0 +1,42 @@
+{# search-modal.njk — Модальное окно поиска
+   Источник: old/new-stack/site/assets/components/header.html
+   Создано: 2026-10-09 (Этап 3.2)
+   Доступность: role="dialog", aria-modal, фокус-ловушка
+#}
+<div class="search-modal"
+     id="searchModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="searchModalTitle"
+     aria-hidden="true">
+  <div class="search-modal__overlay" data-action="close-search"></div>
+  <div class="search-modal__dialog">
+    <button type="button"
+            class="search-modal__close close-btn"
+            aria-label="Закрыть поиск"
+            data-action="close-search">
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+    <h2 class="search-modal__heading" id="searchModalTitle">
+      <i class="bi bi-search" aria-hidden="true"></i>
+      Поиск по сайту
+    </h2>
+    <form class="search-modal__form" role="search" action="/search/" method="get">
+      <div class="search-modal__input-wrap">
+        <i class="bi bi-search search-modal__icon" aria-hidden="true"></i>
+        <input type="search"
+               name="q"
+               class="search-modal__input"
+               id="searchModalInput"
+               placeholder="Введите запрос..."
+               autocomplete="off"
+               autocorrect="off"
+               spellcheck="false"
+               aria-label="Поисковый запрос">
+        <button type="submit" class="btn btn-primary">
+          Найти
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+---
+title: "ПМ.02 — Лекции"
+description: "Лекции по профессиональному модулю ПМ.02."
+layout: base.njk
+permalink: /obuchenie/pm02/lektsii/index.html
+date: 2026-10-09
+section: obuchenie
+order: 4
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Обучение", "url": "/obuchenie/" },
+    { "title": "ПМ.02 Лекции" }
+  ]) }}
+
+  <h1>ПМ.02 — Лекции</h1>
+  <p class="lead">Лекции по профессиональному модулю ПМ.02.</p>
+
+  <div class="content-placeholder" style="background: var(--color-surface-alt); padding: var(--space-8); border-radius: var(--radius-lg); border: 2px dashed var(--color-border);">
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">📝 Контент будет добавлен на Этапе 5.1</p>
+  </div>
+</div>

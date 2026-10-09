@@ -1,0 +1,124 @@
+{# footer.njk — Подвал сайта
+   Источник: old/DESIGN.md §6.6 + old/new-stack/site/assets/components/footer.html
+   Создано: 2026-10-09 (Этап 3.2)
+#}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+
+    {# === Верхний блок === #}
+    <div class="footer-top">
+
+      {# Бренд === #}
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="На главную">
+          <div class="footer-logo-text">
+            <span class="footer-logo-org">{{ site.footerText }}</span>
+          </div>
+        </a>
+        <p class="footer-tagline">{{ site.tagline }}</p>
+        <div class="footer-meta">
+          <div class="footer-meta-item">
+            <i class="bi bi-mortarboard-fill" aria-hidden="true"></i>
+            <span>{{ site.position }}</span>
+          </div>
+          <div class="footer-meta-item">
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+            <span>{{ site.city }}, {{ site.region }}</span>
+          </div>
+        </div>
+        <div class="footer-social" aria-label="Контакты">
+          <a href="mailto:{{ contacts.contacts.email }}" class="footer-social-link" aria-label="Электронная почта">
+            <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+            <span class="sr-only">Электронная почта</span>
+          </a>
+          <a href="/search/" class="footer-social-link" aria-label="Поиск по сайту">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <span class="sr-only">Поиск по сайту</span>
+          </a>
+        </div>
+      </div>
+
+      {# Карточка контакта === #}
+      <div class="footer-corp-wrap">
+        <div class="footer-corp-card">
+          <div class="footer-corp-header">
+            <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
+            <h4 class="footer-corp-title">{{ contacts.person.full_name }}</h4>
+          </div>
+          <p class="footer-corp-address">
+            <i class="bi bi-building" aria-hidden="true"></i>
+            <span>{{ contacts.person.organization }}, {{ contacts.person.city }}</span>
+          </p>
+          <ul class="footer-corp-phones">
+            <li>
+              <span class="footer-phone-label">Электронная почта</span>
+              <a href="mailto:{{ contacts.contacts.email }}" class="footer-phone-link">{{ contacts.contacts.email_display }}</a>
+            </li>
+            <li>
+              <span class="footer-phone-label">Режим работы</span>
+              <span class="footer-phone-link">{{ contacts.contacts.work_hours }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {# Навигация === #}
+      <nav class="footer-nav" aria-label="Навигация в подвале">
+        {% for block in navigation.footer_nav %}
+        <div class="footer-nav-block">
+          <h4 class="footer-heading">{{ block.title }}</h4>
+          <ul class="footer-links">
+            {% for link in block.links %}
+            <li>
+              <a href="{{ link.url }}">
+                <i class="bi {{ link.icon }}" aria-hidden="true"></i>{{ link.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </nav>
+
+    </div>
+
+    {# === Официальные ресурсы === #}
+    <section class="footer-resources" aria-labelledby="footer-resources-title">
+      <h4 id="footer-resources-title" class="footer-heading footer-resources-title">
+        Официальные ресурсы
+      </h4>
+      <ul class="footer-resources-grid">
+        {% for link in navigation.government_links %}
+        <li>
+          <a href="{{ link.url }}"
+             target="_blank"
+             rel="noopener"
+             class="footer-resource"
+             title="{{ link.title }}">
+            <span class="footer-resource-icon">
+              <img src="/assets/images/ikonccilki/{{ link.icon }}"
+                   alt="{{ link.alt }}"
+                   loading="lazy"
+                   decoding="async"
+                   width="48" height="48">
+            </span>
+            <span class="footer-resource-text">{{ link.short_title }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    {# === Нижний блок === #}
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        {% set year = "now" | date("Y") %}
+        {{ site.copyright | replace("{year}", year) }}
+      </p>
+      <div class="footer-bottom-links">
+        <a href="/sitemap.xml">Карта сайта</a>
+      </div>
+    </div>
+
+  </div>
+</footer>

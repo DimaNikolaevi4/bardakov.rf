@@ -1,0 +1,15 @@
+{# badge.njk — Бейдж категории
+   Источник: old/DESIGN.md §6.2
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Использование:
+   {% from "components/badge.njk" import badge %}
+   {{ badge({ "text": "Новое", "variant": "accent" }) }}
+#}
+{% macro badge(params) %}
+  {% set variant = params.variant or "default" %}
+  <span class="badge badge--{{ variant }}{% if params.modifier %} {{ params.modifier }}{% endif %}">
+    {% if params.icon %}<i class="bi {{ params.icon }}" aria-hidden="true"></i> {% endif %}
+    {{ params.text }}
+  </span>
+{% endmacro %}

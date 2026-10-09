@@ -1,0 +1,162 @@
+---
+title: "Главная"
+description: "Персональный сайт преподавателя Бардакова Дмитрия Николаевича. Методические материалы, лекции и учебные пособия для студентов технических специальностей ГБПОУ РО «СИТ»."
+layout: base.njk
+permalink: /
+date: 2026-10-09
+section: home
+order: 1
+templateEngineOverride: njk
+---
+
+{% from "components/button.njk" import button %}
+{% from "components/card.njk" import card %}
+{% from "components/section-divider.njk" import section_divider %}
+
+{# === HERO-БЛОК === #}
+<section class="hero">
+  <div class="container">
+    <p class="hero__eyebrow">Персональный сайт преподавателя</p>
+    <h1 class="hero__title">Бардаков Дмитрий Николаевич</h1>
+    <p class="hero__subtitle">Преподаватель технических дисциплин</p>
+    <p class="hero__description">
+      ГБПОУ РО «Сальский индустриальный техникум» (СИТ),
+      г. Сальск, Ростовская область.
+      Методические материалы, лекции и практические работы
+      для студентов технических специальностей.
+    </p>
+    <div class="hero__actions">
+      {{ button({
+        "text": "Обо мне",
+        "href": "/obo-mne/",
+        "variant": "primary",
+        "icon": "bi-person-circle"
+      }) }}
+      {{ button({
+        "text": "Связаться",
+        "href": "mailto:" ~ contacts.contacts.email,
+        "variant": "secondary",
+        "icon": "bi-envelope"
+      }) }}
+    </div>
+  </div>
+</section>
+
+{{ section_divider({ "type": "wave" }) }}
+
+{# === ЦИТАТА / ПЕДАГОГИЧЕСКОЕ КРЕДО === #}
+<section class="section section-sm">
+  <div class="container container-md">
+    <blockquote>
+      <p>
+        «Образование — это не наполнение сосуда,
+        а зажигание огня.»
+      </p>
+      <cite>педагогическое кредо</cite>
+    </blockquote>
+  </div>
+</section>
+
+{# === СЕТКА БЫСТРЫХ ССЫЛОК === #}
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-8">Разделы сайта</h2>
+    <p class="lead text-center mx-auto" style="max-width: 640px;">
+      Материалы для студентов, абитуриентов и родителей.
+      Выберите интересующий вас раздел.
+    </p>
+
+    <div class="quick-links">
+      {{ card({
+        "category": "Раздел",
+        "title": "Обо мне",
+        "description": "Биография, методическая работа, достижения, хобби и контакты преподавателя.",
+        "link": "/obo-mne/",
+        "icon": "bi-person-circle"
+      }) }}
+
+      {{ card({
+        "category": "Раздел",
+        "title": "Обучение",
+        "description": "Учебные материалы по дисциплинам: КИП, КСК, электромонтёр, ПМ.02. Лекции и практические работы.",
+        "link": "/obuchenie/",
+        "icon": "bi-book"
+      }) }}
+
+      {{ card({
+        "category": "Раздел",
+        "title": "Абитуриенту",
+        "description": "Профессии и специальности ГБПОУ РО «СИТ». Документация для поступления.",
+        "link": "/abiturientu/",
+        "icon": "bi-mortarboard"
+      }) }}
+
+      {{ card({
+        "category": "Раздел",
+        "title": "Воспитание",
+        "description": "Материалы для родителей и студентов. «Разговоры о важном». Советы и рекомендации.",
+        "link": "/vospitanie/",
+        "icon": "bi-heart"
+      }) }}
+    </div>
+  </div>
+</section>
+
+{{ section_divider({ "type": "wave" }) }}
+
+{# === КРАТКИЕ КОНТАКТЫ === #}
+<section class="section section-sm">
+  <div class="container container-md">
+    <h2 class="text-center mb-8">Контакты</h2>
+
+    <div class="grid grid-2">
+      <div>
+        <h3 class="mb-2">
+          <i class="bi bi-person-badge-fill" aria-hidden="true"></i>
+          Преподаватель
+        </h3>
+        <p>{{ contacts.person.full_name }}</p>
+        <p class="text-sm" style="color: var(--color-text-muted);">
+          {{ contacts.person.position }}
+        </p>
+        <p class="text-sm" style="color: var(--color-text-muted);">
+          {{ contacts.person.organization }}
+        </p>
+      </div>
+
+      <div>
+        <h3 class="mb-2">
+          <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+          Адрес
+        </h3>
+        <p>{{ contacts.person.city }}, {{ contacts.person.region }}</p>
+        <p class="text-sm" style="color: var(--color-text-muted);">
+          {{ contacts.person.country }}
+        </p>
+
+        <h3 class="mt-6 mb-2">
+          <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+          Email
+        </h3>
+        <p>
+          <a href="mailto:{{ contacts.contacts.email }}">{{ contacts.contacts.email_display }}</a>
+        </p>
+
+        <h3 class="mt-6 mb-2">
+          <i class="bi bi-clock-fill" aria-hidden="true"></i>
+          Режим работы
+        </h3>
+        <p>{{ contacts.contacts.work_hours }}</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      {{ button({
+        "text": "Все контакты",
+        "href": "/obo-mne/kontakty/",
+        "variant": "secondary",
+        "icon_after": "bi-arrow-right"
+      }) }}
+    </div>
+  </div>
+</section>

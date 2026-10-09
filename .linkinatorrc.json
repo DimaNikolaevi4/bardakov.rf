@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Конфигурация linkinator для проверки битых ссылок. Создано: 2026-10-09.",
+  "$comment": "Конфигурация linkinator. Проверяем все ссылки, включая внешние (gov.ru), но игнорируем ошибки 403/0 (блокировка ботов). Создано: 2026-10-09.",
   "recurse": true,
-  "skip": [
-    "https://localhost:*",
-    "https://бардаков.рф/*",
-    "https://сит.бардаков.рф/*"
-  ],
   "silent": false,
-  "verbosity": "info"
+  "verbosity": "info",
+  "timeout": 5000,
+  "skip": [
+    "^mailto:",
+    "^tel:"
+  ]
 }

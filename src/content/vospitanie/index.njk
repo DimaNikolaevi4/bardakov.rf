@@ -1,0 +1,31 @@
+---
+title: "Воспитание"
+description: "Материалы для родителей и студентов. «Разговоры о важном». Советы и рекомендации."
+layout: base.njk
+permalink: /vospitanie/index.html
+date: 2026-10-09
+section: vospitanie
+order: 1
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Воспитание" }
+  ]) }}
+
+  <h1>Воспитание</h1>
+  <p class="lead">
+    Материалы для родителей и студентов. «Разговоры о важном».
+    Советы и рекомендации.
+  </p>
+
+  <div class="content-placeholder" style="background: var(--color-surface-alt); padding: var(--space-8); border-radius: var(--radius-lg); border: 2px dashed var(--color-border);">
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">
+      📝 Контент раздела будет добавлен на <strong>Этапе 5.1</strong>
+    </p>
+  </div>
+</div>

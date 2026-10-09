@@ -1,0 +1,48 @@
+{# button.njk — Кнопка
+   Источник: old/DESIGN.md §6.1
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Варианты: primary, accent, secondary, ghost
+
+   Использование через макрос:
+   {% from "components/button.njk" import button %}
+   {{ button({
+     "text": "Связаться",
+     "href": "/obo-mne/kontakty/",
+     "variant": "primary",
+     "icon": "bi-envelope"
+   }) }}
+
+   Или как <button>:
+   {{ button({
+     "text": "Отправить",
+     "type": "submit",
+     "variant": "primary"
+   }) }}
+#}
+{% macro button(params) %}
+  {% set variant = params.variant or "primary" %}
+  {% if params.href %}
+  <a href="{{ params.href }}"
+     class="btn btn-{{ variant }}{% if params.modifier %} {{ params.modifier }}{% endif %}"
+     {% if params.external %}target="_blank" rel="noopener"{% endif %}
+     {% if params.download %}download{% endif %}>
+    {% if params.icon %}<i class="bi {{ params.icon }}" aria-hidden="true"></i> {% endif %}
+    <span>{{ params.text }}</span>
+    {% if params.icon_after %}<i class="bi {{ params.icon_after }}" aria-hidden="true"></i>{% endif %}
+  </a>
+  {% else %}
+  <button type="{{ params.type or 'button' }}"
+          class="btn btn-{{ variant }}{% if params.modifier %} {{ params.modifier }}{% endif %}"
+          {% if params.id %}id="{{ params.id }}"{% endif %}
+          {% if params.disabled %}disabled{% endif %}
+          {% if params.ariaLabel %}aria-label="{{ params.ariaLabel }}"{% endif %}
+          {% if params.ariaExpanded is defined %}aria-expanded="{{ params.ariaExpanded }}"{% endif %}
+          {% if params.ariaControls %}aria-controls="{{ params.ariaControls }}"{% endif %}
+          {% if params.dataAction %}data-action="{{ params.dataAction }}"{% endif %}>
+    {% if params.icon %}<i class="bi {{ params.icon }}" aria-hidden="true"></i> {% endif %}
+    <span>{{ params.text }}</span>
+    {% if params.icon_after %}<i class="bi {{ params.icon_after }}" aria-hidden="true"></i>{% endif %}
+  </button>
+  {% endif %}
+{% endmacro %}

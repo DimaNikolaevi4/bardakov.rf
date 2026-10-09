@@ -1,0 +1,27 @@
+{# section-divider.njk — Разделитель секций
+   Источник: old/DESIGN.md §3.5 (Геометрические детали внутри граней)
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Виды:
+   - "straight" (по умолчанию) — прямая линия
+   - "wave" — волнистый разделитель (амплитуда 8-16px, не под текстом)
+   - "gradient" — градиентная линия
+
+   Использование:
+   {% from "components/section-divider.njk" import section_divider %}
+   {{ section_divider({ "type": "wave" }) }}
+#}
+{% macro section_divider(params) %}
+  {% set type = params.type or "straight" %}
+  <div class="section-divider section-divider--{{ type }}"{% if params.modifier %} {{ params.modifier }}{% endif %} aria-hidden="true">
+    {% if type == "wave" %}
+    <svg class="section-divider__wave"
+         viewBox="0 0 1440 24"
+         preserveAspectRatio="none"
+         aria-hidden="true">
+      <path d="M0,12 C240,4 480,20 720,12 C960,4 1200,20 1440,12 L1440,24 L0,24 Z"
+            fill="currentColor"></path>
+    </svg>
+    {% endif %}
+  </div>
+{% endmacro %}

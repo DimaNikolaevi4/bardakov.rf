@@ -1,0 +1,29 @@
+---
+title: "Поиск"
+description: "Поиск по сайту бардаков.рф"
+layout: base.njk
+permalink: /search/index.html
+date: 2026-10-09
+section: search
+templateEngineOverride: njk
+---
+
+<div class="container container-md">
+  <h1>Поиск по сайту</h1>
+
+  <div id="search"></div>
+
+  <noscript>
+    <p>Для использования поиска включите JavaScript в браузере.</p>
+  </noscript>
+</div>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof PagefindUI !== 'undefined') {
+      new PagefindUI({ element: "#search", showSubResults: true });
+    }
+  });
+</script>

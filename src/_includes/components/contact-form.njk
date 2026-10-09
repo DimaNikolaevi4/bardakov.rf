@@ -1,0 +1,108 @@
+{# contact-form.njk — Форма обратной связи
+   Источник: old/DESIGN.md §3.3
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Использует внешний сервис для обработки формы:
+   - Formspree (https://formspree.io/) — рекомендуется
+   - Web3Forms (https://web3forms.com/)
+   - Formspark (https://formspark.io/)
+
+   Поля:
+   - name (обязательное)
+   - email (обязательное)
+   - message (обязательное)
+   - _honey (honeypot — скрытое поле от спама)
+#}
+{# TODO: на Этапе 5.3 заменить FORMSPREE_ID на реальный ID после регистрации
+   на https://formspree.io/. До этого момента форма будет тестовой. #}
+{% set formAction = "https://formspree.io/f/your-form-id" %}
+
+<form class="contact-form"
+      action="{{ formAction }}"
+      method="POST"
+      enctype="multipart/form-data"
+      novalidate>
+  <input type="hidden" name="_subject" value="Новое сообщение с сайта бардаков.рф">
+  <input type="hidden" name="_language" value="ru">
+  <input type="hidden" name="_template" value="table">
+
+  {# Honeypot — скрытое поле, которое боты заполнят, а люди — нет #}
+  <div class="contact-form__honeypot" aria-hidden="true" style="position: absolute; left: -9999px;">
+    <label>Не заполняйте это поле<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+  </div>
+
+  <div class="contact-form__row">
+    <div class="form-group">
+      <label for="contactName">
+        Ваше имя
+        <span class="required" aria-hidden="true">*</span>
+      </label>
+      <input type="text"
+             id="contactName"
+             name="name"
+             required
+             autocomplete="name"
+             minlength="2"
+             maxlength="100"
+             aria-required="true"
+             aria-describedby="contactName-error">
+      <span class="form-error" id="contactName-error" role="alert"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="contactEmail">
+        Email
+        <span class="required" aria-hidden="true">*</span>
+      </label>
+      <input type="email"
+             id="contactEmail"
+             name="email"
+             required
+             autocomplete="email"
+             aria-required="true"
+             aria-describedby="contactEmail-error">
+      <span class="form-error" id="contactEmail-error" role="alert"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="contactMessage">
+      Сообщение
+      <span class="required" aria-hidden="true">*</span>
+    </label>
+    <textarea id="contactMessage"
+              name="message"
+              rows="5"
+              required
+              minlength="10"
+              maxlength="2000"
+              aria-required="true"
+              aria-describedby="contactMessage-error"></textarea>
+    <span class="form-error" id="contactMessage-error" role="alert"></span>
+    <span class="form-hint" id="contactMessage-hint">
+      Минимум 10 символов. Текст будет отправлен преподавателю.
+    </span>
+  </div>
+
+  {# Согласие на обработку персональных данных #}
+  <div class="form-group contact-form__consent">
+    <label class="a11y-toggle">
+      <input type="checkbox" name="consent" required aria-required="true">
+      <span>
+        Я согласен с
+        <a href="/privacy/" target="_blank" rel="noopener">политикой конфиденциальности</a>
+        и обработкой персональных данных
+        <span class="required" aria-hidden="true">*</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="contact-form__actions">
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-send" aria-hidden="true"></i>
+      Отправить сообщение
+    </button>
+  </div>
+
+  <p class="contact-form__status" id="contactFormStatus" role="status" aria-live="polite"></p>
+</form>

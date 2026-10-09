@@ -2,20 +2,109 @@
 <html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+
+  {% if title %}
   <title>{{ title }} — {{ site.name }}</title>
+  {% else %}
+  <title>{{ site.name }}</title>
+  {% endif %}
+
   <meta name="description" content="{{ description or site.description }}">
-  <link rel="icon" href="/favicon.ico">
+  <meta name="author" content="{{ site.author }}">
+  <link rel="canonical" href="{{ page.url | absolutizeURL }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  {# TODO на Этапе 5.2: добавить полный набор favicons (16, 32, 48, 180, 192, 512) #}
+  {# TODO на Этапе 5.1: добавить RSS feed.xml через @11ty/eleventy-plugin-rss #}
+
+  <!-- FOUC protection: тема должна установиться ДО первого рендера -->
+  <!-- Источник: old/DESIGN.md §8.3. Размер: ~280 байт. -->
+  <script>
+    (function() {
+      var theme = (
+        document.cookie.match(/(?:^|;\s*)theme=([^;]+)/) || []
+      )[1] || localStorage.getItem('theme');
+      if (!theme) {
+        theme = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = theme;
+
+      // Также восстановим a11y-настройки
+      var fontScale = localStorage.getItem('a11y-font-scale');
+      if (fontScale) {
+        document.documentElement.style.setProperty('--font-scale', fontScale);
+      }
+      var images = localStorage.getItem('a11y-images');
+      if (images === 'off') {
+        document.documentElement.dataset.images = 'off';
+      }
+      var animations = localStorage.getItem('a11y-animations');
+      if (animations === 'off') {
+        document.documentElement.dataset.animations = 'off';
+      }
+    })();
+  </script>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="/assets/fonts/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/a11y.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+
+  {% block head %}{% endblock %}
 </head>
 <body>
-  <header>
-    <h1>{{ title }}</h1>
-  </header>
-  <main>
-    {{ content | safe }}
+  <!-- Skip-link для клавиатурной навигации -->
+  <a href="#main" class="skip-link">Перейти к контенту</a>
+
+  <!-- Шапка сайта -->
+  {% include "components/header.njk" %}
+
+  <!-- Основной контент -->
+  <main id="main" class="site-main" tabindex="-1">
+    {% block content %}{{ content | safe }}{% endblock %}
   </main>
-  <footer>
-    <p>{{ site.copyright | replace("{year}", "2026") }}</p>
-  </footer>
+
+  <!-- Подвал сайта -->
+  {% include "components/footer.njk" %}
+
+  <!-- Offcanvas (мобильное меню) -->
+  {% include "components/nav-burger.njk" %}
+
+  <!-- A11y панель -->
+  {% include "components/a11y-panel.njk" %}
+
+  <!-- Модальное окно поиска -->
+  {% include "components/search-modal.njk" %}
+
+  <!-- Yandex.Metrika -->
+  {% if site.metrikaId %}
+  <script>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
+    (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+    ym({{ site.metrikaId }}, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/{{ site.metrikaId }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  {% endif %}
+
+  <!-- JS-модули -->
+  <script src="/assets/js/theme.js" defer></script>
+  <script src="/assets/js/a11y.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

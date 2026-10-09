@@ -1,0 +1,93 @@
+{# header.njk — Шапка сайта
+   Источник: old/DESIGN.md §6.3 + old/new-stack/site/assets/components/header.html
+   Создано: 2026-10-09 (Этап 3.2)
+#}
+<header class="site-header" id="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+
+      {# === Логотип === #}
+      <a href="/" class="header-brand" aria-label="На главную страницу">
+        <img src="/favicon.ico" alt="" class="header-logo-img" width="32" height="32">
+        <span class="header-brand-text">
+          <span class="header-brand-name">{{ site.name }}</span>
+          <span class="header-brand-sub">{{ site.footerText }}</span>
+        </span>
+      </a>
+
+      {# === Десктоп-навигация (≥992px) === #}
+      <nav class="main-nav hidden-md-down" role="navigation" aria-label="Основная навигация">
+        <ul class="main-nav-list">
+          {% for item in navigation.main_menu %}
+          <li class="main-nav-item{% if item.submenu %} has-submenu{% endif %}">
+            <a href="{{ item.url }}" class="main-nav-link{% if item.submenu %} has-submenu-trigger{% endif %}"{% if page.url == item.url %} aria-current="page"{% endif %}>
+              {{ item.title }}
+              {% if item.submenu %}
+              <i class="bi bi-chevron-down main-nav-chevron" aria-hidden="true"></i>
+              {% endif %}
+            </a>
+            {% if item.submenu %}
+            <ul class="main-nav-submenu">
+              {% for sub in item.submenu %}
+              <li>
+                <a href="{{ sub.url }}" class="main-nav-submenu-link">
+                  {% if sub.icon %}<i class="bi {{ sub.icon }}" aria-hidden="true"></i>{% endif %}
+                  {{ sub.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      {# === Действия в шапке === #}
+      <div class="header-actions">
+        {# Переключатель тем #}
+        {% include "components/theme-switcher.njk" %}
+
+        {# Кнопка поиска #}
+        <button
+          type="button"
+          class="header-icon-btn"
+          id="search-btn"
+          title="Поиск"
+          aria-label="Поиск"
+          aria-expanded="false"
+          aria-controls="searchModal"
+          data-action="open-search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
+
+        {# Кнопка панели доступности #}
+        <button
+          type="button"
+          class="header-icon-btn"
+          id="a11y-toggle"
+          title="Версия для слабовидящих"
+          aria-label="Версия для слабовидящих"
+          aria-expanded="false"
+          aria-controls="a11yPanel"
+          data-action="open-a11y">
+          <i class="bi bi-eye" aria-hidden="true"></i>
+        </button>
+
+        {# Гамбургер-меню (только мобильное) #}
+        <button
+          type="button"
+          class="header-icon-btn header-burger hidden-lg"
+          id="offcanvas-toggle"
+          title="Меню"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="offcanvasNav"
+          data-action="open-offcanvas">
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>

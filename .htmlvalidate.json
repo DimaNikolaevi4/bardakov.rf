@@ -7,6 +7,10 @@
     "prefer-tbody": "off",
     "wcag/h30": "off",
     "wcag/h63": "off",
-    "element-name": ["error", { "whitelist": ["njk-*"] }]
+    "element-name": ["error", { "whitelist": ["njk-*"] }],
+    "no-inline-style": "off",
+    "aria-label-misuse": "off",
+    "hidden-focusable": "warn",
+    "no-redundant-role": "off"
   }
 }

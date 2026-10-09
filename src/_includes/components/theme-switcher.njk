@@ -1,0 +1,37 @@
+{# theme-switcher.njk — Переключатель тем (light / dark / vi)
+   Источник: old/DESIGN.md §6.4, §8
+   Создано: 2026-10-09 (Этап 3.2)
+
+   Хранение: cookie + localStorage
+   Приоритет: cookie > localStorage > prefers-color-scheme
+   VI — никогда автоматически, только вручную
+#}
+<div class="theme-switcher" role="group" aria-label="Выбор темы оформления">
+  <button type="button"
+          class="theme-btn"
+          data-theme="light"
+          title="Светлая тема"
+          aria-label="Светлая тема"
+          aria-pressed="true">
+    <i class="bi bi-sun-fill" aria-hidden="true"></i>
+    <span class="sr-only">Светлая</span>
+  </button>
+  <button type="button"
+          class="theme-btn"
+          data-theme="dark"
+          title="Тёмная тема"
+          aria-label="Тёмная тема"
+          aria-pressed="false">
+    <i class="bi bi-moon-fill" aria-hidden="true"></i>
+    <span class="sr-only">Тёмная</span>
+  </button>
+  <button type="button"
+          class="theme-btn"
+          data-theme="vi"
+          title="Версия для слабовидящих"
+          aria-label="Версия для слабовидящих"
+          aria-pressed="false">
+    <i class="bi bi-eye-fill" aria-hidden="true"></i>
+    <span class="sr-only">Для слабовидящих</span>
+  </button>
+</div>

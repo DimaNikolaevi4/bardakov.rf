@@ -1,0 +1,31 @@
+---
+title: "Обо мне"
+description: "Биография, методическая работа, достижения, хобби и контакты преподавателя Бардакова Дмитрия Николаевича."
+layout: base.njk
+permalink: /obo-mne/index.html
+date: 2026-10-09
+section: obo-mne
+order: 1
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Обо мне" }
+  ]) }}
+
+  <h1>Обо мне</h1>
+  <p class="lead">
+    Бардаков Дмитрий Николаевич — преподаватель технических дисциплин
+    ГБПОУ РО «СИТ» (Сальский индустриальный техникум).
+  </p>
+
+  <div class="content-placeholder" style="background: var(--color-surface-alt); padding: var(--space-8); border-radius: var(--radius-lg); border: 2px dashed var(--color-border);">
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">
+      📝 Контент раздела будет добавлен на <strong>Этапе 5.1</strong> (Наполнение контентом)
+    </p>
+  </div>
+</div>

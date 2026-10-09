@@ -1,0 +1,31 @@
+---
+title: "Абитуриенту"
+description: "Профессии и специальности ГБПОУ РО «СИТ». Документация для поступления."
+layout: base.njk
+permalink: /abiturientu/index.html
+date: 2026-10-09
+section: abiturientu
+order: 1
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Абитуриенту" }
+  ]) }}
+
+  <h1>Абитуриенту</h1>
+  <p class="lead">
+    Профессии и специальности, документация для поступления
+    в ГБПОУ РО «СИТ».
+  </p>
+
+  <div class="content-placeholder" style="background: var(--color-surface-alt); padding: var(--space-8); border-radius: var(--radius-lg); border: 2px dashed var(--color-border);">
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">
+      📝 Контент раздела будет добавлен на <strong>Этапе 5.1</strong>
+    </p>
+  </div>
+</div>

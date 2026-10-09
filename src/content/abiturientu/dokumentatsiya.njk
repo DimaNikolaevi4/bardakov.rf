@@ -1,0 +1,27 @@
+---
+title: "Документация"
+description: "Документы для абитуриентов: положения, правила приёма, устав."
+layout: base.njk
+permalink: /abiturientu/dokumentatsiya/index.html
+date: 2026-10-09
+section: abiturientu
+order: 3
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Абитуриенту", "url": "/abiturientu/" },
+    { "title": "Документация" }
+  ]) }}
+
+  <h1>Документация</h1>
+  <p class="lead">Документы для абитуриентов: положения, правила приёма, устав.</p>
+
+  <div class="content-placeholder" style="background: var(--color-surface-alt); padding: var(--space-8); border-radius: var(--radius-lg); border: 2px dashed var(--color-border);">
+    <p style="margin: 0; text-align: center; color: var(--color-text-muted);">📝 Контент будет добавлен на Этапе 5.1</p>
+  </div>
+</div>

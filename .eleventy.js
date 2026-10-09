@@ -6,6 +6,7 @@ import eleventyPluginRss from "@11ty/eleventy-plugin-rss";
 export default function (eleventyConfig) {
   // === Passthrough copies (файлы копируются в public/ без обработки) ===
   eleventyConfig.addPassthroughCopy({ "src/assets/": "assets/" });
+  eleventyConfig.addPassthroughCopy({ "src/styles/": "assets/css/" });
   eleventyConfig.addPassthroughCopy({ "src/content/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "src/content/favicon.ico": "favicon.ico" });
   eleventyConfig.addPassthroughCopy({ "src/content/sitemap.xml": "sitemap.xml" });
@@ -60,6 +61,35 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("dateISO", (dateObj) => {
     if (!dateObj) return "";
     return new Date(dateObj).toISOString();
+  });
+
+  // date: форматирование дат (Nunjucks-compatible)
+  // Примеры: {{ "now" | date("Y") }} → 2026
+  //          {{ "2026-10-09" | date("d.m.Y") }} → 09.10.2026
+  eleventyConfig.addFilter("date", (dateObj, format) => {
+    if (!dateObj) return "";
+    const d = dateObj === "now" ? new Date() : new Date(dateObj);
+    if (isNaN(d.getTime())) return "";
+
+    const pad = (n) => String(n).padStart(2, "0");
+
+    const replacements = {
+      Y: d.getFullYear(),
+      y: String(d.getFullYear()).slice(-2),
+      m: pad(d.getMonth() + 1),
+      n: d.getMonth() + 1,
+      d: pad(d.getDate()),
+      j: d.getDate(),
+      H: pad(d.getHours()),
+      i: pad(d.getMinutes()),
+      s: pad(d.getSeconds()),
+    };
+
+    let result = format || "Y-m-d H:i:s";
+    for (const [key, value] of Object.entries(replacements)) {
+      result = result.replace(new RegExp(key, "g"), value);
+    }
+    return result;
   });
 
   // truncate: обрезка строки до указанной длины с многоточием
