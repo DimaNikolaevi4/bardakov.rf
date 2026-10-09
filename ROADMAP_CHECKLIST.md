@@ -56,6 +56,7 @@
 
 - [~] Собрать список всех URL живого сайта `бардаков.рф` через:
   - ✅ `sitemap.xml` Joomla (см. `old/joomla/sitemap.xml`) — распарсен, 148 URL
+  - ✅ **Свежая выгрузка с живого сайта (2026-10-09):** `migration-source/sitemap-live-2026-10-08.xml` — **идентична архивной** (148 URL, 0 различий через `diff`), живой сайт не обновлялся с `2024-09-09`
   - [!] Google Search Console (если есть доступ) — 🔒 **заблокировано**: нет доступа к GSC
   - [!] Yandex.Webmaster (если есть доступ) — 🔒 **заблокировано**: нет доступа к Yandex.Webmaster
   - ✅ Ручное прохождение меню сайта — выполнено через сканирование HTML-файлов в `old/new-stack/site/` (50 страниц)
@@ -129,7 +130,8 @@
     - См. `migration-source/server-config-analysis.md` — подробный разбор по секциям с рекомендациями
   - ✅ Зафиксировать правила, которые нужно перенести в новый `.htaccess` (безопасность, GZIP, кэширование, HTTPS, www→без www, 301-редиректы, канонизация index.html)
   - ✅ Скачать текущий `robots.txt` → `migration-source/robots-joomla.txt` + `migration-source/robots-newstack.txt` (оба варианта)
-  - ✅ Сравнить с `old/joomla/robots.txt` и `old/new-stack/site/robots.txt` — выполнено в `server-config-analysis.md`
+  - ✅ **Свежая выгрузка `robots.txt.dist` с живого сайта (2026-10-09):** `migration-source/robots-live-2026-10-08.txt` — **идентична архивной** (0 различий через `diff`)
+  - ✅ Сравнить с `old/joomla/robots.txt` и `old/new-stack/site/robots.txt` — выполнено в `server-config-analysis.md` (свежая выгрузка подтвердила идентичность архиву)
   - ✅ Зафиксировать директивы `Disallow`, `Host`, `Sitemap` для адаптации в новом `robots.txt`
     - Joomla-правила (Disallow: /administrator/, /api/ и т.д.) не нужны в статическом сайте
     - Новый robots.txt: запрет индексации CSS/JS/JSON/MD + полный URL sitemap
