@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "URL тяжёлых медиафайлов на хостинге Beget. Источник: docs/large-files-strategy.md. Обновлено: 2026-10-09.",
+  "baseUrl": "https://сит.бардаков.рф/assets",
+  "video": {
+    "Бардаков_самопризентация": "https://сит.бардаков.рф/assets/video/Бардаков_самопризентация.mp4",
+    "2-1-2400": "https://сит.бардаков.рф/assets/video/2-1-2400.mp4"
+  },
+  "documents": {
+    "Атомный_урок": "https://сит.бардаков.рф/assets/documents/Атомный урок.pdf",
+    "ДЕНЬ_ЗНАНИЙ": "https://сит.бардаков.рф/assets/documents/ДЕНЬ ЗНАНИЙ.pdf",
+    "ДЕНЬ_КОСМОНАВТИКИ": "https://сит.бардаков.рф/assets/documents/ДЕНЬ КОСМОНАВТИКИ.pdf",
+    "Устав_СИТ": "https://сит.бардаков.рф/assets/documents/Устав-ГБПОУ-РО-СИТ-14.12.2018[1].pdf",
+    "ПР_МДК_03_02_КИП_3_КУРС": "https://сит.бардаков.рф/assets/documents/ПР МДК 03.02 КИП 3 КУРС.docx",
+    "ПР_МДК_03_02_КИП_4_КУРС": "https://сит.бардаков.рф/assets/documents/ПР МДК 03.02 КИП 4 КУРС.docx"
+  },
+  "images": {
+    "$comment": "Шаблон URL для тяжёлых изображений (>3 MB). Полный список см. в migration-source/large-files-inventory.csv (категория large-image)",
+    "template": "https://сит.бардаков.рф/assets/images/{filename}"
+  }
+}

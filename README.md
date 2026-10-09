@@ -212,18 +212,33 @@
 
 ```
 bardakov.rf/
-├── .gitignore               # Исключения git
+├── .gitignore               # Исключения git (включая *.mp4, *.zip, large-media/)
 ├── .replit                  # Конфиг Replit
 ├── README.md                # Этот файл
 ├── ROADMAP_CHECKLIST.md     # Чек-лист миграции (этапы 1–7)
 ├── docs/                    # Документация проекта
-│   └── old-inventory.md     # Инвентарь архивной папки old/
-├── migration-source/        # Промежуточные данные миграции (создаётся на Этапе 1)
+│   ├── old-inventory.md     # Инвентарь архивной папки old/
+│   ├── large-files-beget-migration.md  # Отчёт о переносе тяжёлых файлов
+│   └── large-files-strategy.md          # Стратегия работы с тяжёлыми файлами (для ИИ-агента)
+├── migration-source/        # Промежуточные данные миграции
+│   ├── redirects.csv        # 119 URL для редиректов
+│   ├── menu.yaml            # Структура навигации
+│   ├── contacts.yaml        # Контактные данные
+│   ├── analytics.yaml       # Yandex.Metrika ID 98275481
+│   ├── images-inventory.csv # 364 изображения
+│   ├── docs-inventory.csv   # 43 документа
+│   ├── server-config-analysis.md  # Анализ .htaccess и robots.txt
+│   └── large-files-inventory.csv  # Инвентарь больших файлов (>1 MB)
+├── scripts/                 # Скрипты для анализа и обработки
+│   ├── parse-sitemap.py     # Парсер sitemap.xml
+│   ├── scan-images.py       # Сканер изображений
+│   ├── scan-docs.py         # Сканер документов
+│   └── analyze-large-files.py  # Анализатор больших файлов в истории Git
 └── old/                     # ⚠️ АРХИВ — только для чтения
     ├── DESIGN.md            # Дизайн-система (источник правды для токенов)
     ├── CHECKLIST.md         # Старый чек-лист (архивный)
-    ├── joomla/              # Файлы Joomla 5 (331 файл, 162 MB)
-    ├── new-stack/           # Статическая версия (466 файлов, 185 MB)
+    ├── joomla/              # Файлы Joomla 5 (без стандартного ядра)
+    ├── new-stack/           # Статическая версия (466 файлов)
     ├── homepage/            # Альтернативная главная на jQuery/Flipster
     └── attached_assets/     # Временные ассеты
 ```
@@ -236,6 +251,21 @@ bardakov.rf/
 Полный архив будет перенесён в ветку `archive-joomla` на Этапе 6 (Очистка репозитория).
 
 См. подробный инвентарь: [`docs/old-inventory.md`](docs/old-inventory.md)
+
+### Тяжёлые медиафайлы (видео, большие PDF/DOCX)
+
+⚠️ **Тяжёлые файлы НЕ хранятся в Git-репозитории.** Они лежат на хостинге Beget в `~/bardakov.rf-v2/large-media/{video,documents,images}/` и доступны через symlink в `public_html/assets/`.
+
+**Базовый URL:** `https://сит.бардаков.рф/assets/{video|documents|images}/<файл>`
+
+См. подробности: [`docs/large-files-strategy.md`](docs/large-files-strategy.md)
+
+### Домены
+
+| Домен | Назначение |
+|---|---|
+| `бардаков.рф` | Старый сайт на Joomla (работает, не трогать) |
+| `сит.бардаков.рф` | Новый проект на Eleventy (для разработки и тестирования) |
 
 ---
 
