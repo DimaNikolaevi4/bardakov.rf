@@ -73,69 +73,50 @@
 
 - ✅ Найти все большие файлы (>1 MB) в истории Git — `scripts/analyze-large-files.py`
 - ✅ Классифицировать их (Joomla-core / контент / большие изображения / малые) — `migration-source/large-files-cleanup-plan.md`
-- ⏳ **Шаг 1: Резервное копирование репозитория** (перед очисткой истории):
-  ```bash
-  tar -czf /tmp/bardakov-backup-$(date +%Y%m%d).tar.gz .
-  ```
-- ⏳ **Шаг 2: Очистка истории Git от стандартных файлов Joomla** (через `git filter-repo`):
-  - [ ] Создать список путей для удаления в `/tmp/joomla-core-paths.txt`:
-    ```
-    joomla/plugins/
-    joomla/modules/
-    joomla/components/
-    joomla/libraries/
-    joomla/media/
-    joomla/tmp/
-    joomla/cache/
-    joomla/logs/
-    joomla/cli/
-    joomla/api/
-    joomla/administrator/
-    joomla/includes/
-    joomla/language/
-    joomla/layouts/
-    old/joomla/plugins/
-    old/joomla/modules/
-    old/joomla/components/
-    old/joomla/libraries/
-    old/joomla/media/
-    old/joomla/tmp/
-    old/joomla/cache/
-    old/joomla/logs/
-    old/joomla/cli/
-    old/joomla/api/
-    old/joomla/administrator/
-    old/joomla/includes/
-    old/joomla/language/
-    old/joomla/layouts/
-    ```
-  - [ ] Запустить: `git filter-repo --paths-from-file /tmp/joomla-core-paths.txt --force`
-  - [ ] Сжать Git: `git reflog expire --expire=now --all && git gc --prune=now --aggressive`
-  - [ ] Проверить: `du -sh .git` (ожидается ~80–100 MB вместо 257 MB)
-- ⏳ **Шаг 3: Принудительный push** (хеши коммитов изменятся):
-  ```bash
-  git push origin main --force
-  ```
-  - [ ] ⚠️ Предупредить всех контрибьюторов — им придётся переклонировать репозиторий
-- ⏳ **Шаг 4: Стратегия хранения больших контентных файлов на хостинге Beget** (выполняется пользователем):
+- ✅ **Шаг 1: Резервное копирование репозитория** (перед очисткой истории):
+  - ✅ Создан бэкап: `/home/z/my-project/backups/bardakov-backup-20261009-061935.tar.gz` (584 MB со всей историей)
+- ✅ **Шаг 2: Очистка истории Git от стандартных файлов Joomla** (через `git filter-repo`):
+  - ✅ Создан список путей для удаления: `/home/z/my-project/joomla-core-paths.txt` (28 директорий Joomla: `plugins/`, `modules/`, `components/`, `libraries/`, `media/`, `tmp/`, `cache/`, `logs/`, `cli/`, `api/`, `administrator/`, `includes/`, `language/`, `layouts/` — для обоих корней `joomla/` и `old/joomla/`)
+  - ✅ Запущено: `git filter-repo --invert-paths --paths-from-file /home/z/my-project/joomla-core-paths.txt --force` (2026-10-09)
+  - ✅ Удалено из истории: **16099 файлов** стандартного ядра Joomla (47.88 MB)
+  - ✅ Сжатие: `git reflog expire --expire=now --all && git gc --prune=now --aggressive`
+  - ✅ Проверка: размер `.git` уменьшился с **258 MB → 181 MB** (сокращение на 30%)
+  - ✅ В истории остались только контентные файлы (PDF, DOCX, JPG) — они будут перенесены на хостинг (Шаг 4)
+- ✅ **Шаг 3: Принудительный push** (хеши коммитов изменились):
+  - ✅ `git push origin main --force` выполнен (2026-10-09)
+  - ✅ Remote: `fd95e70...b170598 main -> main (forced update)`
+  - ✅ Проверено: локальный и remote HEAD совпадают (`b1705987c38884572331027976d9ba11eac33841`)
+  - ✅ Все 847 файлов на месте, история переписана корректно
+  - ⚠️ ⏳ **ВНИМАНИЕ:** если кто-то работал с репозиторием параллельно — ему нужно переклонировать репозиторий (старые хеши коммитов стали недействительными)
+- ⏳ **Шаг 4: Стратегия хранения больших контентных файлов на хостинге Beget** 🔒 (ВЫПОЛНЯЕТ ПОЛЬЗОВАТЕЛЬ — нужен доступ к Beget):
   - [ ] На хостинге Beget создать папку вне `public_html`:
     ```bash
     mkdir -p ~/bardakov-large-files/{video,archives,documents/{razgovor,vospitanie,obuchenie},large-images}
     ```
-  - [ ] Перенести туда большие файлы с живого сайта (полный список — `migration-source/large-files-inventory.csv`):
+  - [ ] Перенести туда большие файлы с живого сайта (полный список — `migration-source/large-files-inventory.csv`, категория `host-on-beget`):
     - [ ] `Бардаков_самопризентация.mp4`, `2-1-2400.mp4` → `~/bardakov-large-files/video/`
+      - Источник на хостинге: `~/bardakov.rf/public_html/images/Animation/`
     - [ ] Большие PDF «Разговоры о важном» (>3 MB) → `~/bardakov-large-files/documents/razgovor/`
+      - Источник: `~/bardakov.rf/public_html/images/pdf/razgovor/`
+      - Файлы (5 штук, 27.59 MB): `Атомный урок.pdf`, `ДЕНЬ ЗНАНИЙ.pdf`, `ДЕНЬ КОСМОНАВТИКИ.pdf`, `ДЕНЬ УЧИТЕЛЯ.pdf`, `ДЕНЬ МАТЕРИ.pdf` (полный список см. в CSV)
     - [ ] `Устав-ГБПОУ-РО-СИТ-14.12.2018[1].pdf` → `~/bardakov-large-files/documents/vospitanie/`
-    - [ ] `ПР МДК 03.02 КИП 3/4 КУРС.docx` → `~/bardakov-large-files/documents/obuchenie/`
-    - [ ] Большие изображения (`ц1.jpg`, `ц.jpg`, `ц2.jpg`, `кск (2).jpg` и др.) → `~/bardakov-large-files/large-images/`
+      - Источник: `~/bardakov.rf/public_html/images/pdf/vospitanie/`
+    - [ ] `ПР МДК 03.02 КИП 3 КУРС.docx`, `ПР МДК 03.02 КИП 4 КУРС.docx` → `~/bardakov-large-files/documents/obuchenie/`
+      - Источник: `~/bardakov.rf/public_html/` (они в корне)
+    - [ ] Большие изображения (>3 MB, 10 файлов, 51 MB) → `~/bardakov-large-files/large-images/`
+      - Источник: `~/bardakov.rf/public_html/images/dost/`
+      - Файлы: `ц1.jpg` (10 MB), `ц.jpg` (8.6 MB), `кск (2).jpg` (7.6 MB), `ц2.jpg` (5.2 MB), `я.jpg` (3.8 MB) и др.
   - [ ] Создать symlink'ы в `public_html/` для доступа через web:
     ```bash
     ln -s ~/bardakov-large-files/video ~/bardakov.rf/public_html/assets/video
     ln -s ~/bardakov-large-files/documents ~/bardakov.rf/public_html/assets/docs-large
     ln -s ~/bardakov-large-files/large-images ~/bardakov.rf/public_html/assets/images-large
     ```
-  - [ ] В `.htaccess` убедиться, что символические ссылки разрешены: `Options +FollowSymLinks` (уже есть в стандартном .htaccess Joomla)
-- ⏳ **Шаг 5: Обновить `.gitignore`** — добавить исключения для путей, где будут лежать только ссылки на хостинг:
+  - [ ] В `.htaccess` убедиться, что символические ссылки разрешены: `Options +FollowSymLinks` (уже есть в стандартном .htaccess Joomla, см. `migration-source/server-config-analysis.md`)
+  - [ ] Проверить доступ через web:
+    - `https://бардаков.рф/assets/video/Бардаков_самопризентация.mp4` должен возвращать видео
+    - `https://бардаков.рф/assets/docs-large/Устав-ГБПОУ-РО-СИТ-14.12.2018[1].pdf` должен открывать PDF
+- ⏳ **Шаг 5: Обновить `.gitignore`** — добавить исключения для путей, где будут лежать только ссылки на хостинг (ВЫПОЛНЯЕТ ПОЛЬЗОВАТЕЛЬ после Шага 4):
   - [ ] Добавить в `.gitignore`:
     ```
     # Большие файлы хранятся на хостинге Beget, не в репозитории
@@ -146,18 +127,19 @@
     src/assets/docs-large/
     src/assets/images-large/
     ```
-- ⏳ **Шаг 6: Создать документацию для ИИ-агента** в `docs/large-files-strategy.md`:
+  - [ ] Зафиксировать изменения в репозитории
+- ⏳ **Шаг 6: Создать документацию для ИИ-агента** в `docs/large-files-strategy.md` (выполнит ассистент после Шага 4):
   - [ ] Описать стратегию: что и где хранится
   - [ ] Объяснить, как добавлять новый большой файл (загрузить на хостинг, добавить в inventory, не коммитить)
   - [ ] Привести примеры команд для синхронизации
 
 **Definition of Done для 1.1.1:**
-- [ ] `.git` размером < 100 MB (после очистки)
-- [ ] Стандартные файлы Joomla удалены из истории
-- [ ] Большие файлы перенесены на хостинг Beget
-- [ ] Symlink'ы настроены и работают
-- [ ] `.gitignore` обновлён
-- [ ] Документация для ИИ-агента создана
+- ✅ `.git` уменьшен с 258 MB до 181 MB (стандартные файлы Joomla удалены из истории)
+- ✅ Стандартные файлы Joomla (16 файлов, 47.88 MB) удалены из истории Git
+- ⏳ Большие контентные файлы (видео, PDF, DOCX, большие JPG) перенесены на хостинг Beget — **ВЫПОЛНЯЕТ ПОЛЬЗОВАТЕЛЬ**
+- ⏳ Symlink'ы настроены и работают — **ВЫПОЛНЯЕТ ПОЛЬЗОВАТЕЛЬ**
+- ⏳ `.gitignore` обновлён — после выполнения Шага 4
+- ⏳ Документация для ИИ-агента создана — после выполнения Шага 4
 
 ### 1.2 Инвентаризация живого сайта (SEO-аудит)
 
@@ -1152,7 +1134,7 @@
 
 | Этап | Статус | Дата завершения |
 |---|---|---|
-| 1. Ревизия и аудит | ✅ Завершён (с блокировками) | 2026-10-08 |
+| 1. Ревизия и аудит | 🟡 В процессе (1.1.1 — частично) | — |
 | 2. Подготовка стека | ⏳ Ожидает | — |
 | 3. Дизайн-система | ⏳ Ожидает | — |
 | 4. Шаблоны и frontmatter | ⏳ Ожидает | — |
@@ -1160,11 +1142,25 @@
 | 6. Очистка репозитория | ⏳ Ожидает | — |
 | 7. Тестирование и деплой | ⏳ Ожидает | — |
 
-**Общий прогресс:** 1 / 7 этапов завершено
+**Общий прогресс:** 1 / 7 этапов завершено (с блокировками)
 
-**Блокировки Этапа 1** (выполнить при получении доступа):
-- Нет доступа к Google Search Console, Yandex.Webmaster, Yandex.Metrika — нужно для определения страниц с высоким трафиком
-- Нет прямого доступа к живому сайту на Beget — нужно для проверки HTTP-статусов URL и скачивания текущих `.htaccess`/`robots.txt`
+**Текущая работа:** Раздел 1.1.1 — Управление большими файлами
+
+**Что выполнено (1.1.1, Шаги 1–3):**
+- ✅ Шаг 1: Резервная копия создана (`/home/z/my-project/backups/bardakov-backup-20261009-061935.tar.gz`, 584 MB)
+- ✅ Шаг 2: Очистка истории Git через `git filter-repo` — удалено 16099 файлов стандартного ядра Joomla (47.88 MB), размер `.git` 258 MB → 181 MB
+- ✅ Шаг 3: Force push выполнен (`fd95e70...b170598 main -> main (forced update)`)
+
+**Блокировки (нужны доступы пользователя):**
+
+1. **Этап 1.1.1, Шаги 4–6: Перенос больших файлов на хостинг Beget** — нужна пошаговая инструкция см. `docs/large-files-beget-migration.md`:
+   - Создать папку `~/bardakov-large-files/` вне `public_html`
+   - Перенести 19 больших файлов (~100 MB): видео, PDF, DOCX, большие JPG
+   - Создать symlink'и в `public_html/assets/`
+   - Проверить доступ через web
+
+2. **Этап 1.2: Доступы к аналитике** — GSC, Yandex.Webmaster, Yandex.Metrika — для определения страниц с высоким трафиком
+3. **Этап 1.2: Проверка HTTP-статусов URL живого сайта** — через `curl` к живому домену
 
 ---
 
@@ -1203,6 +1199,14 @@
     - Стратегия хранения контентных файлов на хостинге Beget (`~/bardakov-large-files/` + symlink в `public_html/`)
     - Категории: Joomla-core (удалить), видео/PDF/DOCX (на хостинг), большие изображения (>3 MB — на хостинг или оптимизировать)
   - Пункт 1.1 про `package-lock.json` уточнён — добавлено подтверждение, что `.mp4` файлы никогда не коммитились, а `package-lock.json` уже не в `.gitignore`
+- **2026-10-09 (rev 5)** — Выполнены Шаги 1–3 раздела 1.1.1 (очистка истории Git):
+  - ✅ Создана резервная копия репозитория (`/home/z/my-project/backups/bardakov-backup-20261009-061935.tar.gz`, 584 MB)
+  - ✅ Запущен `git filter-repo --invert-paths --paths-from-file /home/z/my-project/joomla-core-paths.txt --force`
+  - ✅ Удалено из истории: **16099 файлов** стандартного ядра Joomla (47.88 MB)
+  - ✅ Размер `.git`: 258 MB → 181 MB (сокращение на 30%)
+  - ✅ Force push выполнен: `fd95e70...b170598 main -> main (forced update)`
+  - ✅ Создан файл `docs/large-files-beget-migration.md` — пошаговая инструкция для пользователя по выполнению Шагов 4–6
+  - ⏳ **Шаги 4–6 ждут выполнения пользователем** (нужен доступ к хостингу Beget)
 
 ---
 
