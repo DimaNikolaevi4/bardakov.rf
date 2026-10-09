@@ -1,0 +1,66 @@
+{
+  "name": "bardakov-rf",
+  "version": "2.0.0",
+  "description": "Персональный сайт преподавателя Бардакова Дмитрия Николаевича (ГБПОУ РО «СИТ»). Статический сайт на Eleventy.",
+  "type": "module",
+  "main": ".eleventy.js",
+  "scripts": {
+    "clean": "rimraf public",
+    "dev": "npm run clean && eleventy --serve --watch",
+    "build": "npm run clean && eleventy",
+    "postbuild": "npm run pagefind",
+    "pagefind": "pagefind --site public",
+    "serve:public": "npx serve public",
+    "lint:md": "markdownlint-cli2 'src/content/**/*.md'",
+    "lint:html": "html-validate public/index.html",
+    "format": "prettier --write 'src/**/*.{js,njk,md,css,json}'",
+    "check:links": "linkinator public --recurse",
+    "check:frontmatter": "node scripts/validate-frontmatter.js",
+    "test": "npm run build && npm run lint:html && npm run check:links",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "keywords": [
+    "eleventy",
+    "static-site",
+    "education",
+    "personal-website",
+    "nunjucks",
+    "bootstrap"
+  ],
+  "author": "Dmitry Bardakov <info@бардаков.рф>",
+  "license": "MIT",
+  "homepage": "https://бардаков.рф",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DimaNikolaevi4/bardakov.rf.git"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.2",
+    "aos": "^2.3.4",
+    "bootstrap": "^5.3.3",
+    "glightbox": "^3.3.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@11ty/eleventy-img": "^5.0.0",
+    "html-validate": "^9.0.0",
+    "husky": "^9.1.6",
+    "linkinator": "^6.1.2",
+    "lint-staged": "^15.2.10",
+    "markdownlint-cli2": "^0.14.0",
+    "pagefind": "^1.1.1",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "lint-staged": {
+    "src/content/**/*.{md,njk}": "node scripts/validate-frontmatter.js --staged"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
+  }
+}

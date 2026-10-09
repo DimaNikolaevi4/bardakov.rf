@@ -1,0 +1,12 @@
+# .prettierignore — файлы, которые Prettier не должен форматировать
+public/
+node_modules/
+old/
+migration-source/
+backups/
+*.min.css
+*.min.js
+package-lock.json
+*.csv
+*.yaml
+*.yml

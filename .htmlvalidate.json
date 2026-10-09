@@ -1,0 +1,12 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attribute-boolean-style": "off",
+    "void-style": "off",
+    "no-trailing-whitespace": "off",
+    "prefer-tbody": "off",
+    "wcag/h30": "off",
+    "wcag/h63": "off",
+    "element-name": ["error", { "whitelist": ["njk-*"] }]
+  }
+}

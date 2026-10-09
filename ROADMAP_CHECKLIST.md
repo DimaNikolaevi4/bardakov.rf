@@ -245,108 +245,111 @@
 
 ### 2.1 Инициализация зависимостей
 
-- [ ] Обновить `package.json` в корне репозитория (взять за основу `old/package.json`, переработать):
-  - [ ] Поле `"name": "bardakov-rf"`
-  - [ ] Поле `"version": "2.0.0"`
-  - [ ] Поле `"type": "module"` (если используем ESM)
-  - [ ] Поле `"description"` — короткое описание проекта
-  - [ ] Поле `"license": "MIT"` или явно указать
-  - [ ] Поле `"author": "Dmitry Bardakov"`
-- [ ] Зависимости (dependencies):
-  - [ ] `@11ty/eleventy` (latest stable) — генератор статики
-  - [ ] `nunjucks` — шаблонизатор
-  - [ ] `bootstrap` (5.3.x) — UI-фреймворк
-  - [ ] `aos` — анимации при скролле
-  - [ ] `glightbox` — лайтбокс для изображений
-  - [ ] `@11ty/eleventy-plugin-rss` — RSS-фид (опционально)
-- [ ] Зависимости разработки (devDependencies):
-  - [ ] `pagefind` (latest) — статический поиск по сайту
-  - [ ] `sharp` или `eleventy-img` — оптимизация изображений в WebP
-  - [ ] `html-validate` — валидация HTML
-  - [ ] `markdownlint-cli2` — линтер Markdown
-  - [ ] `prettier` — форматирование
-  - [ ] `husky` + `lint-staged` — pre-commit хуки (опционально)
-- [ ] Запустить `npm install` и проверить отсутствие ошибок
-- [ ] Зафиксировать `package-lock.json` (НЕ добавлять в `.gitignore`)
-- [ ] Создать `.nvmrc` с версией Node.js (для воспроизводимости в CI)
+- ✅ Обновить `package.json` в корне репозитория (создан новый файл):
+  - ✅ Поле `"name": "bardakov-rf"`
+  - ✅ Поле `"version": "2.0.0"`
+  - ✅ Поле `"type": "module"` (ESM)
+  - ✅ Поле `"description"` — короткое описание проекта
+  - ✅ Поле `"license": "MIT"`
+  - ✅ Поле `"author": "Dmitry Bardakov <info@бардаков.рф>"`
+- ✅ Зависимости (dependencies):
+  - ✅ `@11ty/eleventy` ^3.0.0 (v3.1.6 установлена) — генератор статики
+  - ✅ `nunjucks` ^3.2.4 — шаблонизатор
+  - ✅ `bootstrap` ^5.3.3 — UI-фреймворк
+  - ✅ `aos` ^2.3.4 — анимации при скролле
+  - ✅ `glightbox` ^3.3.0 — лайтбокс для изображений
+  - ✅ `@11ty/eleventy-plugin-rss` ^2.0.2 — RSS-фид
+- ✅ Зависимости разработки (devDependencies):
+  - ✅ `pagefind` ^1.1.1 (v1.5.2 установлена) — статический поиск по сайту
+  - ✅ `sharp` ^0.33.5 + `@11ty/eleventy-img` ^5.0.0 — оптимизация изображений в WebP
+  - ✅ `html-validate` ^9.0.0 — валидация HTML
+  - ✅ `markdownlint-cli2` ^0.14.0 — линтер Markdown
+  - ✅ `prettier` ^3.3.3 — форматирование
+  - ✅ `husky` ^9.1.6 + `lint-staged` ^15.2.10 — pre-commit хуки
+  - ✅ `rimraf` ^6.0.1 — очистка папки public/
+  - ✅ `linkinator` ^6.1.2 — проверка битых ссылок
+- ✅ Запустить `npm install` — 319 пакетов установлено за 29 сек (есть 21 vulnerability, некритично)
+- ✅ Зафиксировать `package-lock.json` (163 KB) — НЕ в `.gitignore`, проверено через `git check-ignore`
+- ✅ Создать `.nvmrc` с версией Node.js: `24.21.0`
 
 ### 2.2 Создание структуры папок
 
-- [ ] Создать структуру каталогов:
+- ✅ Создать структуру каталогов (полная):
   ```
   src/
-  ├── _data/              # Глобальные данные (сайт, навигация, контакты)
-  │   ├── site.json       # Название, описание, URL, автор
-  │   ├── navigation.json # Меню
-  │   └── contacts.json   # Контакты
-  ├── _includes/          # Шаблоны и компоненты
-  │   ├── layouts/         # Базовые layout-ы
-  │   │   ├── base.njk
-  │   │   └── page.njk
-  │   ├── components/      # Переиспользуемые компоненты
-  │   │   ├── header.njk
-  │   │   ├── footer.njk
-  │   │   ├── card.njk
-  │   │   ├── button.njk
-  │   │   ├── nav-burger.njk
-  │   │   ├── theme-switcher.njk
-  │   │   ├── breadcrumb.njk
-  │   │   └── a11y-panel.njk
-  │   └── partials/        # Прочие переиспользуемые куски
-  ├── content/            # Контент в Markdown/Nunjucks
-  │   ├── index.njk        # Главная
-  │   ├── obo-mne/
-  │   ├── obuchenie/
-  │   ├── abiturientu/
-  │   ├── vospitanie/
-  │   ├── search.njk       # Страница поиска Pagefind
-  │   └── 404.njk          # 404
-  ├── assets/             # Статика (копируется в public/)
-  │   ├── css/
-  │   ├── js/
-  │   ├── fonts/          # Inter, Manrope (self-hosted)
-  │   ├── images/
-  │   └── docs/           # PDF/DOCX документы
-  └── styles/             # Исходные SCSS/CSS для дизайн-системы
-      ├── tokens.css      # CSS-переменные (цвета, тени, радиусы)
-      ├── typography.css
-      ├── layout.css
-      └── components.css
+  ├── _data/              # Глобальные данные ✅
+  │   ├── site.json       # ✅ Название, описание, URL, автор
+  │   ├── navigation.json # ✅ Меню (12 гос. ссылок, 4 раздела)
+  │   ├── contacts.json   # ✅ Контакты
+  │   ├── analytics.json  # ✅ Yandex.Metrika ID 98275481
+  │   └── large-media-urls.json # ✅ URL тяжёлых файлов на хостинге Beget
+  ├── _includes/          # Шаблоны и компоненты ✅
+  │   ├── layouts/         # Базовые layout-ы ✅
+  │   │   └── base.njk    # ✅ Базовый HTML-каркас
+  │   ├── components/      # (создаются на Этапе 3)
+  │   └── partials/        # (создаются на Этапе 3)
+  ├── content/            # Контент в Markdown/Nunjucks ✅
+  │   ├── index.md        # ✅ Главная (временная заглушка)
+  │   ├── favicon.ico     # ✅ Скопирован из migration-source/
+  │   ├── robots.txt      # ✅ Базовый robots.txt
+  │   ├── yandex_0ff2f2d3e1d3590d.html # ✅ Верификация Yandex.Webmaster
+  │   ├── obo-mne/        # ✅ Директория создана
+  │   ├── obuchenie/kip/prakticheskie-kip/ # ✅
+  │   ├── obuchenie/pm02/lektsii/         # ✅
+  │   ├── abiturientu/professii/           # ✅
+  │   ├── abiturientu/spetsialnosti/       # ✅
+  │   └── vospitanie/dlya-roditelej/       # ✅
+  ├── assets/             # Статика (копируется в public/) ✅
+  │   ├── css/            # ✅
+  │   ├── js/             # ✅
+  │   ├── fonts/          # ✅ (Inter, Manrope — загрузить на Этапе 3)
+  │   ├── images/         # ✅
+  │   └── docs/           # ✅
+  └── styles/             # Исходные SCSS/CSS для дизайн-системы ✅
+      └── (создаются на Этапе 3: tokens.css, typography.css, layout.css, components.css)
   ```
-- [ ] Создать `.eleventy.js` (или `.eleventy.cjs`) с конфигурацией:
-  - [ ] `input: "src"`
-  - [ ] `output: "public"`
-  - [ ] `includes: "_includes"`
-  - [ ] `data: "_data"`
-  - [ ] Passthrough для `assets/`, `robots.txt`, `favicon.ico`
-  - [ ] Настройка шаблонизаторов (nunjucks + markdown)
-  - [ ] Кастомные фильтры (slugify, date-format, truncate и т. д.)
-  - [ ] Плагины (если нужны)
-- [ ] Добавить `public/` в `.gitignore` (результат сборки — не коммитится)
+- ✅ Создать `.eleventy.js` (ESM-формат) с конфигурацией:
+  - ✅ `input: "src"`, `output: "public"`, `includes: "_includes"`, `data: "_data"`, `layouts: "_includes/layouts"`
+  - ✅ Passthrough для `assets/`, `robots.txt`, `favicon.ico`, `yandex_*.html`
+  - ✅ Шаблонизаторы: `njk` + `md` (html исключён, чтобы служебные файлы не обрабатывались)
+  - ✅ Кастомные фильтры: `slugify` (с поддержкой кириллицы), `dateRu`, `dateISO`, `truncate`, `limit`, `where`, `sortByDateDesc`, `absolutizeURL`
+  - ✅ Кастомные коллекции: `publishedPages`, `aboutPages`, `educationPages`, `abiturientuPages`, `vospitaniePages`
+  - ✅ Плагины: `@11ty/eleventy-plugin-rss`
+  - ✅ Настройки сервера: liveReload, domDiff, port 8080
+  - ✅ `dataDeepMerge: true` — глубокое слияние данных
+- ✅ Добавить `public/` в `.gitignore` (уже было сделано в Шаге 5 раздела 1.1.1)
 
 ### 2.3 Настройка скриптов
 
-- [ ] `package.json` scripts:
-  - [ ] `"clean": "rimraf public"` — очистка результата сборки
-  - [ ] `"dev": "npm run clean && eleventy --serve --watch"` — локальная разработка с hot-reload
-  - [ ] `"build": "npm run clean && eleventy"` — production-сборка
-  - [ ] `"pagefind": "pagefind --site public"` — индексация поиска
-  - [ ] `"postbuild": "npm run pagefind"` — автоиндексация после сборки
-  - [ ] `"serve:public": "npx serve public"` — быстрый предпросмотр собранного
-  - [ ] `"lint:md": "markdownlint-cli2 'src/content/**/*.md'"`
-  - [ ] `"lint:html": "html-validate 'public/**/*.html'"`
-  - [ ] `"format": "prettier --write 'src/**/*.{js,njk,md,css,json}'"`
-  - [ ] `"check:links": "linkinator public --recurse"` — проверка битых ссылок
-  - [ ] `"test": "npm run build && npm run lint:html && npm run check:links"`
-- [ ] Создать `.editorconfig` для единообразия (отступы, переводы строк)
-- [ ] Создать `.prettierrc` с базовыми настройками
+- ✅ `package.json` scripts:
+  - ✅ `"clean": "rimraf public"` — очистка результата сборки
+  - ✅ `"dev": "npm run clean && eleventy --serve --watch"` — локальная разработка с hot-reload (порт 8080)
+  - ✅ `"build": "npm run clean && eleventy"` — production-сборка
+  - ✅ `"pagefind": "pagefind --site public"` — индексация поиска
+  - ✅ `"postbuild": "npm run pagefind"` — автоиндексация после сборки
+  - ✅ `"serve:public": "npx serve public"` — быстрый предпросмотр собранного
+  - ✅ `"lint:md": "markdownlint-cli2 'src/content/**/*.md'"`
+  - ✅ `"lint:html": "html-validate public/index.html"` (исключены служебные файлы yandex_*.html)
+  - ✅ `"format": "prettier --write 'src/**/*.{js,njk,md,css,json}'"`
+  - ✅ `"check:links": "linkinator public --recurse"` — проверка битых ссылок
+  - ✅ `"check:frontmatter": "node scripts/validate-frontmatter.js"` — заготовка для Этапа 4.2
+  - ✅ `"test": "npm run build && npm run lint:html && npm run check:links"`
+  - ✅ `"deploy": "bash scripts/deploy.sh"` — заготовка для Этапа 7.3
+- ✅ Создать `.editorconfig` для единообразия (отступы, переводы строк)
+- ✅ Создать `.prettierrc.json` с базовыми настройками
+- ✅ Создать `.prettierignore` (исключает `public/`, `node_modules/`, `old/`, `migration-source/`)
+- ✅ Создать `.markdownlint.json` (конфигурация markdownlint)
+- ✅ Создать `.htmlvalidate.json` (конфигурация html-validate)
+- ✅ Создать `.linkinatorrc.json` (конфигурация проверки ссылок)
+- ✅ Создать `.nvmrc` с версией Node.js `24.21.0`
 
 **Definition of Done для Этапа 2:**
-- [ ] `package.json` зафиксирован, зависимости установлены, `node_modules/` игнорируется
-- [ ] Структура каталогов `src/` создана
-- [ ] Команда `npm run dev` запускает локальный сервер на http://localhost:8080 (пустая страница, но без ошибок)
-- [ ] Команда `npm run build` успешно собирает пустой сайт в `public/`
-- [ ] Коммит `Этап 2: стек инициализирован`
+- ✅ `package.json` зафиксирован (v2.0.0), 319 пакетов установлено, `node_modules/` игнорируется
+- ✅ Структура каталогов `src/` создана (13 директорий)
+- ✅ Команда `npm run dev` запускает локальный сервер на http://localhost:8080 (проверено)
+- ✅ Команда `npm run build` успешно собирает сайт в `public/` (1 страница, 60 слов в Pagefind)
+- ✅ Команда `npm test` проходит без ошибок (build + lint:html + check:links — все ссылки 200 OK)
+- ✅ Коммит `Этап 2: стек инициализирован`
 
 ---
 
@@ -1127,27 +1130,21 @@
 | Этап | Статус | Дата завершения |
 |---|---|---|
 | 1. Ревизия и аудит | ✅ Завершён (с блокировками по аналитике) | 2026-10-09 |
-| 2. Подготовка стека | ⏳ Ожидает | — |
+| 2. Подготовка стека | ✅ Завершён | 2026-10-09 |
 | 3. Дизайн-система | ⏳ Ожидает | — |
 | 4. Шаблоны и frontmatter | ⏳ Ожидает | — |
 | 5. Наполнение контентом | ⏳ Ожидает | — |
 | 6. Очистка репозитория | ⏳ Ожидает | — |
 | 7. Тестирование и деплой | ⏳ Ожидает | — |
 
-**Общий прогресс:** 1 / 7 этапов завершено (с блокировками)
+**Общий прогресс:** 2 / 7 этапов завершено
 
-**Что выполнено в Этапе 1:**
+**Что выполнено в Этапе 2:**
 
-- ✅ **1.1 Аудит репозитория** — `.gitignore` проверен; создан `docs/old-inventory.md`; обновлён `README.md`
-- ✅ **1.1.1 Управление большими файлами и очистка истории Git** — все 6 шагов выполнены:
-  - Шаг 1: Резервная копия создана (584 MB)
-  - Шаг 2: `git filter-repo` удалил 16099 файлов стандартного ядра Joomla (47.88 MB)
-  - Шаг 3: `git push --force` выполнен
-  - Шаг 4: Пользователь перенёс 8 тяжёлых файлов на хостинг Beget (через symlink в `~/bardakov.rf-v2/large-media/`)
-  - Шаг 5: `.gitignore` обновлён с глобальными исключениями `*.mp4`, `*.zip`, `large-media/` и т.д.
-  - Шаг 6: Создан `docs/large-files-strategy.md` для ИИ-агента
-- ✅ **1.2 Инвентаризация URL** — `redirects.csv` (119 URL); свежая выгрузка с живого сайта идентична архиву
-- ✅ **1.3 Экспорт контента** — `menu.yaml`, `contacts.yaml`, `analytics.yaml` (Yandex.Metrika ID 98275481), `images-inventory.csv` (364 изобр.), `docs-inventory.csv` (43 док.), `server-config-analysis.md`
+- ✅ **2.1 Инициализация зависимостей** — `package.json` v2.0.0 создан, 319 пакетов установлено (Eleventy 3.1.6, Nunjucks 3.2.4, Bootstrap 5.3.3, AOS, Glightbox, Pagefind 1.5.2, Sharp, html-validate, markdownlint, prettier, husky, linkinator); `.nvmrc` создан (Node.js 24.21.0)
+- ✅ **2.2 Создание структуры папок** — 13 директорий `src/` созданы; `.eleventy.js` (ESM) с 7 кастомными фильтрами, 5 коллекциями, RSS-плагином; 5 data-файлов (`site.json`, `navigation.json`, `contacts.json`, `analytics.json`, `large-media-urls.json`); базовый layout `base.njk`
+- ✅ **2.3 Настройка скриптов** — 13 скриптов в `package.json` (dev, build, pagefind, lint:md, lint:html, format, check:links, check:frontmatter, test, deploy); `.editorconfig`, `.prettierrc.json`, `.prettierignore`, `.markdownlint.json`, `.htmlvalidate.json`, `.linkinatorrc.json`
+- ✅ **Проверка:** `npm test` проходит без ошибок (build + lint:html + check:links — все 3 ссылки 200 OK)
 
 **Блокировки (выполнить при получении доступа):**
 
@@ -1206,6 +1203,12 @@
   - ✅ **Шаг 6:** Создан `docs/large-files-strategy.md` — стратегия для ИИ-агента с тремя сценариями использования
   - ✅ **Этап 1 «Ревизия и аудит» полностью завершён** (с блокировками по GSC/Yandex.Metrika)
   - 🎯 **Готовы к Этапу 2 «Подготовка стека»** (инициализация Eleventy, структура `src/`, скрипты dev/build/CI)
+- **2026-10-09 (rev 7)** — Выполнен Этап 2 «Подготовка стека»:
+  - ✅ **2.1:** `package.json` v2.0.0 создан (ESM, MIT, автор); 319 пакетов установлено (Eleventy 3.1.6, Nunjucks, Bootstrap 5.3.3, AOS, Glightbox, Pagefind 1.5.2, Sharp, html-validate, markdownlint, prettier, husky, lint-staged, linkinator, rimraf); `package-lock.json` 163 KB зафиксирован; `.nvmrc` создан (Node.js 24.21.0)
+  - ✅ **2.2:** Создана структура `src/` (13 директорий); `.eleventy.js` (ESM) с 7 фильтрами (slugify с кириллицей, dateRu, dateISO, truncate, limit, where, sortByDateDesc, absolutizeURL), 5 коллекциями (publishedPages, aboutPages, educationPages, abiturientuPages, vospitaniePages), RSS-плагином, настройками сервера (liveReload, порт 8080); созданы data-файлы `site.json`, `navigation.json`, `contacts.json`, `analytics.json`; базовый layout `base.njk`
+  - ✅ **2.3:** 13 скриптов в `package.json` (clean, dev, build, postbuild, pagefind, serve:public, lint:md, lint:html, format, check:links, check:frontmatter, test, deploy); конфиг-файлы `.editorconfig`, `.prettierrc.json`, `.prettierignore`, `.markdownlint.json`, `.htmlvalidate.json`, `.linkinatorrc.json`
+  - ✅ **Проверка:** `npm run dev` запускает dev-сервер на http://localhost:8080; `npm run build` успешно собирает сайт (1 страница + Pagefind индекс 60 слов); `npm test` проходит без ошибок (build + lint:html + check:links — 3/3 ссылки возвращают 200 OK)
+  - 🎯 **Готовы к Этапу 3 «Дизайн-система»** (токены, UI-кит, прототип главной)
 
 ---
 

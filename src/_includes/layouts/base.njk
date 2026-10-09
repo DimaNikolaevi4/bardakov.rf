@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} — {{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+  <main>
+    {{ content | safe }}
+  </main>
+  <footer>
+    <p>{{ site.copyright | replace("{year}", "2026") }}</p>
+  </footer>
+</body>
+</html>

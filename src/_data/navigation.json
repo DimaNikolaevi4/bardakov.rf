@@ -1,0 +1,107 @@
+{
+  "$comment": "Структура навигации сайта. Источник: migration-source/menu.yaml. Создано: 2026-10-09.",
+  "main_menu": [
+    {
+      "title": "Обо мне",
+      "url": "/obo-mne/",
+      "icon": "bi-person-circle",
+      "section": "obo-mne"
+    },
+    {
+      "title": "Обучение",
+      "url": "/obuchenie/",
+      "icon": "bi-book",
+      "section": "obuchenie",
+      "submenu": [
+        { "title": "Все материалы по обучению", "url": "/obuchenie/", "icon": "bi-grid-fill" },
+        { "title": "Электромонтер", "url": "/obuchenie/elektromonter/" },
+        { "title": "КИП", "url": "/obuchenie/kip/" },
+        { "title": "КСК", "url": "/obuchenie/ksk/" },
+        { "title": "ПМ.02 Лекции", "url": "/obuchenie/pm02/lektsii/" }
+      ]
+    },
+    {
+      "title": "Абитуриенту",
+      "url": "/abiturientu/",
+      "icon": "bi-mortarboard",
+      "section": "abiturientu",
+      "submenu": [
+        { "title": "Всё для абитуриентов", "url": "/abiturientu/", "icon": "bi-grid-fill" },
+        { "title": "Профессии", "url": "/abiturientu/professii/" },
+        { "title": "Специальности", "url": "/abiturientu/spetsialnosti/" },
+        { "title": "Документация", "url": "/abiturientu/dokumentatsiya/" }
+      ]
+    },
+    {
+      "title": "Воспитание",
+      "url": "/vospitanie/",
+      "icon": "bi-heart",
+      "section": "vospitanie"
+    }
+  ],
+  "mobile_extra": [
+    { "title": "Поиск", "url": "/search/", "icon": "bi-search" }
+  ],
+  "header_actions": [
+    { "id": "search-btn", "title": "Поиск", "icon": "bi-search", "action": "open search modal" },
+    { "id": "theme-toggle", "title": "Тёмная тема", "icon": "bi-moon-fill", "action": "toggle dark theme" },
+    { "id": "a11y-toggle", "title": "Версия для слабовидящих", "icon": "bi-eye", "action": "open a11y panel" },
+    { "id": "offcanvas-toggle", "title": "Все разделы", "icon": "menu (svg)", "action": "open offcanvas nav" }
+  ],
+  "footer_nav": [
+    {
+      "title": "Навигация",
+      "links": [
+        { "title": "Обо мне", "url": "/obo-mne/", "icon": "bi-chevron-right" },
+        { "title": "Обучение", "url": "/obuchenie/", "icon": "bi-chevron-right" },
+        { "title": "Абитуриенту", "url": "/abiturientu/", "icon": "bi-chevron-right" },
+        { "title": "Воспитание", "url": "/vospitanie/", "icon": "bi-chevron-right" },
+        { "title": "Поиск по сайту", "url": "/search/", "icon": "bi-chevron-right" }
+      ]
+    },
+    {
+      "title": "Материалы",
+      "links": [
+        { "title": "Учебные материалы", "url": "/obuchenie/", "icon": "bi-chevron-right" },
+        { "title": "Лекции", "url": "/obuchenie/", "icon": "bi-chevron-right" },
+        { "title": "Практические работы", "url": "/obuchenie/", "icon": "bi-chevron-right" },
+        { "title": "Абитуриентам", "url": "/abiturientu/", "icon": "bi-chevron-right" }
+      ]
+    }
+  ],
+  "government_links": [
+    { "title": "Правительство Российской Федерации", "short_title": "Правительство России", "url": "http://government.ru/", "icon": "government.svg", "alt": "Правительство Российской Федерации" },
+    { "title": "Президент Российской Федерации", "short_title": "Президент РФ", "url": "https://www.kremlin.ru/", "icon": "pr-rf.webp", "alt": "Президент Российской Федерации" },
+    { "title": "Министерство просвещения Российской Федерации", "short_title": "Минпросвещения", "url": "https://edu.gov.ru/", "icon": "min-pr.webp", "alt": "Министерство просвещения РФ" },
+    { "title": "Федеральная служба по надзору в сфере образования и науки", "short_title": "Рособрнадзор", "url": "https://obrnadzor.gov.ru/", "icon": "cropped-logo_rosobrnadzor-2.png", "alt": "Рособрнадзор" },
+    { "title": "Генеральная прокуратура Российской Федерации", "short_title": "Генпрокуратура", "url": "https://epp.genproc.gov.ru/", "icon": "prok-rf.webp", "alt": "Генеральная прокуратура РФ" },
+    { "title": "Министерство труда и социальной защиты", "short_title": "Минтруд", "url": "https://mintrud.gov.ru/", "icon": "min-tr.webp", "alt": "Министерство труда и социальной защиты" },
+    { "title": "Федеральная служба по труду и занятости", "short_title": "Роструд", "url": "https://rostrud.gov.ru/", "icon": "rostrud.gov.svg", "alt": "Роструд" },
+    { "title": "Официальный сайт МЧС России", "short_title": "МЧС России", "url": "https://www.mchs.gov.ru/", "icon": "MCHS.webp", "alt": "МЧС России" },
+    { "title": "Официальный портал Правительства Ростовской области", "short_title": "Правительство РО", "url": "https://www.donland.ru/", "icon": "don-logo.svg", "alt": "Правительство Ростовской области" },
+    { "title": "Министерство общего и профессионального образования Ростовской области", "short_title": "Минобразования РО", "url": "https://minobr.donland.ru/", "icon": "logo_min_rost.png", "alt": "Министерство образования Ростовской области" },
+    { "title": "Федеральная служба по экологическому и технологическому надзору", "short_title": "Ростехнадзор", "url": "https://gosnadzor.ru/", "icon": "rtn.webp", "alt": "Ростехнадзор" },
+    { "title": "Министерство науки и высшего образования РФ", "short_title": "Минобрнауки", "url": "https://www.minobrnauki.gov.ru/", "icon": "MNVO.webp", "alt": "Минобрнауки России" }
+  ],
+  "a11y_panel": {
+    "title": "Версия для слабовидящих",
+    "icon": "bi-eye",
+    "options": [
+      { "id": "a11yLargeFont", "label": "Крупный шрифт" },
+      { "id": "a11yHighContrast", "label": "Высокий контраст" },
+      { "id": "a11yNoAnimations", "label": "Без анимаций" }
+    ],
+    "actions": {
+      "reset": "↩ Сбросить",
+      "close": "✕ Закрыть"
+    }
+  },
+  "search_modal": {
+    "heading": "Поиск по сайту",
+    "placeholder": "Введите запрос...",
+    "submit_button": "Найти",
+    "action": "/search/",
+    "method": "get",
+    "param": "q"
+  }
+}
