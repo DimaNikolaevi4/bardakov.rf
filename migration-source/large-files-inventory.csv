@@ -1,0 +1,50 @@
+path,object,size_bytes,size_mb,category,action,reason
+old/joomla/ПР МДК 03.02 КИП 4 КУРС.docx,d4a050f4d51eef4169e40d778afe36a28551e5bb,14606791,13.93,large-doc,host-on-beget,Большой документ — хранить на хостинге
+old/joomla/images/dost/ц1.jpg,c983241cc7cca5cdf431a8cba990e090ababfbe4,10522426,10.03,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/pdf/razgovor/ДЕНЬ ЗНАНИЙ.pdf,81abc6c4a52a9c9eae847b4b3dacb629f0a71549,10106725,9.64,large-pdf,host-on-beget,"Большой PDF — хранить на хостинге, в репозитории только путь"
+old/joomla/images/dost/ц.jpg,230986328149869c30ec4d08762f5ba5557c457c,8992434,8.58,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/ПР МДК 03.02 КИП 3 КУРС.docx,8e53263fdc47cad693c8a9795f2b724e2f8eff71,8858682,8.45,large-doc,host-on-beget,Большой документ — хранить на хостинге
+old/joomla/images/dost/кск (2).jpg,d73a4ab082888c3f6f45955c0eb45396711a2a4c,8011613,7.64,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/pdf/razgovor/Атомный урок.pdf,a4bf371a5be3a0c912fa18e8da19915144efcbe8,7570576,7.22,large-pdf,host-on-beget,"Большой PDF — хранить на хостинге, в репозитории только путь"
+joomla/plugins/system/webauthn/fido.jwt,3ccc2502e3237fc6abec36d28b9764b1b7f5c130,7232130,6.90,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/pdf/razgovor/ДЕНЬ КОСМОНАВТИКИ.pdf,5f2924e16c839856fb2179b2c459416d6f6b51b7,5821664,5.55,large-pdf,host-on-beget,"Большой PDF — хранить на хостинге, в репозитории только путь"
+joomla/tmp/pdfviewer_content_1.4.1.zip,abccc7c63180b5cbfe66c09c34f462ccd1b367e5,5521507,5.27,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/dost/ц2.jpg,8818c740e161d32646cf34e42163153a99504d28,5475462,5.22,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/pdf/vospitanie/Устав-ГБПОУ-РО-СИТ-14.12.2018[1].pdf,dc98d4c3c13600db574d26b37052cb6f7e085fb5,5427201,5.18,large-pdf,host-on-beget,"Большой PDF — хранить на хостинге, в репозитории только путь"
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.worker.mjs.map,2eb5336371012400dd6dfd4e9db23615d9dbd573,5020489,4.79,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/tmp/pdfviewer_content_1.4.0.zip,a80c7222b76bee189182fe182dbf59dd1bd4ec45,5004985,4.77,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/tmp/pdfviewer_content_1.3.2.zip,5346e3ea5c4fe97e6d265825c25e7bf857f9f1a7,5004978,4.77,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.worker.js.map,2a7f7db2ddedebcac82495b46801bec05af5e395,4971937,4.74,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/dost/я.jpg,d1f378f3449176b506e541f061fd22aa0125d8e7,4014419,3.83,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/pm02/headers/156.jpg,8ccb82b202caaca92be952a5b5f8f2a738877388,3613174,3.45,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/dost/кск (1).jpg,1a333bb89a80761a0a98f45f1cfeb5667a8ec1d7,3303221,3.15,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/dost/ы2.jpg,76c1c27c3ecd54c895c12fe58883edffa985c7c7,3214044,3.07,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/dost/ы4.jpg,77d18d51d29c6a0e91d50a11fa392c1d9048e455,3200126,3.05,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+old/joomla/images/dost/ы3.jpg,ee8a382ca1e8ac1aff06fd9adf119f7bfaec2881,3192280,3.04,large-image,host-on-beget-or-optimize,"Большое изображение — оптимизировать (WebP, resize) или хранить на хостинге"
+joomla/tmp/install_67eb8097c5ff9/com_akeebabackup-core.zip,3e4c70bec5fe367fb67efe0172b1e37c0b84d8f7,3029278,2.89,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/new-stack/site/assets/images/dost/я111.jpg,1db5826b1137e41705a659982977bcaf21ce14a1,2998460,2.86,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/joomla/images/a9-12.jpg,37e09f73c09ed47c7227386cc9db853adf1dd7d1,2937429,2.80,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/joomla/images/Animation/Снимок плеера2.png,16b58df6b2e9856abc55faeeea1012b267a80c38,2590789,2.47,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/joomla/images/pm02/headers/20181219_100315.jpg,faa4566f513f6310f44c14f28ba0bd879844a5c0,2196672,2.09,image,keep-but-optimize,Изображение — оптимизировать в WebP
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.worker.js,ac3d027f8e53a9e7e8c21089b8fb110dc7fb6d91,1981637,1.89,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.mjs.map,fa0d20eda74984d0529ff354be8edd87efddbdc4,1977713,1.89,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.worker.mjs,10a244a1cc1b4a5288efbe1520baf3defe3000e1,1892435,1.80,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/media/vendor/tinymce/tinymce.js,8d76d9c958413496f7ab1c83b10bd97563d7e381,1824338,1.74,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/abiturientu/professii/prodavec/pr.png,f0170bc4a29dbceffc4892bd4d3285d9dcccb14e,1681904,1.60,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/joomla/images/new_foto/pam/6.jpg,ed9ca109bdc2ab75ba38c483692befc4a1eca5f0,1618085,1.54,image,keep-but-optimize,Изображение — оптимизировать в WebP
+joomla/media/vendor/tinymce/themes/silver/theme.js,cab3a760ff3e0aec4cd7a5139ce5f8dc4267a089,1523042,1.45,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/pdf/razgovor/ДЕНЬ ЗЕМЛИ.pdf,eaab874d9632e8b66fb7f057376729a08f06737b,1505493,1.44,pdf,keep,PDF документ — оставить в репозитории
+old/joomla/images/new_foto/a24.jpeg,d45cd9406d0253bc83fc0a39bb15cfcc788636fa,1504600,1.43,image,keep-but-optimize,Изображение — оптимизировать в WebP
+joomla/plugins/content/pdfviewer/assets/pdfjs/web/viewer.mjs.map,ddabd5895716fa1b1e424c7a5be66d1bd61e173c,1495830,1.43,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/plugins/content/pdfviewer/assets/pdfjs/build/pdf.js.map,39c3bd65a6a91e5661985a531c17060f2bbc35a3,1434098,1.37,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/joomla/images/pdf/obychen/materialovedenie_kurs_lektsiy_.pdf,a85a9abd6fcdb64fcddb64ad2a1d1b6a20cf31a0,1399355,1.33,pdf,keep,PDF документ — оставить в репозитории
+old/joomla/images/pdf/razgovor/ДЕНЬ ТРУДА.pdf,32ff79c25564b5a9b6c80ebfd6a9ba58f98ceb65,1319784,1.26,pdf,keep,PDF документ — оставить в репозитории
+old/new-stack/site/assets/images/abiturientu/kabinet/св.png,33ab6407d83359104395b4179dc7ac8797cf7d33,1308293,1.25,image,keep-but-optimize,Изображение — оптимизировать в WebP
+"old/joomla/images/pdf/razgovor/ТАМ, ГДЕ РОССИЯ.pdf",8899bd7301ee0b3a96d929d7768469168c047a83,1288580,1.23,pdf,keep,PDF документ — оставить в репозитории
+old/new-stack/site/assets/images/dost/15.jpg,18d9110256135408b1955ce12f261892b5b93e5f,1270907,1.21,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/joomla/images/pdf/razgovor/ДЕНЬ ВОССОЕДИНЕНИЯ КРЫМА С РОССИЕЙ.pdf,920b3b11df2fbfb777684d907f20f05dfa7de575,1265363,1.21,pdf,keep,PDF документ — оставить в репозитории
+joomla/media/gantry5/assets/js/font-awesome5-all.min.js,455df8cab3c5f304b72c3f67af5b646648f7c175,1182680,1.13,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+old/new-stack/site/assets/images/dost/573я.jpg,b78f966ac2f92f8feb7fe7f06d4e82773bef5e0b,1163488,1.11,image,keep-but-optimize,Изображение — оптимизировать в WebP
+joomla/plugins/content/pdfviewer/assets/pdfjs/web/viewer.js.map,faf37bc98725bbf9d4d2790a2fc577ed1d96353a,1108728,1.06,joomla-core,remove-from-history,Стандартный файл Joomla — не должен быть в репозитории
+joomla/templates/rt_elixir/images/home/slideshow/img-01.jpg,63f15634e4c27920f12ce2fb1c9008f4843cc4c8,1073147,1.02,image,keep-but-optimize,Изображение — оптимизировать в WebP
+old/new-stack/site/assets/images/dost/17.jpg,89077b11251506c1a7816c9e1798c17227c916b4,1066632,1.02,image,keep-but-optimize,Изображение — оптимизировать в WebP
