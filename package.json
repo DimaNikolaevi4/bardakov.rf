@@ -6,7 +6,7 @@
   "main": ".eleventy.js",
   "scripts": {
     "clean": "rimraf public",
-    "dev": "npm run clean && eleventy --serve --watch",
+    "dev": "npm run build && eleventy --serve --watch",
     "build": "npm run clean && eleventy",
     "postbuild": "npm run pagefind",
     "pagefind": "pagefind --site public",
