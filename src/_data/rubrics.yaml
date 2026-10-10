@@ -1,0 +1,145 @@
+# Полная структура рубрик сайта bardakov.rf
+# Источник: design-reference/cit-calck-reference/rubrics.yaml (адаптировано под 5 разделов)
+# Создано: 2026-10-10 (Этап A интеграции)
+#
+# Используется:
+# - В header.njk для offcanvas-меню (3 уровня)
+# - В search-modal.njk для select-списка (по разделам)
+# - В offcanvas-nav.js через <script type="application/json" id="rubricsData">
+
+main_rubrics:
+  - code: "1"
+    title: "Обо мне"
+    slug: obo-mne
+    level: 0
+    icon: "person"
+    children:
+      - code: "1.1"
+        title: "Биография"
+        slug: biografiya
+      - code: "1.2"
+        title: "Методическая работа"
+        slug: metodicheskaya-rabota
+      - code: "1.3"
+        title: "Достижения"
+        slug: dostizheniya
+      - code: "1.4"
+        title: "Хобби (Нейро Мульт Студия)"
+        slug: khobbi
+      - code: "1.5"
+        title: "Контакты"
+        slug: kontakty
+
+  - code: "2"
+    title: "Обучение"
+    slug: obuchenie
+    level: 0
+    icon: "book"
+    children:
+      - code: "2.1"
+        title: "КИП (контрольно-измерительные приборы)"
+        slug: kip
+        children:
+          - code: "2.1.1"
+            title: "Практические работы"
+            slug: prakticheskie-kip
+      - code: "2.2"
+        title: "КСК (компьютерные системы и комплексы)"
+        slug: ksk
+      - code: "2.3"
+        title: "Электромонтёр"
+        slug: elektromonter
+      - code: "2.4"
+        title: "ПМ.02 Лекции"
+        slug: pm02
+        children:
+          - code: "2.4.1"
+            title: "Раздел 1"
+            slug: lektsii
+
+  - code: "3"
+    title: "Абитуриенту"
+    slug: abiturientu
+    level: 0
+    icon: "mortarboard"
+    children:
+      - code: "3.1"
+        title: "Профессии"
+        slug: professii
+        children:
+          - code: "3.1.1"
+            title: "15.01.31 Мастер КИП и автоматики"
+            slug: 15-01-31-master-kip
+          - code: "3.1.2"
+            title: "15.01.05 Сварщик"
+            slug: 15-01-05-svarshchik
+          - code: "3.1.3"
+            title: "13.01.10 Электромонтёр"
+            slug: 13-01-10-elektromonter
+          - code: "3.1.4"
+            title: "43.01.09 Повар, кондитер"
+            slug: 43-01-09-povar-konditer
+          - code: "3.1.5"
+            title: "08.01.07 Мастер общестроительных работ"
+            slug: 08-01-07-master-obshchestroitelnykh-rabot
+          - code: "3.1.6"
+            title: "Продавец, контролёр-кассир"
+            slug: prodavets-kontroler-kassir
+      - code: "3.2"
+        title: "Специальности"
+        slug: spetsialnosti
+        children:
+          - code: "3.2.1"
+            title: "Компьютерные системы и комплексы"
+            slug: kompyuternye-sistemy-i-kompleksy
+          - code: "3.2.2"
+            title: "Экономика и бухгалтерский учёт"
+            slug: ekonomika-i-bukhgalterskij-uchet
+      - code: "3.3"
+        title: "Документация"
+        slug: dokumentatsiya
+
+  - code: "4"
+    title: "Воспитание"
+    slug: vospitanie
+    level: 0
+    icon: "heart"
+    children:
+      - code: "4.1"
+        title: "Для родителей"
+        slug: dlya-roditelej
+        children:
+          - code: "4.1.1"
+            title: "Нужно ли обсуждать с ребёнком тему алкоголя и наркотиков"
+            slug: nuzhno-li-obsuzhdat-s-rebenkom-temu-alkogolya-i-narkotikov
+          - code: "4.1.2"
+            title: "Юридическая ответственность"
+            slug: yuridicheskaya-otvetstvennost
+          - code: "4.1.3"
+            title: "16 важных правил «про это»"
+            slug: 16-vazhnykh-pravil-pro-eto
+          - code: "4.1.4"
+            title: "Как помочь подростку справляться со стрессом"
+            slug: kak-pomoch-podrostku-spravlyatsya-so-stressom
+          - code: "4.1.5"
+            title: "Советы родителям во время экзамена"
+            slug: prakticheskie-sovety-roditelyam-vo-vremya-ekzamena
+          - code: "4.1.6"
+            title: "Как не допустить суицид у подростка"
+            slug: kak-ne-dopustit-suitsid-u-podrostka
+      - code: "4.2"
+        title: "Разговоры о важном"
+        slug: razgovory-o-vazhnom
+      - code: "4.3"
+        title: "Советы студентам"
+        slug: prakticheskie-sovety-studentam
+      - code: "4.4"
+        title: "Нормативные документы"
+        slug: normativnye-dokumenty
+
+  - code: "5"
+    title: "Поиск"
+    slug: search
+    level: 0
+    icon: "search"
+    url: /search/

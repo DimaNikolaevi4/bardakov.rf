@@ -1,0 +1,64 @@
+# Главное меню сайта bardakov.rf
+# Источник: design-reference/cit-calck-reference/menu.yaml (адаптировано под 5 разделов)
+# Создано: 2026-10-10 (Этап A интеграции)
+#
+# Используется в header.njk для десктоп-навигации (≥992px)
+
+main:
+  - title: Обо мне
+    url: /obo-mne/
+    key: about
+    children:
+      - title: Биография
+        url: /obo-mne/biografiya/
+      - title: Методическая работа
+        url: /obo-mne/metodicheskaya-rabota/
+      - title: Достижения
+        url: /obo-mne/dostizheniya/
+      - title: Хобби (Нейро Мульт Студия)
+        url: /obo-mne/khobbi/
+      - title: Контакты
+        url: /obo-mne/kontakty/
+
+  - title: Обучение
+    url: /obuchenie/
+    key: education
+    children:
+      - title: КИП (контрольно-измерительные приборы)
+        url: /obuchenie/kip/
+      - title: Практические работы КИП
+        url: /obuchenie/kip/prakticheskie-kip/
+      - title: КСК (компьютерные системы и комплексы)
+        url: /obuchenie/ksk/
+      - title: Электромонтёр
+        url: /obuchenie/elektromonter/
+      - title: ПМ.02 Лекции
+        url: /obuchenie/pm02/lektsii/
+
+  - title: Абитуриенту
+    url: /abiturientu/
+    key: abiturient
+    children:
+      - title: Профессии
+        url: /abiturientu/professii/
+      - title: Специальности
+        url: /abiturientu/spetsialnosti/
+      - title: Документация
+        url: /abiturientu/dokumentatsiya/
+
+  - title: Воспитание
+    url: /vospitanie/
+    key: vospitanie
+    children:
+      - title: Для родителей
+        url: /vospitanie/dlya-roditelej/
+      - title: Разговоры о важном
+        url: /vospitanie/razgovory-o-vazhnom/
+      - title: Советы студентам
+        url: /vospitanie/prakticheskie-sovety-studentam/
+      - title: Нормативные документы
+        url: /vospitanie/normativnye-dokumenty/
+
+  - title: Контакты
+    url: /obo-mne/kontakty/
+    key: contacts

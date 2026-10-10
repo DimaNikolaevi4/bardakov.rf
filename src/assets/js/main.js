@@ -1,171 +1,95 @@
 /* ============================================================
- * main.js — Основные интерактивы сайта
- * Создано: 2026-10-09 (Этап 3.3)
+ * main.js — Основные интерактивы сайта bardakov.rf
+ * Источник: design-reference/index.html (строки 284-339) + cit-calck main.js
+ * Создано: 2026-10-10 (Этап E интеграции)
+ *
+ * Функции:
+ * 1. Sticky header: тень при скролле
+ * 2. Reveal animations через IntersectionObserver
+ * 3. Card glow effect (mousemove → radial-gradient)
+ * 4. Scroll-to-top кнопка
+ * 5. Подсветка активного пункта меню
+ *
+ * NOTE: Offcanvas и Search-modal вынесены в отдельные файлы
+ *       (offcanvas-nav.js, search-modal.js)
  * ============================================================ */
 
 (function () {
   "use strict";
 
-  /**
-   * Sticky header: добавляет тень при скролле
-   */
+  // 1. Тень шапки при скролле
   function initStickyHeader() {
-    const header = document.getElementById("site-header");
+    const header = document.querySelector('.site-header');
     if (!header) return;
-
-    let lastScroll = 0;
-    function onScroll() {
-      const scroll = window.pageYOffset || document.documentElement.scrollTop;
-      if (scroll > 8) {
-        header.classList.add("is-scrolled");
-      } else {
-        header.classList.remove("is-scrolled");
-      }
-      lastScroll = scroll;
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 6);
+    };
     onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /**
-   * Offcanvas mobile menu: открыть/закрыть
-   */
-  function initOffcanvas() {
-    const offcanvas = document.getElementById("offcanvasNav");
-    const backdrop = document.getElementById("offcanvasBackdrop");
-    const openBtn = document.getElementById("offcanvas-toggle");
+  // 2. Плавное появление карточек (reveal)
+  function initReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
 
-    if (!offcanvas || !openBtn) return;
-
-    function open() {
-      offcanvas.classList.add("is-open");
-      offcanvas.setAttribute("aria-hidden", "false");
-      if (backdrop) backdrop.classList.add("is-open");
-      openBtn.setAttribute("aria-expanded", "true");
-      document.body.classList.add("no-scroll");
-
-      // Фокус на offcanvas
-      setTimeout(() => offcanvas.focus(), 100);
-
-      document.addEventListener("keydown", escapeHandler);
-    }
-
-    function close() {
-      offcanvas.classList.remove("is-open");
-      offcanvas.setAttribute("aria-hidden", "true");
-      if (backdrop) backdrop.classList.remove("is-open");
-      openBtn.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("no-scroll");
-      openBtn.focus();
-
-      document.removeEventListener("keydown", escapeHandler);
-    }
-
-    function escapeHandler(e) {
-      if (e.key === "Escape") close();
-    }
-
-    openBtn.addEventListener("click", open);
-
-    // Кнопки закрытия (data-dismiss="offcanvas")
-    document.querySelectorAll('[data-dismiss="offcanvas"]').forEach((btn) => {
-      btn.addEventListener("click", close);
-    });
-
-    if (backdrop) {
-      backdrop.addEventListener("click", close);
-    }
-
-    // Подменю: при клике на .offcanvas-parent копируем подменю в side panel
-    document.querySelectorAll(".offcanvas-parent").forEach((parentBtn) => {
-      parentBtn.addEventListener("click", () => {
-        const title = parentBtn.dataset.ocTitle;
-        const target = parentBtn.dataset.ocTarget;
-        if (!target) return;
-
-        // Извлекаем подменю из data-атрибутов навигации
-        const navItem = document.querySelector(
-          `.main-nav-link[href]:nth-of-type(1)`
-        );
-        // TODO: реализовать подменю для оффканваса (упрощённая версия без side-panel)
-        // Для прототипа просто переходим по первой ссылке подменю
+  // 3. Эффект фонарика на карточках
+  function initCardGlow() {
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
       });
     });
   }
 
-  /**
-   * Search modal
-   */
-  function initSearchModal() {
-    const modal = document.getElementById("searchModal");
-    const openBtn = document.getElementById("search-btn");
-    const input = document.getElementById("searchModalInput");
-
-    if (!modal || !openBtn) return;
-
-    function open() {
-      modal.setAttribute("aria-hidden", "false");
-      openBtn.setAttribute("aria-expanded", "true");
-      document.body.classList.add("no-scroll");
-
-      setTimeout(() => {
-        if (input) input.focus();
-      }, 100);
-
-      document.addEventListener("keydown", escapeHandler);
-    }
-
-    function close() {
-      modal.setAttribute("aria-hidden", "true");
-      openBtn.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("no-scroll");
-      openBtn.focus();
-      document.removeEventListener("keydown", escapeHandler);
-    }
-
-    function escapeHandler(e) {
-      if (e.key === "Escape") close();
-    }
-
-    openBtn.addEventListener("click", open);
-
-    // Кнопки закрытия
-    document.querySelectorAll('[data-action="close-search"]').forEach((btn) => {
-      btn.addEventListener("click", close);
-    });
-
-    // Закрытие по Escape (даже если фокус внутри)
-    modal.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") close();
+  // 4. Scroll-to-top
+  function initScrollTop() {
+    const btn = document.getElementById('scrollTop');
+    if (!btn) return;
+    const onScroll = () => {
+      btn.classList.toggle('is-visible', window.scrollY > 400);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  /**
-   * Подсветка активного пункта меню
-   */
+  // 5. Подсветка активного пункта меню
   function initActiveNav() {
     const currentPath = window.location.pathname;
-    document.querySelectorAll(".main-nav-link").forEach((link) => {
-      const href = link.getAttribute("href");
-      if (href && (href === currentPath || currentPath.startsWith(href))) {
-        link.setAttribute("aria-current", "page");
+    document.querySelectorAll('.main-nav-link').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href && href !== '/' && currentPath.startsWith(href)) {
+        link.setAttribute('aria-current', 'page');
       }
     });
   }
 
-  /**
-   * Инициализация
-   */
+  // Init
   function init() {
     initStickyHeader();
-    initOffcanvas();
-    initSearchModal();
+    initReveal();
+    initCardGlow();
+    initScrollTop();
     initActiveNav();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }

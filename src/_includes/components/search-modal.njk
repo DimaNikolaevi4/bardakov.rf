@@ -1,42 +1,96 @@
-{# search-modal.njk — Модальное окно поиска
-   Источник: old/new-stack/site/assets/components/header.html
-   Создано: 2026-10-09 (Этап 3.2)
-   Доступность: role="dialog", aria-modal, фокус-ловушка
+{# search-modal.njk — Модальное окно поиска (2 секции)
+   Источник: design-reference/cit-calck-reference/header.njk (строки 127–186)
+   Адаптировано: Lunr.js → Pagefind (уже установлен)
+   Создано: 2026-10-10 (Этап C интеграции)
+
+   2 секции:
+   1. Поиск по разделам — <select> с деревом всех рубрик (3 уровня)
+   2. Поиск по фразам — input + мгновенные результаты через Pagefind
 #}
-<div class="search-modal"
-     id="searchModal"
-     role="dialog"
-     aria-modal="true"
-     aria-labelledby="searchModalTitle"
-     aria-hidden="true">
-  <div class="search-modal__overlay" data-action="close-search"></div>
-  <div class="search-modal__dialog">
+<div class="search-modal" id="searchModal" aria-hidden="true">
+  <div class="search-modal__overlay" id="searchModalOverlay" data-action="close-search"></div>
+  <div class="search-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle">
     <button type="button"
             class="search-modal__close close-btn"
             aria-label="Закрыть поиск"
             data-action="close-search">
-      <i class="bi bi-x-lg" aria-hidden="true"></i>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
     </button>
+
     <h2 class="search-modal__heading" id="searchModalTitle">
-      <i class="bi bi-search" aria-hidden="true"></i>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
       Поиск по сайту
     </h2>
-    <form class="search-modal__form" role="search" action="/search/" method="get">
-      <div class="search-modal__input-wrap">
-        <i class="bi bi-search search-modal__icon" aria-hidden="true"></i>
-        <input type="search"
-               name="q"
-               class="search-modal__input"
-               id="searchModalInput"
-               placeholder="Введите запрос..."
-               autocomplete="off"
-               autocorrect="off"
-               spellcheck="false"
-               aria-label="Поисковый запрос">
-        <button type="submit" class="btn btn-primary">
-          Найти
-        </button>
+
+    {# Секция 1: Поиск по разделам #}
+    <div class="search-modal__section">
+      <h3 class="search-modal__section-title">Поиск по разделам</h3>
+      <select class="search-modal__select" id="searchRubricSelect">
+        <option value="">Выберите нужный раздел/рубрику сайта</option>
+        {% for main in rubrics.main_rubrics %}
+          {% set mainUrl = '/' + main.slug + '/' %}
+          {% if main.url %}
+            {% set mainUrl = main.url %}
+          {% endif %}
+          <option value="{{ mainUrl }}">{{ main.code }}. {{ main.title }}</option>
+          {% if main.children %}
+            {% for child in main.children %}
+              {% set childUrl = '/' + main.slug + '/' + child.slug + '/' %}
+              {% if child.url %}
+                {% set childUrl = child.url %}
+              {% endif %}
+              <option value="{{ childUrl }}">&nbsp;&nbsp;&nbsp;{{ child.code }} {{ child.title }}</option>
+              {% if child.children %}
+                {% for grandchild in child.children %}
+                  {% set gcUrl = '/' + main.slug + '/' + child.slug + '/' + grandchild.slug + '/' %}
+                  {% if grandchild.url %}
+                    {% set gcUrl = grandchild.url %}
+                  {% endif %}
+                  <option value="{{ gcUrl }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ grandchild.code }} {{ grandchild.title }}</option>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+    {# Разделитель #}
+    <div class="search-modal__divider"></div>
+
+    {# Секция 2: Поиск по фразам #}
+    <div class="search-modal__section">
+      <h3 class="search-modal__section-title">Поиск по фразам</h3>
+      <form class="search-modal__form" role="search" action="/search/" method="get">
+        <div class="search-modal__input-wrap">
+          <svg class="search-modal__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="search"
+                 name="q"
+                 class="search-modal__input"
+                 id="searchModalInput"
+                 placeholder="Введите запрос для поиска..."
+                 autocomplete="off"
+                 autocorrect="off"
+                 spellcheck="false"
+                 aria-label="Поисковый запрос">
+          <button type="submit" class="btn btn-primary search-modal__submit">Найти</button>
+        </div>
+      </form>
+
+      {# Мгновенные результаты (через Pagefind) #}
+      <div class="search-modal__results" id="searchModalResults" style="display:none;">
+        <p class="search-modal__results-info" id="searchModalResultsInfo"></p>
+        <ul class="search-modal__results-list" id="searchModalResultsList"></ul>
       </div>
-    </form>
+    </div>
   </div>
 </div>

@@ -1,93 +1,159 @@
-{# header.njk — Шапка сайта
-   Источник: old/DESIGN.md §6.3 + old/new-stack/site/assets/components/header.html
-   Создано: 2026-10-09 (Этап 3.2)
-#}
-<header class="site-header" id="site-header" role="banner">
-  <div class="container">
-    <div class="header-inner">
+{# header.njk — Шапка сайта bardakov.rf
+   Источник: design-reference/cit-calck-reference/header.njk (адаптировано)
+   Дизайн: design-reference/style.css (палитра «Золотой день / Ночное небо»)
+   Создано: 2026-10-10 (Этап B интеграции)
 
-      {# === Логотип === #}
-      <a href="/" class="header-brand" aria-label="На главную страницу">
-        <img src="/favicon.ico" alt="" class="header-logo-img" width="32" height="32">
-        <span class="header-brand-text">
-          <span class="header-brand-name">{{ site.name }}</span>
-          <span class="header-brand-sub">{{ site.footerText }}</span>
-        </span>
+   Особенности:
+   - Sticky с backdrop-filter: blur(14px)
+   - Монограмма «БД» в градиентном квадрате (из design-reference)
+   - 5 пунктов главного меню (Обо мне / Обучение / Абитуриенту / Воспитание / Контакты)
+   - 4 иконки действий: Email / Поиск / A11y / Dark-theme
+   - Кнопка «Все разделы» (offcanvas-toggle)
+   - Бургер для мобильных
+#}
+<header id="site-header" class="site-header" data-site-header>
+  <div class="container nav-wrapper">
+
+    {# === Логотип-монограмма «БД» === #}
+    <a href="/" class="logo" aria-label="На главную">
+      <span class="logo-mark" aria-hidden="true">БД</span>
+      <span class="logo-text">
+        <strong>Бардаков Д. Н.</strong>
+        <span>Персональный сайт</span>
+      </span>
+    </a>
+
+    {# === Десктоп-навигация (≥992px) === #}
+    <nav class="main-nav hidden-md-down" role="navigation" aria-label="Основная навигация">
+      <ul class="main-nav-list">
+        {% for item in menu.main %}
+        <li class="main-nav-item{% if item.children %} has-submenu{% endif %}">
+          <a href="{{ item.url }}"
+             class="main-nav-link{% if item.children %} has-submenu-trigger{% endif %}"
+             {% if page.url == item.url %}aria-current="page"{% endif %}>
+            {{ item.title }}
+            {% if item.children %}
+            <svg class="main-nav-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            {% endif %}
+          </a>
+          {% if item.children %}
+          <ul class="main-nav-submenu">
+            {% for sub in item.children %}
+            <li>
+              <a href="{{ sub.url }}" class="main-nav-submenu-link">{{ sub.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    {# === Иконки действий === #}
+    <div class="header-actions">
+      {# Email #}
+      <a href="mailto:{{ contacts.contacts.email }}"
+         class="header-icon-btn"
+         title="Написать на почту: {{ contacts.contacts.email }}"
+         aria-label="Электронная почта">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
       </a>
 
-      {# === Десктоп-навигация (≥992px) === #}
-      <nav class="main-nav hidden-md-down" role="navigation" aria-label="Основная навигация">
-        <ul class="main-nav-list">
-          {% for item in navigation.main_menu %}
-          <li class="main-nav-item{% if item.submenu %} has-submenu{% endif %}">
-            <a href="{{ item.url }}" class="main-nav-link{% if item.submenu %} has-submenu-trigger{% endif %}"{% if page.url == item.url %} aria-current="page"{% endif %}>
-              {{ item.title }}
-              {% if item.submenu %}
-              <i class="bi bi-chevron-down main-nav-chevron" aria-hidden="true"></i>
-              {% endif %}
-            </a>
-            {% if item.submenu %}
-            <ul class="main-nav-submenu">
-              {% for sub in item.submenu %}
-              <li>
-                <a href="{{ sub.url }}" class="main-nav-submenu-link">
-                  {% if sub.icon %}<i class="bi {{ sub.icon }}" aria-hidden="true"></i>{% endif %}
-                  {{ sub.title }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
-      </nav>
+      {# Поиск #}
+      <button type="button"
+              class="header-icon-btn"
+              id="headerSearchToggle"
+              title="Поиск по сайту"
+              aria-label="Поиск"
+              aria-expanded="false"
+              aria-controls="searchModal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
 
-      {# === Действия в шапке === #}
-      <div class="header-actions">
-        {# Переключатель тем #}
-        {% include "components/theme-switcher.njk" %}
+      {# A11y #}
+      <button type="button"
+              class="header-icon-btn"
+              id="a11yToggle"
+              title="Версия для слабовидящих"
+              aria-label="Версия для слабовидящих"
+              aria-expanded="false"
+              aria-controls="a11yPanel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </button>
 
-        {# Кнопка поиска #}
-        <button
-          type="button"
-          class="header-icon-btn"
-          id="search-btn"
-          title="Поиск"
-          aria-label="Поиск"
-          aria-expanded="false"
-          aria-controls="searchModal"
-          data-action="open-search">
-          <i class="bi bi-search" aria-hidden="true"></i>
+      {# Theme switcher (3 кнопки) #}
+      <div class="theme-switcher" role="group" aria-label="Выбор темы оформления">
+        <button type="button" class="theme-btn" data-theme="light" aria-label="Светлая тема" title="Светлая тема" aria-pressed="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
         </button>
-
-        {# Кнопка панели доступности #}
-        <button
-          type="button"
-          class="header-icon-btn"
-          id="a11y-toggle"
-          title="Версия для слабовидящих"
-          aria-label="Версия для слабовидящих"
-          aria-expanded="false"
-          aria-controls="a11yPanel"
-          data-action="open-a11y">
-          <i class="bi bi-eye" aria-hidden="true"></i>
+        <button type="button" class="theme-btn" data-theme="dark" aria-label="Тёмная тема" title="Тёмная тема" aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
         </button>
-
-        {# Гамбургер-меню (только мобильное) #}
-        <button
-          type="button"
-          class="header-icon-btn header-burger hidden-lg"
-          id="offcanvas-toggle"
-          title="Меню"
-          aria-label="Открыть меню"
-          aria-expanded="false"
-          aria-controls="offcanvasNav"
-          data-action="open-offcanvas">
-          <i class="bi bi-list" aria-hidden="true"></i>
+        <button type="button" class="theme-btn" data-theme="high-contrast" aria-label="Версия для слабовидящих" title="Версия для слабовидящих" aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
         </button>
       </div>
 
+      {# Кнопка «Все разделы» (offcanvas-toggle) — только десктоп #}
+      <button type="button"
+              class="header-icon-btn rubrics-toggle hidden-md-down"
+              id="offcanvasToggle"
+              title="Все разделы сайта"
+              aria-label="Все разделы"
+              aria-expanded="false"
+              aria-controls="offcanvasRubrics">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="currentColor" aria-hidden="true">
+          <rect x="3" y="0" width="14" height="2" rx="1"/>
+          <rect x="0" y="7" width="20" height="2" rx="1"/>
+          <rect x="3" y="14" width="14" height="2" rx="1"/>
+        </svg>
+      </button>
+
+      {# Бургер (только мобильные) #}
+      <button type="button"
+              class="header-icon-btn burger hidden-lg-up"
+              id="burgerBtn"
+              aria-label="Открыть меню"
+              title="Меню"
+              aria-expanded="false"
+              aria-controls="offcanvasRubrics">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
     </div>
+
   </div>
 </header>
+
+{# === Search Modal (Этап C) === #}
+{% include "components/search-modal.njk" %}
+
+{# === Offcanvas 3-уровневый (Этап D) === #}
+{% include "components/offcanvas.njk" %}
+
+{# === A11y Panel === #}
+{% include "components/a11y-panel.njk" %}
+
+{# === Данные рубрик для offcanvas-nav.js === #}
+<script id="rubricsData" type="application/json">{{ rubrics.main_rubrics | dump | safe }}</script>

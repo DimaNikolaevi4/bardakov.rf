@@ -1,134 +1,51 @@
 /* ============================================================
- * tokens.css — Дизайн-токены для bardakov.rf
- * Источник: old/DESIGN.md
- * Создано: 2026-10-09 (Этап 3.1)
- * ============================================================
- *
- * Принципы (из DESIGN.md §1):
- * 1. Ясность важнее декоративности
- * 2. Воздух — это инструмент
- * 3. Акценты дозированно
- * 4. Доступность по умолчанию (WCAG 2.1 AA)
- * 5. Скорость — часть дизайна
+ * tokens.css — Дизайн-токены «Золотой день / Ночное небо»
+ * Источник: design-reference/style.css (строки 4-97)
+ * Создано: 2026-10-10 (Этап F интеграции)
  * ============================================================ */
 
 :root {
-  /* === 1. ЦВЕТОВЫЕ ПРИМИТИВЫ (палитра) === */
+  /* === Светлая тема «Золотой день» === */
+  --bg-primary:     #FFFFF5;
+  --bg-secondary:   #E5E1DC;
+  --bg-subtle:      #FEF9E7;
 
-  /* Синие — основные */
-  --blue-50: #eff6ff;
-  --blue-100: #dbeafe;
-  --blue-300: #93c5fd;
-  --blue-400: #60a5fa;
-  --blue-500: #2563eb;
-  --blue-600: #1d4ed8;
+  --text-primary:   #0F172A;
+  --text-secondary: #475569;
+  --text-muted:     #78716C;
 
-  /* Тёплые акценты */
-  --orange-400: #fb923c;
-  --orange-500: #f97316;
-  --orange-600: #ea580c;
+  --accent:         #4338CA;
+  --accent-hover:   #3730A3;
+  --accent-soft:    rgba(67, 56, 202, 0.08);
+  --accent-ring:    rgba(67, 56, 202, 0.30);
 
-  /* Нейтральные — тёплые, не чистый серый */
-  --neutral-50: #fafaf9;
-  --neutral-100: #f5f5f4;
-  --neutral-200: #e7e5e4;
-  --neutral-300: #d6d3d1;
-  --neutral-500: #78716c;
-  --neutral-700: #44403c;
-  --neutral-800: #292524;
-  --neutral-900: #1c1917;
+  --highlight:      #CA8A04;
+  --highlight-hover:#B45309;
+  --highlight-soft: rgba(254, 249, 231, 0.6);
 
-  /* === 2. СЕМАНТИЧЕСКИЕ ТОКЕНЫ (LIGHT, по умолчанию) === */
-  --color-bg: var(--neutral-50);
-  --color-surface: #ffffff;
-  --color-surface-alt: var(--neutral-100);
-  --color-text: var(--neutral-900);
-  --color-text-muted: var(--neutral-500);
-  --color-border: var(--neutral-200);
+  --border:         #D4CFC7;
+  --border-strong:  #B8B0A5;
 
-  --color-primary: var(--blue-500);
-  --color-primary-hover: var(--blue-600);
-  --color-primary-text: #ffffff;
+  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow:         0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+  --shadow-hover:   0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.10);
 
-  --color-accent: var(--orange-500);
-  --color-accent-hover: var(--orange-600);
-  --color-accent-text: #ffffff;
+  --card-glow:      rgb(251 142 34 / 31%);
 
-  --color-focus-ring: var(--blue-500);
+  --radius:         16px;
+  --radius-sm:      10px;
+  --radius-full:    9999px;
 
-  /* === 3. ТИПОГРАФИКА === */
-  /* Шрифты */
-  --font-heading: "Manrope", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-main:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif:     "Merriweather", Georgia, serif;
+  --font-hand:      "Caveat", cursive;
 
-  /* Шкала размеров (модульная 1.25, база 16px) */
-  --text-xs: 0.75rem; /* 12px — подписи, метки */
-  --text-sm: 0.875rem; /* 14px — вспомогательный */
-  --text-base: 1rem; /* 16px — основной текст */
-  --text-lg: 1.125rem; /* 18px — лид-абзац */
-  --text-xl: 1.25rem; /* 20px — h4, подзаголовки */
-  --text-2xl: 1.5rem; /* 24px — h3 */
-  --text-3xl: 1.875rem; /* 30px — h2 */
-  --text-4xl: 2.25rem; /* 36px — h1 */
-  --text-5xl: 3rem; /* 48px — hero (desktop) */
+  --container:      1160px;
+  --target:         44px;
+  --t-fast:         160ms cubic-bezier(.4, 0, .2, 1);
+  --t-base:         260ms cubic-bezier(.4, 0, .2, 1);
 
-  /* Межстрочные интервалы */
-  --leading-tight: 1.15; /* заголовки */
-  --leading-snug: 1.35; /* подзаголовки */
-  --leading-normal: 1.6; /* основной текст */
-
-  /* Веса шрифтов */
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-
-  /* Масштаб шрифта для a11y (1.0 по умолчанию, 1.5 в VI) */
-  --font-scale: 1;
-
-  /* === 4. ПРОСТРАНСТВО (базовая единица 8px) === */
-  --space-1: 0.25rem; /* 4px */
-  --space-2: 0.5rem; /* 8px */
-  --space-3: 0.75rem; /* 12px */
-  --space-4: 1rem; /* 16px */
-  --space-6: 1.5rem; /* 24px */
-  --space-8: 2rem; /* 32px */
-  --space-12: 3rem; /* 48px */
-  --space-16: 4rem; /* 64px */
-  --space-24: 6rem; /* 96px */
-
-  /* === 5. КОНТЕЙНЕРЫ И БРЕЙКПОИНТЫ === */
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-
-  --bp-sm: 640px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1280px;
-
-  /* === 6. РАДИУСЫ === */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-
-  /* === 7. ТЕНИ (для LIGHT-темы) === */
-  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
-  --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.08);
-  --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.12);
-  /* Многослойная тень для «воздушной» глубины */
-  --shadow-air: 0 1px 2px rgba(28, 25, 23, 0.04),
-    0 4px 8px rgba(28, 25, 23, 0.04), 0 12px 24px rgba(28, 25, 23, 0.06);
-
-  /* === 8. АНИМАЦИИ === */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 600ms cubic-bezier(0.33, 1, 0.68, 1);
-
-  /* === 9. Z-INDEX (иерархия слоёв) === */
+  /* Z-index */
   --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -138,69 +55,67 @@
   --z-modal: 1060;
   --z-tooltip: 1070;
 
-  /* === 10. РАЗМЕРЫ КЛИКАБЕЛЬНЫХ ЗОН === */
-  --target-min: 44px; /* минимум для a11y */
-  --target-vi: 56px; /* минимум в VI-режиме */
+  /* Цвет focus-ring для :focus-visible */
+  --color-focus-ring: var(--accent-ring);
 }
 
-/* === ТЕМА: DARK === */
+/* === Тёмная тема «Ночное небо» === */
 [data-theme="dark"] {
-  --color-bg: var(--neutral-900);
-  --color-surface: var(--neutral-800);
-  --color-surface-alt: var(--neutral-700);
-  --color-text: var(--neutral-100);
-  --color-text-muted: var(--neutral-300);
-  --color-border: var(--neutral-700);
+  --bg-primary:     #050A1F;
+  --bg-secondary:   #0F172A;
+  --bg-subtle:      #1E293B;
 
-  --color-primary: var(--blue-400); /* #60A5FA — контрастнее на тёмном */
-  --color-primary-hover: var(--blue-300);
-  --color-primary-text: var(--neutral-900);
+  --text-primary:   #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted:     #64748B;
 
-  --color-accent: var(--orange-400);
-  --color-accent-hover: var(--orange-500);
-  --color-accent-text: var(--neutral-900);
+  --accent:         #818CF8;
+  --accent-hover:   #A5B4FC;
+  --accent-soft:    rgba(129, 140, 248, 0.15);
+  --accent-ring:    rgba(129, 140, 248, 0.40);
 
-  --color-focus-ring: var(--blue-400);
+  --highlight:      #FACC15;
+  --highlight-hover:#FDE047;
+  --highlight-soft: rgba(250, 204, 21, 0.15);
 
-  /* Тени не работают в dark — используем разницу тонов поверхности */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
-  --shadow-air: 0 1px 2px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.3),
-    0 12px 24px rgba(0, 0, 0, 0.4);
+  --border:         #2A3555;
+  --border-strong:  #3D4C73;
+
+  --shadow-sm:      0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow:         0 4px 10px rgba(0, 0, 0, 0.5);
+  --shadow-hover:   0 24px 48px -12px rgba(129, 140, 248, 0.25);
+
+  --card-glow:      rgba(79, 130, 252, 0.31);
 }
 
-/* === ТЕМА: VI (для слабовидящих) === */
-[data-theme="vi"] {
-  --color-bg: #000000; /* чистый чёрный */
-  --color-surface: #000000;
-  --color-surface-alt: #111111;
-  --color-text: #ffffff; /* чистый белый */
-  --color-text-muted: #dddddd;
-  --color-border: #ffffff;
-
-  --color-primary: #ffff00; /* жёлтый 19.6:1 — AAA */
-  --color-primary-hover: #ffff66;
-  --color-primary-text: #000000;
-
-  --color-accent: #00bfff; /* голубой */
-  --color-accent-hover: #33ccff;
-  --color-accent-text: #000000;
-
-  --color-focus-ring: #ffff00;
-
-  /* В VI-режиме тени не работают — используем только границы */
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-air: none;
-
-  /* Крупный шрифт */
-  --font-scale: 1.5;
-  --target-min: 56px;
+/* === High-contrast тема (для слабовидящих) === */
+[data-theme="high-contrast"] {
+  --bg-primary:     #000000;
+  --bg-secondary:   #000000;
+  --bg-subtle:      #0A0A0A;
+  --text-primary:   #FFFF00;
+  --text-secondary: #FFFFFF;
+  --text-muted:     #DDDDDD;
+  --accent:         #00FFFF;
+  --accent-hover:   #66FFFF;
+  --accent-soft:    transparent;
+  --accent-ring:    #FFFF00;
+  --highlight:      #FFFF00;
+  --highlight-hover:#FFFF00;
+  --highlight-soft: transparent;
+  --border:         #FFFFFF;
+  --border-strong:  #FFFFFF;
+  --shadow-sm:      none;
+  --shadow:         none;
+  --shadow-hover:   none;
+  --card-glow:      transparent;
+  --radius:         0px;
+  --radius-sm:      0px;
+  --radius-full:    0px;
+  --target:         56px;
 }
 
-/* === ПРИНУДИТЕЛЬНОЕ ОТКЛЮЧЕНИЕ АНИМАЦИЙ === */
+/* === Принудительное отключение анимаций === */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -210,15 +125,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* === РЕЖИМ «БЕЗ ИЗОБРАЖЕНИЙ» (через data-атрибут) === */
-[data-images="off"] img:not([role="img"]):not([data-keep]) {
-  display: none !important;
-}
-
-/* === РЕЖИМ «ОБЫЧНЫЙ ШРИФТ» (сброс к системному) === */
-[data-font="system"] {
-  --font-heading: system-ui, sans-serif;
-  --font-body: system-ui, sans-serif;
 }

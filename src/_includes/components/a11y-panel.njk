@@ -1,13 +1,6 @@
 {# a11y-panel.njk — Панель доступности
-   Источник: old/DESIGN.md §6.5
-   Создано: 2026-10-09 (Этап 3.2)
-
-   Регулировки:
-   - Размер шрифта: A- / A / A+
-   - Без изображений
-   - Обычный шрифт (сброс к системному)
-   - Без анимаций
-   - Сбросить всё
+   Источник: design-reference/cit-calck-reference/header.njk (строки 383-403)
+   Создано: 2026-10-10 (Этап D интеграции)
 #}
 <div class="a11y-panel__backdrop" id="a11yBackdrop" aria-hidden="true"></div>
 
@@ -19,18 +12,48 @@
        aria-hidden="true">
   <div class="a11y-panel__header">
     <h2 class="a11y-panel__title" id="a11yPanelTitle">
-      <i class="bi bi-eye" aria-hidden="true"></i>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
       Настройки доступности
     </h2>
     <button type="button"
             class="close-btn"
             aria-label="Закрыть панель"
             data-action="close-a11y">
-      <i class="bi bi-x-lg" aria-hidden="true"></i>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
     </button>
   </div>
 
   <div class="a11y-panel__body">
+
+    {# Тема оформления === #}
+    <section class="a11y-section">
+      <h3 class="a11y-section__title">Тема оформления</h3>
+      <div class="theme-switcher" role="group" aria-label="Выбор темы">
+        <button type="button" class="theme-btn" data-theme="light" aria-label="Светлая тема" title="Светлая тема">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+        <button type="button" class="theme-btn" data-theme="dark" aria-label="Тёмная тема" title="Тёмная тема">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button type="button" class="theme-btn" data-theme="high-contrast" aria-label="Версия для слабовидящих" title="Версия для слабовидящих">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+    </section>
 
     {# Размер шрифта === #}
     <section class="a11y-section">
@@ -38,62 +61,44 @@
       <div class="a11y-font-controls" role="group" aria-label="Размер шрифта">
         <button type="button" class="a11y-font-btn" data-font-scale="0.9" aria-label="Уменьшить шрифт">
           <span style="font-size: 0.75rem;">A</span>
-          <span class="sr-only">Мелкий</span>
         </button>
         <button type="button" class="a11y-font-btn" data-font-scale="1" aria-label="Обычный шрифт" aria-pressed="true">
           <span style="font-size: 0.875rem;">A</span>
-          <span class="sr-only">Обычный</span>
         </button>
         <button type="button" class="a11y-font-btn" data-font-scale="1.5" aria-label="Увеличенный шрифт">
           <span style="font-size: 1.125rem;">A</span>
-          <span class="sr-only">Крупный</span>
         </button>
         <button type="button" class="a11y-font-btn" data-font-scale="2" aria-label="Очень крупный шрифт">
           <span style="font-size: 1.5rem;">A</span>
-          <span class="sr-only">Очень крупный</span>
         </button>
       </div>
     </section>
 
-    {# Изображения === #}
+    {# Дополнительные опции === #}
     <section class="a11y-section">
-      <h3 class="a11y-section__title">Изображения</h3>
+      <h3 class="a11y-section__title">Дополнительно</h3>
       <label class="a11y-toggle">
         <input type="checkbox" id="a11yNoImages">
         <span>Отключить изображения</span>
       </label>
-    </section>
-
-    {# Шрифты === #}
-    <section class="a11y-section">
-      <h3 class="a11y-section__title">Шрифты</h3>
       <label class="a11y-toggle">
         <input type="checkbox" id="a11ySystemFont">
         <span>Использовать системный шрифт</span>
       </label>
-    </section>
-
-    {# Анимации === #}
-    <section class="a11y-section">
-      <h3 class="a11y-section__title">Анимации</h3>
       <label class="a11y-toggle">
         <input type="checkbox" id="a11yNoAnimations">
         <span>Отключить анимации</span>
       </label>
     </section>
 
-    {# Тема === #}
-    <section class="a11y-section">
-      <h3 class="a11y-section__title">Тема оформления</h3>
-      <p class="a11y-hint">Выберите подходящую тему:</p>
-      {% include "components/theme-switcher.njk" %}
-    </section>
-
   </div>
 
   <div class="a11y-panel__footer">
-    <button type="button" class="btn btn-secondary a11y-reset" data-action="reset-a11y">
-      <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+    <button type="button" class="btn btn-outline a11y-reset" data-action="reset-a11y">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="1 4 1 10 7 10"/>
+        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+      </svg>
       Сбросить всё
     </button>
   </div>

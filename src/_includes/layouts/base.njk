@@ -1,63 +1,76 @@
+{# base.njk — Базовый layout сайта bardakov.rf
+   Источник: design-reference/cit-calck-reference/base.njk (адаптировано)
+   Дизайн: design-reference/style.css (палитра «Золотой день / Ночное небо»)
+   Создано: 2026-10-10 (Этап E интеграции)
+
+   Особенности:
+   - FOUC protection (inline-скрипт в <head>)
+   - CSS через preload+onload (async) — пока не используется, стили инлайн
+   - JSON-LD Schema.org Person (не EducationalOrganization)
+   - Open Graph + Twitter Card
+   - Scroll-to-top кнопка
+#}
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
 
-  {% if title %}
-  <title>{{ title }} — {{ site.name }}</title>
-  {% else %}
-  <title>{{ site.name }}</title>
-  {% endif %}
-
+  <title>{% if title %}{{ title }} — {{ site.name }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
   <meta name="author" content="{{ site.author }}">
-  <link rel="canonical" href="{{ page.url | absolutizeURL }}">
 
-  <!-- Open Graph -->
+  {# === SEO: canonical + Open Graph + Twitter Card === #}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="{{ description or site.description }}">
-  <meta property="og:locale" content="{{ site.locale }}">
   <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title or site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or site.title }}">
+  <meta name="twitter:description" content="{{ description or site.description }}">
 
-  <!-- Favicon -->
+  {# === Favicon === #}
   <link rel="icon" href="/favicon.ico" sizes="32x32">
-  {# TODO на Этапе 5.2: добавить полный набор favicons (16, 32, 48, 180, 192, 512) #}
-  {# TODO на Этапе 5.1: добавить RSS feed.xml через @11ty/eleventy-plugin-rss #}
+  {# TODO на Этапе 5.2: полный набор favicons (16, 32, 48, 180, 192, 512) #}
 
-  <!-- FOUC protection: тема должна установиться ДО первого рендера -->
-  <!-- Источник: old/DESIGN.md §8.3. Размер: ~280 байт. -->
+  {# === FOUC protection: тема должна установиться ДО первого рендера === #}
+  {# Источник: design-reference/index.html (строки 251-282) #}
   <script>
-    (function() {
-      var theme = (
-        document.cookie.match(/(?:^|;\s*)theme=([^;]+)/) || []
-      )[1] || localStorage.getItem('theme');
-      if (!theme) {
-        theme = matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark' : 'light';
-      }
-      document.documentElement.dataset.theme = theme;
+    (function () {
+      const KEY = 'bardakov-theme';
+      const root = document.documentElement;
+      const body = document.body;
+      const allowed = ['light', 'dark', 'high-contrast'];
 
-      // Также восстановим a11y-настройки
-      var fontScale = localStorage.getItem('a11y-font-scale');
-      if (fontScale) {
-        document.documentElement.style.setProperty('--font-scale', fontScale);
+      function apply(theme) {
+        if (!allowed.includes(theme)) theme = 'light';
+        if (body) {
+          body.setAttribute('data-theme', theme);
+        } else {
+          root.dataset.pendingTheme = theme;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          if (body) body.setAttribute('data-theme', theme);
+        });
       }
-      var images = localStorage.getItem('a11y-images');
-      if (images === 'off') {
-        document.documentElement.dataset.images = 'off';
-      }
-      var animations = localStorage.getItem('a11y-animations');
-      if (animations === 'off') {
-        document.documentElement.dataset.animations = 'off';
+
+      let saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved && allowed.includes(saved)) {
+        apply(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        apply('dark');
+      } else {
+        apply('light');
       }
     })();
   </script>
 
-  <!-- Стили -->
-  <link rel="stylesheet" href="/assets/fonts/bootstrap-icons/bootstrap-icons.css">
+  {# === Стили (пока синхронно, Critical CSS добавим на Этапе F) === #}
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/typography.css">
   <link rel="stylesheet" href="/assets/css/layout.css">
@@ -66,45 +79,76 @@
 
   {% block head %}{% endblock %}
 </head>
-<body>
-  <!-- Skip-link для клавиатурной навигации -->
+<body data-theme="light">
+
+  {# === Skip-link === #}
   <a href="#main" class="skip-link">Перейти к контенту</a>
 
-  <!-- Шапка сайта -->
+  {# === Шапка сайта (включает search-modal + offcanvas + a11y-panel) === #}
   {% include "components/header.njk" %}
 
-  <!-- Основной контент -->
+  {# === Основной контент === #}
   <main id="main" class="site-main" tabindex="-1">
     {% block content %}{{ content | safe }}{% endblock %}
   </main>
 
-  <!-- Подвал сайта -->
+  {# === Подвал сайта === #}
   {% include "components/footer.njk" %}
 
-  <!-- Offcanvas (мобильное меню) -->
-  {% include "components/nav-burger.njk" %}
+  {# === Scroll-to-top кнопка === #}
+  <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх" title="Наверх">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="12" y1="19" x2="12" y2="5"/>
+      <polyline points="5 12 12 5 19 12"/>
+    </svg>
+  </a>
 
-  <!-- A11y панель -->
-  {% include "components/a11y-panel.njk" %}
+  {# === JSON-LD: Person (Schema.org) === #}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.author }}",
+    "jobTitle": "{{ site.position }}",
+    "worksFor": {
+      "@type": "EducationalOrganization",
+      "name": "{{ site.organization }}",
+      "alternateName": "{{ site.organization_short }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ site.city }}",
+        "addressRegion": "{{ site.region }}",
+        "addressCountry": "RU"
+      }
+    },
+    "url": "{{ site.url }}",
+    "email": "{{ contacts.contacts.email }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "{{ site.city }}",
+      "addressRegion": "{{ site.region }}",
+      "addressCountry": "RU"
+    }
+  }
+  </script>
 
-  <!-- Модальное окно поиска -->
-  {% include "components/search-modal.njk" %}
-
-  <!-- Yandex.Metrika -->
-  {% if site.metrikaId %}
+  {# === Yandex.Metrika === #}
+  {% if site.metrika_id %}
   <script>
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
     k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
     (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-    ym({{ site.metrikaId }}, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+    ym({{ site.metrika_id }}, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/{{ site.metrikaId }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/{{ site.metrika_id }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   {% endif %}
 
-  <!-- JS-модули -->
-  <script src="/assets/js/theme.js" defer></script>
-  <script src="/assets/js/a11y.js" defer></script>
-  <script src="/assets/js/main.js" defer></script>
+  {# === JS-модули (с defer — не блокируют рендер) === #}
+  <script defer src="/assets/js/theme.js"></script>
+  <script defer src="/assets/js/a11y.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+  <script defer src="/assets/js/offcanvas-nav.js"></script>
+  <script defer src="/assets/js/search-modal.js"></script>
 </body>
 </html>
