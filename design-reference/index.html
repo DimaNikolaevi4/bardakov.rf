@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Персональный сайт преподавателя Бардакова Дмитрия Николаевича. Методические материалы, лекции и учебные пособия для студентов технических специальностей ГБПОУ РО «СИТ».">
+<meta name="author" content="Бардаков Дмитрий Николаевич">
+<title>Главная — Бардаков Дмитрий Николаевич</title>
+
+<!-- Подключение шрифтов: Inter (основной), Merriweather (цитаты), Caveat (рукописные формулы) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@1,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+
+  <a href="#main" class="skip-link">Перейти к контенту</a>
+
+  <!-- ======================= HEADER ======================= -->
+  <header class="site-header" role="banner">
+    <div class="container nav-wrapper">
+      <a href="/" class="logo" aria-label="На главную">
+        <span class="logo-mark" aria-hidden="true">БД</span>
+        <span class="logo-text">
+          <strong>Бардаков Д. Н.</strong>
+          <span>Персональный сайт</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Основная навигация">
+        <ul>
+          <li><a href="/obo-mne/">Обо мне</a></li>
+          <li><a href="/obuchenie/">Обучение</a></li>
+          <li><a href="/abiturientu/">Абитуриенту</a></li>
+          <li><a href="/vospitanie/">Воспитание</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="theme-switcher" role="group" aria-label="Выбор темы оформления">
+          <button type="button" class="theme-btn" data-theme="light" aria-label="Светлая тема" title="Светлая тема">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </button>
+          <button type="button" class="theme-btn" data-theme="dark" aria-label="Тёмная тема" title="Тёмная тема">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <button type="button" class="theme-btn" data-theme="high-contrast" aria-label="Версия для слабовидящих" title="Версия для слабовидящих">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+
+        <button type="button" class="icon-btn burger" id="burger-btn" aria-label="Открыть меню" title="Меню" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Мобильная навигация">
+      <a href="/obo-mne/" class="mobile-nav-link">Обо мне</a>
+      <a href="/obuchenie/" class="mobile-nav-link">Обучение</a>
+      <a href="/abiturientu/" class="mobile-nav-link">Абитуриенту</a>
+      <a href="/vospitanie/" class="mobile-nav-link">Воспитание</a>
+      <a href="/search/" class="mobile-nav-link">Поиск по сайту</a>
+    </nav>
+  </div>
+
+  <!-- ======================= MAIN ======================= -->
+  <main id="main" tabindex="-1">
+
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-content">
+        <span class="eyebrow">Персональный сайт преподавателя</span>
+        <h1>Бардаков<br><span class="accent">Дмитрий Николаевич</span></h1>
+        <p class="hero-subtitle">Преподаватель технических дисциплин высшей категории<br>ГБПОУ РО «Сальский индустриальный техникум»</p>
+        <blockquote class="hero-quote">«Образование — это не наполнение сосуда, а зажигание огня.»</blockquote>
+        <div class="hero-actions">
+          <a href="/obo-mne/" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Обо мне
+          </a>
+          <a href="mailto:info@бардаков.рф" class="btn btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Связаться
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity="0.9"/><stop offset="100%" stop-color="currentColor" stop-opacity="0.3"/></linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="currentColor" stop-opacity="0.25"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></linearGradient>
+          </defs>
+          <circle cx="200" cy="200" r="180" fill="url(#g2)" style="color: var(--accent)"/>
+          <g stroke="currentColor" stroke-opacity="0.08" style="color: var(--text-primary)">
+            <line x1="20" y1="200" x2="380" y2="200"/><line x1="200" y1="20" x2="200" y2="380"/>
+            <line x1="60" y1="60" x2="340" y2="340" stroke-dasharray="4 6"/><line x1="340" y1="60" x2="60" y2="340" stroke-dasharray="4 6"/>
+          </g>
+          <g transform="translate(120 180)" style="color: var(--accent)">
+            <path d="M0 20 L80 0 L80 80 L0 100 Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M80 0 L160 20 L160 100 L80 80 Z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="80" y1="0" x2="80" y2="80" stroke="currentColor" stroke-width="2.5"/>
+            <line x1="20" y1="40" x2="60" y2="30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="20" y1="55" x2="60" y2="45" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="100" y1="30" x2="140" y2="40" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="100" y1="45" x2="140" y2="55" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          </g>
+          <circle cx="80" cy="80" r="6" fill="currentColor" style="color: var(--highlight)"/>
+          <circle cx="320" cy="120" r="8" fill="currentColor" style="color: var(--accent)"/>
+          <circle cx="300" cy="300" r="5" fill="currentColor" style="color: var(--accent)"/>
+          <circle cx="100" cy="320" r="7" fill="currentColor" style="color: var(--highlight)"/>
+          <circle cx="200" cy="200" r="140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 8" style="color: var(--accent); opacity: 0.35"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- РАЗДЕЛЫ -->
+    <section class="section container">
+      <div class="section-head">
+        <h2>Разделы сайта</h2>
+        <p>Материалы для студентов, абитуриентов и родителей. Выберите интересующий вас раздел.</p>
+      </div>
+      <div class="sections-grid">
+        <article class="card reveal">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Обо мне</h3>
+          <p>Биография, методическая работа, достижения, хобби (Нейро Мульт Студия) и контакты преподавателя.</p>
+          <a href="/obo-mne/" class="card-link">Подробнее</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>Обучение</h3>
+          <p>Учебные материалы по дисциплинам: КИП, КСК, электромонтёр, ПМ.02. Лекции и практические работы.</p>
+          <a href="/obuchenie/" class="card-link">Подробнее</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <h3>Абитуриенту</h3>
+          <p>Профессии и специальности ГБПОУ РО «СИТ». Документация и порядок подачи документов для поступления.</p>
+          <a href="/abiturientu/" class="card-link">Подробнее</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Воспитание</h3>
+          <p>Материалы для родителей и студентов. «Разговоры о важном», советы и рекомендации.</p>
+          <a href="/vospitanie/" class="card-link">Подробнее</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>О сайте</h4>
+          <p>Персональный сайт преподавателя Бардакова Д. Н. Методические материалы, лекции и учебные пособия для студентов технических специальностей.</p>
+        </div>
+        <div>
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="/obo-mne/">Обо мне</a></li>
+            <li><a href="/obuchenie/">Обучение</a></li>
+            <li><a href="/abiturientu/">Абитуриенту</a></li>
+            <li><a href="/vospitanie/">Воспитание</a></li>
+            <li><a href="/search/">Поиск по сайту</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><strong>Сальск, Ростовская область</strong>ГБПОУ РО «СИТ»</div>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <div><strong>Email</strong><a href="mailto:info@бардаков.рф">info@бардаков.рф</a></div>
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div><strong>Режим работы</strong>Пн–Пт: 8:00 – 17:00</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Официальные ресурсы -->
+      <section class="footer-resources" aria-labelledby="resources-title">
+        <h4 id="resources-title" style="text-align: center; margin-bottom: 20px; font-family: var(--font-main); color: var(--text-primary); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Официальные ресурсы</h4>
+        <ul class="resources-grid">
+          <li><a href="http://government.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg>
+            <span>Правительство России</span>
+          </a></li>
+          <li><a href="https://www.kremlin.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 4 4 .5-3 3 .8 4.5L12 12l-3.8 2 .8-4.5-3-3L10 6z"/><path d="M5 21h14"/></svg>
+            <span>Президент РФ</span>
+          </a></li>
+          <li><a href="https://edu.gov.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Минпросвещения</span>
+          </a></li>
+          <li><a href="https://obrnadzor.gov.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>Рособрнадзор</span>
+          </a></li>
+          <li><a href="https://www.donland.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+            <span>Правительство РО</span>
+          </a></li>
+          <li><a href="https://minobr.donland.ru/" target="_blank" rel="noopener" class="resource-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Минобразования РО</span>
+          </a></li>
+        </ul>
+      </section>
+
+      <div class="footer-bottom">
+        <p>© 2026 Бардаков.рф. Все права защищены.</p>
+        <p><a href="/sitemap.xml">Карта сайта</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================= SCRIPTS ======================= -->
+  <script>
+    // 1. Переключатель темы
+    (function () {
+      const KEY = 'bardakov-theme';
+      const root = document.body;
+      const buttons = document.querySelectorAll('.theme-btn');
+      const allowed = ['light', 'dark', 'high-contrast'];
+
+      function apply(theme) {
+        if (!allowed.includes(theme)) theme = 'light';
+        root.setAttribute('data-theme', theme);
+        buttons.forEach(btn => {
+          btn.setAttribute('aria-pressed', btn.dataset.theme === theme ? 'true' : 'false');
+        });
+      }
+
+      let saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved && allowed.includes(saved)) {
+        apply(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        apply('dark');
+      } else {
+        apply('light');
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const theme = btn.dataset.theme;
+          apply(theme);
+          try { localStorage.setItem(KEY, theme); } catch (e) {}
+        });
+      });
+    })();
+
+    // 2. Тень шапки при скролле
+    (function () {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const onScroll = () => {
+        header.classList.toggle('is-scrolled', window.scrollY > 6);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // 3. Плавное появление карточек
+    (function () {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
+
+    // 4. Эффект фонарика на карточках
+    (function () {
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+          card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+        });
+      });
+    })();
+
+    // 5. Мобильное меню
+    (function () {
+      const burgerBtn = document.getElementById('burger-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (burgerBtn && mobileMenu) {
+        burgerBtn.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('is-open');
+          mobileMenu.setAttribute('aria-hidden', !isOpen);
+          burgerBtn.setAttribute('aria-expanded', isOpen);
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('is-open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            burgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
