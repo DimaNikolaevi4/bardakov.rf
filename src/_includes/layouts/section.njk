@@ -1,0 +1,110 @@
+{# section.njk — Шаблон раздела/подраздела
+   Создано: 2026-10-11
+
+   Используется для страниц категорий:
+   - /obo-mne/           (раздел 1-го уровня)
+   - /obuchenie/         (раздел 1-го уровня)
+   - /obuchenie/kip/     (подраздел 2-го уровня)
+   - /abiturientu/       (раздел 1-го уровня)
+   - /vospitanie/        (раздел 1-го уровня)
+
+   Структура блоков:
+   1. Меню (header — из base.njk)
+   2. Витрина (hero-section — заголовок раздела + описание)
+   3. Хлебные крошки (breadcrumb)
+   4. Верхний блок тела (intro — вводный текст)
+   5. Средний блок тела (cards-grid — сетка карточек подразделов/материалов)
+   6. Нижний блок тела (extra — доп. информация, ссылки на документы)
+   7. Подвал (footer — из base.njk)
+
+   Frontmatter:
+   ---
+   title: "Обучение"
+   description: "Учебные материалы по дисциплинам"
+   layout: section.njk
+   section: obuchenie
+   permalink: /obuchenie/index.html
+   ---
+#}
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<div class="page-section" data-section="{{ section or '' }}">
+
+  {# === Блок 2: Витрина (Hero раздела) === #}
+  <section class="hero-section">
+    <div class="container">
+      <span class="eyebrow">{{ eyebrow or "Раздел" }}</span>
+      <h1>{{ title }}</h1>
+      {% if subtitle %}
+      <p class="hero-subtitle">{{ subtitle }}</p>
+      {% endif %}
+      {% if description %}
+      <p class="hero-description">{{ description }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {# === Блок 3: Хлебные крошки === #}
+  {% if breadcrumbs %}
+  <div class="container">
+    {% include "components/breadcrumb.njk" %}
+  </div>
+  {% endif %}
+
+  {# === Блок 4: Верхний блок тела (вводный текст) === #}
+  {% block intro %}
+  {% if intro %}
+  <section class="section section-sm">
+    <div class="container container-md">
+      <div class="prose">
+        {{ intro | safe }}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+  {% endblock %}
+
+  {# === Блок 5: Средний блок тела (сетка карточек) === #}
+  {% block cards %}
+  {% if cards %}
+  <section class="section">
+    <div class="container">
+      {% if cards_title %}
+      <div class="section-head">
+        <h2>{{ cards_title }}</h2>
+        {% if cards_description %}
+        <p>{{ cards_description }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="sections-grid">
+        {% for card in cards %}
+        {% set cardParams = {
+          "category": card.category or title,
+          "title": card.title,
+          "description": card.description,
+          "link": card.url or card.link,
+          "icon": card.icon
+        } %}
+        {% include "components/card.njk" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+  {% endblock %}
+
+  {# === Блок 6: Нижний блок тела (доп. информация) === #}
+  {% block extra %}
+  {% if extra %}
+  <section class="section section-sm">
+    <div class="container container-md">
+      {{ extra | safe }}
+    </div>
+  </section>
+  {% endif %}
+  {% endblock %}
+
+</div>
+{% endblock %}

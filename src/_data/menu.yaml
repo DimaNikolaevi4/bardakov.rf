@@ -1,6 +1,6 @@
-# Главное меню сайта bardakov.rf
-# Источник: design-reference/cit-calck-reference/menu.yaml (адаптировано под 5 разделов)
-# Создано: 2026-10-10 (Этап A интеграции)
+# Главное меню сайта bardakov.rf — 4 основных раздела
+# Источник: design-reference/cit-calck-reference/menu.yaml (адаптировано)
+# Обновлено: 2026-10-11 — убран «Поиск» (доступ через иконку в шапке)
 #
 # Используется в header.njk для десктоп-навигации (≥992px)
 
@@ -58,7 +58,3 @@ main:
         url: /vospitanie/prakticheskie-sovety-studentam/
       - title: Нормативные документы
         url: /vospitanie/normativnye-dokumenty/
-
-  - title: Контакты
-    url: /obo-mne/kontakty/
-    key: contacts

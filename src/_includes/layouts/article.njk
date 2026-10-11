@@ -1,0 +1,158 @@
+{# article.njk — Шаблон материала/статьи
+   Создано: 2026-10-11
+
+   Используется для конкретных страниц контента:
+   - /obo-mne/biografiya/           (статья о биографии)
+   - /obuchenie/kip/prakticheskie-kip/prakticheskaya-rabota-no1/  (практическая работа)
+   - /vospitanie/dlya-roditelej/kak-pomoch-podrostku/  (статья для родителей)
+   - /abiturientu/professii/15-01-31-master-kip/      (описание профессии)
+
+   Структура блоков:
+   1. Меню (header — из base.njk)
+   2. Витрина (hero-article — заголовок статьи + мета-данные)
+   3. Хлебные крошки (breadcrumb)
+   4. Верхний блок тела (article-meta — дата, автор, категория)
+   5. Средний блок тела (article-content — основной текст из Markdown)
+   6. Нижний блок тела (article-footer — документы для скачивания, теги, related)
+   7. Подвал (footer — из base.njk)
+
+   Frontmatter:
+   ---
+   title: "Практическая работа №1"
+   description: "Изучение..."
+   layout: article.njk
+   section: obuchenie
+   subsection: kip
+   date: 2024-09-09
+   author: "Бардаков Д. Н."
+   category: "КИП"
+   tags: ["практика", "кип"]
+   documents:
+     - title: "Задание"
+       url: "https://сит.бардаков.рф/assets/documents/prakticheskaya-rabota-1.pdf"
+       type: "pdf"
+       size: "1.2 MB"
+   ---
+#}
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<article class="page-article" data-section="{{ section or '' }}">
+
+  {# === Блок 3: Хлебные крошки (перед витриной для статей) === #}
+  {% if breadcrumbs %}
+  <div class="container">
+    {% include "components/breadcrumb.njk" %}
+  </div>
+  {% endif %}
+
+  {# === Блок 2: Витрина (заголовок статьи) === #}
+  <header class="article-header">
+    <div class="container container-md">
+      {% if category %}
+      <span class="eyebrow">{{ category }}</span>
+      {% endif %}
+      <h1>{{ title }}</h1>
+      {% if description %}
+      <p class="article-lead">{{ description }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  {# === Блок 4: Верхний блок тела (мета-данные) === #}
+  <div class="article-meta">
+    <div class="container container-md">
+      <div class="article-meta-row">
+        {% if author %}
+        <span class="article-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          {{ author }}
+        </span>
+        {% endif %}
+        {% if date %}
+        <span class="article-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          {{ date | dateRu }}
+        </span>
+        {% endif %}
+        {% if readTime %}
+        <span class="article-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          {{ readTime }}
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {# === Блок 5: Средний блок тела (основной контент) === #}
+  <div class="article-body">
+    <div class="container container-md">
+      <div class="prose">
+        {{ content | safe }}
+      </div>
+
+      {# Документы для скачивания #}
+      {% if documents %}
+      <aside class="article-documents">
+        <h2 class="article-documents-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Документы для скачивания
+        </h2>
+        <ul class="article-documents-list">
+          {% for doc in documents %}
+          <li>
+            <a href="{{ doc.url }}" class="article-document-link" {% if doc.external %}target="_blank" rel="noopener"{% endif %}>
+              <span class="article-document-icon" data-type="{{ doc.type or 'file' }}">
+                {% if doc.type == "pdf" %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                {% else %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                {% endif %}
+              </span>
+              <span class="article-document-info">
+                <strong>{{ doc.title }}</strong>
+                {% if doc.size %}<span class="article-document-size">{{ doc.type | upper }}, {{ doc.size }}</span>{% endif %}
+              </span>
+              <svg class="article-document-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </aside>
+      {% endif %}
+    </div>
+  </div>
+
+  {# === Блок 6: Нижний блок тела (теги, related, поделиться) === #}
+  {% if tags or related %}
+  <footer class="article-footer">
+    <div class="container container-md">
+      {% if tags %}
+      <div class="article-tags">
+        <span class="article-tags-label">Теги:</span>
+        {% for tag in tags %}
+        <a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if related %}
+      <section class="article-related">
+        <h2>Смотрите также</h2>
+        <div class="related-grid">
+          {% for item in related %}
+          <a href="{{ item.url }}" class="related-card">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </a>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </div>
+  </footer>
+  {% endif %}
+
+</article>
+{% endblock %}

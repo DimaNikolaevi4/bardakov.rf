@@ -1,0 +1,123 @@
+{# kontakty.njk — Шаблон страницы контактов
+   Создано: 2026-10-11
+
+   Используется:
+   - /obo-mne/kontakty/  (страница контактов)
+
+   Структура блоков:
+   1. Меню (header — из base.njk)
+   2. Витрина (заголовок + подзаголовок)
+   3. Хлебные крошки
+   4. Верхний блок тела (контактная информация: email, адрес, режим работы)
+   5. Средний блок тела (форма обратной связи)
+   6. Нижний блок тела (карта, доп. информация)
+   7. Подвал (footer — из base.njk)
+
+   Frontmatter:
+   ---
+   title: "Контакты"
+   description: "Контактные данные преподавателя"
+   layout: kontakty.njk
+   section: obo-mne
+   permalink: /obo-mne/kontakty/index.html
+   ---
+#}
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<div class="page-kontakty" data-section="obo-mne">
+
+  {# === Блок 2: Витрина === #}
+  <section class="hero-section">
+    <div class="container">
+      <span class="eyebrow">Обо мне</span>
+      <h1>Контакты</h1>
+      <p class="hero-subtitle">Свяжитесь со мной удобным способом</p>
+    </div>
+  </section>
+
+  {# === Блок 3: Хлебные крошки === #}
+  <div class="container">
+    {% include "components/breadcrumb.njk" %}
+  </div>
+
+  {# === Блок 4: Верхний блок тела (контактная информация) === #}
+  <section class="section section-sm">
+    <div class="container">
+      <div class="kontakty-grid">
+
+        {# Левая колонка — преподаватель === #}
+        <div class="kontakty-card">
+          <h2 class="kontakty-card-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Преподаватель
+          </h2>
+          <div class="kontakty-info">
+            <p class="kontakty-name">{{ contacts.person.full_name }}</p>
+            <p class="kontakty-position">{{ contacts.person.position }}</p>
+            <p class="kontakty-organization">{{ contacts.person.organization }}</p>
+          </div>
+        </div>
+
+        {# Правая колонка — контактные данные === #}
+        <div class="kontakty-card">
+          <h2 class="kontakty-card-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Адрес
+          </h2>
+          <div class="kontakty-info">
+            <p>{{ contacts.person.city }}, {{ contacts.person.region }}</p>
+            <p class="text-muted">{{ contacts.person.country }}</p>
+          </div>
+
+          <h2 class="kontakty-card-title mt-6">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Электронная почта
+          </h2>
+          <div class="kontakty-info">
+            <p><a href="mailto:{{ contacts.contacts.email }}">{{ contacts.contacts.email_display }}</a></p>
+          </div>
+
+          <h2 class="kontakty-card-title mt-6">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Режим работы
+          </h2>
+          <div class="kontakty-info">
+            <p>{{ contacts.contacts.work_hours }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {# === Блок 5: Средний блок тела (форма обратной связи) === #}
+  <section class="section">
+    <div class="container container-md">
+      <div class="section-head">
+        <h2>Написать сообщение</h2>
+        <p>Заполните форму, и я свяжусь с вами в ближайшее время</p>
+      </div>
+      {% include "components/contact-form.njk" %}
+    </div>
+  </section>
+
+  {# === Блок 6: Нижний блок тела (призыв к сотрудничеству) === #}
+  <section class="section section-sm">
+    <div class="container container-md text-center">
+      <div class="cta-block">
+        <h2>Призыв к сотрудничеству</h2>
+        <p class="lead">
+          Открыт к обмену опытом, методическим материалам и
+          профессиональному сотрудничеству в области технического образования.
+        </p>
+        <a href="mailto:{{ contacts.contacts.email }}" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Написать на почту
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

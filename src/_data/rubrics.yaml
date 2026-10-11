@@ -1,6 +1,6 @@
 # Полная структура рубрик сайта bardakov.rf
-# Источник: design-reference/cit-calck-reference/rubrics.yaml (адаптировано под 5 разделов)
-# Создано: 2026-10-10 (Этап A интеграции)
+# Источник: design-reference/cit-calck-reference/rubrics.yaml (адаптировано под 4 раздела)
+# Обновлено: 2026-10-11 — убран «Поиск» (служебная страница, не раздел контента)
 #
 # Используется:
 # - В header.njk для offcanvas-меню (3 уровня)
@@ -136,10 +136,3 @@ main_rubrics:
       - code: "4.4"
         title: "Нормативные документы"
         slug: normativnye-dokumenty
-
-  - code: "5"
-    title: "Поиск"
-    slug: search
-    level: 0
-    icon: "search"
-    url: /search/

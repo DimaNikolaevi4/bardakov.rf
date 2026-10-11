@@ -84,15 +84,33 @@
   {# === Skip-link === #}
   <a href="#main" class="skip-link">Перейти к контенту</a>
 
-  {# === Шапка сайта (включает search-modal + offcanvas + a11y-panel) === #}
+  {# ════════════════════════════════════════════════════════════
+     СТРУКТУРА СТРАНИЦЫ — 7 БЛОКОВ
+
+     1. Меню (header)
+     2. Витрина (hero) — заголовок раздела/страницы
+     3. Хлебные крошки (breadcrumb)
+     4. Верхний блок тела (intro/meta)
+     5. Средний блок тела (основной контент)
+     6. Нижний блок тела (extra/footer-content)
+     7. Подвал (footer)
+
+     Блоки 1 и 7 — глобальные (header + footer из base.njk)
+     Блоки 2-6 — в {% block content %} (переопределяются в layouts)
+     ════════════════════════════════════════════════════════════ #}
+
+  {# === Блок 1: Меню (header) === #}
+  {# Включает: header + search-modal + offcanvas + a11y-panel #}
   {% include "components/header.njk" %}
 
-  {# === Основной контент === #}
+  {# === Блоки 2-6: Контент страницы === #}
+  {# Каждый layout (section, article, kontakty, index, search, 404)
+     переопределяет блок content со своей структурой #}
   <main id="main" class="site-main" tabindex="-1">
     {% block content %}{{ content | safe }}{% endblock %}
   </main>
 
-  {# === Подвал сайта === #}
+  {# === Блок 7: Подвал (footer) === #}
   {% include "components/footer.njk" %}
 
   {# === Scroll-to-top кнопка === #}
