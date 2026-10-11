@@ -1,0 +1,67 @@
+{# Единая оболочка страницы с семью редактируемыми блоками.
+   Три блока тела заполняются через pageBlocks.upper / middle / lower
+   в front matter страницы. Пустые блоки остаются видимыми как слоты. #}
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% set pageBlocks = pageBlocks or {} %}
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="page-scaffold" data-page-layout="seven-blocks">
+  {# Блок 2: Витрина #}
+  <section class="page-scaffold__showcase" data-page-block="showcase">
+    <div class="container">
+      <p class="page-scaffold__eyebrow">{{ eyebrow or "Персональный сайт преподавателя" }}</p>
+      <h1>{{ heroTitle or title or site.title }}</h1>
+      {% if heroDescription or description %}
+      <p class="page-scaffold__description">{{ heroDescription or description }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {# Блок 3: Хлебные крошки #}
+  <div class="page-scaffold__breadcrumbs" data-page-block="breadcrumbs">
+    <div class="container">
+      {% if breadcrumbs %}
+        {{ breadcrumb(breadcrumbs) }}
+      {% elif page.url != "/" %}
+        {{ breadcrumb([
+          { "title": "Главная", "url": "/" },
+          { "title": title }
+        ]) }}
+      {% endif %}
+    </div>
+  </div>
+
+  {# Блок 4: Верхняя часть тела страницы #}
+  <section class="page-scaffold__body-block" data-page-block="body-upper" aria-label="Верхний блок тела">
+    <div class="container">
+      <div class="page-scaffold__slot{% if not pageBlocks.upper %} page-scaffold__slot--empty{% endif %}">
+        {% if pageBlocks.upper %}{{ pageBlocks.upper | safe }}{% endif %}
+      </div>
+    </div>
+  </section>
+
+  {# Блок 5: Основная часть тела страницы #}
+  <section class="page-scaffold__body-block page-scaffold__body-block--middle" data-page-block="body-middle" aria-label="Средний блок тела">
+    <div class="container">
+      <div class="page-scaffold__slot{% if not pageBlocks.middle %} page-scaffold__slot--empty{% endif %}">
+        {% if pageBlocks.middle %}
+          {{ pageBlocks.middle | safe }}
+        {% elif showLegacyContent %}
+          {{ content | safe }}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {# Блок 6: Нижняя часть тела страницы #}
+  <section class="page-scaffold__body-block" data-page-block="body-lower" aria-label="Нижний блок тела">
+    <div class="container">
+      <div class="page-scaffold__slot{% if not pageBlocks.lower %} page-scaffold__slot--empty{% endif %}">
+        {% if pageBlocks.lower %}{{ pageBlocks.lower | safe }}{% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
