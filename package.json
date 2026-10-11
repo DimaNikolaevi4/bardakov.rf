@@ -17,7 +17,8 @@
     "check:links": "python3 scripts/check-links.py",
     "check:frontmatter": "node scripts/validate-frontmatter.js",
     "test": "npm run build && npm run lint:html && npm run check:links",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "prepare": "husky"
   },
   "keywords": [
     "eleventy",
@@ -45,8 +46,11 @@
   },
   "devDependencies": {
     "@11ty/eleventy-img": "^5.0.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "gray-matter": "^4.0.3",
     "html-validate": "^9.0.0",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "linkinator": "^7.6.1",
     "lint-staged": "^16.4.0",
     "markdownlint-cli2": "^0.22.1",
@@ -59,7 +63,7 @@
     "node": ">=20.17.0"
   },
   "lint-staged": {
-    "src/content/**/*.{md,njk}": "node scripts/validate-frontmatter.js --staged"
+    "src/content/**/*.{md,njk}": "node scripts/validate-frontmatter.js"
   },
   "overrides": {
     "@11ty/eleventy-img": {

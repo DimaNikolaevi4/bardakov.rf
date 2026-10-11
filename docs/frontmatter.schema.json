@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bardakov.rf/docs/frontmatter.schema.json",
+  "title": "Frontmatter Specification for bardakov.rf",
+  "description": "Schema for validating YAML frontmatter in content files. See docs/frontmatter-spec.md",
+  "type": "object",
+  "required": ["title", "description", "layout", "date"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Заголовок страницы (1–100 символов)"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 50,
+      "maxLength": 160,
+      "description": "Meta description для SEO (50–160 символов)"
+    },
+    "layout": {
+      "type": "string",
+      "enum": ["base.njk", "section.njk", "article.njk", "kontakty.njk", "page.njk"],
+      "description": "Шаблон страницы (один из layouts/)"
+    },
+    "date": {
+      "description": "Дата публикации/обновления (ISO 8601: YYYY-MM-DD)",
+      "anyOf": [
+        { "type": "string", "format": "date" },
+        { "type": "object", "description": "Date object from YAML parser" }
+      ]
+    },
+    "permalink": {
+      "type": "string",
+      "pattern": "^/",
+      "description": "URL страницы (должен начинаться с /)"
+    },
+    "section": {
+      "type": "string",
+      "enum": ["obo-mne", "obuchenie", "abiturientu", "vospitanie", "home", "search", "error"],
+      "description": "Раздел сайта (для хлебных крошек и активного меню)"
+    },
+    "order": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Порядок в списке раздела"
+    },
+    "eyebrow": {
+      "type": "string",
+      "description": "Надзаголовок над h1"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Подзаголовок витрины"
+    },
+    "category": {
+      "type": "string",
+      "description": "Категория (для article)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Автор материала"
+    },
+    "readTime": {
+      "type": "string",
+      "description": "Время чтения (например, '5 мин')"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Теги для Pagefind"
+    },
+    "noindex": {
+      "type": "boolean",
+      "default": false,
+      "description": "true → <meta name=\"robots\" content=\"noindex\">"
+    },
+    "changefreq": {
+      "type": "string",
+      "enum": ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"],
+      "default": "monthly",
+      "description": "Частота обновления для sitemap.xml"
+    },
+    "priority": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 0.8,
+      "description": "Приоритет для sitemap.xml (0.0–1.0)"
+    },
+    "breadcrumbs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      },
+      "description": "Хлебные крошки"
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "url": { "type": "string" },
+          "icon": { "type": "string" },
+          "category": { "type": "string" }
+        }
+      },
+      "description": "Карточки подразделов (для section.njk)"
+    },
+    "intro": {
+      "type": "string",
+      "description": "Вводный текст (HTML) для section.njk"
+    },
+    "extra": {
+      "type": "string",
+      "description": "Доп. информация (HTML) для section.njk"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "type": { "type": "string", "enum": ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "file"] },
+          "size": { "type": "string" },
+          "external": { "type": "boolean", "default": false }
+        }
+      },
+      "description": "Документы для скачивания (для article.njk)"
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      },
+      "description": "Связанные материалы (для article.njk)"
+    }
+  },
+  "additionalProperties": true
+}

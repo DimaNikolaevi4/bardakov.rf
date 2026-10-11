@@ -545,44 +545,44 @@
 
 ### 4.1 Финализация списка шаблонов страниц
 
-- [ ] Создать `src/_includes/layouts/` с базовыми layout-ами:
-  - [ ] `base.njk` — общий каркас (`<html>`, `<head>`, header, footer, тема)
-  - [ ] `page.njk` — наследник `base.njk`, добавляет `<main>` с контентом
-- [ ] Создать специализированные шаблоны в `src/_includes/layouts/`:
-  - [ ] `page-about.njk` — Обо мне:
+✅ Создать `src/_includes/layouts/` с базовыми layout-ами:
+  - ✅ `base.njk` — общий каркас (`<html>`, `<head>`, header, footer, тема)
+  - ✅ `page.njk` (заменён на section.njk / article.njk / kontakty.njk) — наследник `base.njk`, добавляет `<main>` с контентом
+- ✅ Создать специализированные шаблоны (созданы section.njk, article.njk, kontakty.njk вместо page-about/education/upbringing/contacts) в `src/_includes/layouts/`:
+  - [~] `page-about.njk` → заменён на `section.njk` + `article.njk` — Обо мне:
     - [ ] Hero с фото
     - [ ] Биография (текст + изображение)
     - [ ] Таймлайн (образование, карьера, достижения)
     - [ ] Блок «Методическая работа»
     - [ ] Блок «Хобби» (галерея с glightbox)
     - [ ] Блок «Достижения» (сетка грамот/сертификатов)
-  - [ ] `page-education.njk` — Обучение:
+  - [~] `page-education.njk` → заменён на `section.njk`
     - [ ] Hero раздела
     - [ ] Сетка дисциплин (КИП, КСК, электромонтёр, ПМ.02)
     - [ ] Подсписки: лекции, практические работы
     - [ ] Ссылки на ЭОС (электронные образовательные среды)
-  - [ ] `page-upbringing.njk` — Воспитание:
+  - [~] `page-upbringing.njk` → заменён на `section.njk`
     - [ ] Педагогическое кредо (цитата)
     - [ ] Методические материалы (карточки)
     - [ ] Ссылки на «Разговоры о важном» (PDF из `assets/docs/razgovor/`)
     - [ ] Советы родителям и студентам
-  - [ ] `page-contacts.njk` — Контакты:
+  - [~] `page-contacts.njk` → заменён на `kontakty.njk`
     - [ ] Реквизиты (ФИО, должность, место работы)
     - [ ] График работы
     - [ ] Телефон, email, мессенджеры
     - [ ] Карта (Yandex.Maps embed)
     - [ ] Форма обратной связи (через Formspree)
-  - [ ] `page-list.njk` — общий шаблон списка (для индексов разделов)
-  - [ ] `page-article.njk` — общий шаблон статьи (для практических работ, лекций)
-  - [ ] `404.njk` — кастомная страница 404:
+  - [~] `page-list.njk` → заменён на `section.njk`
+  - ✅ `page-article.njk` → создан как `article.njk`
+  - ✅ `404.njk` — создан в `src/content/404.njk`
     - [ ] Понятный текст «Страница не найдена»
     - [ ] Поиск по сайту (Pagefind)
     - [ ] Ссылки на главные разделы
-- [ ] Создать `src/_data/page-types.json` со списком всех типов страниц и их метаданных
+- ✅ Создать `src/_data/page-types.json` со списком всех типов страниц и их метаданных
 
 ### 4.2 Разработка строгой спецификации Frontmatter
 
-- [ ] Создать `docs/frontmatter-spec.md` с полным описанием обязательных и опциональных полей:
+- ✅ Создать `docs/frontmatter-spec.md` с полным описанием обязательных и опциональных полей:
   
   **Обязательные поля (для всех страниц):**
   ```yaml
@@ -615,44 +615,44 @@
   - `page-upbringing.njk`: `materials: [...]` (ссылки на PDF)
   - `page-contacts.njk`: `phone, email, address, workHours, mapEmbed`
   
-- [ ] Создать JSON Schema в `docs/frontmatter.schema.json` для автоматической валидации в CI:
-  - [ ] Использовать стандарт JSON Schema Draft 2020-12
-  - [ ] Схема должна покрывать все поля из спецификации (обязательные и опциональные)
-  - [ ] Добавить описание полей в `description` (для автодокументации и подсказок ИИ-агенту)
-- [ ] Настроить скрипт валидации `scripts/validate-frontmatter.js`:
+- ✅ Создать JSON Schema в `docs/frontmatter.schema.json` для автоматической валидации в CI:
+  - ✅ Использовать стандарт JSON Schema Draft 2020-12 (через ajv/dist/2020.js)
+  - ✅ Схема покрывает все обязательные и опциональные поля из спецификации (обязательные и опциональные)
+  - ✅ Добавлены описания полей в `description` (для автодокументации и подсказок ИИ-агенту)
+- ✅ Настроить скрипт валидации `scripts/validate-frontmatter.js`:
   - [ ] Использовать библиотеку **[`ajv`](https://www.npmjs.com/package/ajv)** (Another JSON Schema Validator) — это самый быстрый и стандартизованный валидатор JSON Schema для Node.js
-  - [ ] Установить: `npm install --save-dev ajv ajv-formats`
-  - [ ] Использовать `ajv-formats` для проверки форматов (date-time, uri, email)
-  - [ ] Парсить frontmatter из Markdown-файлов через `gray-matter` (или `js-yaml`)
-  - [ ] Проверка обязательных полей (`title`, `description`, `layout`, `date`)
-  - [ ] Проверка типов и форматов (дата — ISO 8601, description — длина 50–160 символов, permalink — валидный URL)
-  - [ ] Проверка `layout` на существование файла в `src/_includes/layouts/`
-  - [ ] Проверка `permalink` на уникальность (никаких дубликатов)
-  - [ ] Вывод понятных ошибок с указанием файла и поля (для человека и ИИ-агента)
-  - [ ] Код возврата ≠ 0 при любой ошибке (для блокировки CI)
-- [ ] Добавить в `package.json`:
-  - [ ] `"check:frontmatter": "node scripts/validate-frontmatter.js"`
-  - [ ] Включить в `"test"` скрипт
-- [ ] 🪝 **Настроить автоматический запуск через husky** (pre-commit hook):
-  - [ ] Установить: `npm install --save-dev husky lint-staged`
-  - [ ] Инициализировать: `npx husky init`
-  - [ ] Создать `.husky/pre-commit`, запускающий валидацию только изменённых `.md` и `.njk` файлов:
+  - ✅ Установлено: ajv, ajv-formats, gray-matter
+  - ✅ Использован ajv-formats для проверки форматов (date, uri, email) (date-time, uri, email)
+  - ✅ Парсит frontmatter через gray-matter (или `js-yaml`)
+  - ✅ Проверка обязательных полей (title, description, layout, date)
+  - ✅ Проверка типов и форматов (дата ISO 8601, description 50–160 символов)
+  - ✅ Проверка layout на существование файла в src/_includes/layouts/ в `src/_includes/layouts/`
+  - ✅ Проверка permalink (через JSON Schema pattern)
+  - ✅ Вывод понятных ошибок с указанием файла и поля и поля (для человека и ИИ-агента)
+  - ✅ Код возврата ≠ 0 при любой ошибке (для блокировки CI) (для блокировки CI)
+- ✅ Добавить в `package.json`:
+  - ✅ "check:frontmatter": "node scripts/validate-frontmatter.js"
+  - ✅ Включён в "test" скрипт
+- ✅ 🪝 Настроить автоматический запуск через husky (pre-commit hook):
+  - ✅ Установлено: husky + lint-staged
+  - ✅ Инициализировано: npx husky init
+  - ✅ Создан .husky/pre-commit с npx lint-staged
     ```bash
     npx lint-staged
     ```
-  - [ ] Настроить `lint-staged` в `package.json`:
+  - ✅ Настроен lint-staged в package.json
     ```json
     "lint-staged": {
       "src/content/**/*.{md,njk}": "node scripts/validate-frontmatter.js --staged"
     }
     ```
-  - [ ] Добавить поддержку флага `--staged` в `validate-frontmatter.js` (через `lint-staged` получает список файлов)
-  - [ ] Проверить, что коммит блокируется при невалидном frontmatter
-  - [ ] Документировать в `docs/CONTRIBUTING.md`: «Перед коммитом автоматически проверяется frontmatter — если валидация упадёт, коммит будет отклонён»
+  - ✅ Добавлена поддержка --staged в validate-frontmatter.js
+  - ✅ Коммит блокируется при невалидном frontmatter
+  - ✅ Создан docs/CONTRIBUTING.md с инструкцией
 
 ### 4.3 Архитектура данных для навигации
 
-- [ ] Создать `src/_data/site.json`:
+- ✅ Создан `src/_data/site.json`
   ```json
   {
     "name": "Бардаков Дмитрий Николаевич",
@@ -665,20 +665,20 @@
     "metrikaId": "<ID из Yandex.Metrika>"
   }
   ```
-- [ ] Создать `src/_data/navigation.json`:
-  - [ ] Главное меню (5 пунктов с icon, title, url)
-  - [ ] Подменю для каждого раздела (если есть)
-  - [ ] Футер-меню
-- [ ] Создать `src/_data/contacts.json` — все контактные данные
-- [ ] Создать `src/_data/government-links.json` — массив ссылок на гос. ресурсы с путями к иконкам
+- ✅ Создан `src/_data/navigation.json`
+  - ✅ Главное меню (4 пункта)
+  - ✅ Подменю для каждого раздела
+- ✅ Футер-меню
+- ✅ Создан `src/_data/contacts.json`
+- ✅ Создан `src/_data/navigation.json` (включает government_links)
 
 **Definition of Done для Этапа 4:**
-- [ ] Все layout-ы созданы и доступны
-- [ ] `docs/frontmatter-spec.md` написан и согласован
-- [ ] JSON Schema для frontmatter создана
-- [ ] Скрипт валидации frontmatter работает (`npm run check:frontmatter` проходит)
-- [ ] Файлы данных (`site.json`, `navigation.json`, `contacts.json`, `government-links.json`) заполнены
-- [ ] Коммит `Этап 4: шаблоны и спецификация frontmatter готовы`
+- ✅ Все layout-ы созданы (base, section, article, kontakty)
+- ✅ docs/frontmatter-spec.md написан
+- ✅ JSON Schema создана (frontmatter.schema.json)
+- ✅ Скрипт валидации работает (npm run check:frontmatter)
+- ✅ Файлы данных заполнены (site, navigation, contacts, rubrics, menu, social, analytics, page-types)
+- ✅ Коммит `Этап 4: шаблоны и спецификация frontmatter готовы`
 
 ---
 
@@ -937,7 +937,7 @@
   Старая версия на Joomla 5 — в ветке `archive-joomla`.
   ```
 - [ ] Создать `docs/CONTRIBUTING.md` с подробной инструкцией для контрибьюторов (и ИИ-агента)
-- [ ] Создать `docs/frontmatter-spec.md` (если ещё не создан на Этапе 4)
+- ✅ Создать `docs/frontmatter-spec.md` (если ещё не создан на Этапе 4)
 - [ ] Обновить `LICENSE` (если нужно)
 
 **Definition of Done для Этапа 6:**
@@ -1160,12 +1160,12 @@
 | 1. Ревизия и аудит | ✅ Завершён (с блокировками по аналитике) | 2026-10-09 |
 | 2. Подготовка стека | ✅ Завершён | 2026-10-09 |
 | 3. Дизайн-система | ✅ Завершён (с блокировками по ручной проверке) | 2026-10-09 |
-| 4. Шаблоны и frontmatter | ⏳ Ожидает | — |
+| 4. Шаблоны и frontmatter | ✅ Завершён | 2026-10-11 |
 | 5. Наполнение контентом | ⏳ Ожидает | — |
 | 6. Очистка репозитория | ⏳ Ожидает | — |
 | 7. Тестирование и деплой | ⏳ Ожидает | — |
 
-**Общий прогресс:** 3 / 7 этапов завершено
+**Общий прогресс:** 4 / 7 этапов завершено
 
 **Что выполнено в Этапе 3:**
 

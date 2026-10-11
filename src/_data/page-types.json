@@ -1,0 +1,54 @@
+{
+  "$comment": "Список всех типов страниц и их метаданных. Создано: 2026-10-11 (Этап 4.1).",
+  "page_types": [
+    {
+      "name": "index",
+      "layout": "base.njk",
+      "description": "Главная страница (лендинг). Hero + цитата + 4 карточки разделов + краткие контакты.",
+      "url": "/",
+      "file": "src/content/index.njk",
+      "required_frontmatter": ["title", "description", "layout", "date"]
+    },
+    {
+      "name": "section",
+      "layout": "section.njk",
+      "description": "Страница раздела/подраздела. Hero + хлебные крошки + вводный текст + сетка карточек.",
+      "example_urls": ["/obo-mne/", "/obuchenie/", "/abiturientu/", "/vospitanie/"],
+      "required_frontmatter": ["title", "description", "layout", "date", "section"],
+      "optional_frontmatter": ["eyebrow", "subtitle", "cards", "intro", "extra", "breadcrumbs"]
+    },
+    {
+      "name": "article",
+      "layout": "article.njk",
+      "description": "Страница конкретного материала/статьи. Хлебные крошки + заголовок + мета-данные + основной текст + документы для скачивания.",
+      "example_urls": ["/obuchenie/kip/prakticheskie-kip/prakticheskaya-rabota-no1/"],
+      "required_frontmatter": ["title", "description", "layout", "date"],
+      "optional_frontmatter": ["section", "subsection", "author", "category", "tags", "readTime", "documents", "related", "breadcrumbs"]
+    },
+    {
+      "name": "kontakty",
+      "layout": "kontakty.njk",
+      "description": "Страница контактов. Hero + контактная информация + форма обратной связи.",
+      "url": "/obo-mne/kontakty/",
+      "file": "src/content/obo-mne/kontakty.njk",
+      "required_frontmatter": ["title", "description", "layout", "date"]
+    },
+    {
+      "name": "search",
+      "layout": "base.njk",
+      "description": "Страница поиска по сайту через Pagefind.",
+      "url": "/search/",
+      "file": "src/content/search.njk",
+      "required_frontmatter": ["title", "description", "layout", "date"]
+    },
+    {
+      "name": "404",
+      "layout": "base.njk",
+      "description": "Страница 404 — страница не найдена.",
+      "url": "/404.html",
+      "file": "src/content/404.njk",
+      "required_frontmatter": ["title", "description", "layout", "date"]
+    }
+  ],
+  "available_layouts": ["base.njk", "section.njk", "article.njk", "kontakty.njk"]
+}
