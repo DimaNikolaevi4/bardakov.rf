@@ -3,8 +3,7 @@
   ──────────────────────────────────────────────────────────────
   Подключение:
     • Загружается из base.njk (`<script defer src="/assets/js/offcanvas-nav.js">`)
-      ПОСЛЕ bootstrap.bundle.min.js — глобальный `bootstrap.Offcanvas` доступен
-      на момент выполнения благодаря порядку `defer`.
+      после разметки и управляет меню без стороннего JS-зависимого слоя.
     • Разметка живёт в components/header.njk (контейнеры `#offcanvasRubrics`,
       `#ocPanel1`, `#ocPanel2`, `#ocPanel3` и `<script id="rubricsData">`).
     • Источник данных — `_data/rubrics.yaml` ключ `main_rubrics`, выводится в
@@ -20,8 +19,8 @@
   Ключевые поведения:
     • Self-gating: ранний выход при отсутствии `#rubricsData` (на страницах без
       offcanvas скрипт безопасно ничего не делает).
-    • Авто-выделение текущего раздела при открытии (`autoHighlight` — событие
-      `show.bs.offcanvas`): по `window.location.pathname` находит активные L1/L2
+    • Авто-выделение текущего раздела при открытии (`autoHighlight`): по
+      `window.location.pathname` находит активные L1/L2
       и сразу разворачивает соответствующие панели в `silent`-режиме (без
       переноса фокуса; вместо этого `scrollActiveIntoView` подкручивает к active).
     • Управление фокусом (`focusFirstIn`) — при открытии панели фокус уходит
@@ -32,9 +31,6 @@
       hover-логика не активируется.
     • Закрытие всего стека (`closeAll`) при клике на любую конечную ссылку
       (класс `.oc-dismiss-all`) или на «Открыть весь раздел».
-    • Якорные ссылки `href^="#"` внутри offcanvas — сначала закрывают панель
-      и только в `hidden.bs.offcanvas` плавно скроллят к цели (иначе scroll
-      шёл бы при заблокированном `<body>` от Bootstrap).
 
   Утилиты:
     • `esc(s)` — HTML-escape для безопасной вставки названий рубрик в `innerHTML`.
@@ -47,7 +43,7 @@
     • `aria-hidden` на `#ocPanel2` / `#ocPanel3` (false при открытии).
     • `aria-current="page"` на ссылках, совпадающих с текущим URL.
 
-  Зависимости: глобальный `bootstrap.Offcanvas` (Bootstrap 5 bundle).
+  Зависимости: Bootstrap Icons для оформления; меню работает на нативном JS.
   IIFE-обёртка изолирует все функции/переменные от глобального scope.
 */
 (function () {
@@ -60,6 +56,9 @@
   var currentPath = window.location.pathname;
 
   var offcanvasEl    = document.getElementById('offcanvasRubrics');
+  var backdropEl     = document.getElementById('offcanvasBackdrop');
+  var offcanvasToggle = document.getElementById('offcanvasToggle');
+  var burgerBtn      = document.getElementById('burgerBtn');
   var ocPanel2       = document.getElementById('ocPanel2');
   var ocPanel3       = document.getElementById('ocPanel3');
   var ocSubList      = document.getElementById('ocSubList');
@@ -79,6 +78,62 @@
   var hoverTimer = null;
   var currentL1Toggle = null;
   var currentParentRubric = null;
+  var returnFocusTo = null;
+
+  [offcanvasEl, ocPanel2, ocPanel3].forEach(function (panel) {
+    if (!panel) return;
+    panel.setAttribute('aria-hidden', 'true');
+    panel.inert = true;
+  });
+  if (backdropEl) backdropEl.setAttribute('aria-hidden', 'true');
+
+  function setPanelState(panel, open) {
+    if (!panel) return;
+    panel.classList.toggle('is-open', open);
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    panel.inert = !open;
+  }
+
+  function activePanel() {
+    if (ocPanel3 && ocPanel3.classList.contains('is-open')) return ocPanel3;
+    if (ocPanel2 && ocPanel2.classList.contains('is-open')) return ocPanel2;
+    return offcanvasEl;
+  }
+
+  function openMenu(trigger) {
+    if (!offcanvasEl || offcanvasEl.classList.contains('is-open')) return;
+    returnFocusTo = trigger || document.activeElement;
+    setPanelState(offcanvasEl, true);
+    document.body.classList.add('menu-open');
+    if (backdropEl) {
+      backdropEl.classList.add('is-open');
+      backdropEl.setAttribute('aria-hidden', 'false');
+    }
+    [offcanvasToggle, burgerBtn].forEach(function (button) {
+      if (button) button.setAttribute('aria-expanded', 'true');
+    });
+    autoHighlight();
+    focusFirstIn(activePanel());
+  }
+
+  function closeMenu() {
+    if (!offcanvasEl) return;
+    closePanel3();
+    closePanel2();
+    setPanelState(offcanvasEl, false);
+    document.body.classList.remove('menu-open');
+    if (backdropEl) {
+      backdropEl.classList.remove('is-open');
+      backdropEl.setAttribute('aria-hidden', 'true');
+    }
+    [offcanvasToggle, burgerBtn].forEach(function (button) {
+      if (button) button.setAttribute('aria-expanded', 'false');
+    });
+    if (returnFocusTo && typeof returnFocusTo.focus === 'function') {
+      returnFocusTo.focus();
+    }
+    returnFocusTo = null;
+  }
 
   function esc(str) {
     return String(str)
@@ -185,7 +240,7 @@
       el.addEventListener('click', closeAll);
     });
 
-    if (ocPanel2OpenLink) ocPanel2OpenLink.addEventListener('click', closeAll);
+    if (ocPanel2OpenLink) ocPanel2OpenLink.onclick = closeAll;
 
     var l2isPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (l2isPointer) {
@@ -195,7 +250,7 @@
           var href  = row.dataset.l3Href;
           if (child && child.children) {
             hoverTimer = setTimeout(function () {
-              openPanel3(child, href, row.querySelector('.oc-open-l3'), rubric);
+              openPanel3(child, href, row.querySelector('.oc-open-l3'), rubric, true);
             }, 220);
           }
         });
@@ -209,8 +264,7 @@
     currentL1Toggle = toggleBtn || null;
     if (currentL1Toggle) currentL1Toggle.setAttribute('aria-expanded', 'true');
 
-    ocPanel2.classList.add('is-open');
-    ocPanel2.setAttribute('aria-hidden', 'false');
+    setPanelState(ocPanel2, true);
     if (ocPanel2Scroll) ocPanel2Scroll.scrollTop = 0;
 
     if (!silent) {
@@ -220,15 +274,16 @@
     }
   }
 
-  function closePanel2() {
+  function closePanel2(restoreFocus) {
     closePanel3();
-    ocPanel2.classList.remove('is-open');
-    ocPanel2.setAttribute('aria-hidden', 'true');
+    setPanelState(ocPanel2, false);
+    var focusTarget = currentL1Toggle;
     if (currentL1Toggle) {
       currentL1Toggle.setAttribute('aria-expanded', 'false');
       currentL1Toggle = null;
     }
     currentParentRubric = null;
+    if (restoreFocus && focusTarget) focusTarget.focus();
   }
 
   function openPanel3(child, parentHref, toggleBtn, parentRubric, silent) {
@@ -248,12 +303,11 @@
         el.addEventListener('click', closeAll);
       });
     }
-    if (ocPanel3OpenLink) ocPanel3OpenLink.addEventListener('click', closeAll);
+    if (ocPanel3OpenLink) ocPanel3OpenLink.onclick = closeAll;
 
     if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
 
-    ocPanel3.classList.add('is-open');
-    ocPanel3.setAttribute('aria-hidden', 'false');
+    setPanelState(ocPanel3, true);
     var p3scroll = ocPanel3.querySelector('.oc-panel__scroll');
     if (p3scroll) p3scroll.scrollTop = 0;
 
@@ -264,23 +318,21 @@
     }
   }
 
-  function closePanel3() {
-    ocPanel3.classList.remove('is-open');
-    ocPanel3.setAttribute('aria-hidden', 'true');
+  function closePanel3(restoreFocus) {
+    var focusTarget = ocSubList
+      ? ocSubList.querySelector('.oc-open-l3[aria-expanded="true"]')
+      : null;
+    setPanelState(ocPanel3, false);
     if (ocSubList) {
       ocSubList.querySelectorAll('.oc-open-l3[aria-expanded="true"]').forEach(function (btn) {
         btn.setAttribute('aria-expanded', 'false');
       });
     }
+    if (restoreFocus && focusTarget) focusTarget.focus();
   }
 
   function closeAll() {
-    closePanel3();
-    closePanel2();
-    if (offcanvasEl) {
-      var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
-      if (bsOc) bsOc.hide();
-    }
+    closeMenu();
   }
 
   // ─── Автовыделение: определяем текущую позицию в иерархии ───
@@ -327,70 +379,67 @@
     el.addEventListener('click', closeAll);
   });
 
-  if (ocCloseBtn2) ocCloseBtn2.addEventListener('click', closePanel2);
-  if (ocCloseBtn3) ocCloseBtn3.addEventListener('click', closePanel3);
+  if (ocCloseBtn2) ocCloseBtn2.addEventListener('click', function () { closePanel2(true); });
+  if (ocCloseBtn3) ocCloseBtn3.addEventListener('click', function () { closePanel3(true); });
+  var ocBackBtn2 = document.getElementById('ocBackBtn2');
+  var ocBackBtn3 = document.getElementById('ocBackBtn3');
+  if (ocBackBtn2) ocBackBtn2.addEventListener('click', function () { closePanel2(true); });
+  if (ocBackBtn3) ocBackBtn3.addEventListener('click', function () { closePanel3(true); });
 
-  // ─── Автовыделение при открытии offcanvas ───
-  if (offcanvasEl) {
-    offcanvasEl.addEventListener('show.bs.offcanvas', function () {
-      autoHighlight();
+  [offcanvasToggle, burgerBtn].forEach(function (button) {
+    if (!button) return;
+    button.setAttribute('aria-expanded', 'false');
+    button.addEventListener('click', function () {
+      if (offcanvasEl.classList.contains('is-open')) closeMenu();
+      else openMenu(button);
     });
-    offcanvasEl.addEventListener('hidden.bs.offcanvas', function () {
-      closePanel3();
-      closePanel2();
+  });
+  if (backdropEl) backdropEl.addEventListener('click', closeMenu);
+  if (offcanvasEl) {
+    offcanvasEl.addEventListener('click', function (event) {
+      if (event.target.closest('[data-dismiss="offcanvas"]')) closeMenu();
     });
   }
 
   // ─── Escape закрывает самую глубокую панель ───
   document.addEventListener('keydown', function (e) {
+    if (!offcanvasEl || !offcanvasEl.classList.contains('is-open')) return;
     if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
       if (ocPanel3.classList.contains('is-open')) {
-        e.stopPropagation();
-        closePanel3();
-        focusFirstIn(ocPanel2);
+        closePanel3(true);
       } else if (ocPanel2.classList.contains('is-open')) {
-        e.stopPropagation();
-        closePanel2();
-        if (offcanvasEl) {
-          var first = offcanvasEl.querySelectorAll('a[href], button:not([disabled]), input');
-          if (first.length) first[0].focus();
-        }
+        closePanel2(true);
+      } else {
+        closeMenu();
+      }
+      return;
+    }
+    if (e.key === 'Tab') {
+      var panels = [offcanvasEl, ocPanel2, ocPanel3].filter(function (panel) {
+        return panel && !panel.inert;
+      });
+      var focusables = [];
+      panels.forEach(function (panel) {
+        Array.prototype.forEach.call(panel.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ), function (element) {
+          if (element.getClientRects().length) focusables.push(element);
+        });
+      });
+      if (!focusables.length) {
+        e.preventDefault();
+        offcanvasEl.focus();
+      } else if (e.shiftKey && document.activeElement === focusables[0]) {
+        e.preventDefault();
+        focusables[focusables.length - 1].focus();
+      } else if (!e.shiftKey && document.activeElement === focusables[focusables.length - 1]) {
+        e.preventDefault();
+        focusables[0].focus();
       }
     }
   });
-
-  // ─── Якорные ссылки внутри offcanvas (например «Контакты» → #footer) ───
-  // Сначала закрываем панель, и только после полного закрытия плавно
-  // прокручиваем к цели, иначе скролл происходит при заблокированном body.
-  if (offcanvasEl) {
-    offcanvasEl.addEventListener('click', function (e) {
-      var link = e.target.closest('a[href^="#"]');
-      if (!link || !offcanvasEl.contains(link)) return;
-      var hash = link.getAttribute('href');
-      if (!hash || hash === '#' || hash.length < 2) return;
-      var target = document.querySelector(hash);
-      if (!target) return;
-      e.preventDefault();
-      var bsOc = bootstrap.Offcanvas.getInstance(offcanvasEl);
-      var doScroll = function () {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (history.pushState) {
-          history.pushState(null, '', hash);
-        } else {
-          window.location.hash = hash;
-        }
-      };
-      if (bsOc && offcanvasEl.classList.contains('show')) {
-        offcanvasEl.addEventListener('hidden.bs.offcanvas', function once() {
-          offcanvasEl.removeEventListener('hidden.bs.offcanvas', once);
-          setTimeout(doScroll, 20);
-        });
-        bsOc.hide();
-      } else {
-        doScroll();
-      }
-    });
-  }
 
   // ─── Hover-открытие на десктопе ───
   var isPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -401,7 +450,7 @@
         var rubric = RUBRICS[idx];
         var toggle = row.querySelector('.oc-split-row__toggle');
         if (rubric && rubric.children) {
-          hoverTimer = setTimeout(function () { openPanel2(rubric, toggle); }, 220);
+          hoverTimer = setTimeout(function () { openPanel2(rubric, toggle, true); }, 220);
         }
       });
       row.addEventListener('mouseleave', function () { clearTimeout(hoverTimer); });
