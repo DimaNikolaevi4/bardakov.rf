@@ -1,1 +1,2 @@
 - [Package install lockfile churn](package-install-lockfile.md) — Replit package setup may rewrite unrelated dependency and platform metadata; review manifest changes after installs.
+- [ARIA and visual hiding](aria-hidden-visual-state.md) — Keep aria-hidden semantic; component styles, not global ARIA selectors, control visual visibility.
