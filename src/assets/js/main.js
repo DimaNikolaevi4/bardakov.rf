@@ -53,22 +53,36 @@
     });
   }
 
-  // 4. Scroll-to-top
+  // 4. Принудительно загружаем локальный шрифт для Bootstrap Icons
+  function initIconFont() {
+    if (!document.fonts) return;
+    document.fonts.load('16px "bootstrap-icons"', '\uf32f').catch((error) => {
+      console.error('Не удалось загрузить шрифт Bootstrap Icons:', error);
+    });
+  }
+
+  // 5. Scroll-to-top
   function initScrollTop() {
     const btn = document.getElementById('scrollTop');
     if (!btn) return;
     const onScroll = () => {
-      btn.classList.toggle('is-visible', window.scrollY > 400);
+      const maxScroll = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight,
+      );
+      const threshold = Math.min(400, maxScroll / 2);
+      btn.classList.toggle('is-visible', window.scrollY > threshold);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
-  // 5. Подсветка активного пункта меню
+  // 6. Подсветка активного пункта меню
   function initActiveNav() {
     const currentPath = window.location.pathname;
     document.querySelectorAll('.main-nav-link').forEach((link) => {
@@ -81,6 +95,7 @@
 
   // Init
   function init() {
+    initIconFont();
     initStickyHeader();
     initReveal();
     initCardGlow();
