@@ -1,0 +1,1 @@
+- [Package install lockfile churn](package-install-lockfile.md) — Replit package setup may rewrite unrelated dependency and platform metadata; review manifest changes after installs.

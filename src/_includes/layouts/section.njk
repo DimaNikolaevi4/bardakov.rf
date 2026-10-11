@@ -32,16 +32,18 @@
 <div class="page-section" data-section="{{ section or '' }}">
 
   {# === Блок 2: Витрина (Hero раздела) === #}
-  <section class="hero-section">
-    <div class="container">
-      <span class="eyebrow">{{ eyebrow or "Раздел" }}</span>
-      <h1>{{ title }}</h1>
-      {% if subtitle %}
-      <p class="hero-subtitle">{{ subtitle }}</p>
-      {% endif %}
-      {% if description %}
-      <p class="hero-description">{{ description }}</p>
-      {% endif %}
+  <section class="hero-section page-showcase" data-page-block="showcase">
+    <div class="container page-showcase__inner">
+      <div class="page-showcase__copy">
+        <span class="eyebrow">{{ eyebrow or "Раздел" }}</span>
+        <h1>{{ title }}</h1>
+        {% if subtitle %}
+        <p class="hero-subtitle">{{ subtitle }}</p>
+        {% endif %}
+        {% if description %}
+        <p class="hero-description">{{ description }}</p>
+        {% endif %}
+      </div>
     </div>
   </section>
 

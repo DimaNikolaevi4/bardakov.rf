@@ -9,56 +9,15 @@ order: 1
 eyebrow: "Персональный сайт преподавателя"
 heroTitle: "Бардаков Дмитрий Николаевич"
 heroDescription: "Преподаватель технических дисциплин"
+heroQuote: "«Образование — это не наполнение сосуда, а зажигание огня.»"
+heroQuoteAttribution: "Педагогическое кредо"
+heroVisual: true
 templateEngineOverride: njk
 ---
 
 {% from "components/button.njk" import button %}
 {% from "components/card.njk" import card %}
 {% from "components/section-divider.njk" import section_divider %}
-
-{# === HERO-БЛОК === #}
-<section class="hero">
-  <div class="container">
-    <p class="hero__eyebrow">Персональный сайт преподавателя</p>
-    <h1 class="hero__title">Бардаков Дмитрий Николаевич</h1>
-    <p class="hero__subtitle">Преподаватель технических дисциплин</p>
-    <p class="hero__description">
-      ГБПОУ РО «Сальский индустриальный техникум» (СИТ),
-      г. Сальск, Ростовская область.
-      Методические материалы, лекции и практические работы
-      для студентов технических специальностей.
-    </p>
-    <div class="hero__actions">
-      {{ button({
-        "text": "Обо мне",
-        "href": "/obo-mne/",
-        "variant": "primary",
-        "icon": "bi-person-circle"
-      }) }}
-      {{ button({
-        "text": "Связаться",
-        "href": "mailto:" ~ contacts.contacts.email,
-        "variant": "secondary",
-        "icon": "bi-envelope"
-      }) }}
-    </div>
-  </div>
-</section>
-
-{{ section_divider({ "type": "wave" }) }}
-
-{# === ЦИТАТА / ПЕДАГОГИЧЕСКОЕ КРЕДО === #}
-<section class="section section-sm">
-  <div class="container container-md">
-    <blockquote>
-      <p>
-        «Образование — это не наполнение сосуда,
-        а зажигание огня.»
-      </p>
-      <cite>педагогическое кредо</cite>
-    </blockquote>
-  </div>
-</section>
 
 {# === СЕТКА БЫСТРЫХ ССЫЛОК === #}
 <section class="section">

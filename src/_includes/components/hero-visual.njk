@@ -1,0 +1,27 @@
+{# Декоративная SVG-витрина для главной страницы. #}
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="showcase-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="currentColor" stop-opacity=".24"/>
+      <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#showcase-glow)"/>
+  <g fill="none" stroke="var(--text-primary)" stroke-opacity=".1">
+    <path d="M20 200h360M200 20v360"/>
+    <path d="m60 60 280 280M340 60 60 340" stroke-dasharray="4 6"/>
+  </g>
+  <g transform="translate(120 180)" stroke="currentColor" stroke-linejoin="round">
+    <path d="M0 20 80 0v80L0 100Z" fill="currentColor" fill-opacity=".15" stroke-width="2.5"/>
+    <path d="m80 0 80 20v80L80 80Z" fill="currentColor" fill-opacity=".1" stroke-width="2.5"/>
+    <path d="M80 0v80" fill="none" stroke-width="2.5"/>
+    <g fill="none" stroke-linecap="round" stroke-opacity=".65" stroke-width="2">
+      <path d="m20 40 40-10M20 55l40-10M100 30l40 10M100 45l40 10"/>
+    </g>
+  </g>
+  <circle cx="80" cy="80" r="6" fill="var(--highlight)"/>
+  <circle cx="320" cy="120" r="8" fill="currentColor"/>
+  <circle cx="300" cy="300" r="5" fill="currentColor"/>
+  <circle cx="100" cy="320" r="7" fill="var(--highlight)"/>
+  <circle cx="200" cy="200" r="140" fill="none" stroke="currentColor" stroke-dasharray="3 8" stroke-opacity=".35" stroke-width="1.5"/>
+</svg>

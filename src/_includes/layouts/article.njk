@@ -47,15 +47,17 @@
   {% endif %}
 
   {# === Блок 2: Витрина (заголовок статьи) === #}
-  <header class="article-header">
-    <div class="container container-md">
-      {% if category %}
-      <span class="eyebrow">{{ category }}</span>
-      {% endif %}
-      <h1>{{ title }}</h1>
-      {% if description %}
-      <p class="article-lead">{{ description }}</p>
-      {% endif %}
+  <header class="article-header page-showcase" data-page-block="showcase">
+    <div class="container container-md page-showcase__inner">
+      <div class="page-showcase__copy">
+        {% if category %}
+        <span class="eyebrow">{{ category }}</span>
+        {% endif %}
+        <h1>{{ title }}</h1>
+        {% if description %}
+        <p class="article-lead">{{ description }}</p>
+        {% endif %}
+      </div>
     </div>
   </header>
 

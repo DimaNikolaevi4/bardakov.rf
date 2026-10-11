@@ -6,15 +6,38 @@
 {% block content %}
 {% set pageBlocks = pageBlocks or {} %}
 {% from "components/breadcrumb.njk" import breadcrumb %}
+{% from "components/button.njk" import button %}
 
 <div class="page-scaffold" data-page-layout="seven-blocks">
   {# Блок 2: Витрина #}
-  <section class="page-scaffold__showcase" data-page-block="showcase">
-    <div class="container">
-      <p class="page-scaffold__eyebrow">{{ eyebrow or "Персональный сайт преподавателя" }}</p>
-      <h1>{{ heroTitle or title or site.title }}</h1>
-      {% if heroDescription or description %}
-      <p class="page-scaffold__description">{{ heroDescription or description }}</p>
+  <section class="page-showcase page-scaffold__showcase{% if heroVisual %} page-showcase--featured{% endif %}" data-page-block="showcase">
+    <div class="container page-showcase__inner{% if heroVisual %} page-showcase__inner--featured{% endif %}">
+      <div class="page-showcase__copy">
+        <p class="eyebrow">{{ eyebrow or "Персональный сайт преподавателя" }}</p>
+        <h1>{{ heroTitle or title or site.title }}</h1>
+        {% if heroDescription or description %}
+        <p class="page-scaffold__description">{{ heroDescription or description }}</p>
+        {% endif %}
+
+        {% if heroQuote %}
+        <blockquote class="page-showcase__quote">
+          <p>{{ heroQuote }}</p>
+          {% if heroQuoteAttribution %}<cite>{{ heroQuoteAttribution }}</cite>{% endif %}
+        </blockquote>
+        {% endif %}
+
+        {% if page.url == "/" %}
+        <div class="page-showcase__actions">
+          {{ button({ "text": "Обо мне", "href": "/obo-mne/", "variant": "primary", "icon": "bi-person-circle" }) }}
+          {{ button({ "text": "Связаться", "href": "mailto:" ~ contacts.contacts.email, "variant": "secondary", "icon": "bi-envelope" }) }}
+        </div>
+        {% endif %}
+      </div>
+
+      {% if heroVisual %}
+      <figure class="page-showcase__visual">
+        {% include "components/hero-visual.njk" %}
+      </figure>
       {% endif %}
     </div>
   </section>
