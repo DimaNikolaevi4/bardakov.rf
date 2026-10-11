@@ -12,7 +12,7 @@
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="На главную">
           <div class="footer-logo-text">
-            <span class="footer-logo-org">{{ site.footerText }}</span>
+            <span class="footer-logo-org">{{ site.footer_text }}</span>
           </div>
         </a>
         <p class="footer-tagline">{{ site.tagline }}</p>
@@ -26,7 +26,7 @@
             <span>{{ site.city }}, {{ site.region }}</span>
           </div>
         </div>
-        <div class="footer-social" aria-label="Контакты">
+        <div class="footer-social" role="group" aria-label="Контакты">
           <a href="mailto:{{ contacts.contacts.email }}" class="footer-social-link" aria-label="Электронная почта">
             <i class="bi bi-envelope-fill" aria-hidden="true"></i>
             <span class="sr-only">Электронная почта</span>
@@ -46,7 +46,7 @@
             <h4 class="footer-corp-title">{{ contacts.person.full_name }}</h4>
           </div>
           <p class="footer-corp-address">
-            <i class="bi bi-building" aria-hidden="true"></i>
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
             <span>{{ contacts.person.organization }}, {{ contacts.person.city }}</span>
           </p>
           <ul class="footer-corp-phones">
@@ -71,7 +71,7 @@
             {% for link in block.links %}
             <li>
               <a href="{{ link.url }}">
-                <i class="bi {{ link.icon }}" aria-hidden="true"></i>{{ link.title }}
+                <i class="bi {{ link.icon or 'bi-chevron-right' }}" aria-hidden="true"></i>{{ link.title }}
               </a>
             </li>
             {% endfor %}
@@ -92,7 +92,7 @@
         <li>
           <a href="{{ link.url }}"
              target="_blank"
-             rel="noopener"
+             rel="noopener noreferrer"
              class="footer-resource"
              title="{{ link.title }}">
             <span class="footer-resource-icon">
