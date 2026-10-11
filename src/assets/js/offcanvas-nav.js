@@ -456,4 +456,11 @@
       row.addEventListener('mouseleave', function () { clearTimeout(hoverTimer); });
     });
   }
+
+  window.BardakovOffcanvas = {
+    close: closeMenu,
+    isOpen: function () {
+      return Boolean(offcanvasEl && offcanvasEl.classList.contains('is-open'));
+    }
+  };
 })();

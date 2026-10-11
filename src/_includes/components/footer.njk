@@ -115,6 +115,11 @@
         {% set year = "now" | date("Y") %}
         {{ site.copyright | replace("{year}", year) }}
       </p>
+      <p class="footer-license-note">
+        При создании сайта использовались
+        <a href="/third-party-notices/">библиотеки</a>
+        с открытым исходным кодом.
+      </p>
       <div class="footer-bottom-links">
         <a href="/sitemap.xml">Карта сайта</a>
       </div>

@@ -1,0 +1,99 @@
+---
+title: "Лицензии библиотек"
+description: "Версии и лицензии библиотек с открытым исходным кодом, использованных при создании сайта."
+layout: page.njk
+permalink: /third-party-notices/index.html
+date: 2026-10-11
+section: obo-mne
+order: 6
+templateEngineOverride: njk
+---
+
+{% from "components/breadcrumb.njk" import breadcrumb %}
+
+<div class="container container-md third-party-notices">
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Лицензии библиотек" }
+  ]) }}
+
+  <h1>Лицензии библиотек</h1>
+  <p class="third-party-notices__intro">
+    При создании сайта использовались библиотеки с открытым исходным кодом.
+    Ниже указаны версии, назначение, исходный проект и лицензия каждой прямой зависимости.
+  </p>
+
+  <h2>Библиотеки и ресурсы сайта</h2>
+  <div class="third-party-notices__table-wrap"
+       role="region"
+       aria-label="Библиотеки и ресурсы опубликованного сайта"
+       tabindex="0">
+    <table class="third-party-notices__table">
+      <caption>Компоненты, используемые в опубликованной версии сайта</caption>
+      <thead>
+        <tr>
+          <th scope="col">Библиотека</th>
+          <th scope="col">Версия</th>
+          <th scope="col">Назначение</th>
+          <th scope="col">Лицензия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for package in thirdPartyNotices.website %}
+        <tr>
+          <th scope="row"><a href="{{ package.packageUrl }}">{{ package.name }}</a></th>
+          <td>{{ package.version }}</td>
+          <td>{{ package.purpose }}</td>
+          <td>
+            {% if package.licenseUrl %}
+            <a href="{{ package.licenseUrl }}">{{ package.license }}</a>
+            {% else %}
+            {{ package.license }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Библиотеки, используемые при сборке и проверке</h2>
+  <div class="third-party-notices__table-wrap"
+       role="region"
+       aria-label="Библиотеки для сборки и проверки сайта"
+       tabindex="0">
+    <table class="third-party-notices__table">
+      <caption>Инструменты разработки и подготовки сайта</caption>
+      <thead>
+        <tr>
+          <th scope="col">Библиотека</th>
+          <th scope="col">Версия</th>
+          <th scope="col">Назначение</th>
+          <th scope="col">Лицензия</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for package in thirdPartyNotices.build %}
+        <tr>
+          <th scope="row"><a href="{{ package.packageUrl }}">{{ package.name }}</a></th>
+          <td>{{ package.version }}</td>
+          <td>{{ package.purpose }}</td>
+          <td>
+            {% if package.licenseUrl %}
+            <a href="{{ package.licenseUrl }}">{{ package.license }}</a>
+            {% else %}
+            {{ package.license }}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <p class="third-party-notices__note">
+    В таблицах перечислены прямые npm-зависимости проекта. Их версии и сведения о лицензиях
+    берутся из установленных пакетов; полный состав зависимостей сборки закреплён в файле
+    <a href="https://github.com/DimaNikolaevi4/bardakov.rf/blob/main/package-lock.json">package-lock.json</a>.
+  </p>
+</div>

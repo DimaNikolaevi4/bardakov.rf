@@ -23,20 +23,45 @@
     FONT: "a11y-font",
     ANIMATIONS: "a11y-animations",
   };
+  let activeA11yToggle = null;
+  let a11yReturnFocus = null;
+
+  function getA11yToggleButtons() {
+    return Array.from(document.querySelectorAll('[aria-controls="a11yPanel"]'));
+  }
+
+  function getVisibleOffcanvasToggle() {
+    return Array.from(document.querySelectorAll('[aria-controls="offcanvasRubrics"]'))
+      .find((button) => !button.closest("#offcanvasRubrics") && button.getClientRects().length);
+  }
 
   /**
    * Открывает панель доступности
    */
-  function openA11yPanel() {
+  function openA11yPanel(trigger) {
     const panel = document.getElementById("a11yPanel");
     const backdrop = document.getElementById("a11yBackdrop");
-    const toggleBtn = document.getElementById("a11y-toggle");
 
     if (!panel) return;
 
+    if (window.BardakovSearch && window.BardakovSearch.isOpen()) {
+      window.BardakovSearch.close(false);
+    }
+    if (window.BardakovOffcanvas && window.BardakovOffcanvas.isOpen()) {
+      window.BardakovOffcanvas.close();
+    }
+
+    activeA11yToggle = trigger || document.getElementById("a11yToggle");
+    a11yReturnFocus = activeA11yToggle && activeA11yToggle.closest("#offcanvasRubrics")
+      ? getVisibleOffcanvasToggle() || document.getElementById("a11yToggle")
+      : activeA11yToggle;
+
+    panel.inert = false;
     panel.setAttribute("aria-hidden", "false");
     if (backdrop) backdrop.setAttribute("aria-hidden", "false");
-    if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+    getA11yToggleButtons().forEach((button) => {
+      button.setAttribute("aria-expanded", button === activeA11yToggle ? "true" : "false");
+    });
 
     document.body.classList.add("no-scroll");
 
@@ -56,19 +81,21 @@
   /**
    * Закрывает панель доступности
    */
-  function closeA11yPanel() {
+  function closeA11yPanel(restoreFocus = true) {
     const panel = document.getElementById("a11yPanel");
     const backdrop = document.getElementById("a11yBackdrop");
-    const toggleBtn = document.getElementById("a11y-toggle");
 
     if (!panel) return;
 
-    panel.setAttribute("aria-hidden", "true");
-    if (backdrop) backdrop.setAttribute("aria-hidden", "true");
-    if (toggleBtn) {
-      toggleBtn.setAttribute("aria-expanded", "false");
-      toggleBtn.focus();
+    if (restoreFocus && a11yReturnFocus && a11yReturnFocus.isConnected) {
+      a11yReturnFocus.focus();
     }
+    panel.setAttribute("aria-hidden", "true");
+    panel.inert = true;
+    if (backdrop) backdrop.setAttribute("aria-hidden", "true");
+    getA11yToggleButtons().forEach((button) => button.setAttribute("aria-expanded", "false"));
+    activeA11yToggle = null;
+    a11yReturnFocus = null;
 
     document.body.classList.remove("no-scroll");
     document.removeEventListener("keydown", escapeCloseHandler);
@@ -229,18 +256,14 @@
   function init() {
     restoreSettings();
 
-    // Кнопка открытия панели
-    const openBtn = document.getElementById("a11y-toggle");
-    if (openBtn) {
-      openBtn.addEventListener("click", () => {
-        const isExpanded = openBtn.getAttribute("aria-expanded") === "true";
-        if (isExpanded) {
-          closeA11yPanel();
-        } else {
-          openA11yPanel();
-        }
+    // Кнопки открытия панели в шапке и в меню
+    getA11yToggleButtons().forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+      button.addEventListener("click", () => {
+        if (panelIsOpen()) closeA11yPanel();
+        else openA11yPanel(button);
       });
-    }
+    });
 
     // Кнопки закрытия (любая с data-action="close-a11y")
     document.querySelectorAll('[data-action="close-a11y"]').forEach((btn) => {
@@ -280,6 +303,11 @@
     document.querySelectorAll('[data-action="reset-a11y"]').forEach((btn) => {
       btn.addEventListener("click", resetAll);
     });
+  }
+
+  function panelIsOpen() {
+    const panel = document.getElementById("a11yPanel");
+    return panel && panel.getAttribute("aria-hidden") === "false";
   }
 
   if (document.readyState === "loading") {
