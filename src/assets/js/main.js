@@ -85,6 +85,97 @@
     });
   }
 
+  // 6. Модальное окно поиска (открытие/закрытие/фокус-трап)
+  function initSearchModal() {
+    var searchToggle = document.getElementById('headerSearchToggle');
+    var searchModal  = document.getElementById('searchModal');
+    var searchModalOverlay = document.getElementById('searchModalOverlay');
+    var searchModalInput   = document.getElementById('searchModalInput');
+    var offcanvasSearchToggle = document.getElementById('offcanvasSearchToggle');
+
+    if (!searchToggle || !searchModal) return;
+
+    var previouslyFocused = null;
+
+    function openSearchModal() {
+      previouslyFocused = document.activeElement;
+      searchModal.classList.add('is-open');
+      searchModal.setAttribute('aria-hidden', 'false');
+      searchModal.removeAttribute('inert');
+      searchToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function () { if (searchModalInput) searchModalInput.focus(); }, 100);
+    }
+
+    function closeSearchModal() {
+      searchModal.classList.remove('is-open');
+      searchModal.setAttribute('aria-hidden', 'true');
+      searchModal.setAttribute('inert', '');
+      searchToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (previouslyFocused) {
+        previouslyFocused.focus();
+        previouslyFocused = null;
+      }
+    }
+
+    // Клик по кнопке поиска в шапке
+    searchToggle.addEventListener('click', function () {
+      if (searchModal.classList.contains('is-open')) {
+        closeSearchModal();
+      } else {
+        openSearchModal();
+      }
+    });
+
+    // Клик по кнопке поиска в offcanvas
+    if (offcanvasSearchToggle) {
+      offcanvasSearchToggle.addEventListener('click', function () {
+        // Закрываем offcanvas если открыт
+        var offcanvasEl = document.getElementById('offcanvasRubrics');
+        if (offcanvasEl && offcanvasEl.classList.contains('is-open')) {
+          offcanvasEl.classList.remove('is-open');
+          offcanvasEl.setAttribute('aria-hidden', 'true');
+          var backdrop = document.getElementById('offcanvasBackdrop');
+          if (backdrop) backdrop.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+        setTimeout(openSearchModal, 150);
+      });
+    }
+
+    // Клик по overlay
+    if (searchModalOverlay) {
+      searchModalOverlay.addEventListener('click', closeSearchModal);
+    }
+
+    // Кнопки закрытия (data-action="close-search")
+    searchModal.querySelectorAll('[data-action="close-search"]').forEach(function(btn) {
+      btn.addEventListener('click', closeSearchModal);
+    });
+
+    // Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && searchModal.classList.contains('is-open')) {
+        closeSearchModal();
+      }
+    });
+
+    // Фокус-трап внутри модала
+    searchModal.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var focusable = searchModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
   // Init
   function init() {
     initStickyHeader();
@@ -92,6 +183,7 @@
     initCardGlow();
     initScrollTop();
     initActiveNav();
+    initSearchModal();
   }
 
   if (document.readyState === 'loading') {
