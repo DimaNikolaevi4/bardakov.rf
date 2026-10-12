@@ -99,8 +99,8 @@ if (carousel) {
         : "Приостановить автоматическую смену слайдов",
     );
     carousel.setAttribute("aria-live", manuallyPaused ? "polite" : "off");
-    pauseIcon.hidden = manuallyPaused;
-    playIcon.hidden = !manuallyPaused;
+    pauseIcon.toggleAttribute("hidden", manuallyPaused);
+    playIcon.toggleAttribute("hidden", !manuallyPaused);
   }
 
   function stopTimer() {
