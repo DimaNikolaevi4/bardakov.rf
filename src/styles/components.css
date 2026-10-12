@@ -448,13 +448,48 @@ a:hover { color: var(--accent-hover); }
    4.1 СЛАЙДЕР ГЛАВНОЙ СТРАНИЦЫ
    ============================================================ */
 .home-carousel {
+  --carousel-shade-strong: color-mix(in srgb, var(--bg-primary) 78%, transparent);
+  --carousel-shade-medium: color-mix(in srgb, var(--bg-primary) 62%, transparent);
+  --carousel-shade-light: color-mix(in srgb, var(--bg-primary) 24%, transparent);
+  --carousel-shade-bottom: color-mix(in srgb, var(--highlight) 20%, transparent);
+  --carousel-panel: color-mix(in srgb, var(--bg-primary) 90%, transparent);
+  --carousel-control-surface: color-mix(in srgb, var(--bg-primary) 86%, transparent);
+  --carousel-control-hover: color-mix(in srgb, var(--accent) 14%, var(--bg-primary));
+  --carousel-control-border: color-mix(in srgb, var(--accent) 42%, var(--border));
+  --carousel-turn-shadow: color-mix(in srgb, var(--accent) 30%, transparent);
+  --carousel-turn-edge: color-mix(in srgb, var(--highlight) 32%, transparent);
   position: relative;
   isolation: isolate;
   height: min(84svh, 54rem);
   min-height: 36rem;
   overflow: hidden;
-  color: #fff;
-  background: #142019;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .home-carousel {
+  --carousel-shade-strong: color-mix(in srgb, var(--bg-primary) 90%, transparent);
+  --carousel-shade-medium: color-mix(in srgb, var(--bg-primary) 76%, transparent);
+  --carousel-shade-light: color-mix(in srgb, var(--accent) 32%, transparent);
+  --carousel-shade-bottom: color-mix(in srgb, var(--highlight) 24%, transparent);
+  --carousel-panel: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
+  --carousel-control-surface: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
+  --carousel-control-hover: color-mix(in srgb, var(--accent) 28%, var(--bg-secondary));
+  --carousel-turn-shadow: color-mix(in srgb, var(--accent) 40%, transparent);
+  --carousel-turn-edge: color-mix(in srgb, var(--highlight) 42%, transparent);
+}
+
+[data-theme="high-contrast"] .home-carousel {
+  --carousel-shade-strong: rgb(0 0 0 / 94%);
+  --carousel-shade-medium: rgb(0 0 0 / 82%);
+  --carousel-shade-light: rgb(0 0 0 / 54%);
+  --carousel-shade-bottom: rgb(0 0 0 / 28%);
+  --carousel-panel: var(--bg-secondary);
+  --carousel-control-surface: var(--bg-secondary);
+  --carousel-control-hover: color-mix(in srgb, var(--accent) 28%, var(--bg-secondary));
+  --carousel-control-border: var(--border);
+  --carousel-turn-shadow: rgb(255 255 255 / 38%);
+  --carousel-turn-edge: color-mix(in srgb, var(--highlight) 48%, transparent);
 }
 
 .home-carousel__slides {
@@ -492,7 +527,7 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__slide.is-turning-out {
   z-index: 3;
   visibility: visible;
-  box-shadow: 0 0 2.5rem rgb(0 0 0 / 32%);
+  box-shadow: 0 0 2.5rem var(--carousel-turn-shadow);
 }
 
 .home-carousel__slide.is-turning-forward {
@@ -511,10 +546,10 @@ a:hover { color: var(--accent-hover); }
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgb(3 9 5 / 46%) 0%,
+    color-mix(in srgb, var(--accent) 30%, transparent) 0%,
     transparent 24%,
     transparent 69%,
-    rgb(255 255 255 / 18%) 100%
+    var(--carousel-turn-edge) 100%
   );
   content: "";
   pointer-events: none;
@@ -523,10 +558,10 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__slide.is-turning-backward::after {
   background: linear-gradient(
     270deg,
-    rgb(3 9 5 / 46%) 0%,
+    color-mix(in srgb, var(--accent) 30%, transparent) 0%,
     transparent 24%,
     transparent 69%,
-    rgb(255 255 255 / 18%) 100%
+    var(--carousel-turn-edge) 100%
   );
 }
 
@@ -545,8 +580,13 @@ a:hover { color: var(--accent-hover); }
 
 .home-carousel__shade {
   background:
-    linear-gradient(90deg, rgb(10 19 14 / 86%) 0%, rgb(10 19 14 / 65%) 48%, rgb(10 19 14 / 24%) 100%),
-    linear-gradient(0deg, rgb(10 19 14 / 48%), transparent 46%);
+    linear-gradient(
+      90deg,
+      var(--carousel-shade-strong) 0%,
+      var(--carousel-shade-medium) 48%,
+      var(--carousel-shade-light) 100%
+    ),
+    linear-gradient(0deg, var(--carousel-shade-bottom), transparent 46%);
 }
 
 .home-carousel__content {
@@ -569,7 +609,7 @@ a:hover { color: var(--accent-hover); }
 
 .home-carousel__eyebrow {
   margin-bottom: 1rem;
-  color: #c1e6ce;
+  color: var(--accent);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.11em;
@@ -579,7 +619,7 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__title {
   max-width: 15ch;
   margin: 0 0 1.25rem;
-  color: #fff;
+  color: var(--text-primary);
   font-size: clamp(2.5rem, 6vw, 5.6rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -600,7 +640,7 @@ a:hover { color: var(--accent-hover); }
 
 .home-carousel__subtitle {
   max-width: 48ch;
-  color: rgb(255 255 255 / 90%);
+  color: var(--text-secondary);
   font-size: clamp(1.05rem, 1.8vw, 1.35rem);
   line-height: 1.65;
 }
@@ -610,9 +650,10 @@ a:hover { color: var(--accent-hover); }
   justify-self: end;
   margin: 0 0 clamp(2rem, 8vh, 5rem);
   padding: 1rem 1.25rem;
-  color: #fff;
-  background: rgb(13 27 19 / 72%);
-  border-inline-start: 3px solid #9dd8b1;
+  color: var(--text-primary);
+  background: var(--carousel-panel);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--accent);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   line-height: 1.6;
@@ -622,7 +663,7 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__detail a {
   display: inline-block;
   margin-top: 0.65rem;
-  color: #c1e6ce;
+  color: var(--accent);
   font-weight: 700;
   text-underline-offset: 0.2em;
 }
@@ -640,9 +681,9 @@ a:hover { color: var(--accent-hover); }
   display: grid;
   place-items: center;
   padding: 0;
-  color: #fff;
-  background: rgb(10 19 14 / 65%);
-  border: 1px solid rgb(255 255 255 / 42%);
+  color: var(--accent);
+  background: var(--carousel-control-surface);
+  border: 1px solid var(--carousel-control-border);
   cursor: pointer;
   pointer-events: auto;
   transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
@@ -651,8 +692,8 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__arrow:hover,
 .home-carousel__toggle:hover,
 .home-carousel__dot:hover {
-  background: rgb(10 19 14 / 90%);
-  border-color: #fff;
+  background: var(--carousel-control-hover);
+  border-color: var(--accent);
 }
 
 .home-carousel__arrow:focus-visible,
@@ -660,7 +701,7 @@ a:hover { color: var(--accent-hover); }
 .home-carousel__dot:focus-visible,
 .home-carousel__title a:focus-visible,
 .home-carousel__detail a:focus-visible {
-  outline: 3px solid #fff;
+  outline: 3px solid var(--highlight);
   outline-offset: 4px;
 }
 
@@ -716,20 +757,15 @@ a:hover { color: var(--accent-hover); }
 }
 
 .home-carousel__dot[aria-current="true"] {
-  background: #c1e6ce;
-  border-color: #c1e6ce;
-  box-shadow: 0 0 0 3px rgb(10 19 14 / 55%);
-}
-
-[data-theme="high-contrast"] .home-carousel__eyebrow,
-[data-theme="high-contrast"] .home-carousel__detail a {
-  color: #fff;
+  background: var(--highlight);
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-primary) 72%, transparent);
 }
 
 [data-theme="high-contrast"] .home-carousel__arrow,
 [data-theme="high-contrast"] .home-carousel__toggle,
 [data-theme="high-contrast"] .home-carousel__dot {
-  border: 2px solid #fff;
+  border: 2px solid var(--border);
 }
 
 @media (max-width: 700px) {
@@ -744,8 +780,13 @@ a:hover { color: var(--accent-hover); }
 
   .home-carousel__shade {
     background:
-      linear-gradient(0deg, rgb(10 19 14 / 86%) 0%, rgb(10 19 14 / 61%) 55%, rgb(10 19 14 / 29%) 100%),
-      linear-gradient(90deg, rgb(10 19 14 / 28%), transparent 85%);
+      linear-gradient(
+        0deg,
+        var(--carousel-shade-strong) 0%,
+        var(--carousel-shade-medium) 55%,
+        var(--carousel-shade-light) 100%
+      ),
+      linear-gradient(90deg, var(--carousel-shade-bottom), transparent 85%);
   }
 
   .home-carousel__content {
