@@ -1,0 +1,192 @@
+<section id="g-slideshow" class="fp-slideshow">
+                                        <div class="g-grid">                        
+
+        <div class="g-block size-100 nomargintop nomarginbottom nopaddingbottom nopaddingtop">
+             <div id="slideshow-4169-particle" class="g-content g-particle">            <div class="g-slideshow-wrapper">
+        <style scoped="">
+            #slideshow-4169 .g-slideshow-slider {
+                height: 85vh;
+            }
+
+            @media only all and (max-width: 51rem) {
+                #slideshow-4169 .g-slideshow-slider {
+                    height: 500px !important;
+                }
+            }
+        </style>
+
+        <div id="slideshow-4169" class="g-slideshow swiper-container swiper-container-flip swiper-container-3d swiper-container-initialized swiper-container-horizontal" data-slideshow-id="slideshow-4169" data-slideshow-effect="flip" data-slideshow-autoplay="true" data-slideshow-loop="true" data-direction="horizontal" data-slideshow-timeout="8000" data-slideshow-speed="800" data-slideshow-touchmove="true" style="cursor: grab;">
+            <div class="g-slideshow-slider swiper-wrapper" style="transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="2" style="width: 877px; transition-duration: 0ms; z-index: 4; transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(-180deg);">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <div class="content-background" style="background-image: url(/templates/rt_elixir/custom/images/home/6e77cfa3-abff-4c04-bba9-56fafdc3e556.jpg);"></div>
+
+                                    <div class="content-left">
+                                                                                    <h1 class="g-slideshow-main-title">
+                                                                                                    <a href="/index.php/obuchenie" target="_self"><span>Обучение</span></a>
+                                                                                            </h1>
+                                        
+                                                                            </div>
+
+                                    <div class="content-right">
+                                                                                    <div class="g-slideshow-description2">
+                                                <span>2017 год - работа в "Сальском индустриальном техникуме". Преподаю технические дисциплины   <a title="ПМ02" href="http://пм02.рф/" target="_blank" rel="noopener">учебный веб-ресурс</a></span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                                                            <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 877px; transition-duration: 0ms; z-index: 4; transform: translate3d(-877px, 0px, 0px) rotateX(0deg) rotateY(-180deg);">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <div class="content-background" style="background-image: url(/images/new_foto/a24.jpeg);"></div>
+
+                                    <div class="content-left">
+                                                                                    <h1 class="g-slideshow-main-title">
+                                                                                                    <a href="/index.php/obo-mne/dostizheniya" target="_blank"><div data-aos="fade-right" class="aos-init aos-animate"><span>Бардаков Дмитрий Николаевич</span></div></a>
+                                                                                            </h1>
+                                        
+                                                                                    <div class="g-slideshow-description1">
+                                                <div data-aos="fade-right" class="aos-init aos-animate"><span>Преподаватель высшей категории<br></span></div>
+                                            </div>
+                                                                            </div>
+
+                                    <div class="content-right">
+                                                                                    <div class="g-slideshow-description2">
+                                                <div data-aos="fade-left" class="aos-init aos-animate"><span><a href="https://sit-salsk.ru" target="_blank">Сальского индустриального техникума</a></span></div>
+                                            </div>
+                                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="1" style="width: 877px; transition-duration: 0ms; z-index: 5; transform: translate3d(-1754px, 0px, 0px) rotateX(0deg) rotateY(0deg);">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <div class="content-background" style="background-image: url(/images/new_foto/3b66199b-bacc-4ef1-a576-808ce90b0711.jpg);"></div>
+
+                                    <div class="content-left">
+                                                                                    <h1 class="g-slideshow-main-title">
+                                                                                                    <a href="/index.php/vospitanie" target="_self"><span>ВОСПИТАНИЕ - ВАЖНО</span></a>
+                                                                                            </h1>
+                                        
+                                                                            </div>
+
+                                    <div class="content-right">
+                                                                                    <div class="g-slideshow-description2">
+                                                <span>Воспитание и образование неразделимы. Нельзя воспитывать, не передавая знания, а любое знание оказывает воспитательное воздействие</span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="width: 877px; transition-duration: 0ms; z-index: 4; transform: translate3d(-2631px, 0px, 0px) rotateX(0deg) rotateY(180deg);">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <div class="content-background" style="background-image: url(/templates/rt_elixir/custom/images/home/6e77cfa3-abff-4c04-bba9-56fafdc3e556.jpg);"></div>
+
+                                    <div class="content-left">
+                                                                                    <h1 class="g-slideshow-main-title">
+                                                                                                    <a href="/index.php/obuchenie" target="_self"><span>Обучение</span></a>
+                                                                                            </h1>
+                                        
+                                                                            </div>
+
+                                    <div class="content-right">
+                                                                                    <div class="g-slideshow-description2">
+                                                <span>2017 год - работа в "Сальском индустриальном техникуме". Преподаю технические дисциплины   <a title="ПМ02" href="http://пм02.рф/" target="_blank" rel="noopener">учебный веб-ресурс</a></span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                                                <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="0" style="width: 877px; transition-duration: 0ms; z-index: 4; transform: translate3d(-3508px, 0px, 0px) rotateX(0deg) rotateY(180deg);">
+                            <div class="slide">
+                                <div class="slide-content">
+                                    <div class="content-background" style="background-image: url(/images/new_foto/a24.jpeg);"></div>
+
+                                    <div class="content-left">
+                                                                                    <h1 class="g-slideshow-main-title">
+                                                                                                    <a href="/index.php/obo-mne/dostizheniya" target="_blank"><div data-aos="fade-right" class="aos-init aos-animate"><span>Бардаков Дмитрий Николаевич</span></div></a>
+                                                                                            </h1>
+                                        
+                                                                                    <div class="g-slideshow-description1">
+                                                <div data-aos="fade-right" class="aos-init aos-animate"><span>Преподаватель высшей категории<br></span></div>
+                                            </div>
+                                                                            </div>
+
+                                    <div class="content-right">
+                                                                                    <div class="g-slideshow-description2">
+                                                <div data-aos="fade-left" class="aos-init aos-animate"><span><a href="https://sit-salsk.ru" target="_blank">Сальского индустриального техникума</a></span></div>
+                                            </div>
+                                                                            </div>
+                                </div>
+                            </div>
+                        </div></div>
+
+                                                <div class="navigation">
+                        <div class="swiper-button-next" tabindex="0" role="button" aria-label="Следующий слайд">
+                            <i class="fa fa-angle-right"></i>
+                        </div>
+                        <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Предыдущий слайд">
+                            <i class="fa fa-angle-left"></i>
+                        </div>
+                    </div>
+                            
+                                        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Перейти к слайду 1"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Перейти к слайду 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Перейти к слайду 3"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+    </div>
+            </div>
+        </div>
+            </div>
+                            <div class="g-grid">                        
+
+        <div class="g-block size-100 center">
+             <div id="social-2632-particle" class="g-content g-particle">            <div class="g-social ">
+                <div class="g-social-items">
+                            <a target="_blank" href="https://vk.com/id514588431" title="ВКонтакте Бардаков Дмитрий Николаевич" aria-label="ВКонтакте Бардаков Дмитрий Николаевич">
+                    <span class="fa fa-vk"></span>                                    </a>
+                            <a target="_blank" href="https://sit-salsk.ru/" title="ГБПОУ РО &quot;СИТ&quot;" aria-label="ГБПОУ РО &quot;СИТ&quot;">
+                    <span class="fa fa-mail-forward"></span>                                    </a>
+                            <a target="_blank" href="https://эос.сит-сальск.рф/" title="Электронная образовательная система ГБПОУ РО &quot;СИТ&quot;" aria-label="Электронная образовательная система ГБПОУ РО &quot;СИТ&quot;">
+                    <span class="fas fa-graduation-cap"></span>                                    </a>
+                            <a target="_blank" href="https://sit-salsk.ru/?p=15146" title="нормативно-правовая база ГБПОУ РО &quot;СИТ&quot;" aria-label="нормативно-правовая база ГБПОУ РО &quot;СИТ&quot;">
+                    <span class="fa fa-legal"></span>                                    </a>
+                            <a target="_blank" href="https://донмолодой.рф/" title="Дон молодой" aria-label="Дон молодой">
+                    <span class="fa fa-child"></span>                                    </a>
+                            <a target="_blank" href="https://minobr.donland.ru/" title="Министерство общего и профессионального образования Ростовской области" aria-label="Министерство общего и профессионального образования Ростовской области">
+                    <span class="fa fa-handshake-o"></span>                                    </a>
+                            <a target="_blank" href="https://dobro.ru/" title="Я доброволец" aria-label="Я доброволец">
+                    <span class="fa fa-users"></span>                                    </a>
+                            <a target="_blank" href="https://живунадону.рф/" title="Живу на Дону" aria-label="Живу на Дону">
+                    <span class="fa fa-map-o"></span>                                    </a>
+                            <a target="_blank" href="https://vk.com/sitsalsksit" title="ВКонтакте ГБПОУ РО &quot;СИТ&quot;" aria-label="ВКонтакте ГБПОУ РО &quot;СИТ&quot;">
+                    <span class="fa fa-vk"></span>                                    </a>
+                            <a target="_blank" href="https://t.me/Neuro_Animation_Studio" title="хобби - Нейро Мульт Студия" aria-label="хобби - Нейро Мульт Студия">
+                    <span class="fab fa-telegram"></span>                                    </a>
+                    </div>
+    </div>
+            </div>
+        </div>
+            </div>
+                            <div class="g-grid">                        
+
+        <div class="g-block size-100">
+             <div id="video-3605-particle" class="g-content g-particle">            <div class="g-video-container g-video-container-columns-1 ">
+        
+    <div class="g-video-inner">
+        <div id="g-video-3605-1" data-g-video-id="g-video-3605-1" class="g-video">
+            
+            
+                        <video poster="/images/Animation/видео%20среднее%20качество.mp4_snapshot_00.18.351.jpg" loop="" controls="" muted="" playsinline="">
+                                <source src="/images/Animation/Бардаков_самопризентация.mp4" type="video/mp4">
+                                    </video>
+                                
+                
+                                            </div>
+                                            </div>
+                                    </div>
+            </div>
+        </div>
+            </div>
+            
+    </section>

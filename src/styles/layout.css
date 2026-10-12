@@ -96,6 +96,10 @@ select {
   padding-block: var(--space-12);
 }
 
+.site-main:has(.home-carousel) {
+  padding-block: 0;
+}
+
 /* Общая витрина для главной, разделов, материалов и контактов. */
 .page-showcase {
   position: relative;

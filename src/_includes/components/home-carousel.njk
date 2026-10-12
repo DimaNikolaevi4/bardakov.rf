@@ -1,0 +1,141 @@
+<section
+  class="home-carousel"
+  data-home-carousel
+  data-autoplay-interval="8000"
+  aria-label="Слайд-шоу главной страницы"
+  aria-roledescription="слайдер"
+  aria-live="off"
+>
+  <div class="home-carousel__slides">
+    <article
+      class="home-carousel__slide is-active"
+      aria-roledescription="слайд"
+      aria-label="1 из 3"
+      aria-hidden="false"
+    >
+      <img
+        class="home-carousel__image"
+        src="/assets/images/home-slider/profile.jpeg"
+        alt="Дмитрий Николаевич Бардаков в своём кабинете"
+        fetchpriority="high"
+        decoding="async"
+      >
+      <div class="home-carousel__shade" aria-hidden="true"></div>
+      <div class="home-carousel__content">
+        <div class="home-carousel__copy">
+          <p class="home-carousel__eyebrow">Персональный сайт преподавателя</p>
+          <h1 class="home-carousel__title">
+            <a href="/obo-mne/">Бардаков Дмитрий Николаевич</a>
+          </h1>
+          <p class="home-carousel__subtitle">Преподаватель высшей категории</p>
+        </div>
+        <p class="home-carousel__detail">
+          <a href="https://sit-salsk.ru/" target="_blank" rel="noopener noreferrer">
+            Сальский индустриальный техникум
+          </a>
+        </p>
+      </div>
+    </article>
+
+    <article
+      class="home-carousel__slide"
+      aria-roledescription="слайд"
+      aria-label="2 из 3"
+      aria-hidden="true"
+      inert
+    >
+      <img
+        class="home-carousel__image"
+        src="/assets/images/home-slider/education.jpg"
+        alt="Студенты за совместной работой в аудитории"
+        loading="lazy"
+        decoding="async"
+      >
+      <div class="home-carousel__shade" aria-hidden="true"></div>
+      <div class="home-carousel__content">
+        <div class="home-carousel__copy">
+          <p class="home-carousel__eyebrow">Воспитание и образование</p>
+          <h2 class="home-carousel__title">
+            <a href="/vospitanie/">Воспитание — важно</a>
+          </h2>
+        </div>
+        <p class="home-carousel__detail">
+          Воспитание и образование неразделимы. Нельзя воспитывать, не передавая знания,
+          а любое знание оказывает воспитательное воздействие.
+          <a href="/vospitanie/">Материалы о воспитании</a>
+        </p>
+      </div>
+    </article>
+
+    <article
+      class="home-carousel__slide"
+      aria-roledescription="слайд"
+      aria-label="3 из 3"
+      aria-hidden="true"
+      inert
+    >
+      <img
+        class="home-carousel__image"
+        src="/assets/images/home-slider/teaching.jpg"
+        alt="Преподаватель показывает студентам учебный электрический стенд"
+        loading="lazy"
+        decoding="async"
+      >
+      <div class="home-carousel__shade" aria-hidden="true"></div>
+      <div class="home-carousel__content">
+        <div class="home-carousel__copy">
+          <p class="home-carousel__eyebrow">Для студентов технических специальностей</p>
+          <h2 class="home-carousel__title">
+            <a href="/obuchenie/">Обучение</a>
+          </h2>
+        </div>
+        <p class="home-carousel__detail">
+          С 2017 года преподаю технические дисциплины в Сальском индустриальном техникуме.
+          <a href="/obuchenie/">Учебные материалы и лекции</a>
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <div class="home-carousel__controls" aria-label="Управление слайд-шоу">
+    <button
+      class="home-carousel__arrow home-carousel__arrow--previous"
+      type="button"
+      data-carousel-previous
+      aria-label="Предыдущий слайд"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+    </button>
+    <button
+      class="home-carousel__arrow home-carousel__arrow--next"
+      type="button"
+      data-carousel-next
+      aria-label="Следующий слайд"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </button>
+    <button
+      class="home-carousel__toggle"
+      type="button"
+      data-carousel-toggle
+      aria-label="Приостановить автоматическую смену слайдов"
+      aria-pressed="false"
+    >
+      <svg data-carousel-pause-icon viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M7 5h3v14H7zm7 0h3v14h-3z"></path>
+      </svg>
+      <svg data-carousel-play-icon viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden>
+        <path d="M8 5v14l11-7z"></path>
+      </svg>
+    </button>
+    <div class="home-carousel__pagination" role="group" aria-label="Выбрать слайд">
+      <button class="home-carousel__dot" type="button" data-carousel-slide="0" aria-label="Показать слайд 1: Бардаков Дмитрий Николаевич" aria-current="true"></button>
+      <button class="home-carousel__dot" type="button" data-carousel-slide="1" aria-label="Показать слайд 2: Воспитание — важно" aria-current="false"></button>
+      <button class="home-carousel__dot" type="button" data-carousel-slide="2" aria-label="Показать слайд 3: Обучение" aria-current="false"></button>
+    </div>
+  </div>
+</section>
