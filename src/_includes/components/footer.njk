@@ -59,6 +59,10 @@
               <a href="mailto:{{ contacts.contacts.email }}" class="footer-phone-link">{{ contacts.contacts.email_display }}</a>
             </li>
             <li>
+              <span class="footer-phone-label">Адрес</span>
+              <span class="footer-phone-link">{{ contacts.person.address }}<br>{{ contacts.person.address_building }}</span>
+            </li>
+            <li>
               <span class="footer-phone-label">Режим работы</span>
               <span class="footer-phone-link">{{ contacts.contacts.work_hours }}</span>
             </li>
