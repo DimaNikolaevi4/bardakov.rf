@@ -24,7 +24,7 @@ echo ""
 echo "📦 1/6. Сборка сайта..."
 cd "$REPO_DIR"
 rm -rf public
-./node_modules/.bin/eleventy
+npx --no-install @11ty/eleventy 2>/dev/null || node_modules/.bin/eleventy
 
 # 2. Пост-обработка путей
 echo "🔧 2/6. Пост-обработка путей для GitHub Pages..."
