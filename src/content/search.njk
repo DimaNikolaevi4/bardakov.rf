@@ -1,29 +1,139 @@
 ---
 title: "Поиск"
-description: "Поиск по сайту бардаков.рф"
-layout: base.njk
+description: "Поиск по сайту бардаков.рф — методические материалы, лекции, практические работы и документы"
+layout: page.njk
 permalink: /search/index.html
 date: 2026-10-09
 section: search
+showLegacyContent: true
+breadcrumbs:
+  - title: "Главная"
+    url: "/"
+  - title: "Поиск"
 templateEngineOverride: njk
 ---
 
-<div class="container container-md">
-  <h1>Поиск по сайту</h1>
-
-  <div id="search"></div>
-
-  <noscript>
-    <p>Для использования поиска включите JavaScript в браузере.</p>
-  </noscript>
+<div class="container container--breadcrumbs">
+  {% from "components/breadcrumb.njk" import breadcrumb %}
+  {{ breadcrumb([
+    { "title": "Главная", "url": "/" },
+    { "title": "Поиск" }
+  ]) }}
 </div>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    if (typeof PagefindUI !== 'undefined') {
-      new PagefindUI({ element: "#search", showSubResults: true });
-    }
-  });
-</script>
+<div class="container layout">
+  <div class="layout__content layout__content--full search-page">
+
+    {# Форма поиска #}
+    <form class="search-form" role="search" action="/search/" method="get">
+      <div class="search-form__row">
+        <div class="search-form__group">
+          <input
+            type="search"
+            class="search-form__input"
+            name="q"
+            id="searchQueryInput"
+            value=""
+            placeholder="Введите запрос для поиска..."
+            aria-label="Поисковый запрос"
+            autocomplete="off">
+          <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+      </div>
+
+      {# Фильтр по разделам #}
+      <div class="search-filters">
+        <div class="search-filter">
+          <label for="rubricFilter" class="search-filter__label">Раздел:</label>
+          <select name="rubric" id="rubricFilter" class="search-filter__select">
+            <option value="">Все разделы</option>
+            {% for rubric in rubrics.main_rubrics %}
+            <option value="{{ rubric.slug }}">{{ rubric.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </form>
+
+    {# Результаты поиска #}
+    <div class="search-results" style="display: none;">
+      <p class="search-results__info"></p>
+      <ul class="search-results__list"></ul>
+    </div>
+
+    {# Подсказки #}
+    <div class="search-tips">
+      <h2 class="search-tips__title">Советы по поиску</h2>
+      <ul class="search-tips__list">
+        <li>Используйте ключевые слова для более точного поиска</li>
+        <li>Можно искать по названию, содержанию или тегам</li>
+        <li>Для поиска точной фразы используйте кавычки: «профессиональное образование»</li>
+        <li>Используйте фильтр по разделу для уточнения результатов</li>
+        <li>Поиск работает по русским и английским словам</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.search-page { padding: 2rem 0 4rem; }
+.search-form { margin-bottom: 2rem; }
+.search-form__row { margin-bottom: 1rem; }
+.search-form__group { display: flex; gap: 1rem; max-width: 800px; }
+.search-form__input {
+  flex: 1; padding: 0.75rem 1rem; font-size: 1.125rem;
+  border: 2px solid var(--border, #dee2e6); border-radius: var(--radius-sm, 0.5rem);
+  background: var(--bg-subtle, #fff); color: var(--text-primary, #000);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-form__input:focus {
+  outline: none; border-color: var(--accent, #4338CA);
+  box-shadow: 0 0 0 3px var(--accent-ring, rgba(67,56,202,0.15));
+}
+.search-filters {
+  display: flex; flex-wrap: wrap; gap: 1.5rem; padding: 1rem;
+  background: var(--bg-subtle, #f8f9fa); border-radius: var(--radius-sm, 0.5rem);
+  max-width: 800px;
+}
+.search-filter { display: flex; align-items: center; gap: 0.5rem; }
+.search-filter__label { font-weight: 500; color: var(--text-secondary, #495057); white-space: nowrap; }
+.search-filter__select {
+  padding: 0.5rem 1rem; font-size: 0.9375rem;
+  border: 1px solid var(--border, #ced4da); border-radius: 0.375rem;
+  background: var(--bg-primary, #fff); color: var(--text-primary, #000);
+  min-width: 200px; cursor: pointer;
+}
+.search-filter__select:focus { outline: none; border-color: var(--accent, #4338CA); }
+
+.search-results { margin-top: 2rem; }
+.search-results__info { font-size: 1.125rem; color: var(--text-muted, #6c757d); margin-bottom: 1.5rem; }
+.search-results__list { list-style: none; padding: 0; margin: 0; }
+.search-result-card {
+  background: var(--bg-subtle, #fff); border: 1px solid var(--border, #e9ecef);
+  border-radius: var(--radius-sm, 0.5rem); padding: 1.5rem; margin-bottom: 1rem;
+  transition: box-shadow 0.2s;
+}
+.search-result-card:hover { box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.1)); }
+.search-result-card__title { font-size: 1.25rem; margin: 0 0 0.5rem 0; }
+.search-result-card__title a { color: var(--accent, #4338CA); text-decoration: none; }
+.search-result-card__title a:hover { text-decoration: underline; }
+.search-result-card__meta { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.875rem; color: var(--text-muted, #6c757d); margin-bottom: 0.5rem; }
+.search-result-card__category { background: var(--accent-soft, #e9ecef); padding: 0.125rem 0.5rem; border-radius: 0.25rem; }
+.search-result-card__rubric { background: rgba(67,56,202,0.1); color: var(--accent, #4338CA); padding: 0.125rem 0.5rem; border-radius: 0.25rem; }
+.search-result-card__excerpt { color: var(--text-secondary, #495057); line-height: 1.5; margin: 0; }
+.search-result-card__excerpt mark { background: rgba(250,204,21,0.3); padding: 0.125rem 0.25rem; border-radius: 0.125rem; }
+.search-result-card__tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.5rem; }
+.search-result-card__tag { font-size: 0.75rem; padding: 0.125rem 0.5rem; background: var(--bg-secondary, #f8f9fa); border: 1px solid var(--border, #e9ecef); border-radius: 0.25rem; color: var(--text-muted, #6c757d); }
+
+.search-tips { background: var(--bg-subtle, #f8f9fa); border-radius: var(--radius-sm, 0.5rem); padding: 1.5rem; margin-top: 2rem; }
+.search-tips__title { font-size: 1.125rem; margin: 0 0 1rem 0; }
+.search-tips__list { margin: 0; padding-left: 1.25rem; }
+.search-tips__list li { margin-bottom: 0.5rem; color: var(--text-secondary, #495057); }
+
+@media (max-width: 768px) {
+  .search-form__group { flex-direction: column; }
+  .search-filters { flex-direction: column; gap: 1rem; }
+  .search-filter__select { min-width: 100%; }
+}
+</style>

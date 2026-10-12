@@ -99,6 +99,14 @@ export default function (eleventyConfig) {
     return str.slice(0, n).trim() + "…";
   });
 
+  // isostring: дата → ISO строка для JSON
+  eleventyConfig.addFilter("isostring", (dateObj) => {
+    if (!dateObj) return "";
+    const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
+    if (isNaN(d.getTime())) return "";
+    return d.toISOString();
+  });
+
   // limit: взять первые N элементов массива
   eleventyConfig.addFilter("limit", (arr, limit) => {
     if (!Array.isArray(arr)) return [];

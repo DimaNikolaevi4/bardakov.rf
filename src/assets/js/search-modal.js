@@ -18,12 +18,6 @@
   var resultsInfo    = document.getElementById('searchModalResultsInfo');
   var resultsList    = document.getElementById('searchModalResultsList');
   var rubricSelect   = document.getElementById('searchRubricSelect');
-  var searchModal    = document.getElementById('searchModal');
-  var searchTriggers = [
-    document.getElementById('headerSearchToggle'),
-    document.getElementById('offcanvasSearchToggle')
-  ].filter(Boolean);
-  var searchReturnFocus = null;
 
   if (!modalInput || !resultsDiv) return;
 
@@ -244,118 +238,8 @@
     });
   }
 
-  function setSearchExpanded(isExpanded) {
-    searchTriggers.forEach(function (trigger) {
-      trigger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    });
-  }
-
-  function getVisibleOffcanvasToggle() {
-    return Array.prototype.find.call(
-      document.querySelectorAll('[aria-controls="offcanvasRubrics"]'),
-      function (button) {
-        return !button.closest('#offcanvasRubrics') && button.getClientRects().length;
-      }
-    );
-  }
-
-  function openSearchModal(trigger) {
-    if (!searchModal || searchModal.classList.contains('is-open')) return;
-
-    var a11yPanel = document.getElementById('a11yPanel');
-    if (a11yPanel && a11yPanel.getAttribute('aria-hidden') === 'false' &&
-        window.BardakovA11y && window.BardakovA11y.close) {
-      window.BardakovA11y.close(false);
-    }
-
-    if (window.BardakovOffcanvas && window.BardakovOffcanvas.isOpen()) {
-      window.BardakovOffcanvas.close();
-    }
-
-    searchReturnFocus = trigger && trigger.closest('#offcanvasRubrics')
-      ? getVisibleOffcanvasToggle() || document.getElementById('headerSearchToggle')
-      : trigger || document.getElementById('headerSearchToggle');
-
-    searchModal.inert = false;
-    searchModal.setAttribute('aria-hidden', 'false');
-    searchModal.classList.add('is-open');
-    setSearchExpanded(true);
-    document.body.classList.add('no-scroll');
-    document.addEventListener('keydown', onSearchModalKeydown);
-
-    window.requestAnimationFrame(function () {
-      if (searchModal.classList.contains('is-open')) modalInput.focus();
-    });
-  }
-
-  function closeSearchModal(restoreFocus) {
-    if (!searchModal || !searchModal.classList.contains('is-open')) return;
-
-    if (restoreFocus !== false && searchReturnFocus && searchReturnFocus.isConnected) {
-      searchReturnFocus.focus();
-    }
-    searchModal.classList.remove('is-open');
-    searchModal.setAttribute('aria-hidden', 'true');
-    searchModal.inert = true;
-    setSearchExpanded(false);
-    document.body.classList.remove('no-scroll');
-    document.removeEventListener('keydown', onSearchModalKeydown);
-    searchReturnFocus = null;
-  }
-
-  function onSearchModalKeydown(event) {
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      closeSearchModal();
-      return;
-    }
-    if (event.key !== 'Tab') return;
-
-    var focusable = Array.prototype.filter.call(
-      searchModal.querySelectorAll(
-        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      ),
-      function (element) {
-        return element.getClientRects().length > 0;
-      }
-    );
-
-    if (!focusable.length) {
-      event.preventDefault();
-      return;
-    }
-    if (event.shiftKey && document.activeElement === focusable[0]) {
-      event.preventDefault();
-      focusable[focusable.length - 1].focus();
-    } else if (!event.shiftKey && document.activeElement === focusable[focusable.length - 1]) {
-      event.preventDefault();
-      focusable[0].focus();
-    }
-  }
-
-  searchTriggers.forEach(function (trigger) {
-    trigger.addEventListener('click', function () {
-      openSearchModal(trigger);
-    });
-  });
-
-  if (searchModal) {
-    searchModal.querySelectorAll('[data-action="close-search"]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        closeSearchModal();
-      });
-    });
-  }
-
-  window.BardakovSearch = {
-    open: openSearchModal,
-    close: closeSearchModal,
-    isOpen: function () {
-      return Boolean(searchModal && searchModal.classList.contains('is-open'));
-    }
-  };
-
   // ─── Сброс при закрытии модала ───
+  var searchModal = document.getElementById('searchModal');
   if (searchModal) {
     var observer = new MutationObserver(function (mutations) {
       mutations.forEach(function (m) {

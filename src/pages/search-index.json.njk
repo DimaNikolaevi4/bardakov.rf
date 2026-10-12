@@ -1,0 +1,25 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+
+{%- set searchCollection = collections.all -%}
+{
+  "documents": [
+  {%- for item in searchCollection %}
+    {%- if item.data.title and item.url and item.url != "/search-index.json" -%}
+    {
+      "id": {{ item.url | dump | safe }},
+      "title": {{ (item.data.title or "") | dump | safe }},
+      "excerpt": {{ ((item.data.description or "") | truncate(200)) | dump | safe }},
+      "url": {{ item.url | dump | safe }},
+      "date": {{ (item.date | isostring) | dump | safe }},
+      "rubric": {{ (item.data.section or "") | dump | safe }},
+      "category": {{ (item.data.section or "") | dump | safe }},
+      "tags": {{ (item.data.tags or []) | dump | safe }},
+      "image": {{ (item.data.image or "") | dump | safe }}
+    }{% if not loop.last %},{% endif %}
+    {%- endif -%}
+  {%- endfor %}
+  ]
+}
