@@ -20,6 +20,8 @@ if (carousel) {
   let manuallyPaused = reducedMotion.matches;
   let hovered = false;
   let focused = false;
+  let resumeWhileHovered = false;
+  let resumeWhileFocused = false;
 
   function normalizeIndex(index) {
     return (index + slides.length) % slides.length;
@@ -109,7 +111,10 @@ if (carousel) {
   function syncTimer() {
     stopTimer();
 
-    if (!manuallyPaused && !hovered && !focused && !document.hidden) {
+    const pausedByHover = hovered && !resumeWhileHovered;
+    const pausedByFocus = focused && !resumeWhileFocused;
+
+    if (!manuallyPaused && !pausedByHover && !pausedByFocus && !document.hidden) {
       timerId = window.setInterval(() => showSlide(activeIndex + 1), interval);
     }
   }
@@ -121,6 +126,8 @@ if (carousel) {
       direction || (forwardDistance <= slides.length / 2 ? "forward" : "backward");
 
     manuallyPaused = true;
+    resumeWhileHovered = false;
+    resumeWhileFocused = false;
     showSlide(nextIndex, turnDirection);
     updateToggle();
     syncTimer();
@@ -135,6 +142,8 @@ if (carousel) {
 
   toggleButton.addEventListener("click", () => {
     manuallyPaused = !manuallyPaused;
+    resumeWhileHovered = !manuallyPaused && hovered;
+    resumeWhileFocused = !manuallyPaused && focused;
     updateToggle();
     syncTimer();
   });
@@ -146,17 +155,20 @@ if (carousel) {
 
   carousel.addEventListener("mouseleave", () => {
     hovered = false;
+    resumeWhileHovered = false;
     syncTimer();
   });
 
   carousel.addEventListener("focusin", () => {
     focused = true;
+    resumeWhileFocused = false;
     syncTimer();
   });
 
   carousel.addEventListener("focusout", (event) => {
     if (!carousel.contains(event.relatedTarget)) {
       focused = false;
+      resumeWhileFocused = false;
       syncTimer();
     }
   });
@@ -176,6 +188,8 @@ if (carousel) {
   reducedMotion.addEventListener("change", (event) => {
     if (event.matches) {
       manuallyPaused = true;
+      resumeWhileHovered = false;
+      resumeWhileFocused = false;
       finishPageTurn();
     }
 
