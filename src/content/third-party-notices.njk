@@ -6,18 +6,15 @@ permalink: /third-party-notices/index.html
 date: 2026-10-11
 section: obo-mne
 order: 6
+showLegacyContent: true
+breadcrumbs:
+  - title: "Главная"
+    url: "/"
+  - title: "Лицензии библиотек"
 templateEngineOverride: njk
 ---
 
-{% from "components/breadcrumb.njk" import breadcrumb %}
-
 <div class="container container-md third-party-notices">
-  {{ breadcrumb([
-    { "title": "Главная", "url": "/" },
-    { "title": "Лицензии библиотек" }
-  ]) }}
-
-  <h1>Лицензии библиотек</h1>
   <p class="third-party-notices__intro">
     При создании сайта использовались библиотеки с открытым исходным кодом.
     Ниже указаны версии, назначение, исходный проект и лицензия каждой прямой зависимости.
