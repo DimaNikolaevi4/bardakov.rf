@@ -1,0 +1,71 @@
+<nav class="oc-nav" aria-label="Разделы сайта">
+          
+            
+            
+            
+            
+              <div class="oc-split-row" data-rubric-index="0">
+                <a href="/obo-mne/" class="oc-split-row__link oc-dismiss-all" title="Обо мне">
+                  <i class="bi bi-person-vcard oc-section-icon" aria-hidden="true"></i>
+                  <span>Обо мне</span>
+                </a>
+                <button class="oc-split-row__toggle" type="button" aria-label="Открыть подразделы: Обо мне" aria-expanded="false" data-rubric-index="0">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            
+          
+            
+            
+            
+            
+              <div class="oc-split-row" data-rubric-index="1">
+                <a href="/obuchenie/" class="oc-split-row__link oc-dismiss-all" title="Обучение">
+                  <i class="bi bi-journal-bookmark oc-section-icon" aria-hidden="true"></i>
+                  <span>Обучение</span>
+                </a>
+                <button class="oc-split-row__toggle" type="button" aria-label="Открыть подразделы: Обучение" aria-expanded="false" data-rubric-index="1">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            
+          
+            
+            
+            
+            
+              <div class="oc-split-row" data-rubric-index="2">
+                <a href="/abiturientu/" class="oc-split-row__link oc-dismiss-all" title="Абитуриенту">
+                  <i class="bi bi-mortarboard oc-section-icon" aria-hidden="true"></i>
+                  <span>Абитуриенту</span>
+                </a>
+                <button class="oc-split-row__toggle" type="button" aria-label="Открыть подразделы: Абитуриенту" aria-expanded="false" data-rubric-index="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            
+          
+            
+            
+            
+            
+              <div class="oc-split-row" data-rubric-index="3">
+                <a href="/vospitanie/" class="oc-split-row__link oc-dismiss-all" title="Воспитание">
+                  <i class="bi bi-heart-pulse oc-section-icon" aria-hidden="true"></i>
+                  <span>Воспитание</span>
+                </a>
+                <button class="oc-split-row__toggle" type="button" aria-label="Открыть подразделы: Воспитание" aria-expanded="false" data-rubric-index="3">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            
+          
+        </nav>

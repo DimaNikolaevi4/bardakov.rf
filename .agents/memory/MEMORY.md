@@ -1,3 +1,4 @@
 - [Package install lockfile churn](package-install-lockfile.md) — Replit package setup may rewrite unrelated dependency and platform metadata; review manifest changes after installs.
 - [ARIA and visual hiding](aria-hidden-visual-state.md) — Keep aria-hidden semantic; component styles, not global ARIA selectors, control visual visibility.
 - [Язык общения в проекте](russian-communication.md) — В переписке по этому проекту отвечать пользователю на русском.
+- [Перезагрузка данных Eleventy](eleventy-data-reload.md) — После изменения YAML, читаемого JS-модулем данных, перезапускайте Eleventy для обновления сгенерированной разметки.

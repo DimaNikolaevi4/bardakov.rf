@@ -9,12 +9,12 @@ footer_nav:
     links:
       - title: "Обо мне"
         url: "/obo-mne/"
+      - title: "Воспитание"
+        url: "/vospitanie/"
       - title: "Обучение"
         url: "/obuchenie/"
       - title: "Абитуриенту"
         url: "/abiturientu/"
-      - title: "Воспитание"
-        url: "/vospitanie/"
       - title: "Поиск по сайту"
         url: "/search/"
 
