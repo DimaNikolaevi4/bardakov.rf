@@ -20,6 +20,19 @@ main:
       - title: Контакты
         url: /obo-mne/kontakty/
 
+  - title: Воспитание
+    url: /vospitanie/
+    key: vospitanie
+    children:
+      - title: Для родителей
+        url: /vospitanie/dlya-roditelej/
+      - title: Разговоры о важном
+        url: /vospitanie/razgovory-o-vazhnom/
+      - title: Советы студентам
+        url: /vospitanie/prakticheskie-sovety-studentam/
+      - title: Нормативные документы
+        url: /vospitanie/normativnye-dokumenty/
+
   - title: Обучение
     url: /obuchenie/
     key: education
@@ -45,16 +58,3 @@ main:
         url: /abiturientu/spetsialnosti/
       - title: Документация
         url: /abiturientu/dokumentatsiya/
-
-  - title: Воспитание
-    url: /vospitanie/
-    key: vospitanie
-    children:
-      - title: Для родителей
-        url: /vospitanie/dlya-roditelej/
-      - title: Разговоры о важном
-        url: /vospitanie/razgovory-o-vazhnom/
-      - title: Советы студентам
-        url: /vospitanie/prakticheskie-sovety-studentam/
-      - title: Нормативные документы
-        url: /vospitanie/normativnye-dokumenty/
