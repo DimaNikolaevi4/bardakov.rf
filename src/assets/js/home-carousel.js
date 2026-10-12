@@ -9,7 +9,7 @@ if (carousel) {
   const pauseIcon = carousel.querySelector("[data-carousel-pause-icon]");
   const playIcon = carousel.querySelector("[data-carousel-play-icon]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const interval = Number(carousel.dataset.autoplayInterval) || 8000;
+  const interval = Number(carousel.dataset.autoplayInterval) || 6000;
   const turnDuration = 1000;
 
   let activeIndex = 0;
@@ -17,11 +17,19 @@ if (carousel) {
   let turnTimerId;
   let isAnimating = false;
   let currentTurn;
-  let manuallyPaused = reducedMotion.matches;
+  let manuallyPaused =
+    reducedMotion.matches || document.documentElement.dataset.animations === "off";
   let hovered = false;
   let focused = false;
   let resumeWhileHovered = false;
   let resumeWhileFocused = false;
+
+  function animationsDisabled() {
+    return (
+      reducedMotion.matches ||
+      document.documentElement.dataset.animations === "off"
+    );
+  }
 
   function normalizeIndex(index) {
     return (index + slides.length) % slides.length;
@@ -70,7 +78,7 @@ if (carousel) {
     activeIndex = nextIndex;
     updateDots(activeIndex);
 
-    if (reducedMotion.matches) {
+    if (animationsDisabled()) {
       updateAccessibleSlide(activeIndex);
       return;
     }
@@ -195,6 +203,23 @@ if (carousel) {
 
     updateToggle();
     syncTimer();
+  });
+
+  const animationPreferenceObserver = new MutationObserver(() => {
+    if (document.documentElement.dataset.animations === "off") {
+      manuallyPaused = true;
+      resumeWhileHovered = false;
+      resumeWhileFocused = false;
+      finishPageTurn();
+    }
+
+    updateToggle();
+    syncTimer();
+  });
+
+  animationPreferenceObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-animations"],
   });
 
   updateToggle();

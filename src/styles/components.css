@@ -448,23 +448,25 @@ a:hover { color: var(--accent-hover); }
    4.1 СЛАЙДЕР ГЛАВНОЙ СТРАНИЦЫ
    ============================================================ */
 .home-carousel {
-  --carousel-shade-strong: color-mix(in srgb, var(--bg-primary) 78%, transparent);
-  --carousel-shade-medium: color-mix(in srgb, var(--bg-primary) 62%, transparent);
-  --carousel-shade-light: color-mix(in srgb, var(--bg-primary) 24%, transparent);
-  --carousel-shade-bottom: color-mix(in srgb, var(--highlight) 20%, transparent);
-  --carousel-panel: color-mix(in srgb, var(--bg-primary) 90%, transparent);
+  --carousel-shade-strong: color-mix(in srgb, var(--bg-primary) 66%, transparent);
+  --carousel-shade-medium: color-mix(in srgb, var(--bg-primary) 50%, transparent);
+  --carousel-shade-light: color-mix(in srgb, var(--bg-primary) 16%, transparent);
+  --carousel-shade-bottom: color-mix(in srgb, var(--highlight) 14%, transparent);
+  --carousel-panel: color-mix(in srgb, var(--bg-subtle) 92%, transparent);
   --carousel-control-surface: color-mix(in srgb, var(--bg-primary) 86%, transparent);
   --carousel-control-hover: color-mix(in srgb, var(--accent) 14%, var(--bg-primary));
-  --carousel-control-border: color-mix(in srgb, var(--accent) 42%, var(--border));
-  --carousel-turn-shadow: color-mix(in srgb, var(--accent) 30%, transparent);
-  --carousel-turn-edge: color-mix(in srgb, var(--highlight) 32%, transparent);
+  --carousel-control-border: color-mix(in srgb, var(--accent) 28%, var(--border));
+  --carousel-turn-shadow: color-mix(in srgb, var(--accent) 18%, transparent);
+  --carousel-turn-edge: color-mix(in srgb, var(--highlight) 24%, transparent);
   position: relative;
   isolation: isolate;
-  height: min(84svh, 54rem);
-  min-height: 36rem;
+  height: min(68svh, 46rem);
+  min-height: 32rem;
   overflow: hidden;
   color: var(--text-primary);
   background: var(--bg-primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 [data-theme="dark"] .home-carousel {
@@ -472,7 +474,7 @@ a:hover { color: var(--accent-hover); }
   --carousel-shade-medium: color-mix(in srgb, var(--bg-primary) 76%, transparent);
   --carousel-shade-light: color-mix(in srgb, var(--accent) 32%, transparent);
   --carousel-shade-bottom: color-mix(in srgb, var(--highlight) 24%, transparent);
-  --carousel-panel: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
+  --carousel-panel: color-mix(in srgb, var(--bg-subtle) 92%, transparent);
   --carousel-control-surface: color-mix(in srgb, var(--bg-secondary) 90%, transparent);
   --carousel-control-hover: color-mix(in srgb, var(--accent) 28%, var(--bg-secondary));
   --carousel-turn-shadow: color-mix(in srgb, var(--accent) 40%, transparent);
@@ -620,10 +622,11 @@ a:hover { color: var(--accent-hover); }
   max-width: 15ch;
   margin: 0 0 1.25rem;
   color: var(--text-primary);
-  font-size: clamp(2.5rem, 6vw, 5.6rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.02;
+  font-size: clamp(2.25rem, 5.4vw, 4.8rem);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
@@ -654,10 +657,11 @@ a:hover { color: var(--accent-hover); }
   background: var(--carousel-panel);
   border: 1px solid var(--border);
   border-inline-start: 3px solid var(--accent);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: var(--radius-sm);
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   line-height: 1.6;
   backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-sm);
 }
 
 .home-carousel__detail a {
@@ -686,7 +690,11 @@ a:hover { color: var(--accent-hover); }
   border: 1px solid var(--carousel-control-border);
   cursor: pointer;
   pointer-events: auto;
-  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
 }
 
 .home-carousel__arrow:hover,
@@ -711,7 +719,13 @@ a:hover { color: var(--accent-hover); }
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
+  opacity: 0.78;
   transform: translateY(-50%);
+}
+
+.home-carousel__arrow:hover,
+.home-carousel__arrow:focus-visible {
+  opacity: 1;
 }
 
 .home-carousel__arrow:hover {
@@ -751,27 +765,68 @@ a:hover { color: var(--accent-hover); }
 }
 
 .home-carousel__dot {
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 50%;
+  width: var(--target);
+  height: var(--target);
+  flex: 0 0 var(--target);
+  background: transparent;
+  border-color: transparent;
+  border-radius: var(--radius-full);
 }
 
-.home-carousel__dot[aria-current="true"] {
+.home-carousel__dot:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+.home-carousel__dot::before {
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  content: "";
+  opacity: 0.5;
+  transition:
+    background-color 180ms ease,
+    opacity 180ms ease,
+    width 180ms ease;
+}
+
+.home-carousel__dot:hover::before {
+  opacity: 1;
+}
+
+.home-carousel__dot[aria-current="true"]::before {
+  width: 1rem;
+  height: 0.55rem;
   background: var(--highlight);
-  border-color: var(--highlight);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-primary) 72%, transparent);
+  opacity: 1;
+}
+
+.home-carousel__dot:focus-visible::before {
+  opacity: 1;
 }
 
 [data-theme="high-contrast"] .home-carousel__arrow,
-[data-theme="high-contrast"] .home-carousel__toggle,
-[data-theme="high-contrast"] .home-carousel__dot {
+[data-theme="high-contrast"] .home-carousel__toggle {
   border: 2px solid var(--border);
+}
+
+[data-theme="high-contrast"] .home-carousel__dot {
+  border: 0;
+}
+
+[data-theme="high-contrast"] .home-carousel__dot::before {
+  border: 2px solid var(--border);
+}
+
+[data-theme="high-contrast"] .home-carousel__dot[aria-current="true"]::before {
+  border-color: var(--highlight);
 }
 
 @media (max-width: 700px) {
   .home-carousel {
-    height: min(84svh, 50rem);
-    min-height: 39rem;
+    height: min(70svh, 40rem);
+    min-height: 34rem;
   }
 
   .home-carousel__image {
@@ -802,7 +857,7 @@ a:hover { color: var(--accent-hover); }
   }
 
   .home-carousel__title {
-    font-size: clamp(2.5rem, 11vw, 4.25rem);
+    font-size: clamp(2.25rem, 10vw, 3.5rem);
   }
 
   .home-carousel__detail {
@@ -836,7 +891,7 @@ a:hover { color: var(--accent-hover); }
 
 @media (max-width: 380px) {
   .home-carousel {
-    min-height: 42rem;
+    min-height: 36rem;
   }
 
   .home-carousel__content {
