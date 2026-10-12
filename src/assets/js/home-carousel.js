@@ -10,26 +10,82 @@ if (carousel) {
   const playIcon = carousel.querySelector("[data-carousel-play-icon]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const interval = Number(carousel.dataset.autoplayInterval) || 8000;
+  const turnDuration = 1000;
 
   let activeIndex = 0;
   let timerId;
+  let turnTimerId;
+  let isAnimating = false;
+  let currentTurn;
   let manuallyPaused = reducedMotion.matches;
   let hovered = false;
   let focused = false;
 
-  function showSlide(index) {
-    activeIndex = (index + slides.length) % slides.length;
+  function normalizeIndex(index) {
+    return (index + slides.length) % slides.length;
+  }
 
+  function updateAccessibleSlide(index) {
     slides.forEach((slide, slideIndex) => {
-      const isActive = slideIndex === activeIndex;
+      const isActive = slideIndex === index;
       slide.classList.toggle("is-active", isActive);
       slide.setAttribute("aria-hidden", String(!isActive));
       slide.inert = !isActive;
     });
 
     dots.forEach((dot, dotIndex) => {
-      dot.setAttribute("aria-current", String(dotIndex === activeIndex));
+      dot.setAttribute("aria-current", String(dotIndex === index));
     });
+  }
+
+  function updateDots(index) {
+    dots.forEach((dot, dotIndex) => {
+      dot.setAttribute("aria-current", String(dotIndex === index));
+    });
+  }
+
+  function finishPageTurn() {
+    if (!currentTurn) return;
+
+    window.clearTimeout(turnTimerId);
+    const { outgoing, incoming } = currentTurn;
+    outgoing.classList.remove("is-turning-out", "is-turning-forward", "is-turning-backward");
+    incoming.classList.remove("is-turning-in");
+    incoming.classList.add("is-active");
+    currentTurn = undefined;
+    isAnimating = false;
+    updateAccessibleSlide(activeIndex);
+  }
+
+  function showSlide(index, direction = "forward") {
+    if (slides.length < 2 || isAnimating) return;
+
+    const nextIndex = normalizeIndex(index);
+    if (nextIndex === activeIndex) return;
+
+    const outgoing = slides[activeIndex];
+    const incoming = slides[nextIndex];
+    activeIndex = nextIndex;
+    updateDots(activeIndex);
+
+    if (reducedMotion.matches) {
+      updateAccessibleSlide(activeIndex);
+      return;
+    }
+
+    isAnimating = true;
+    outgoing.classList.remove("is-active");
+    outgoing.classList.add(
+      "is-turning-out",
+      direction === "forward" ? "is-turning-forward" : "is-turning-backward",
+    );
+    outgoing.setAttribute("aria-hidden", "true");
+    outgoing.inert = true;
+
+    incoming.classList.add("is-turning-in");
+
+    currentTurn = { outgoing, incoming };
+    turnTimerId = window.setTimeout(finishPageTurn, turnDuration);
   }
 
   function updateToggle() {
@@ -58,15 +114,20 @@ if (carousel) {
     }
   }
 
-  function navigateTo(index) {
+  function navigateTo(index, direction) {
+    const nextIndex = normalizeIndex(index);
+    const forwardDistance = normalizeIndex(nextIndex - activeIndex);
+    const turnDirection =
+      direction || (forwardDistance <= slides.length / 2 ? "forward" : "backward");
+
     manuallyPaused = true;
-    showSlide(index);
+    showSlide(nextIndex, turnDirection);
     updateToggle();
     syncTimer();
   }
 
-  previousButton.addEventListener("click", () => navigateTo(activeIndex - 1));
-  nextButton.addEventListener("click", () => navigateTo(activeIndex + 1));
+  previousButton.addEventListener("click", () => navigateTo(activeIndex - 1, "backward"));
+  nextButton.addEventListener("click", () => navigateTo(activeIndex + 1, "forward"));
 
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => navigateTo(index));
@@ -103,10 +164,10 @@ if (carousel) {
   carousel.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
-      navigateTo(activeIndex - 1);
+      navigateTo(activeIndex - 1, "backward");
     } else if (event.key === "ArrowRight") {
       event.preventDefault();
-      navigateTo(activeIndex + 1);
+      navigateTo(activeIndex + 1, "forward");
     }
   });
 
@@ -115,6 +176,7 @@ if (carousel) {
   reducedMotion.addEventListener("change", (event) => {
     if (event.matches) {
       manuallyPaused = true;
+      finishPageTurn();
     }
 
     updateToggle();
