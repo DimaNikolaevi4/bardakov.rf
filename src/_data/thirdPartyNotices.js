@@ -17,6 +17,8 @@ const websiteLibraries = [
   ["@fontsource/inter", "Шрифт Inter для основного текста сайта."],
   ["@fontsource/manrope", "Шрифт Manrope для заголовков."],
   ["bootstrap-icons", "Набор иконок, подключённый в интерфейсе сайта."],
+  ["lunr", "Поисковый индекс по текстам сайта."],
+  ["lunr-languages", "Поддержка русского языка и стемминга в поиске."],
 ];
 
 const buildLibraries = [
@@ -38,6 +40,21 @@ const buildLibraries = [
   ["rimraf", "Очистка каталогов сборки."],
   ["sharp", "Обработка изображений."],
 ];
+
+const listedNames = [...websiteLibraries, ...buildLibraries].map(([name]) => name);
+const duplicateNames = listedNames.filter((name, index) => listedNames.indexOf(name) !== index);
+const declaredNames = [
+  ...Object.keys(manifest.dependencies || {}),
+  ...Object.keys(manifest.devDependencies || {}),
+];
+const missingNames = declaredNames.filter((name) => !listedNames.includes(name));
+
+if (duplicateNames.length || missingNames.length) {
+  throw new Error(
+    `Список лицензий должен содержать каждую прямую npm-зависимость ровно один раз. ` +
+    `Пропущены: ${missingNames.join(", ") || "нет"}; дубли: ${duplicateNames.join(", ") || "нет"}.`
+  );
+}
 
 function resolvePackage([name, purpose]) {
   const declaredIn = manifest.dependencies?.[name]

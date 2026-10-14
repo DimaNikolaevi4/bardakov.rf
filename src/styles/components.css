@@ -1388,6 +1388,12 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.7;
 }
 
+.third-party-notices__scroll-hint {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
 .third-party-notices__table-wrap {
   margin: 1.25rem 0 2rem;
   overflow-x: auto;

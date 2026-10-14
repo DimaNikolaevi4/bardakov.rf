@@ -1,0 +1,76 @@
+<section class="page-showcase page-scaffold__showcase page-showcase--featured" data-page-block="showcase">
+    <div class="container page-showcase__inner page-showcase__inner--featured">
+      <div class="page-showcase__copy">
+        <p class="eyebrow">Персональный сайт преподавателя</p>
+        <h1>Бардаков Дмитрий Николаевич</h1>
+        
+        <p class="page-scaffold__description">Преподаватель технических дисциплин</p>
+        
+
+        
+        <blockquote class="page-showcase__quote">
+          <p>«Образование — это не наполнение сосуда, а зажигание огня.»</p>
+          <cite>Педагогическое кредо</cite>
+        </blockquote>
+        
+
+        
+        <div class="page-showcase__actions">
+          
+  
+  
+  <a href="/obo-mne/" class="btn btn-primary">
+    <i class="bi bi-person-circle" aria-hidden="true"></i> 
+    <span>Обо мне</span>
+    
+  </a>
+  
+
+          
+  
+  
+  <a href="mailto:info@бардаков.рф" class="btn btn-secondary">
+    <i class="bi bi-envelope" aria-hidden="true"></i> 
+    <span>Связаться</span>
+    
+  </a>
+  
+
+        </div>
+        
+      </div>
+
+      
+      <figure class="page-showcase__visual">
+        
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="showcase-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="currentColor" stop-opacity=".24"></stop>
+      <stop offset="100%" stop-color="currentColor" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="180" fill="url(#showcase-glow)"></circle>
+  <g fill="none" stroke="var(--text-primary)" stroke-opacity=".1">
+    <path d="M20 200h360M200 20v360"></path>
+    <path d="m60 60 280 280M340 60 60 340" stroke-dasharray="4 6"></path>
+  </g>
+  <g transform="translate(120 180)" stroke="currentColor" stroke-linejoin="round">
+    <path d="M0 20 80 0v80L0 100Z" fill="currentColor" fill-opacity=".15" stroke-width="2.5"></path>
+    <path d="m80 0 80 20v80L80 80Z" fill="currentColor" fill-opacity=".1" stroke-width="2.5"></path>
+    <path d="M80 0v80" fill="none" stroke-width="2.5"></path>
+    <g fill="none" stroke-linecap="round" stroke-opacity=".65" stroke-width="2">
+      <path d="m20 40 40-10M20 55l40-10M100 30l40 10M100 45l40 10"></path>
+    </g>
+  </g>
+  <circle cx="80" cy="80" r="6" fill="var(--highlight)"></circle>
+  <circle cx="320" cy="120" r="8" fill="currentColor"></circle>
+  <circle cx="300" cy="300" r="5" fill="currentColor"></circle>
+  <circle cx="100" cy="320" r="7" fill="var(--highlight)"></circle>
+  <circle cx="200" cy="200" r="140" fill="none" stroke="currentColor" stroke-dasharray="3 8" stroke-opacity=".35" stroke-width="1.5"></circle>
+</svg>
+
+      </figure>
+      
+    </div>
+  </section>
