@@ -8,7 +8,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/": "assets/" });
   eleventyConfig.addPassthroughCopy({ "src/styles/": "assets/css/" });
   eleventyConfig.addPassthroughCopy({ "src/content/robots.txt": "robots.txt" });
-  eleventyConfig.addPassthroughCopy({ "src/content/favicon.ico": "favicon.ico" });
+  // Favicon — SVG + PNG fallback в корень public/
+  eleventyConfig.addPassthroughCopy({ "src/assets/favicon.svg": "favicon.svg" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/favicon-16.png": "favicon-16.png" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/favicon-32.png": "favicon-32.png" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/favicon-48.png": "favicon-48.png" });
+  eleventyConfig.addPassthroughCopy({ "src/assets/apple-touch-icon-180.png": "apple-touch-icon.png" });
   eleventyConfig.addPassthroughCopy({ "src/content/sitemap.xml": "sitemap.xml" });
   eleventyConfig.addPassthroughCopy({ "src/content/yandex_*.html": "./" });
 
