@@ -9,16 +9,21 @@ if (carousel) {
   const pauseIcon = carousel.querySelector("[data-carousel-pause-icon]");
   const playIcon = carousel.querySelector("[data-carousel-play-icon]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const interval = Number(carousel.dataset.autoplayInterval) || 6000;
-  const turnDuration = 1000;
+  const autoplayInterval = Number(carousel.dataset.autoplayInterval);
+  const autoplayEnabled = Number.isFinite(autoplayInterval) && autoplayInterval > 0;
+  const interval = autoplayEnabled ? autoplayInterval : 6000;
+  const turnDuration = 320;
 
   let activeIndex = 0;
   let timerId;
   let turnTimerId;
   let isAnimating = false;
   let currentTurn;
+  let swipeStart;
   let manuallyPaused =
-    reducedMotion.matches || document.documentElement.dataset.animations === "off";
+    !autoplayEnabled ||
+    reducedMotion.matches ||
+    document.documentElement.dataset.animations === "off";
   let hovered = false;
   let focused = false;
   let resumeWhileHovered = false;
@@ -93,12 +98,19 @@ if (carousel) {
     outgoing.inert = true;
 
     incoming.classList.add("is-turning-in");
+    incoming.setAttribute("aria-hidden", "false");
+    incoming.inert = false;
 
     currentTurn = { outgoing, incoming };
     turnTimerId = window.setTimeout(finishPageTurn, turnDuration);
   }
 
   function updateToggle() {
+    if (!toggleButton) {
+      carousel.setAttribute("aria-live", "polite");
+      return;
+    }
+
     toggleButton.setAttribute("aria-pressed", String(manuallyPaused));
     toggleButton.setAttribute(
       "aria-label",
@@ -148,13 +160,15 @@ if (carousel) {
     dot.addEventListener("click", () => navigateTo(index));
   });
 
-  toggleButton.addEventListener("click", () => {
-    manuallyPaused = !manuallyPaused;
-    resumeWhileHovered = !manuallyPaused && hovered;
-    resumeWhileFocused = !manuallyPaused && focused;
-    updateToggle();
-    syncTimer();
-  });
+  if (toggleButton) {
+    toggleButton.addEventListener("click", () => {
+      manuallyPaused = !manuallyPaused;
+      resumeWhileHovered = !manuallyPaused && hovered;
+      resumeWhileFocused = !manuallyPaused && focused;
+      updateToggle();
+      syncTimer();
+    });
+  }
 
   carousel.addEventListener("mouseenter", () => {
     hovered = true;
@@ -189,6 +203,28 @@ if (carousel) {
       event.preventDefault();
       navigateTo(activeIndex + 1, "forward");
     }
+  });
+
+  carousel.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "touch") {
+      swipeStart = { x: event.clientX, y: event.clientY };
+    }
+  });
+
+  carousel.addEventListener("pointerup", (event) => {
+    if (!swipeStart) return;
+
+    const deltaX = event.clientX - swipeStart.x;
+    const deltaY = event.clientY - swipeStart.y;
+    swipeStart = undefined;
+
+    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+    navigateTo(activeIndex + (deltaX < 0 ? 1 : -1), deltaX < 0 ? "forward" : "backward");
+  });
+
+  carousel.addEventListener("pointercancel", () => {
+    swipeStart = undefined;
   });
 
   document.addEventListener("visibilitychange", syncTimer);

@@ -10,9 +10,6 @@
 
 <div class="page-scaffold" data-page-layout="seven-blocks">
   {# Блок 2: Витрина #}
-  {% if page.url == "/" %}
-  {% include "components/home-carousel.njk" %}
-  {% else %}
   <section class="page-showcase page-scaffold__showcase{% if heroVisual %} page-showcase--featured{% endif %}" data-page-block="showcase">
     <div class="container page-showcase__inner{% if heroVisual %} page-showcase__inner--featured{% endif %}">
       <div class="page-showcase__copy">
@@ -38,13 +35,16 @@
       </div>
 
       {% if heroVisual %}
-      <figure class="page-showcase__visual">
-        {% include "components/hero-visual.njk" %}
+      <figure class="page-showcase__visual{% if page.url == "/" %} page-showcase__visual--carousel{% endif %}">
+        {% if page.url == "/" %}
+          {% include "components/home-carousel.njk" %}
+        {% else %}
+          {% include "components/hero-visual.njk" %}
+        {% endif %}
       </figure>
       {% endif %}
     </div>
   </section>
-  {% endif %}
 
   {# Блок 3: Хлебные крошки #}
   <div class="page-scaffold__breadcrumbs" data-page-block="breadcrumbs">
