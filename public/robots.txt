@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Запрет индексации служебных файлов
+Disallow: /*.json$
+Disallow: /*.md$
+Disallow: /assets/css/
+Disallow: /assets/js/
+Disallow: /assets/fonts/
+
+# Карта сайта (полный URL)
+Sitemap: https://бардаков.рф/sitemap.xml
