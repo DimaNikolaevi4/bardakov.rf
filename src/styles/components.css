@@ -238,15 +238,8 @@ a:hover { color: var(--accent-hover); }
   transition: color .2s ease, background-color .2s ease;
   flex-shrink: 0;
 }
-.logo:hover {
-  color: var(--accent);
-  background: var(--accent-soft);
-}
-.logo:focus-visible {
-  outline: 2px solid var(--accent-ring);
-  outline-offset: 2px;
-}
-
+/* .logo:hover — moved to unified header-interactive block */
+/* .logo:focus-visible — moved to unified block */
 .logo-mark {
   display: block;
   width: 40px;
@@ -256,16 +249,7 @@ a:hover { color: var(--accent-hover); }
 
 [data-theme="high-contrast"] .logo-mark { color: var(--highlight); }
 [data-theme="dark"] .logo-mark { color: var(--accent); }
-[data-theme="dark"] .logo:hover,
-[data-theme="dark"] .logo:focus-visible {
-  color: var(--text-primary);
-  background: var(--bg-subtle);
-}
-[data-theme="dark"] .logo:hover .logo-mark,
-[data-theme="dark"] .logo:focus-visible .logo-mark {
-  color: var(--text-primary);
-}
-
+/* [data-theme="dark"] .logo hover/focus — REMOVED: conflicts with unified rules */
 @media (max-width: 640px) { .logo-mark { width: 34px; height: 34px; } }
 [data-theme="high-contrast"] .logo { min-width: 56px; min-height: 56px; }
 [data-theme="high-contrast"] .logo-mark { width: 48px; height: 48px; }
@@ -299,7 +283,7 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-muted); border-radius: var(--radius-full);
   cursor: pointer; transition: background var(--t-fast), color var(--t-fast);
 }
-.theme-btn:hover { color: var(--text-primary); }
+/* .theme-btn:hover — moved to unified block */
 .theme-btn[aria-pressed="true"] {
   background: var(--accent); color: #fff;
   box-shadow: 0 4px 12px -4px var(--accent-ring);
@@ -1748,13 +1732,8 @@ a:hover { color: var(--accent-hover); }
   font-weight: 500;
   transition: background-color var(--t-fast);
 }
-.oc-split-row__link:hover {
-  background-color: var(--accent-soft);
-}
-.oc-split-row__link.active {
-  color: var(--accent);
-  background-color: var(--accent-soft);
-}
+/* .oc-split-row__link:hover — moved to unified block */
+/* .oc-split-row__link.active — moved to unified block */
 .oc-section-icon {
   flex: 0 0 18px;
   color: var(--accent);
@@ -1773,11 +1752,7 @@ a:hover { color: var(--accent-hover); }
   cursor: pointer;
   transition: color var(--t-fast), background-color var(--t-fast);
 }
-.oc-split-row__toggle:hover {
-  color: var(--accent);
-  background-color: var(--accent-soft);
-}
-
+/* .oc-split-row__toggle:hover — moved to unified block */
 .oc-footer {
   margin-top: auto;
   padding: 16px;
@@ -1901,10 +1876,7 @@ a:hover { color: var(--accent-hover); }
   border: 1px solid var(--accent);
   border-radius: var(--radius-sm);
 }
-.oc-panel-open-link:hover {
-  background-color: var(--accent-soft);
-}
-
+/* .oc-panel-open-link:hover — moved to unified block */
 .oc-sub-list {
   list-style: none;
   margin: 0;
@@ -1921,11 +1893,7 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-sm);
   transition: background-color var(--t-fast);
 }
-.oc-sub-list a:hover {
-  background-color: var(--accent-soft);
-  color: var(--accent);
-}
-
+/* .oc-sub-list a:hover — moved to unified block */
 /* === SEARCH MODAL === */
 .search-modal {
   position: fixed;
@@ -2227,15 +2195,8 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-sm);
   transition: background-color var(--t-fast);
 }
-.close-btn:hover {
-  background-color: var(--accent-soft);
-  color: var(--accent);
-}
-.close-btn:focus-visible {
-  outline: 3px solid var(--accent-ring);
-  outline-offset: 2px;
-}
-
+/* .close-btn:hover — moved to unified block */
+/* .close-btn:focus-visible — moved to unified block */
 /* === HEADER + NAVIGATION: compact horizontal utility bar === */
 .nav-wrapper {
   min-height: 66px;
@@ -2265,11 +2226,7 @@ a:hover { color: var(--accent-hover); }
   white-space: nowrap;
   border-radius: 8px;
 }
-.main-nav a.main-nav-link:hover,
-.main-nav a.main-nav-link[aria-current="page"] {
-  color: var(--accent);
-  background: var(--accent-soft);
-}
+/* .main-nav-link:hover/[aria-current] — moved to unified block */
 .main-nav-icon {
   flex: 0 0 auto;
   color: var(--accent);
@@ -2303,12 +2260,7 @@ a:hover { color: var(--accent-hover); }
   cursor: pointer;
   transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
 }
-.header-icon-btn:hover,
-.header-icon-btn[aria-expanded="true"] {
-  color: var(--accent);
-  background: var(--accent-soft);
-  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
-}
+/* .header-icon-btn:hover/[aria-expanded] — moved to unified block */
 .theme-switcher {
   flex: 0 0 auto;
   padding: 2px;
@@ -2320,7 +2272,7 @@ a:hover { color: var(--accent-hover); }
   min-width: 30px;
   min-height: 30px;
 }
-.theme-btn[aria-pressed="true"] { color: var(--bg-primary); }
+/* .theme-btn[aria-pressed] — moved to unified block */
 .rubrics-toggle {
   width: 42px;
   min-width: 42px;
@@ -2429,11 +2381,7 @@ body.menu-open { overflow: hidden; }
   transform-origin: left;
   transition: transform var(--t-fast);
 }
-.main-nav a.main-nav-link:hover,
-.main-nav a.main-nav-link[aria-current="page"] {
-  color: var(--accent);
-  background: var(--menu-wash);
-}
+/* .main-nav-link:hover (expanded) — moved to unified block */
 .main-nav a.main-nav-link:hover::after,
 .main-nav a.main-nav-link[aria-current="page"]::after { transform: scaleX(1); }
 .main-nav-icon { color: color-mix(in srgb, var(--accent) 78%, var(--highlight)); }
@@ -2451,23 +2399,14 @@ body.menu-open { overflow: hidden; }
   border-radius: 10px;
   color: var(--text-secondary);
 }
-.header-icon-btn:hover,
-.header-icon-btn[aria-expanded="true"] {
-  color: var(--accent);
-  background: var(--menu-wash);
-  border-color: color-mix(in srgb, var(--accent) 24%, transparent);
-}
+/* .header-icon-btn:hover (expanded) — moved to unified block */
 .theme-switcher {
   margin-left: 4px;
   padding: 3px;
   border-color: color-mix(in srgb, var(--border) 80%, var(--highlight) 20%);
   background: color-mix(in srgb, var(--menu-paper) 75%, var(--bg-secondary));
 }
-.theme-btn[aria-pressed="true"] {
-  color: var(--bg-primary);
-  background: var(--accent);
-  box-shadow: none;
-}
+/* .theme-btn[aria-pressed] (expanded) — moved to unified block */
 .rubrics-toggle {
   width: 44px;
   min-width: 44px;
@@ -2477,7 +2416,7 @@ body.menu-open { overflow: hidden; }
   color: var(--accent);
   background: var(--menu-paper);
 }
-.rubrics-toggle:hover { border-color: var(--accent); }
+/* .rubrics-toggle:hover — moved to unified block */
 .burger {
   width: 42px;
   min-width: 42px;
@@ -2593,11 +2532,8 @@ body.menu-open { overflow: hidden; }
   font-size: .94rem;
   font-weight: 600;
 }
-.oc-split-row__link:hover { background: transparent; }
-.oc-split-row__link.active {
-  color: var(--accent);
-  background: transparent;
-}
+/* .oc-split-row__link:hover (expanded) — moved to unified block */
+/* .oc-split-row__link.active (expanded) — moved to unified block */
 .oc-section-icon {
   flex-basis: 22px;
   color: var(--highlight-hover);
@@ -2664,14 +2600,88 @@ body.menu-open { overflow: hidden; }
   font-size: .92rem;
   font-weight: 500;
 }
-.oc-sub-list a:hover,
-.oc-sub-list a.active {
-  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
-  color: var(--accent);
-  background: var(--menu-wash);
-}
+/* .oc-sub-list a:hover/.active (expanded) — moved to unified block */
 .oc-sub-item .oc-split-row__toggle { border-radius: 0 9px 9px 0; }
 .close-btn { flex: 0 0 auto; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   УНИФИЦИРОВАННЫЕ ПРАВИЛА ИНТЕРАКТИВНЫХ ЭЛЕМЕНТОВ ШАПКИ (DRY)
+   Единое поведение hover/focus/active для всех кнопок и ссылок
+   ═══════════════════════════════════════════════════════════ */
+
+/* Светлая тема (по умолчанию) */
+.logo:hover,
+.logo:focus-visible,
+.main-nav-link:hover,
+.main-nav-link[aria-current="page"],
+.header-icon-btn:hover,
+.header-icon-btn[aria-expanded="true"],
+.theme-btn:hover,
+.theme-btn[aria-pressed="true"],
+.burger:hover,
+.rubrics-toggle:hover,
+.close-btn:hover,
+.close-btn:focus-visible,
+.oc-split-row__link:hover,
+.oc-split-row__link.active,
+.oc-split-row__toggle:hover,
+.oc-sub-list a:hover,
+.oc-sub-list a.active,
+.oc-panel-open-link:hover {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Focus-visible — outline для доступности */
+.logo:focus-visible,
+.close-btn:focus-visible,
+.header-icon-btn:focus-visible,
+.theme-btn:focus-visible,
+.main-nav-link:focus-visible,
+.oc-split-row__link:focus-visible,
+.oc-split-row__toggle:focus-visible,
+.oc-sub-list a:focus-visible,
+.oc-panel-open-link:focus-visible {
+  outline: 2px solid var(--accent-ring);
+  outline-offset: 2px;
+}
+
+/* Тёмная тема — те же правила, токены меняются автоматически */
+[data-theme="dark"] .logo:hover,
+[data-theme="dark"] .logo:focus-visible,
+[data-theme="dark"] .main-nav-link:hover,
+[data-theme="dark"] .main-nav-link[aria-current="page"],
+[data-theme="dark"] .header-icon-btn:hover,
+[data-theme="dark"] .header-icon-btn[aria-expanded="true"],
+[data-theme="dark"] .theme-btn:hover,
+[data-theme="dark"] .theme-btn[aria-pressed="true"],
+[data-theme="dark"] .burger:hover,
+[data-theme="dark"] .rubrics-toggle:hover,
+[data-theme="dark"] .close-btn:hover,
+[data-theme="dark"] .close-btn:focus-visible,
+[data-theme="dark"] .oc-split-row__link:hover,
+[data-theme="dark"] .oc-split-row__link.active,
+[data-theme="dark"] .oc-split-row__toggle:hover,
+[data-theme="dark"] .oc-sub-list a:hover,
+[data-theme="dark"] .oc-sub-list a.active,
+[data-theme="dark"] .oc-panel-open-link:hover {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+[data-theme="dark"] .logo:focus-visible,
+[data-theme="dark"] .close-btn:focus-visible,
+[data-theme="dark"] .header-icon-btn:focus-visible,
+[data-theme="dark"] .theme-btn:focus-visible,
+[data-theme="dark"] .main-nav-link:focus-visible {
+  outline: 2px solid var(--accent-ring);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
 
 [data-theme="dark"] .site-header {
   background: color-mix(in srgb, var(--bg-primary) 90%, var(--bg-secondary));
