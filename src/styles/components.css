@@ -252,9 +252,19 @@ a:hover { color: var(--accent-hover); }
   width: 40px;
   height: 40px;
 }
+.logo .logo-mark { transition: color .2s ease; }
 
 [data-theme="high-contrast"] .logo-mark { color: var(--highlight); }
 [data-theme="dark"] .logo-mark { color: var(--accent); }
+[data-theme="dark"] .logo:hover,
+[data-theme="dark"] .logo:focus-visible {
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+}
+[data-theme="dark"] .logo:hover .logo-mark,
+[data-theme="dark"] .logo:focus-visible .logo-mark {
+  color: var(--text-primary);
+}
 
 @media (max-width: 640px) { .logo-mark { width: 34px; height: 34px; } }
 [data-theme="high-contrast"] .logo { min-width: 56px; min-height: 56px; }
