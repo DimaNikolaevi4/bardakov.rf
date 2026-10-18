@@ -151,13 +151,13 @@ a:hover { color: var(--accent-hover); }
 /* .logo:focus-visible — moved to unified block */
 .logo-mark {
   display: block;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
 }
 .logo .logo-mark { transition: color var(--t-fast); }
 
 /* [data-theme="dark"] .logo hover/focus — REMOVED: conflicts with unified rules */
-@media (max-width: 640px) { .logo-mark { width: 34px; height: 34px; } }
+@media (max-width: 640px) { .logo-mark { width: 32px; height: 32px; } }
 [data-theme="high-contrast"] .logo { min-width: 56px; min-height: 56px; }
 [data-theme="high-contrast"] .logo-mark { width: 48px; height: 48px; }
 @media print { .logo { color: #000; } }
@@ -177,20 +177,30 @@ a:hover { color: var(--accent-hover); }
 @media (min-width: 992px) { .header-actions { margin-left: 0; } }
 
 .theme-switcher {
-  display: inline-flex; padding: 3px; gap: 2px;
+  display: inline-flex; padding: 3px; gap: 4px;
   background: var(--bg-subtle); border: 1px solid var(--border);
   border-radius: var(--radius-full);
 }
 .theme-btn {
   display: inline-grid; place-items: center;
-  width: 34px; height: 34px; border: none; background: transparent;
-  color: var(--text-muted); border-radius: var(--radius-full);
-  cursor: pointer; transition: background var(--t-fast), color var(--t-fast);
+  width: 44px; height: 44px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.05rem;
+}
+.theme-btn i.bi {
+  font-size: 1.05rem;
+  line-height: 1;
 }
 /* .theme-btn:hover — moved to unified block */
 .theme-btn[aria-pressed="true"] {
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--color-on-accent);
   box-shadow: 0 4px 12px -4px var(--accent-ring);
+  border-color: transparent;
 }
 [data-theme="high-contrast"] .theme-btn[aria-pressed="true"] {
   color: #000; box-shadow: none; border: 2px solid #fff;
@@ -2153,31 +2163,39 @@ a:hover { color: var(--accent-hover); }
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
-  border: 1px solid transparent;
-  border-radius: 9px;
+  /* Лёгкая граница: в светлой теме rgba(0,0,0,0.15), в тёмной — rgba(255,255,255,0.2).
+     Реализована через color-mix от --text-primary (который #0F172A в light, #F8FAFC в dark):
+     15% прозрачности text-primary даёт близкий к rgba(0,0,0,0.15) эффект. */
+  border: 1px solid color-mix(in srgb, var(--text-primary) 15%, transparent);
+  border-radius: 10px;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 1.05rem;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  transition: all 0.2s ease-in-out;
 }
 /* .header-icon-btn:hover/[aria-expanded] — moved to unified block */
 .theme-switcher {
   flex: 0 0 auto;
-  padding: 2px;
-  gap: 0;
+  padding: 3px;
+  gap: 4px;
+  border-color: color-mix(in srgb, var(--text-primary) 15%, transparent);
+  background: color-mix(in srgb, var(--menu-paper) 75%, var(--bg-secondary));
 }
 .theme-btn {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  min-height: 30px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  /* Внутри .theme-switcher кнопки меньше — общая ширина группы 3×36+2×4+2×3 = 122px.
+     На мобильных узких экранах помещается. На десктопе .theme-btn на строке 184
+     задаёт 44x44 (target a11y), здесь уменьшаем для компактности внутри группы. */
 }
 /* .theme-btn[aria-pressed] — moved to unified block */
 .rubrics-toggle {
@@ -2292,18 +2310,13 @@ body.menu-open { overflow: hidden; }
 .main-nav-icon { color: color-mix(in srgb, var(--accent) 78%, var(--highlight)); }
 
 .header-actions {
-  gap: 3px;
+  gap: 6px;
   padding-left: 10px;
   border-left-color: color-mix(in srgb, var(--border) 75%, var(--highlight) 25%);
 }
-.header-icon-btn {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  border-radius: 10px;
-  color: var(--text-secondary);
-}
+/* .header-icon-btn здесь не переопределяется — финальные размеры
+   заданы выше (44x44, border-radius 10px, цветная граница через color-mix).
+   Раньше здесь было 40x40 — конфликтовало с 44x44. */
 /* .header-icon-btn:hover (expanded) — moved to unified block */
 .theme-switcher {
   margin-left: 4px;
