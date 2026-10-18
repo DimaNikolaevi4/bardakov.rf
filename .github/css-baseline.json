@@ -1,8 +1,8 @@
 {
-  "bytes": 120241,
+  "bytes": 121550,
   "updated": "2026-10-18",
-  "source": "audit после глобального чек-листа DESIGN.md",
-  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (126 253 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
+  "source": "refactor(typography): массовая замена font-size на токены",
+  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (127 627 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
   "history": [
     {"commit": "1f753b37", "bytes": 106555, "note": "стартовый размер (другой агент)"},
     {"commit": "fe4165b5", "bytes": 109008, "note": "+2453 B: унификация hover-эффектов"},
@@ -11,6 +11,7 @@
     {"commit": "01c46d58", "bytes": 111461, "note": "+672 B: унификация интерактивных элементов"},
     {"commit": "1e61cddb", "bytes": 111461, "note": "0: правка цвета логотипа в dark теме (только tokens.css)"},
     {"commit": "9e9e45d8", "bytes": 111461, "note": "0: hover/focus/active для .logo"},
-    {"commit": "audit-1", "bytes": 120241, "note": "+8780 B: аудит DESIGN.md (focus-visible для inputs, комментарии, правки .card и .footer-resources-title)"}
+    {"commit": "audit-1", "bytes": 120241, "note": "+8780 B: аудит DESIGN.md (focus-visible для inputs, комментарии, правки .card и .footer-resources-title)"},
+    {"commit": "df1a32f5", "bytes": 121550, "note": "+1309 B: массовая замена font-size на токены --text-* (4 новых токена, 64 вхождения заменены)"}
   ]
 }
