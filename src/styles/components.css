@@ -1699,7 +1699,9 @@ a:hover { color: var(--accent-hover); }
   flex: 1;
   min-width: 0;               /* позволяет сжиматься для text-overflow */
   text-decoration: none;
-  color: var(--text-primary);
+  /* Цвет логотипа SVG (fill="currentColor") — тот же, что в шапке сайта:
+     light: text-primary (тёмно-синий), dark: accent (светло-фиолетовый). */
+  color: var(--logo-color);
 }
 .offcanvas-title-wrap {
   display: flex;
@@ -2519,13 +2521,17 @@ body.menu-open { overflow: hidden; }
 }
 .offcanvas-header,
 .oc-side-panel__header {
-  /* Унифицированная высота 64px для ВСЕХ шапок offcanvas
+  /* Унифицированная ВЫСОТА 72px для ВСЕХ шапок offcanvas
      (основная + side panels 2 и 3) — fix визуального дискомфорта
      при навигации между уровнями меню.
-     Раньше было 82px, что создавало разную высоту между side-panels
-     (там padding мог быть меньше) и переопределяло min-height: 64px
-     из базового правила выше. */
-  min-height: 64px;
+     Раньше было min-height: 64px, но из-за разного контента:
+     - основная шапка: logo-mark 40px + title + subtitle = 72px
+     - side-panels: breadcrumb + title = 69px
+     получалась разница 3px. Фиксированная height: 72px + overflow: hidden
+     гарантирует одинаковые высоты всех 3 шапок.
+     72px = padding (12+12) + border (1+1) + max content (44px logo + 2px gap). */
+  height: 72px;
+  min-height: 72px;
   padding: var(--space-3) var(--space-4);  /* 12px 16px */
   border-bottom-color: var(--border);
   background: color-mix(in srgb, var(--menu-paper) 88%, var(--highlight) 12%);
