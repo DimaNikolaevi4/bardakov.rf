@@ -143,7 +143,7 @@ a:hover { color: var(--accent-hover); }
   min-height: 44px;
   padding: 2px;
   border-radius: 10px;
-  color: var(--text-primary);
+  color: var(--logo-color);
   transition: color .2s ease, background-color .2s ease;
   flex-shrink: 0;
 }
@@ -151,13 +151,11 @@ a:hover { color: var(--accent-hover); }
 /* .logo:focus-visible — moved to unified block */
 .logo-mark {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
 }
-.logo .logo-mark { transition: color .2s ease; }
+.logo .logo-mark { transition: color var(--t-fast); }
 
-[data-theme="high-contrast"] .logo-mark { color: var(--highlight); }
-[data-theme="dark"] .logo-mark { color: var(--accent); }
 /* [data-theme="dark"] .logo hover/focus — REMOVED: conflicts with unified rules */
 @media (max-width: 640px) { .logo-mark { width: 34px; height: 34px; } }
 [data-theme="high-contrast"] .logo { min-width: 56px; min-height: 56px; }
@@ -2105,14 +2103,22 @@ a:hover { color: var(--accent-hover); }
 }
 
 .main-nav {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
   flex: 1 1 auto;
   min-width: 0;
   margin-left: auto;
 }
 .main-nav-list {
+  display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 2px !important;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 .main-nav-item { min-width: 0; }
 .main-nav a.main-nav-link {
@@ -2590,14 +2596,11 @@ body.menu-open { overflow: hidden; }
 
 /* ═══════════════════════════════════════════════════════════ */
 
-[data-theme="dark"] .site-header {
-  background: color-mix(in srgb, var(--bg-primary) 90%, var(--bg-secondary));
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--highlight) 18%, transparent);
-}
-/* [data-theme="dark"] .site-header.is-scrolled удалено:
-   используется глобальное правило .site-header.is-scrolled { box-shadow: var(--shadow); }
-   где --shadow уже переопределён для тёмной темы в tokens.css. */
-/* dark logo-mark handled in main rules */
+/* [data-theme="dark"] .site-header переопределение удалено:
+   светлая и тёмная темы используют одну схему поверхности --menu-paper,
+   а её оттенок формируют семантические токены темы.
+   .site-header.is-scrolled использует единый токен тени --shadow. */
+/* Цвет логотипа задаётся общим токеном темы --logo-color. */
 [data-theme="dark"] .oc-section-icon,
 [data-theme="dark"] .oc-footer__link svg,
 [data-theme="dark"] .oc-footer__email svg { color: var(--highlight); }

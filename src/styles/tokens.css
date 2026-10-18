@@ -18,6 +18,7 @@
   --accent-hover:   #3730A3;
   --accent-soft:    rgba(67, 56, 202, 0.08);
   --accent-ring:    rgba(67, 56, 202, 0.30);
+  --logo-color:     var(--text-primary);
 
   --highlight:      #CA8A04;
   --highlight-hover:#B45309;
@@ -154,6 +155,7 @@
   --accent-hover:   #A5B4FC;
   --accent-soft:    rgba(129, 140, 248, 0.15);
   --accent-ring:    rgba(129, 140, 248, 0.40);
+  --logo-color:     var(--highlight);
 
   --highlight:      #FACC15;
   --highlight-hover:#FDE047;
@@ -181,6 +183,7 @@
   --accent-hover:   #66FFFF;
   --accent-soft:    transparent;
   --accent-ring:    #FFFF00;
+  --logo-color:     var(--highlight);
   --highlight:      #FFFF00;
   --highlight-hover:#FFFF00;
   --highlight-soft: transparent;
