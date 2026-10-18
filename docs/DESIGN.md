@@ -638,8 +638,71 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 
 ---
 
+## 10. CSS: архитектура и код-стайл
 
+### 10.1 Карта файлов и зоны ответственности (SRP)
 
-*Последнее обновление: 2026-09-11*
+| Файл | Отвечает за | Что НЕ должно быть |
+|---|---|---|
+| `tokens.css` | CSS-переменные, `:root`, `[data-theme="dark"]`, `[data-theme="high-contrast"]` | селекторы компонентов |
+| `typography.css` | базовые стили `body`, `h1–h6`, `p`, `a`, `code` | стили конкретных компонентов |
+| `layout.css` | сетки, контейнеры, `.site-header` / `.site-footer` на уровне раскладки | отступы конкретных компонентов |
+| `a11y.css` | глобальный `:focus-visible`, `.skip-link`, `prefers-reduced-motion`, скроллбары | цвета компонентов |
+| `components.css` | всё, что относится к конкретным UI-компонентам | `:root`, `[data-theme]`, hex, утилиты |
+
+### 10.2 Правила
+
+1. **Токены — единственный источник значений.** Hex/rgb в `components.css` запрещены. Если значения нет — добавьте токен в `tokens.css`, а не хардкодьте.
+2. **Тёмная тема — через токены.** Не пишите `[data-theme="dark"] .card { background: #222 }`. Переопределите `--bg-primary` в `tokens.css` — компонент подхватит автоматически.
+3. **Фокус — только в `a11y.css`.** Любой локальный `:focus-visible` в компоненте — нарушение. Исключение: `.btn-primary` (усиливает hover-состояние, не дублирует outline) и `.home-carousel__*` (позиционирование фокуса на стрелках).
+4. **Утилиты запрещены.** `.mt-2` и подобные — антипаттерн. Отступы задаются в компоненте через `margin-block` / `padding-inline` (логические свойства для RTL-совместимости).
+5. **Vendor-префиксы — только с обоснованием.** Допустимы (нет стандартной альтернативы или Safari < 18 требует):
+   - `-webkit-font-smoothing` / `-moz-osx-font-smoothing` — нет стандарта, активен во всех WebKit/Blink
+   - `-webkit-backdrop-filter` — Safari < 18 (до 2024)
+   - `-webkit-background-clip: text` — gradient text требует webkit-префикса до сих пор
+   - `-webkit-mask` — SVG-маски, Safari
+   - `::-webkit-scrollbar` — нестандартный, единственный способ стилизовать скроллбар в Chrome/Edge
+
+   Всё остальное — удаляется. `-webkit-text-size-adjust` и `-webkit-overflow-scrolling` уже удалены (заменены стандартными свойствами или вообще убраны как устаревшие).
+6. **Deprecated-алиасы — с датой удаления.** Каждый алиас обратной совместимости (`--color-surface` → `--bg-primary`) помечается комментарием `/* @deprecated since 2.1.0 — use --bg-primary */` и удаляется не позже чем через один релизный цикл. Список актуальных deprecated-алиасов — в разделе 2.2.
+
+### 10.3 UNIFIED INTERACTIONS блок
+
+В конце `components.css` определён унифицированный блок `UNIFIED INTERACTIONS`, который задаёт единое поведение hover/focus/active для 11 интерактивных классов:
+
+```
+.logo, .main-nav-link, .header-icon-btn, .theme-btn, .burger,
+.rubrics-toggle, .footer-resource, .footer-social-link,
+.btn-secondary, .btn-outline, .btn-primary
+```
+
+| Свойство | Hover | Active |
+|---|---|---|
+| `color` | `var(--accent)` | (сохраняется) |
+| `background-color` | `var(--accent-soft)` | (сохраняется) |
+| `border-color` | `color-mix(in srgb, var(--accent) 20%, transparent)` | (сохраняется) |
+| `transform` | `translateY(-2px)` (lift) | `translateY(0)` (press down) |
+
+`.btn-primary` — особый случай: меняет `background-color` на `--accent-hover`, `color` на `--color-on-accent`, получает усиленный `box-shadow: 0 8px 16px -4px var(--accent-ring)`. Persistent state (`[aria-current="page"]`, `[aria-pressed="true"]`) — без `transform`, только цвет/фон/граница.
+
+### 10.4 CI-guardrails
+
+Нарушения правил 1–4 блокируются workflow `.github/workflows/css-guardrails.yml`:
+
+| Проверка | Файл | Что блокирует |
+|---|---|---|
+| Запрет `:root` | `components.css` | новые объявления токенов вне `tokens.css` |
+| Запрет `[data-theme=...]` | `components.css` | дублирование тем вне `tokens.css` |
+| Запрет hex/rgb | `components.css` | хардкод-цвета |
+| Запрет утилит | `layout.css` | возврат `.mt-*`, `.mb-*`, `.pt-*`, `.pb-*` |
+| Локальный `:focus-visible` | `components.css` | дублирование фокуса (кроме `.btn-primary`, `.home-carousel__*`) |
+| Deprecated-алиасы | все 4 файла | `::warning::` (не блокирует) |
+| Bundle size | все src/styles/*.css | регресс > +5% от baseline |
+
+Baseline CSS-бандла зафиксирован в `.github/css-baseline.json`.
+
+---
+
+*Последнее обновление: 2026-10-18*
 ```
 
