@@ -285,12 +285,25 @@ select {
   transition: border-color var(--t-fast);
 }
 
+/* :focus (не только :focus-visible) для input/textarea/select —
+   поле ввода должно показывать фокус и при клике мышью, т.к. это
+   статус «активного поля ввода», а не просто навигационный фокус.
+   Глобальное :focus-visible из строки 34 покрывает всё остальное
+   (ссылки, кнопки), здесь — дополнение для форм. */
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--accent);
   outline: 3px solid var(--accent-ring);
   outline-offset: 1px;
+}
+
+/* Дополнительно: input:focus-visible — для клавиатурной навигации
+   даём усиление через box-shadow (1.4.11 Non-text Contrast). */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 input[aria-invalid="true"],

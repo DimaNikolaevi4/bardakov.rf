@@ -1011,7 +1011,8 @@ a:hover { color: var(--accent-hover); }
 
 .card {
   position: relative; display: flex; flex-direction: column;
-  padding: 28px 28px 28px 32px;
+  /* padding: было 28px 28px 28px 32px (не кратно 4px) → var(--space-6) (32px) единое */
+  padding: var(--space-6);
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1367,7 +1368,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .site-footer .footer-resources-title {
-  margin-bottom: 22px;
+  margin-bottom: var(--space-5);  /* 24px, было 22px — хардкод */
   text-align: center;
 }
 
