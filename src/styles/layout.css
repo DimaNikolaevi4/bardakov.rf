@@ -302,10 +302,12 @@ select {
   }
 }
 
-/* Footer — прижат к низу */
+/* Footer — прижат к низу.
+   Фон не задаём здесь — он управляется в components.css (.site-footer)
+   через var(--bg-primary) для консистентности с основным фоном страницы
+   в обеих темах (light/dark). */
 .site-footer {
   flex-shrink: 0;
-  background-color: var(--bg-subtle);
   border-top: 1px solid var(--border);
   padding-block: var(--space-12) var(--space-6);
   margin-top: auto;

@@ -1104,9 +1104,13 @@ a:hover { color: var(--accent-hover); }
   margin-top: auto;
   padding: 56px 0 0;
   border-top: 1px solid var(--border);
-  background:
-    radial-gradient(ellipse at 0 0, color-mix(in srgb, var(--highlight) 8%, transparent), transparent 54%),
-    var(--bg-secondary);
+  /* ОДНОТОННЫЙ фон через --bg-primary (fix: консистентность тем).
+     Раньше был radial-gradient(ellipse at 0 0, ...) + var(--bg-secondary),
+     что в тёмной теме создавало ощущение «градиента» из-за того, что
+     --bg-secondary (#0F172A) светлее --bg-primary (#050A1F).
+     Теперь обе темы (light и dark) используют var(--bg-primary),
+     что обеспечивает консистентность с основным фоном страницы. */
+  background: var(--bg-primary);
   color: var(--text-secondary);
   font-size: var(--text-sm);
   transition: background-color var(--t-base), border-color var(--t-base);
