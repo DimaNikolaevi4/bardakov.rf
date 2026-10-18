@@ -1683,8 +1683,8 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;          /* унифицированная высота с side-panels */
-  padding: var(--space-3) var(--space-4);  /* 12px 16px */
+  min-height: 80px;          /* унифицированная высота с side-panels */
+  padding: var(--space-4) var(--space-4);  /* 16px 16px */
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   /* min-height + overflow hidden гарантирует, что шапка не растянется
@@ -1853,8 +1853,8 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;          /* та же высота, что и у основной шапки offcanvas */
-  padding: var(--space-3) var(--space-4);  /* 12px 16px */
+  min-height: 80px;          /* та же высота, что и у основной шапки offcanvas */
+  padding: var(--space-4) var(--space-4);  /* 16px 16px */
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   overflow: hidden;          /* гарантия: шапка не растянется при длинных текстах */
@@ -2521,18 +2521,15 @@ body.menu-open { overflow: hidden; }
 }
 .offcanvas-header,
 .oc-side-panel__header {
-  /* Унифицированная ВЫСОТА 72px для ВСЕХ шапок offcanvas
+  /* Унифицированная ВЫСОТА 80px для ВСЕХ шапок offcanvas
      (основная + side panels 2 и 3) — fix визуального дискомфорта
      при навигации между уровнями меню.
-     Раньше было min-height: 64px, но из-за разного контента:
-     - основная шапка: logo-mark 40px + title + subtitle = 72px
-     - side-panels: breadcrumb + title = 69px
-     получалась разница 3px. Фиксированная height: 72px + overflow: hidden
-     гарантирует одинаковые высоты всех 3 шапок.
-     72px = padding (12+12) + border (1+1) + max content (44px logo + 2px gap). */
-  height: 72px;
-  min-height: 72px;
-  padding: var(--space-3) var(--space-4);  /* 12px 16px */
+     80px = padding (16+16) + border (1+1) + content (44px logo + 2px запас).
+     Раньше было 72px (padding 12+12), но текст прижимался к нижней границе —
+     увеличили до 80px с padding 16px для визуального воздуха. */
+  height: 80px;
+  min-height: 80px;
+  padding: var(--space-4) var(--space-4);  /* 16px 16px */
   border-bottom-color: var(--border);
   background: color-mix(in srgb, var(--menu-paper) 88%, var(--highlight) 12%);
   box-shadow: inset 0 2px 0 color-mix(in srgb, var(--highlight) 68%, transparent);
