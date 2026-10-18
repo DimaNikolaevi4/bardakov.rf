@@ -3000,163 +3000,146 @@ body.menu-open { overflow: hidden; }
 }
 
 /* ============================================================
-   HERO 3D FLIP CAROUSEL — Blob + 3D Flip + Overlays
-   Креативный дизайн: жидкая форма фото, 3D-переворот,
-   информативные оверлеи на слайдах 2 и 3.
+   HERO FAN CAROUSEL — Веерная раскладка + Blob + Динамический текст
+   Креативный дизайн: все 3 слайда видны одновременно,
+   blob-форма с анимацией морфинга, динамический текст слева.
    ============================================================ */
 
-/* === 1. Blob-форма для изображения === */
+/* === 1. Сетка hero-секции === */
+.page-showcase__inner--featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(16rem, 0.88fr);
+  gap: var(--space-8);
+  align-items: center;
+  min-height: 600px;
+}
+
+/* === 2. Текстовый блок слева — stagger-анимация === */
+.page-showcase__copy {
+  padding: var(--space-4);
+}
+
+.page-showcase__copy .eyebrow,
+.page-showcase__copy h1,
+.page-showcase__copy .page-scaffold__description,
+.page-showcase__copy .page-showcase__quote,
+.page-showcase__copy .page-showcase__actions {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-showcase__copy .visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-showcase__copy h1 {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+/* === 3. Веерная карусель (все 3 слайда видны) === */
+.home-carousel--showcase {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  perspective: 1200px;
+}
+
+.home-carousel__slides {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.home-carousel__slide {
+  position: absolute;
+  width: 70%;
+  height: 80%;
+  left: 15%;
+  top: 10%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  overflow: hidden;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* Веерная раскладка по умолчанию (nth-child) */
+.home-carousel__slide:nth-child(1) {
+  transform: translateX(-30%) rotateY(-25deg) translateZ(-100px);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.home-carousel__slide:nth-child(2) {
+  transform: translateX(0) rotateY(0deg) translateZ(0);
+  opacity: 1;
+  z-index: 3;
+}
+
+.home-carousel__slide:nth-child(3) {
+  transform: translateX(30%) rotateY(25deg) translateZ(-100px);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Активный слайд — выходит вперёд */
+.home-carousel__slide.is-active {
+  transform: translateX(0) rotateY(0deg) translateZ(50px) scale(1.05);
+  opacity: 1;
+  z-index: 5;
+  box-shadow: 0 30px 80px rgba(67, 56, 202, 0.3);
+}
+
+/* Соседние слайды — веер */
+.home-carousel__slide.is-prev {
+  transform: translateX(-35%) rotateY(-20deg) translateZ(-50px);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.home-carousel__slide.is-next {
+  transform: translateX(35%) rotateY(20deg) translateZ(-50px);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+/* === 4. Blob-форма с анимацией === */
 .home-carousel__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob-morph 12s ease-in-out infinite;
-  box-shadow: 0 20px 60px rgba(67, 56, 202, 0.2);
-  transition: box-shadow var(--t-fast);
-}
-
-.home-carousel:hover .home-carousel__image {
-  box-shadow: 0 30px 80px rgba(67, 56, 202, 0.3);
 }
 
 @keyframes blob-morph {
-  0%, 100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  25% {
-    border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%;
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-  75% {
-    border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%;
-  }
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  75% { border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%; }
 }
 
-/* === 2. 3D Flip карусель (замедленная, 1.2s) === */
-.home-carousel__slides {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-
-.home-carousel__slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
-  opacity: 0;
-}
-
-.home-carousel__slide.is-active {
-  opacity: 1;
-  transform: rotateY(0deg) translateZ(250px);
-}
-
-.home-carousel__slide.is-prev {
-  transform: rotateY(-120deg) translateZ(250px);
-  opacity: 0;
-}
-
-.home-carousel__slide.is-next {
-  transform: rotateY(120deg) translateZ(250px);
-  opacity: 0;
-}
-
-/* === 3. Информативные оверлеи для слайдов 2 и 3 === */
-.slide-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-  padding: var(--space-8) var(--space-6) var(--space-6);
-  color: white;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
-  pointer-events: none;
-  border-radius: 0 0 60% 40% 30% 70% / 0 0 30% 70%;
-  overflow: hidden;
-}
-
-.home-carousel__slide.is-active .slide-overlay {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Скрываем оверлей на первом слайде */
-.home-carousel__slide[data-slide="0"] .slide-overlay {
-  display: none;
-}
-
-.slide-overlay i {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-3);
-  color: #818CF8;
-  display: block;
-}
-
-.slide-overlay h3 {
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  margin-bottom: var(--space-2);
-  color: white;
-}
-
-.slide-overlay p {
-  font-size: var(--text-base);
-  opacity: 0.95;
-  margin-bottom: var(--space-3);
-  line-height: 1.5;
-}
-
-.slide-overlay a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--highlight);
-  font-weight: 600;
-  text-decoration: none;
-  transition: gap 0.3s ease;
-  pointer-events: auto;
-}
-
-.slide-overlay a:hover {
-  gap: var(--space-4);
-}
-
-.slide-overlay a i {
-  font-size: 1rem;
-  margin: 0;
-  color: inherit;
-}
-
-/* === 4. Контейнер и управление === */
-.home-carousel--showcase {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
+/* === 5. Управление (стрелки и точки) === */
 .home-carousel__controls {
+  position: absolute;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
+  gap: var(--space-3);
+  z-index: 10;
 }
 
 .home-carousel__arrow {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--bg-primary);
@@ -3166,6 +3149,7 @@ body.menu-open { overflow: hidden; }
   justify-content: center;
   transition: background-color var(--t-fast), color var(--t-fast),
               border-color var(--t-fast), transform var(--t-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .home-carousel__arrow:hover {
@@ -3181,92 +3165,76 @@ body.menu-open { overflow: hidden; }
 }
 
 .home-carousel__pagination {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
   display: flex;
   gap: var(--space-2);
-  align-items: center;
+  z-index: 10;
 }
 
 .home-carousel__dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: none;
-  background: var(--border);
+  border: 2px solid var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 15%, transparent);
   cursor: pointer;
   transition: background-color 0.4s ease, transform 0.4s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .home-carousel__dot[aria-current="true"] {
-  background: var(--accent);
-  transform: scale(1.4);
+  background: var(--text-primary);
+  transform: scale(1.3);
 }
 
-/* === 5. Адаптивность === */
-@media (max-width: 768px) {
-  .home-carousel__slides {
-    height: 350px;
+/* === 6. Адаптивность === */
+@media (max-width: 968px) {
+  .page-showcase__inner--featured {
+    grid-template-columns: 1fr;
   }
 
-  .home-carousel__slide.is-active {
-    transform: rotateY(0deg) translateZ(175px);
+  .page-showcase__visual--carousel {
+    order: -1;
+    height: 400px;
   }
 
-  .home-carousel__slide.is-prev {
-    transform: rotateY(-120deg) translateZ(175px);
+  .page-showcase__copy h1 {
+    font-size: var(--text-3xl);
   }
 
-  .home-carousel__slide.is-next {
-    transform: rotateY(120deg) translateZ(175px);
+  .home-carousel--showcase {
+    height: 400px;
   }
 
-  .slide-overlay {
-    padding: var(--space-6) var(--space-4) var(--space-4);
-  }
-
-  .slide-overlay i {
-    font-size: 2rem;
-  }
-
-  .slide-overlay h3 {
-    font-size: var(--text-xl);
-  }
-
-  .slide-overlay p {
-    font-size: var(--text-sm);
+  .home-carousel__slide {
+    width: 75%;
+    left: 12.5%;
   }
 }
 
 @media (max-width: 480px) {
-  .home-carousel__slides {
-    height: 280px;
+  .page-showcase__visual--carousel {
+    height: 300px;
   }
 
-  .home-carousel__slide.is-active {
-    transform: rotateY(0deg) translateZ(140px);
+  .home-carousel--showcase {
+    height: 300px;
   }
 
-  .home-carousel__slide.is-prev {
-    transform: rotateY(-120deg) translateZ(140px);
+  .home-carousel__slide {
+    width: 80%;
+    left: 10%;
   }
 
-  .home-carousel__slide.is-next {
-    transform: rotateY(120deg) translateZ(140px);
-  }
-
-  .slide-overlay {
-    padding: var(--space-4) var(--space-3) var(--space-3);
-  }
-
-  .slide-overlay i {
-    font-size: 1.5rem;
-  }
-
-  .slide-overlay h3 {
-    font-size: var(--text-lg);
+  .home-carousel__arrow {
+    width: 40px;
+    height: 40px;
   }
 }
 
-/* === 6. Уважение prefers-reduced-motion === */
+/* === 7. Уважение prefers-reduced-motion === */
 @media (prefers-reduced-motion: reduce) {
   .home-carousel__image {
     animation: none;
@@ -3277,7 +3245,11 @@ body.menu-open { overflow: hidden; }
     transition: opacity 0.3s ease;
   }
 
-  .slide-overlay {
+  .page-showcase__copy .eyebrow,
+  .page-showcase__copy h1,
+  .page-showcase__copy .page-scaffold__description,
+  .page-showcase__copy .page-showcase__quote,
+  .page-showcase__copy .page-showcase__actions {
     transition: opacity 0.3s ease;
   }
 }
