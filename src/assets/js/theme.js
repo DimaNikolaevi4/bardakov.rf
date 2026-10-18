@@ -6,7 +6,14 @@
  * Хранение: localStorage 'bardakov-theme'
  * Приоритет: localStorage > prefers-color-scheme > light
  *
- * ВАЖНО: тема хранится на body[data-theme], а НЕ на html[data-theme]
+ * Тема ставится на <html> (document.documentElement), а НЕ на <body>:
+ *   - CSS-токены [data-theme="dark"] и [data-theme="high-contrast"]
+ *     объявлены в tokens.css на уровне :root (=== html)
+ *   - если ставить на body, токены --bg-primary / --menu-paper
+ *     не пересчитываются и шапка остаётся светлой
+ *
+ * FOUC-защита (inline-скрипт в base.njk) тоже ставит на <html>,
+ * чтобы тема применялась ДО первого рендера.
  * ============================================================ */
 
 (function () {
@@ -14,26 +21,52 @@
 
   const KEY = 'bardakov-theme';
   const allowed = ['light', 'dark', 'high-contrast'];
+  const root = document.documentElement;
 
   function apply(theme) {
     if (!allowed.includes(theme)) theme = 'light';
-    document.body.setAttribute('data-theme', theme);
+    // Ставим на <html>, не на <body> — см. комментарий в шапке файла.
+    root.setAttribute('data-theme', theme);
+    // Синхронизируем aria-pressed кнопок с активной темой.
     document.querySelectorAll('.theme-btn').forEach(btn => {
       btn.setAttribute('aria-pressed', btn.dataset.theme === theme ? 'true' : 'false');
     });
   }
 
   function init() {
-    let saved = null;
-    try { saved = localStorage.getItem(KEY); } catch (e) {}
-    if (saved && allowed.includes(saved)) {
-      apply(saved);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      apply('dark');
+    // Считываем текущую тему с <html> (FOUC-скрипт уже выставил её
+    // на загрузке) — используем именно этот источник, а не ещё одну
+    // попытку localStorage / matchMedia, чтобы избежать рассинхрона.
+    const current = root.getAttribute('data-theme');
+    if (current && allowed.includes(current)) {
+      // Синхронизируем aria-pressed с фактической темой на <html>.
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.setAttribute('aria-pressed', btn.dataset.theme === current ? 'true' : 'false');
+      });
     } else {
-      apply('light');
+      // Фолбэк: если FOUC-скрипт не отработал (например, JS отключён
+      // до DOMContentLoaded), применяем тему здесь.
+      let saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) {}
+      if (saved && allowed.includes(saved)) {
+        apply(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        apply('dark');
+      } else {
+        apply('light');
+      }
     }
 
+    // Слушаем изменения системной темы (только если нет сохранённого выбора).
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      let saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (err) {}
+      if (!saved) {
+        apply(e.matches ? 'dark' : 'light');
+      }
+    });
+
+    // Клик по кнопке переключателя тем.
     document.querySelectorAll('.theme-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const theme = btn.dataset.theme;
@@ -49,8 +82,9 @@
     init();
   }
 
+  // Публичный API (для a11y-panel и возможных внешних скриптов).
   window.BardakovTheme = {
     apply: apply,
-    get: () => document.body.getAttribute('data-theme') || 'light'
+    get: () => root.getAttribute('data-theme') || 'light'
   };
 })();

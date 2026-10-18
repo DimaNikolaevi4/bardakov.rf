@@ -47,19 +47,15 @@
     (function () {
       const KEY = 'bardakov-theme';
       const root = document.documentElement;
-      const body = document.body;
       const allowed = ['light', 'dark', 'high-contrast'];
 
       function apply(theme) {
         if (!allowed.includes(theme)) theme = 'light';
-        if (body) {
-          body.setAttribute('data-theme', theme);
-        } else {
-          root.dataset.pendingTheme = theme;
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-          if (body) body.setAttribute('data-theme', theme);
-        });
+        // тема ставится на <html>, т.к. токены [data-theme="dark"]
+        // объявлены в tokens.css на :root — это и есть html.
+        // Раньше было на body — токены не пересчитывались, шапка
+        // оставалась светлой в тёмной теме.
+        root.setAttribute('data-theme', theme);
       }
 
       let saved = null;
@@ -84,7 +80,7 @@
 
   {% block head %}{% endblock %}
 </head>
-<body data-theme="light">
+<body>
 
   {# === Skip-link === #}
   <a href="#main" class="skip-link">Перейти к контенту</a>
