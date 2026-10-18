@@ -1,0 +1,5 @@
+{
+  "bytes": 110789,
+  "updated": "2026-10-18",
+  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (116329 bytes) блокирует мерж."
+}
