@@ -330,11 +330,20 @@ a:hover { color: var(--accent-hover); }
   background: transparent; color: var(--text-primary);
   border: 2px solid var(--border-strong);
 }
-.btn-outline:hover {
-  border-color: var(--accent); color: var(--accent); transform: translateY(-2px);
+/* .btn-outline:hover — moved to UNIFIED INTERACTIONS block at EOF */
+
+/* ДОБАВЛЕНО: базовое правило .btn-secondary — модификатор «приглушённой» кнопки.
+   Используется в HTML (404.njk, button.njk variant=secondary) и до сих пор
+   не имел базового стиля, только hover. Теперь имеет явную семантику:
+   прозрачный фон, как у .btn, но с ненулевой прозрачной рамкой для тактильности. */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 [data-theme="high-contrast"] .btn-primary { color: #000; border: 2px solid #fff; }
 [data-theme="high-contrast"] .btn-outline { border: 2px solid #fff; color: #fff; }
+[data-theme="high-contrast"] .btn-secondary { border: 2px solid #fff; color: #fff; }
 
 .hero-visual {
   position: relative; aspect-ratio: 1 / 1;
@@ -2647,7 +2656,11 @@ body.menu-open { overflow: hidden; }
     transform var(--t-fast);
 }
 
-/* 2. Hover (транзиторное состояние) — единый эффект для «прозрачных» элементов */
+/* 2. Hover (транзиторное состояние) — единый эффект для «прозрачных» элементов.
+   Включает lift-эффект translateY(-2px) — тот же, что у .btn-primary, чтобы
+   все интерактивные элементы шапки/футера/меню имели согласованную «поднимающую»
+   анимацию, как требовалось в ревью: «стили с одинаковыми эффектами — ко всем
+   элементам меню». */
 .logo:hover,
 .main-nav-link:hover,
 .header-icon-btn:hover,
@@ -2656,13 +2669,16 @@ body.menu-open { overflow: hidden; }
 .rubrics-toggle:hover,
 .footer-resource:hover,
 .footer-social-link:hover,
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-outline:hover {
   color: var(--accent);
   background-color: var(--accent-soft);
   border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  transform: translateY(-2px);
 }
 
-/* 3. Persistent states (постоянное состояние) — отделены от :hover */
+/* 3. Persistent states (постоянное состояние) — отделены от :hover.
+   Не получают transform: это состояние «активной вкладки», а не hover. */
 .main-nav-link[aria-current="page"],
 .theme-btn[aria-pressed="true"] {
   color: var(--accent);
@@ -2670,7 +2686,9 @@ body.menu-open { overflow: hidden; }
   border-color: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-/* 4. Primary button — особая визуальная иерархия (НЕ получает --accent-soft) */
+/* 4. Primary button — особая визуальная иерархия (НЕ получает --accent-soft).
+   Сохраняет transform: translateY(-2px) — согласован с остальными прозрачными
+   элементами, но меняет не цвет текста, а заливку (background). */
 .btn-primary:hover,
 .btn-primary:focus-visible {
   background-color: var(--accent-hover);
@@ -2682,3 +2700,19 @@ body.menu-open { overflow: hidden; }
 .btn-primary:active {
   transform: translateY(0);
 }
+
+/* 5. Active-state для прозрачных элементов — кнопка «прижимается» обратно.
+   Универсальный паттерн: hover = lift, active = press down. */
+.logo:active,
+.main-nav-link:active,
+.header-icon-btn:active,
+.theme-btn:active,
+.burger:active,
+.rubrics-toggle:active,
+.footer-resource:active,
+.footer-social-link:active,
+.btn-secondary:active,
+.btn-outline:active {
+  transform: translateY(0);
+}
+
