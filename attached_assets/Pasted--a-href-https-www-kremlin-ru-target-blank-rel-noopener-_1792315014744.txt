@@ -1,0 +1,117 @@
+а по этому что скажешь?  --- <a href="https://www.kremlin.ru/" target="_blank" rel="noopener noreferrer" class="footer-resource" title="Президент Российской Федерации">
+            <span class="footer-resource-icon">
+              <img src="/bardakov.rf/assets/images/ikonccilki/pr-rf.webp" alt="Президент Российской Федерации" loading="lazy" decoding="async" width="48" height="48">
+            </span>
+            <span class="footer-resource-text">Президент РФ</span>
+          </a>  --  <a href="/bardakov.rf/search/" class="footer-social-link" aria-label="Поиск по сайту">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <span class="sr-only">Поиск по сайту</span>
+          </a> ---   здесь стили с одинаковыми эффектами, такие же эффекты можно применить и к  -- <a href="mailto:info@бардаков.рф" class="btn btn-secondary">
+    <i class="bi bi-envelope" aria-hidden="true"></i> 
+    <span>Связаться</span>
+    
+  </a>    --- <a href="/bardakov.rf/obo-mne/" class="btn btn-primary">
+    <i class="bi bi-person-circle" aria-hidden="true"></i> 
+    <span>Обо мне</span>
+    
+  </a>  --- <a href="mailto:info@бардаков.рф" class="header-icon-btn" title="Написать на почту: info@бардаков.рф" aria-label="Электронная почта">
+        <i class="bi bi-envelope" aria-hidden="true"></i>
+      </a>   -- <div class="container nav-wrapper">
+
+    
+    <a href="/bardakov.rf/" class="logo" aria-label="Бардаков Д. Н. — персональный сайт, на главную">
+      <svg class="logo-mark" viewBox="0 0 96 96" aria-hidden="true" focusable="false">
+        <g fill="currentColor" stroke="currentColor" stroke-linecap="round">
+          <circle cx="20" cy="20" r="9" stroke="none"></circle>
+          <rect x="10" y="33" width="20" height="53" rx="8" stroke="none"></rect>
+          <path d="M26 45 L42 36" stroke-width="8" fill="none"></path>
+          <path d="M42 36 L66 23" stroke-width="4.5" fill="none"></path>
+          <rect x="40" y="4" width="52" height="9" rx="2" stroke="none"></rect>
+          <rect x="45" y="13" width="42" height="50" rx="2" fill="none" stroke-width="7"></rect>
+          <path d="M66 66 L54 90 M66 66 L78 90" stroke-width="7" fill="none"></path>
+        </g>
+      </svg>
+    </a>
+
+    
+    <nav class="main-nav hidden-md-down" aria-label="Основная навигация">
+      <ul class="main-nav-list">
+        
+        <li class="main-nav-item">
+          <a href="/bardakov.rf/obo-mne/" class="main-nav-link">
+            <i class="bi main-nav-icon bi-person-vcard" aria-hidden="true"></i>
+            <span>Обо мне</span>
+          </a>
+        </li>
+        
+        <li class="main-nav-item">
+          <a href="/bardakov.rf/vospitanie/" class="main-nav-link">
+            <i class="bi main-nav-icon bi-heart-pulse" aria-hidden="true"></i>
+            <span>Воспитание</span>
+          </a>
+        </li>
+        
+        <li class="main-nav-item">
+          <a href="/bardakov.rf/obuchenie/" class="main-nav-link">
+            <i class="bi main-nav-icon bi-journal-bookmark" aria-hidden="true"></i>
+            <span>Обучение</span>
+          </a>
+        </li>
+        
+        <li class="main-nav-item">
+          <a href="/bardakov.rf/abiturientu/" class="main-nav-link">
+            <i class="bi main-nav-icon bi-mortarboard" aria-hidden="true"></i>
+            <span>Абитуриенту</span>
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+
+    
+    <div class="header-actions">
+      
+      <a href="https://max.ru/join/pzpeTfp5807aifjz7d1_MAmy6Ksa6ffcXMK5EoYOsAY" class="header-icon-btn" target="_blank" rel="noopener" title="Написать в MAX" aria-label="Мессенджер MAX">
+        <i class="bi bi-chat" aria-hidden="true"></i>
+      </a>
+
+      
+      <a href="mailto:info@бардаков.рф" class="header-icon-btn" title="Написать на почту: info@бардаков.рф" aria-label="Электронная почта">
+        <i class="bi bi-envelope" aria-hidden="true"></i>
+      </a>
+
+      
+      <button type="button" class="header-icon-btn" id="headerSearchToggle" title="Поиск по сайту" aria-label="Поиск" aria-expanded="false" aria-controls="searchModal">
+        <i class="bi bi-search" aria-hidden="true"></i>
+      </button>
+
+      
+      <button type="button" class="header-icon-btn" id="a11yToggle" title="Настройки доступности" aria-label="Настройки доступности" aria-expanded="false" aria-controls="a11yPanel">
+        <i class="bi bi-eye" aria-hidden="true"></i>
+      </button>
+
+      
+      <div class="theme-switcher" role="group" aria-label="Выбор темы оформления">
+        <button type="button" class="theme-btn" data-theme="light" aria-label="Светлая тема" title="Светлая тема" aria-pressed="true">
+          <i class="bi bi-sun" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="theme-btn" data-theme="dark" aria-label="Тёмная тема" title="Тёмная тема" aria-pressed="false">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="theme-btn" data-theme="high-contrast" aria-label="Версия для слабовидящих" title="Версия для слабовидящих" aria-pressed="false">
+          <i class="bi bi-circle-half" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    
+    <button type="button" class="header-icon-btn rubrics-toggle hidden-md-down" id="offcanvasToggle" title="Все разделы сайта" aria-label="Все разделы" aria-expanded="false" aria-controls="offcanvasRubrics">
+      <i class="bi bi-list-nested" aria-hidden="true"></i>
+    </button>
+
+    
+    <button type="button" class="header-icon-btn burger hidden-lg-up" id="burgerBtn" aria-label="Открыть меню" title="Меню" aria-expanded="false" aria-controls="offcanvasRubrics">
+      <i class="bi bi-list" aria-hidden="true"></i>
+    </button>
+
+  </div>   --- и вообще ко всем элементам меню
