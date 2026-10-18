@@ -169,7 +169,10 @@
   --accent-hover:   #A5B4FC;
   --accent-soft:    rgba(129, 140, 248, 0.15);
   --accent-ring:    rgba(129, 140, 248, 0.40);
-  --logo-color:     var(--highlight);
+  /* Логотип в тёмной теме — светло-фиолетовый (#818CF8), соответствует
+     дизайн-системе «Ночное небо». Раньше был var(--highlight) = #FACC15
+     (жёлтый) — противоречил акценту тёмной темы. */
+  --logo-color:     var(--accent);
 
   --highlight:      #FACC15;
   --highlight-hover:#FDE047;
