@@ -1,8 +1,8 @@
 {
-  "bytes": 121550,
+  "bytes": 123378,
   "updated": "2026-10-18",
-  "source": "refactor(typography): массовая замена font-size на токены",
-  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (127 627 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
+  "source": "fix(footer): выровнять высоту карточек «Официальные ресурсы»",
+  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (129 547 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
   "history": [
     {"commit": "1f753b37", "bytes": 106555, "note": "стартовый размер (другой агент)"},
     {"commit": "fe4165b5", "bytes": 109008, "note": "+2453 B: унификация hover-эффектов"},
@@ -12,6 +12,7 @@
     {"commit": "1e61cddb", "bytes": 111461, "note": "0: правка цвета логотипа в dark теме (только tokens.css)"},
     {"commit": "9e9e45d8", "bytes": 111461, "note": "0: hover/focus/active для .logo"},
     {"commit": "audit-1", "bytes": 120241, "note": "+8780 B: аудит DESIGN.md (focus-visible для inputs, комментарии, правки .card и .footer-resources-title)"},
-    {"commit": "df1a32f5", "bytes": 121550, "note": "+1309 B: массовая замена font-size на токены --text-* (4 новых токена, 64 вхождения заменены)"}
+    {"commit": "df1a32f5", "bytes": 121550, "note": "+1309 B: массовая замена font-size на токены --text-* (4 новых токена, 64 вхождения заменены)"},
+    {"commit": "38329faa", "bytes": 123378, "note": "+1828 B: fix(footer) — фиксированная высота карточек 76px + line-clamp для text"}
   ]
 }
