@@ -144,7 +144,7 @@ a:hover { color: var(--accent-hover); }
   padding: 2px;
   border-radius: 10px;
   color: var(--logo-color);
-  transition: color .2s ease, background-color .2s ease;
+  transition: transform var(--t-fast), color var(--t-fast), opacity var(--t-fast);
   flex-shrink: 0;
 }
 /* .logo:hover — moved to unified header-interactive block */
@@ -168,6 +168,41 @@ a:hover { color: var(--accent-hover); }
 .logo { color: var(--text-primary); }
 [data-theme="dark"] .logo { color: var(--accent); }
 [data-theme="high-contrast"] .logo { color: var(--highlight); }
+
+/* === HOVER / FOCUS / ACTIVE для логотипа ===
+   Согласно docs/DESIGN.md Принцип 3 «Акценты дозированно» и
+   Принцип 5 «Скорость — часть дизайна»: лёгкий подъём + изменение
+   цвета/прозрачности, без перегрузки.
+
+   Hover: лёгкое смещение вверх + opacity 0.9 + цвет к accent-hover
+   (fallback на accent, если --accent-hover не задан — например, в
+   high-contrast, где accent=accent-hover=#00FFFF).
+   В dark теме: базовый цвет уже accent (#818CF8), hover → accent-hover
+   (#A5B4FC) — виден отклик.
+   В light теме: базовый text-primary, hover → accent-hover (#3730A3).
+   В high-contrast: accent=accent-hover=#00FFFF, цвет не меняется,
+   но opacity 0.9 даёт визуальный отклик. */
+.logo:hover {
+  transform: translateY(-1px);
+  color: var(--accent-hover, var(--accent));
+  opacity: 0.9;
+}
+
+/* Focus-visible: чёткий outline для навигации с клавиатуры (WCAG 2.4.7).
+   + дополнительный box-shadow (1.4.11) для усиления видимости. */
+.logo:focus-visible {
+  outline: 2px solid var(--accent-ring);
+  outline-offset: 4px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+/* Active: кнопка «прижимается» обратно + более выраженное затемнение
+   (opacity 0.7 — заметно сильнее hover, чтобы дать тактильный отклик). */
+.logo:active {
+  transform: translateY(0);
+  opacity: 0.7;
+}
 
 /* [data-theme="dark"] .logo hover/focus — REMOVED: conflicts with unified rules */
 @media (max-width: 640px) { .logo-mark { width: 32px; height: 32px; } }
@@ -2780,9 +2815,10 @@ body.menu-open { overflow: hidden; }
 
 /* 1. Плавные переходы для всех интерактивных элементов.
    Дублирует transition из базовых правил, но гарантирует, что
-   элементы без собственного transition (например, .logo, .burger)
-   тоже получают единое поведение. */
-.logo,
+   элементы без собственного transition (например, .burger) тоже
+   получают единое поведение.
+   ВАЖНО: .logo исключён из этого списка — у него собственный
+   transition с opacity (см. базовое правило .logo выше). */
 .main-nav-link,
 .header-icon-btn,
 .theme-btn,
@@ -2801,10 +2837,10 @@ body.menu-open { overflow: hidden; }
 
 /* 2. Hover (транзиторное состояние) — единый эффект.
    translateY(-1px) — лёгкое смещение вверх (a11y-friendly).
+   .logo — исключён (см. отдельное правило выше: opacity 0.9 + accent-hover).
    .btn-primary — особый случай (меняет заливку, не цвет текста),
    обрабатывается отдельно в блоке 4.
    .footer-resource — отдельный hover с тенью (блок 2.1). */
-.logo:hover,
 .main-nav-link:hover,
 .header-icon-btn:hover,
 .theme-btn:hover,
@@ -2856,8 +2892,8 @@ body.menu-open { overflow: hidden; }
 /* 5. Focus-visible — усиленный box-shadow для интерактивных элементов.
    Outline установлен глобально в a11y.css (:focus-visible { outline: 3px solid var(--accent-ring) }),
    здесь дублируется через box-shadow для дополнительной видимости
-   (WCAG 2.4.7 + 1.4.11). Не применяется к .btn-primary (свой box-shadow). */
-.logo:focus-visible,
+   (WCAG 2.4.7 + 1.4.11). Не применяется к .btn-primary (свой box-shadow).
+   .logo — исключён (см. отдельное правило выше: outline + box-shadow). */
 .main-nav-link:focus-visible,
 .header-icon-btn:focus-visible,
 .theme-btn:focus-visible,
@@ -2872,8 +2908,8 @@ body.menu-open { overflow: hidden; }
 }
 
 /* 6. Active-state для прозрачных элементов — кнопка «прижимается» обратно.
-   Универсальный паттерн: hover = lift, active = press down. */
-.logo:active,
+   Универсальный паттерн: hover = lift, active = press down.
+   .logo — исключён (см. отдельное правило выше: opacity 0.7). */
 .main-nav-link:active,
 .header-icon-btn:active,
 .theme-btn:active,
