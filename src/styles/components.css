@@ -183,14 +183,23 @@ a:hover { color: var(--accent-hover); }
 }
 .theme-btn {
   display: inline-grid; place-items: center;
+  /* === Унификация: 44x44 (a11y target) === */
   width: 44px; height: 44px;
+  min-width: 44px; min-height: 44px;
+  /* === Унификация: border (transparent по умолчанию, цвет при hover) === */
   border: 1px solid transparent;
   background: transparent;
   color: var(--text-muted);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
   font-size: 1.05rem;
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 .theme-btn i.bi {
   font-size: 1.05rem;
@@ -321,12 +330,20 @@ a:hover { color: var(--accent-hover); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: var(--target); padding: 12px 22px;
+  /* === Унификация: min-height 44px для a11y === */
+  min-height: 44px; min-width: 44px;
+  padding: 10px 20px;
   font-family: var(--font-main); font-size: 0.95rem; font-weight: 600;
+  /* === Унификация: border + radius === */
   border: 1px solid transparent; border-radius: var(--radius-sm);
   cursor: pointer; white-space: nowrap;
-  transition: transform var(--t-fast), background-color var(--t-fast),
-              border-color var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 .btn-primary {
   background: var(--accent); color: #fff;
@@ -1113,18 +1130,27 @@ a:hover { color: var(--accent-hover); }
 }
 
 .site-footer .footer-social-link {
+  /* === Квадратная иконка-кнопка 44x44 (a11y target) === */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--bg-primary);
   color: var(--text-secondary);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
-  transition: transform var(--t-fast), border-color var(--t-fast), background-color var(--t-fast), color var(--t-fast);
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 
 /* .footer-social-link:hover — moved to UNIFIED INTERACTIONS block at EOF */
@@ -1312,10 +1338,14 @@ a:hover { color: var(--accent-hover); }
 }
 
 .site-footer .footer-resource {
+  /* === Карточка официального ресурса: иконка + текст === */
   display: flex;
   align-items: center;
   gap: 12px;
+  /* a11y: min-height 44px → достаточно для кликабельной области,
+     высоту 76px оставляем для визуального ритма карточки. */
   min-height: 76px;
+  min-width: 44px;
   height: 100%;
   padding: 12px;
   border: 1px solid var(--border);
@@ -1323,7 +1353,13 @@ a:hover { color: var(--accent-hover); }
   background: var(--bg-primary);
   color: var(--text-secondary);
   text-decoration: none;
-  transition: transform var(--t-fast), border-color var(--t-fast), background-color var(--t-fast), box-shadow var(--t-fast);
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 
 /* .footer-resource:hover — moved to UNIFIED INTERACTIONS block at EOF */
@@ -2135,13 +2171,24 @@ a:hover { color: var(--accent-hover); }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 42px;
-  padding: 7px 9px;
+  /* === Унификация: min-height 44px (a11y target) === */
+  min-height: 44px;
+  min-width: 44px;
+  padding: 7px 11px;
   color: var(--text-secondary);
   font-size: 0.82rem;
   font-weight: 600;
   white-space: nowrap;
-  border-radius: 8px;
+  /* === Унификация: border (transparent по умолчанию, цвет при hover) === */
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 /* .main-nav-link:hover/[aria-current] — moved to unified block */
 .main-nav-icon {
@@ -2163,22 +2210,27 @@ a:hover { color: var(--accent-hover); }
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
+  /* === Унификация: 44x44 (a11y target) === */
   width: 44px;
   height: 44px;
   min-width: 44px;
   min-height: 44px;
   padding: 0;
-  /* Лёгкая граница: в светлой теме rgba(0,0,0,0.15), в тёмной — rgba(255,255,255,0.2).
-     Реализована через color-mix от --text-primary (который #0F172A в light, #F8FAFC в dark):
-     15% прозрачности text-primary даёт близкий к rgba(0,0,0,0.15) эффект. */
+  /* === Унификация: border через color-mix (light: rgba(0,0,0,0.15), dark: rgba(255,255,255,0.2)) === */
   border: 1px solid color-mix(in srgb, var(--text-primary) 15%, transparent);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-secondary);
   font-size: 1.05rem;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  /* === Унификация: единый transition для всех свойств === */
+  transition:
+    transform var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 /* .header-icon-btn:hover/[aria-expanded] — moved to unified block */
 .theme-switcher {
@@ -2709,10 +2761,14 @@ body.menu-open { overflow: hidden; }
    UNIFIED INTERACTIONS (Единый источник истины)
    Смена темы работает автоматически через переопределение
    токенов --accent, --accent-soft, --accent-ring в tokens.css.
-   Фокус (outline) управляется глобально в a11y.css.
+   Фокус (outline) управляется глобально в a11y.css, а здесь —
+   дополнительный box-shadow-фокус для слабовидящих (усиление).
    ============================================================ */
 
-/* 1. Плавные переходы для всех интерактивных элементов */
+/* 1. Плавные переходы для всех интерактивных элементов.
+   Дублирует transition из базовых правил, но гарантирует, что
+   элементы без собственного transition (например, .logo, .burger)
+   тоже получают единое поведение. */
 .logo,
 .main-nav-link,
 .header-icon-btn,
@@ -2723,32 +2779,41 @@ body.menu-open { overflow: hidden; }
 .footer-social-link,
 .btn {
   transition:
-    color var(--t-fast),
+    transform var(--t-fast),
     background-color var(--t-fast),
     border-color var(--t-fast),
     box-shadow var(--t-fast),
-    transform var(--t-fast);
+    color var(--t-fast);
 }
 
-/* 2. Hover (транзиторное состояние) — единый эффект для «прозрачных» элементов.
-   Включает lift-эффект translateY(-2px) — тот же, что у .btn-primary, чтобы
-   все интерактивные элементы шапки/футера/меню имели согласованную «поднимающую»
-   анимацию, как требовалось в ревью: «стили с одинаковыми эффектами — ко всем
-   элементам меню». */
+/* 2. Hover (транзиторное состояние) — единый эффект.
+   translateY(-1px) — лёгкое смещение вверх (a11y-friendly).
+   .btn-primary — особый случай (меняет заливку, не цвет текста),
+   обрабатывается отдельно в блоке 4.
+   .footer-resource — отдельный hover с тенью (блок 2.1). */
 .logo:hover,
 .main-nav-link:hover,
 .header-icon-btn:hover,
 .theme-btn:hover,
 .burger:hover,
 .rubrics-toggle:hover,
-.footer-resource:hover,
 .footer-social-link:hover,
 .btn-secondary:hover,
 .btn-outline:hover {
   color: var(--accent);
   background-color: var(--accent-soft);
-  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
-  transform: translateY(-2px);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* 2.1 Hover для .footer-resource — карточка получает лёгкую тень
+   и меняет границу на более контрастную. */
+.footer-resource:hover {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
 /* 3. Persistent states (постоянное состояние) — отделены от :hover.
@@ -2757,25 +2822,43 @@ body.menu-open { overflow: hidden; }
 .theme-btn[aria-pressed="true"] {
   color: var(--accent);
   background-color: var(--accent-soft);
-  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
 }
 
 /* 4. Primary button — особая визуальная иерархия (НЕ получает --accent-soft).
-   Сохраняет transform: translateY(-2px) — согласован с остальными прозрачными
-   элементами, но меняет не цвет текста, а заливку (background). */
+   Меняет background на accent-hover, color на --color-on-accent,
+   добавляет усиленный box-shadow при hover И focus-visible. */
 .btn-primary:hover,
 .btn-primary:focus-visible {
   background-color: var(--accent-hover);
   color: var(--color-on-accent);
   border-color: transparent;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 0 8px 16px -4px var(--accent-ring);
 }
 .btn-primary:active {
   transform: translateY(0);
 }
 
-/* 5. Active-state для прозрачных элементов — кнопка «прижимается» обратно.
+/* 5. Focus-visible — усиленный box-shadow для интерактивных элементов.
+   Outline установлен глобально в a11y.css (:focus-visible { outline: 3px solid var(--accent-ring) }),
+   здесь дублируется через box-shadow для дополнительной видимости
+   (WCAG 2.4.7 + 1.4.11). Не применяется к .btn-primary (свой box-shadow). */
+.logo:focus-visible,
+.main-nav-link:focus-visible,
+.header-icon-btn:focus-visible,
+.theme-btn:focus-visible,
+.burger:focus-visible,
+.rubrics-toggle:focus-visible,
+.footer-resource:focus-visible,
+.footer-social-link:focus-visible,
+.btn-secondary:focus-visible,
+.btn-outline:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-ring);
+  /* outline сохраняется из глобального правила a11y.css */
+}
+
+/* 6. Active-state для прозрачных элементов — кнопка «прижимается» обратно.
    Универсальный паттерн: hover = lift, active = press down. */
 .logo:active,
 .main-nav-link:active,
