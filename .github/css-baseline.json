@@ -1,8 +1,8 @@
 {
-  "bytes": 123378,
+  "bytes": 127029,
   "updated": "2026-10-18",
-  "source": "fix(footer): выровнять высоту карточек «Официальные ресурсы»",
-  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (129 547 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
+  "source": "style: унифицировать высоту шапок offcanvas + text-overflow ellipsis",
+  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Регресс > +5% (133 380 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
   "history": [
     {"commit": "1f753b37", "bytes": 106555, "note": "стартовый размер (другой агент)"},
     {"commit": "fe4165b5", "bytes": 109008, "note": "+2453 B: унификация hover-эффектов"},
@@ -13,6 +13,8 @@
     {"commit": "9e9e45d8", "bytes": 111461, "note": "0: hover/focus/active для .logo"},
     {"commit": "audit-1", "bytes": 120241, "note": "+8780 B: аудит DESIGN.md (focus-visible для inputs, комментарии, правки .card и .footer-resources-title)"},
     {"commit": "df1a32f5", "bytes": 121550, "note": "+1309 B: массовая замена font-size на токены --text-* (4 новых токена, 64 вхождения заменены)"},
-    {"commit": "38329faa", "bytes": 123378, "note": "+1828 B: fix(footer) — фиксированная высота карточек 76px + line-clamp для text"}
+    {"commit": "38329faa", "bytes": 123378, "note": "+1828 B: fix(footer) — фиксированная высота карточек 76px + line-clamp для text"},
+    {"commit": "e7db57fd", "bytes": 123200, "note": "-178 B: убрать градиент фона футера (radial-gradient удалён)"},
+    {"commit": "6b09d9b0", "bytes": 127029, "note": "+3829 B: унифицировать высоту шапок offcanvas + text-overflow ellipsis (min-height 64px, overflow hidden, white-space nowrap, text-overflow ellipsis, min-width 0)"}
   ]
 }
