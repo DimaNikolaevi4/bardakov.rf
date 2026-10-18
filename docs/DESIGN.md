@@ -35,124 +35,137 @@
 
 ## 2. Цвет
 
-### 2.1 Примитивы (палитра)
+### 2.1 Палитра «Золотой день / Ночное небо»
 
-Используются только через семантические токены.
-
-```css
-/* Синие — основные */
---blue-50:  #EFF6FF;
---blue-100: #DBEAFE;
---blue-300: #93C5FD;
---blue-400: #60A5FA;   /* Primary dark */
---blue-500: #2563EB;   /* Primary light */
---blue-600: #1D4ED8;
-
-/* Тёплые акценты */
---orange-400: #FB923C; /* Accent dark */
---orange-500: #F97316; /* Accent — только для крупных CTA и иконок */
---orange-600: #EA580C;
-
-/* Нейтральные — тёплые, не чистый серый */
---neutral-50:  #FAFAF9;
---neutral-100: #F5F5F4;
---neutral-200: #E7E5E4;
---neutral-300: #D6D3D1;
---neutral-500: #78716C;
---neutral-700: #44403C;
---neutral-800: #292524;
---neutral-900: #1C1917;
-
-/* Доступность (VI) */
---vi-bg:      #000000;
---vi-text:    #FFFFFF;
---vi-yellow:  #FFFF00;  /* WCAG AAA на чёрном — 19.6:1 */
---vi-cyan:    #00BFFF;
-```
-
-### 2.2 Семантические токены
+Актуальная палитра определена в `src/styles/tokens.css`. Примитивы
+(`--blue-*`, `--orange-*`, `--neutral-*`) в коде не объявлены —
+семантические токены хранят значения напрямую.
 
 ```css
-/* === LIGHT (по умолчанию) === */
+/* LIGHT — «Золотой день» (тёплый кремовый фон, фиолетовый акцент) */
 :root {
-  --color-bg:           var(--neutral-50);
-  --color-surface:      #FFFFFF;
-  --color-surface-alt:  var(--neutral-100);
-  --color-text:         var(--neutral-900);
-  --color-text-muted:   var(--neutral-500);
-  --color-border:       var(--neutral-200);
+  --bg-primary:     #FFFFF5;
+  --bg-secondary:   #E5E1DC;
+  --bg-subtle:      #FEF9E7;
 
-  --color-primary:       var(--blue-500);
-  --color-primary-hover: var(--blue-600);
-  --color-primary-text:  #FFFFFF;
+  --text-primary:   #0F172A;
+  --text-secondary: #475569;
+  --text-muted:     #78716C;
 
-  --color-accent:        var(--orange-500);
-  --color-accent-hover:  var(--orange-600);
-  --color-accent-text:   #FFFFFF;
+  --accent:         #4338CA;   /* основной акцент */
+  --accent-hover:   #3730A3;
+  --accent-soft:    rgba(67, 56, 202, 0.08);
+  --accent-ring:    rgba(67, 56, 202, 0.30);
 
-  --color-focus-ring:    var(--blue-500);
+  --highlight:      #CA8A04;   /* тёплый второй акцент */
+  --highlight-hover:#B45309;
+  --highlight-soft: rgba(254, 249, 231, 0.6);
+
+  --border:         #D4CFC7;
+  --border-strong:  #B8B0A5;
+
+  --color-on-accent: #ffffff;   /* текст на залитых кнопках */
 }
 
-/* === DARK === */
+/* DARK — «Ночное небо» (глубокий синий, светло-фиолетовый акцент) */
 [data-theme="dark"] {
-  --color-bg:           var(--neutral-900);
-  --color-surface:      var(--neutral-800);
-  --color-surface-alt:  var(--neutral-700);
-  --color-text:         var(--neutral-100);
-  --color-text-muted:   var(--neutral-300);
-  --color-border:       var(--neutral-700);
+  --bg-primary:     #050A1F;
+  --bg-secondary:   #0F172A;
+  --bg-subtle:      #1E293B;
 
-  --color-primary:       var(--blue-400); /* #60A5FA — контрастнее на тёмном */
-  --color-primary-hover: var(--blue-300);
-  --color-primary-text:  var(--neutral-900);
+  --text-primary:   #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted:     #64748B;
 
-  --color-accent:        var(--orange-400);
-  --color-accent-hover:  var(--orange-500);
-  --color-accent-text:   var(--neutral-900);
+  --accent:         #818CF8;
+  --accent-hover:   #A5B4FC;
+  --accent-soft:    rgba(129, 140, 248, 0.15);
+  --accent-ring:    rgba(129, 140, 248, 0.40);
 
-  --color-focus-ring:    var(--blue-400);
+  --highlight:      #FACC15;
+  --highlight-hover:#FDE047;
+  --highlight-soft: rgba(250, 204, 21, 0.15);
+
+  --border:         #2A3555;
+  --border-strong:  #3D4C73;
 }
 
-/* === VISUALLY IMPAIRED (VI) === */
-[data-theme="vi"] {
-  --color-bg:           var(--vi-bg);
-  --color-surface:      var(--vi-bg);
-  --color-surface-alt:  #111111;
-  --color-text:         var(--vi-text);
-  --color-text-muted:   #DDDDDD;
-  --color-border:       var(--vi-text);
-
-  --color-primary:       var(--vi-yellow);
-  --color-primary-hover: #FFFF66;
-  --color-primary-text:  #000000;
-
-  --color-accent:        var(--vi-cyan);
-  --color-accent-hover:  #33CCFF;
-  --color-accent-text:   #000000;
-
-  --color-focus-ring:    var(--vi-yellow);
-
-  --font-scale: 1.5;
+/* HIGH-CONTRAST — версия для слабовидящих */
+[data-theme="high-contrast"] {
+  --bg-primary:     #000000;
+  --bg-secondary:   #000000;
+  --bg-subtle:      #0A0A0A;
+  --text-primary:   #FFFF00;
+  --text-secondary: #FFFFFF;
+  --text-muted:     #DDDDDD;
+  --accent:         #00FFFF;
+  --accent-hover:   #66FFFF;
+  --highlight:      #FFFF00;
+  --border:         #FFFFFF;
+  --border-strong:  #FFFFFF;
 }
 ```
+
+### 2.2 Deprecated-алиасы обратной совместимости
+
+Эти алиасы существуют временно для совместимости со старым кодом.
+Запланированы к удалению в следующем релизном цикле (см. issue P2).
+
+```css
+/* @deprecated since 2.1.0 — use --bg-primary */
+--color-bg:           var(--bg-primary);
+--color-surface:      var(--bg-primary);
+--color-surface-alt: var(--bg-subtle);
+
+/* @deprecated since 2.1.0 — use --text-primary / --text-muted */
+--color-text:         var(--text-primary);
+--color-text-muted:   var(--text-muted);
+
+/* @deprecated since 2.1.0 — use --accent / --accent-hover */
+--color-primary:      var(--accent);
+--color-primary-hover:var(--accent-hover);
+--color-primary-text: var(--color-on-accent);
+
+/* @deprecated since 2.1.0 — use --border */
+--color-border:       var(--border);
+
+/* @deprecated since 2.1.0 — use --accent */
+--color-accent:       var(--accent);
+
+/* @deprecated since 2.1.0 — use --accent-ring */
+--color-focus-ring:   var(--accent-ring);
+
+/* @deprecated since 2.1.0 — use --radius */
+--radius-md:          var(--radius);
+
+/* @deprecated since 2.1.0 — use --t-fast / --t-base */
+--transition-fast:    var(--t-fast);
+--transition-base:   var(--t-base);
+```
+
+> ⚠️ **Новым кодом deprecated-имена не использовать.**
+> CI-guardrail выдаёт `::warning::` при появлении в новых файлах.
 
 ### 2.3 Правила использования цвета
 
-- `--color-accent` (#F97316) на белом даёт **~3:1**. Проходит только
-  для крупного текста (18pt+ / 14pt bold) и UI-элементов.
-  **Не использовать для мелкого текста на белом.**
-  Текст внутри акцентной кнопки — всегда `--color-accent-text`.
-- `--color-primary` (#2563EB) на белом — ~7:1 (AAA).
-  Можно использовать для текста любого размера.
-- `--color-text-muted` (#78716C) на `--color-bg` — ~4.7:1 (AA).
+- `--accent` (`#4338CA` в light) на белом даёт ~7:1 (AAA). Можно
+  использовать для текста любого размера и UI-элементов.
+- `--highlight` (`#CA8A04` в light) — тёплый второй акцент. На белом
+  ~5:1 (AA). Использовать для декоративных акцентов, иконок, бейджей.
+- `--text-muted` (`#78716C`) на `--bg-primary` — ~4.7:1 (AA).
   Только для второстепенного текста ≥16px.
-- В VI-теме жёлтый `#FFFF00` на чёрном — 19.6:1 (AAA).
+- В high-contrast теме жёлтый `#FFFF00` на чёрном — 19.6:1 (AAA).
   Только для критичных элементов: кнопки действия, ссылки, фокус.
+- Текст внутри залитой кнопки — всегда `--color-on-accent` (`#ffffff`).
 - **Правило одного акцента:** на одном экране не больше одного
-  элемента с `--color-accent`. Исключение: сетка карточек с
-  одинаковыми категориями.
+  элемента с `--accent`. Исключение: сетка карточек с одинаковыми
+  категориями.
 - Любой новый контраст проверяется в
   [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/).
+
+> ⚠️ Deprecated-алиасы (`--color-bg`, `--color-surface`, `--color-text`,
+> `--color-primary`, `--color-accent`, `--color-focus-ring` и т. д.)
+> описаны в разделе 2.2 и запланированы к удалению.
 
 ---
 
@@ -295,10 +308,16 @@
 ```
 
 Все размеры умножаются на `--font-scale` (по умолчанию `1`,
-в VI-теме `1.5`).
+в a11y-режиме `1.5` или `2`).
+
+> ⚠️ `--font-scale` **не объявлен в `tokens.css`** — значение устанавливается
+> inline-стилем через JS (`a11y.js:139`,
+> `document.documentElement.style.setProperty('--font-scale', scale)`).
+> В CSS используется с fallback: `var(--font-scale, 1)` — см. `typography.css:86`.
+> Возможные значения: 0.9 / 1 / 1.5 / 2 (см. `a11y-panel.njk`).
 
 ```css
-font-size: calc(var(--text-base) * var(--font-scale));
+font-size: calc(var(--text-base) * var(--font-scale, 1));
 ```
 
 ### 4.3 Межстрочные интервалы
@@ -334,11 +353,12 @@ font-size: calc(var(--text-base) * var(--font-scale));
 --space-2:  0.5rem;  /*  8px */
 --space-3:  0.75rem; /* 12px */
 --space-4:  1rem;    /* 16px */
---space-6:  1.5rem;  /* 24px */
---space-8:  2rem;    /* 32px */
---space-12: 3rem;    /* 48px */
---space-16: 4rem;    /* 64px */
---space-24: 6rem;    /* 96px */
+--space-5:  1.5rem;  /* 24px */
+--space-6:  2rem;    /* 32px */
+--space-8:  3rem;    /* 48px */
+--space-10: 4rem;    /* 64px */
+--space-12: 6rem;    /* 96px */
+--space-16: 8rem;    /* 128px */
 ```
 
 **Ритм.** Чем крупнее блок, тем больше отступ:
@@ -354,13 +374,12 @@ font-size: calc(var(--text-base) * var(--font-scale));
 --container-sm: 640px;
 --container-md: 768px;
 --container-lg: 1024px;
---container-xl: 1280px;
-
---bp-sm:  640px;
---bp-md:  768px;
---bp-lg:  1024px;
---bp-xl:  1280px;
+--container-xl: 1160px;   /* максимальная ширина основного контейнера */
+--container:    1160px;   /* алиас */
 ```
+
+> ⚠️ В коде `--container-xl` и `--container` имеют одинаковое значение
+> (`1160px`). Разделение сохранено для семантической ясности.
 
 ```css
 .container {
@@ -380,25 +399,26 @@ font-size: calc(var(--text-base) * var(--font-scale));
 ### 5.3 Радиусы и тени
 
 ```css
---radius-sm:   6px;
---radius-md:   10px;
---radius-lg:   16px;
---radius-full: 9999px;
+--radius:      16px;     /* основной радиус скругления */
+--radius-sm:   10px;     /* мелкие элементы, кнопки */
+--radius-full: 9999px;   /* пилюли, иконки */
 
---shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
---shadow-md: 0 4px 12px rgba(28, 25, 23, 0.08);
---shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.12);
+--shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+--shadow:       0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+--shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.10);
 ```
 
-**В dark-теме тени не работают.** Вместо — `--color-border` и разница
-тонов поверхности. Многослойные тени для «воздушной» глубины:
+Алиасы для совместимости со старым кодом:
 
 ```css
-box-shadow:
-  0 1px 2px rgba(28,25,23,.04),
-  0 4px 8px rgba(28,25,23,.04),
-  0 12px 24px rgba(28,25,23,.06);
+--shadow-md:  var(--shadow);        /* @deprecated since 2.1.0 */
+--shadow-lg:  var(--shadow-hover);  /* @deprecated since 2.1.0 */
+--shadow-air: var(--shadow-hover);  /* @deprecated since 2.1.0 */
+--radius-md:  var(--radius);         /* @deprecated since 2.1.0 */
 ```
+
+**В dark-теме** тени переопределены в `tokens.css` через
+переопределение `--shadow-*` переменных (см. раздел 8.1).
 
 ---
 
@@ -408,45 +428,49 @@ box-shadow:
 
 | Вариант | Фон | Текст | Когда |
 |---|---|---|---|
-| `primary` | `--color-primary` | `--color-primary-text` | Основное действие |
-| `accent` | `--color-accent` | `--color-accent-text` | Один на экран, критичное |
-| `secondary` | прозрачный, border | `--color-text` | Альтернативное |
-| `ghost` | прозрачный | `--color-text-muted` | Второстепенное |
+| `btn-primary` | `var(--accent)` | `var(--color-on-accent)` | Основное действие |
+| `btn-secondary` | прозрачный, `border: 1px solid var(--border)` | `var(--text-primary)` | Альтернативное |
+| `btn-outline` | прозрачный, `border: 2px solid var(--border-strong)` | `var(--text-primary)` | Приглушённое |
+
+Базовый класс `.btn` задаёт геометрию (padding, min-height 44px,
+border-radius: var(--radius-sm), font, transition). Модификаторы
+меняют только фон/цвет/границу.
 
 ```css
 .btn {
-  padding: var(--space-3) var(--space-6);
-  min-height: 44px;
-  border-radius: var(--radius-md);
-  font: var(--weight-semibold) var(--text-base) Inter, sans-serif;
-  transition: background-color 150ms ease, transform 100ms ease;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--target); padding: 12px 22px;
+  font-family: var(--font-main); font-size: 0.95rem; font-weight: 600;
+  border: 1px solid transparent; border-radius: var(--radius-sm);
+  cursor: pointer; white-space: nowrap;
+  transition: transform var(--t-fast), background-color var(--t-fast),
+              border-color var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
 }
 
-.btn:hover  { transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-.btn:focus-visible {
-  outline: 3px solid var(--color-focus-ring);
-  outline-offset: 2px;
+.btn-primary {
+  background: var(--accent); color: var(--color-on-accent);
+  box-shadow: 0 10px 24px -10px var(--accent-ring);
 }
 ```
 
-**Правило:** белый текст на `--color-accent` обязателен.
-Никогда не использовать `--color-accent` для мелкого текста на белом.
+Подробно о hover/active/focus — см. раздел «CSS: архитектура и код-стайл»
+в конце документа: там же описан UNIFIED INTERACTIONS блок, который
+унифицирует эффекты для всех интерактивных элементов.
 
 ### 6.2 Карточки
 
 ```css
 .card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: var(--space-6);
-  transition: border-color 150ms, box-shadow 150ms;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
 .card:hover {
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
 }
 ```
 
@@ -473,15 +497,24 @@ box-shadow:
 
 ### 6.4 Переключатель тем
 
-Три состояния: `light` / `dark` / `vi`. В правом верхнем углу,
+Три состояния: `light` / `dark` / `high-contrast`. В правом верхнем углу,
 всегда видим.
 
 ```
 [ ☀ ] [ 🌙 ] [ ♿ ]
 ```
 
-Активное состояние выделено `--color-primary`.
+Активное состояние выделяется `--accent` (через `aria-pressed="true"`).
 Клик → смена `data-theme` на `<html>` + запись в cookie/localStorage.
+
+> ⚠️ Тема `vi` (visually impaired) переименована в `high-contrast`.
+> JS (`theme.js:16`) и HTML (`header.njk`, `a11y-panel.njk`) используют
+> только `high-contrast`. Однако в `a11y.css` осталось 9 правил
+> `[data-theme="vi"]` (строки 41, 102, 110, 116, 117, 251, 252, 253, 254) —
+> это legacy-селекторы, которые **никогда не срабатывают**, т.к. JS не
+> выставляет `data-theme="vi"`. Запланированы к удалению в issue P2
+> (после проверки, что все необходимые правила уже есть в
+> `[data-theme="high-contrast"]`).
 
 ### 6.5 Панель доступности
 
@@ -511,7 +544,7 @@ box-shadow:
 - **Формы:** `<label>` для каждого поля, `aria-describedby` для ошибок.
 - **Анимации:** уважать `prefers-reduced-motion`.
 
-### 7.2 Режим для слабовидящих (VI)
+### 7.2 Режим для слабовидящих (high-contrast)
 
 Соответствует **ГОСТ Р 52872-2019** и WCAG 2.1 AAA.
 
@@ -520,13 +553,14 @@ box-shadow:
 | Фон | `#000000` (чистый чёрный) |
 | Текст | `#FFFFFF` (чистый белый) |
 | Акцент | `#FFFF00` (19.6:1 — AAA) |
-| Вторичный акцент | `#00BFFF` |
-| Масштаб шрифта | 1.5× (настраивается) |
-| Изображения | Отключаются кнопкой |
-| Анимации | Принудительно `none` |
-| Кликабельные зоны | Минимум 56×56px |
+| Вторичный акцент | `#00FFFF` |
+| Радиусы | `0` (все `--radius-*` обнулены в `[data-theme="high-contrast"]`) |
+| Тени | `none` (все `--shadow-*` обнулены) |
+| Изображения | Отключаются кнопкой (`[data-images="off"]`) |
+| Анимации | Принудительно `none` (`[data-animations="off"]`) |
+| Кликабельные зоны | Минимум 56×56px (`--target: 56px`) |
 
-**Не использовать в VI-режиме:** тени, прозрачность (`opacity < 1`),
+**Не использовать в high-contrast режиме:** тени, прозрачность (`opacity < 1`),
 градиенты, фоновые изображения, 3D-навигацию.
 
 ---
@@ -537,12 +571,18 @@ box-shadow:
 
 **Атрибут на `<html>`:**
 ```html
-<html data-theme="light">  <!-- или "dark" / "vi" -->
+<html data-theme="light">  <!-- или "dark" / "high-contrast" -->
 ```
 
 CSS-переменные переключаются через селектор `[data-theme="..."]`.
 Все компоненты используют только семантические токены —
 никаких хардкод-цветов.
+
+**Принцип:** тёмная и high-contrast темы реализуются **только** через
+переопределение токенов в `tokens.css`. Селекторы вида
+`[data-theme="dark"] .card { background: #222 }` в `components.css`
+**запрещены** (см. раздел «CSS: архитектура и код-стайл» в конце
+документа и CI-guardrails в `.github/workflows/css-guardrails.yml`).
 
 ### 8.2 Хранение выбора: Cookie + localStorage
 
@@ -609,8 +649,78 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 
 ---
 
+## 10. CSS: архитектура и код-стайл
 
+### 10.1 Карта файлов и зоны ответственности (SRP)
 
-*Последнее обновление: 2026-09-11*
+| Файл | Отвечает за | Что НЕ должно быть |
+|---|---|---|
+| `tokens.css` | CSS-переменные, `:root`, `[data-theme="dark"]`, `[data-theme="high-contrast"]` | селекторы компонентов |
+| `typography.css` | базовые стили `body`, `h1–h6`, `p`, `a`, `code` | стили конкретных компонентов |
+| `layout.css` | сетки, контейнеры, `.site-header` / `.site-footer` на уровне раскладки | отступы конкретных компонентов |
+| `a11y.css` | глобальный `:focus-visible`, `.skip-link`, `prefers-reduced-motion`, скроллбары | цвета компонентов |
+| `components.css` | всё, что относится к конкретным UI-компонентам | `:root`, `[data-theme]`, hex, утилиты |
+
+### 10.2 Правила
+
+1. **Токены — единственный источник значений.** Hex/rgb в `components.css` запрещены. Если значения нет — добавьте токен в `tokens.css`, а не хардкодьте.
+
+   **Допустимые hex-исключения в `components.css`** (37 вхождений, существующий долг — фиксируется в issue P2):
+   - `#fff` — текст на залитых кнопках (`.skip-link:focus`, `.btn-primary`, `.theme-btn[aria-pressed="true"]`, `.eyebrow::before` и т.д.). Эквивалентен `var(--color-on-accent)`.
+   - `#000` / `#fff` — `[data-theme="high-contrast"]` переопределения (`.site-header`, `.btn-primary`, `.btn-outline`, `.btn-secondary`, `.card:hover`, `.site-footer`, `.offcanvas`, `.oc-side-panel`, `.oc-split-row`, `.oc-sub-list a`, `.oc-footer__email`, `.oc-panel-open-link`). High-contrast тема использует чистый чёрный/белый — это намеренно отличается от токенов `--bg-primary` / `--text-primary` (которые в high-contrast дают жёлтый/голубой).
+   - `#000` / `#555` — `@media print` (принудительная чёрно-белая печать).
+
+   CI guardrail для hex сейчас работает как `::warning::` (не блокирует мерж). После замены всех 37 hex на `var(--color-on-accent)` / явные токены для high-contrast — переключить на `::error::`.
+2. **Тёмная тема — через токены.** Не пишите `[data-theme="dark"] .card { background: #222 }`. Переопределите `--bg-primary` в `tokens.css` — компонент подхватит автоматически.
+3. **Фокус — только в `a11y.css`.** Любой локальный `:focus-visible` в компоненте — нарушение. Исключение: `.btn-primary` (усиливает hover-состояние, не дублирует outline) и `.home-carousel__*` (позиционирование фокуса на стрелках).
+4. **Утилиты запрещены.** `.mt-2` и подобные — антипаттерн. Отступы задаются в компоненте через `margin-block` / `padding-inline` (логические свойства для RTL-совместимости).
+5. **Vendor-префиксы — только с обоснованием.** Допустимы (нет стандартной альтернативы или Safari < 18 требует):
+   - `-webkit-font-smoothing` / `-moz-osx-font-smoothing` — нет стандарта, активен во всех WebKit/Blink
+   - `-webkit-backdrop-filter` — Safari < 18 (до 2024)
+   - `-webkit-background-clip: text` — gradient text требует webkit-префикса до сих пор
+   - `-webkit-mask` — SVG-маски, Safari
+   - `::-webkit-scrollbar` — нестандартный, единственный способ стилизовать скроллбар в Chrome/Edge
+
+   Всё остальное — удаляется. `-webkit-text-size-adjust` и `-webkit-overflow-scrolling` уже удалены (заменены стандартными свойствами или вообще убраны как устаревшие).
+6. **Deprecated-алиасы — с датой удаления.** Каждый алиас обратной совместимости (`--color-surface` → `--bg-primary`) помечается комментарием `/* @deprecated since 2.1.0 — use --bg-primary */` и удаляется не позже чем через один релизный цикл. Список актуальных deprecated-алиасов — в разделе 2.2.
+
+### 10.3 UNIFIED INTERACTIONS блок
+
+В конце `components.css` определён унифицированный блок `UNIFIED INTERACTIONS`, который задаёт единое поведение hover/focus/active для 11 интерактивных классов:
+
+```
+.logo, .main-nav-link, .header-icon-btn, .theme-btn, .burger,
+.rubrics-toggle, .footer-resource, .footer-social-link,
+.btn-secondary, .btn-outline, .btn-primary
+```
+
+| Свойство | Hover | Active |
+|---|---|---|
+| `color` | `var(--accent)` | (сохраняется) |
+| `background-color` | `var(--accent-soft)` | (сохраняется) |
+| `border-color` | `color-mix(in srgb, var(--accent) 20%, transparent)` | (сохраняется) |
+| `transform` | `translateY(-2px)` (lift) | `translateY(0)` (press down) |
+
+`.btn-primary` — особый случай: меняет `background-color` на `--accent-hover`, `color` на `--color-on-accent`, получает усиленный `box-shadow: 0 8px 16px -4px var(--accent-ring)`. Persistent state (`[aria-current="page"]`, `[aria-pressed="true"]`) — без `transform`, только цвет/фон/граница.
+
+### 10.4 CI-guardrails
+
+Нарушения правил 1–4 блокируются workflow `.github/workflows/css-guardrails.yml`:
+
+| Проверка | Файл | Что блокирует |
+|---|---|---|
+| Запрет `:root` | `components.css` | новые объявления токенов вне `tokens.css` |
+| Запрет `[data-theme=...]` | `components.css` | дублирование тем вне `tokens.css` |
+| Запрет hex/rgb | `components.css` | хардкод-цвета |
+| Запрет утилит | `layout.css` | возврат `.mt-*`, `.mb-*`, `.pt-*`, `.pb-*` |
+| Локальный `:focus-visible` | `components.css` | дублирование фокуса (кроме `.btn-primary`, `.home-carousel__*`) |
+| Deprecated-алиасы | все 4 файла | `::warning::` (не блокирует) |
+| Bundle size | все src/styles/*.css | регресс > +5% от baseline |
+
+Baseline CSS-бандла зафиксирован в `.github/css-baseline.json`.
+
+---
+
+*Последнее обновление: 2026-10-18*
 ```
 

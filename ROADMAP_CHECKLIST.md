@@ -3,7 +3,7 @@
 > **Источник правды для миграции.** Каждая задача должна быть отмечена перед переходом к следующему этапу. Файл обновляется по мере прогресса.
 >
 > **Связанные документы:**
-> - `old/DESIGN.md` — Дизайн-система сайта (токены цветов, типографика, темы)
+> - `docs/DESIGN.md` — Дизайн-система сайта (токены цветов, типографика, темы)
 > - `old/CHECKLIST.md` — Старый чек-лист (архивный, не активен)
 > - `old/replit.md` — Описание проекта
 > - `design-reference/STRUCTURE.md` — структура страниц и план работы над дизайном семи блоков
@@ -360,11 +360,11 @@
 
 **Definition of Ready:**
 - Этап 2 завершён
-- `old/DESIGN.md` изучен (там уже есть проработанная дизайн-система: «Кристалл знаний», токены, темы, a11y)
+- `docs/DESIGN.md` изучен (там уже есть проработанная дизайн-система: «Кристалл знаний», токены, темы, a11y)
 
 ### 3.1 Определение дизайн-токенов
 
-- ✅ Создать `src/styles/tokens.css` на основе `old/DESIGN.md`:
+- ✅ Создать `src/styles/tokens.css` на основе `docs/DESIGN.md`:
   - ✅ Цветовые примитивы (blue, orange, neutral) — §2.1
   - ✅ Семантические токены (light) — §2.2
   - ✅ Семантические токены для dark-темы через `[data-theme="dark"]` — §2.2
@@ -1275,7 +1275,7 @@
 
 **Что выполнено в Этапе 3:**
 
-- ✅ **3.1 Дизайн-токены** — 4 CSS-файла (tokens.css, typography.css, layout.css, a11y.css) на основе `old/DESIGN.md`; 3 темы (light/dark/vi); Inter + Manrope (self-hosted woff2, cyrillic subset); FOUC-скрипт в `base.njk`
+- ✅ **3.1 Дизайн-токены** — 4 CSS-файла (tokens.css, typography.css, layout.css, a11y.css) на основе `docs/DESIGN.md`; 3 темы (light/dark/vi); Inter + Manrope (self-hosted woff2, cyrillic subset); FOUC-скрипт в `base.njk`
 - ✅ **3.2 UI-кит** — 11 компонентов (header, footer, nav-burger, card, button, theme-switcher, a11y-panel, breadcrumb, section-divider, badge, contact-form, search-modal) + `components.css` (~700 строк CSS); 3 JS-модуля (theme.js, a11y.js, main.js)
 - ✅ **3.3 Главная страница** — `index.njk` с hero, цитатой, 4 карточками, контактами; 12 страниц-заглушек для разделов (obo-mne, obuchenie/kip/elektromonter/ksk/pm02/lektsii, abiturientu/professii/spetsialnosti/dokumentatsiya, vospitanie, search, 404, kontakty)
 - ✅ **3.4 Утверждение** — `npm test` проходит без ошибок (build + lint:html 0 errors + check:links 69/69 OK); версия дизайн-системы 1.0.0 зафиксирована
@@ -1301,7 +1301,7 @@ npm run dev
 
 - Репозиторий: https://github.com/DimaNikolaevi4/bardakov.rf
 - Ветка с архивом Joomla: https://github.com/DimaNikolaevi4/bardakov.rf/tree/archive-joomla (после создания на Этапе 6)
-- Дизайн-система (архив): [`old/DESIGN.md`](old/DESIGN.md)
+- Дизайн-система (архив): [`docs/DESIGN.md`](docs/DESIGN.md)
 - Старый чек-лист (архив): [`old/CHECKLIST.md`](old/CHECKLIST.md)
 - Хостинг: Beget (https://beget.com)
 - Домен: `бардаков.рф`

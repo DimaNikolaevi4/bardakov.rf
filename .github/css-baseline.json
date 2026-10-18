@@ -1,0 +1,12 @@
+{
+  "bytes": 110349,
+  "updated": "2026-10-18",
+  "source": "origin/main (commit 0a7de8ca, до этого PR)",
+  "comment": "CSS bundle: tokens.css + typography.css + layout.css + a11y.css + components.css (суммарно src/styles/*.css). Baseline заморожен на размере origin/main на момент старта этого PR. Регресс > +5% (115 866 bytes) блокирует мерж. Обновление baseline — отдельным PR с обоснованием.",
+  "history": [
+    {"commit": "1f753b37", "bytes": 106555, "note": "стартовый размер (другой агент)"},
+    {"commit": "fe4165b5", "bytes": 109008, "note": "+2453 B: унификация hover-эффектов"},
+    {"commit": "0a7de8ca", "bytes": 110349, "note": "+1341 B: другой агент (origin/main)"},
+    {"commit": "HEAD (этот PR)", "bytes": 110789, "note": "+440 B: --font-scale + DESIGN.md правки"}
+  ]
+}

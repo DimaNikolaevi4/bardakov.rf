@@ -2241,12 +2241,10 @@ body.menu-open { overflow: hidden; }
 /* ============================================================
    ГЛОБАЛЬНОЕ МЕНЮ — спокойная редакционная навигация
    Тёплая бумажная поверхность, точный индиго и тонкая золотая метка.
+
+   Токены --menu-paper / --menu-wash / --menu-panel-width
+   перенесены в src/styles/tokens.css (бывший локальный :root удалён).
    ============================================================ */
-:root {
-  --menu-paper: color-mix(in srgb, var(--bg-primary) 96%, var(--highlight) 4%);
-  --menu-wash: color-mix(in srgb, var(--bg-primary) 88%, var(--accent) 12%);
-  --menu-panel-width: 420px;
-}
 
 .site-header {
   background: color-mix(in srgb, var(--menu-paper) 92%, transparent);

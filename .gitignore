@@ -47,3 +47,6 @@ public/
 *.tmp
 *.bak
 *.old
+tmp/
+playwright-report/
+test-results/
