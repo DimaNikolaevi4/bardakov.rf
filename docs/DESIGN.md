@@ -307,6 +307,22 @@
 --text-5xl:  3rem;      /* 48px — hero (desktop) */
 ```
 
+> ⚠️ **Запрет на хардкод `rem`/`px` для `font-size` в компонентах.**
+>
+> В файлах `components.css` и других компонентных CSS **запрещено**
+> использовать прямые значения `font-size: X rem` или `font-size: Xpx`.
+>
+> Если требуется размер, которого нет в шкале `--text-*`:
+> 1. Сначала добавьте новый токен в `tokens.css` (например,
+>    `--text-2xs: 0.625rem; /* 10px — микро-подписи */`).
+> 2. Затем используйте его в компоненте: `font-size: var(--text-2xs);`.
+>
+> **Текущий статус (на 2026-10-18):** в кодовой базе ~65 вхождений
+> хардкод-`font-size` через `rem` — это технический долг, запланированный
+> к устранению в отдельном PR через массовую замену.
+> CI-guardrail для запрета новых хардкод-`font-size` пока не внедрён
+> (см. issue P2).
+
 Все размеры умножаются на `--font-scale` (по умолчанию `1`,
 в a11y-режиме `1.5` или `2`).
 
@@ -420,6 +436,35 @@ font-size: calc(var(--text-base) * var(--font-scale, 1));
 **В dark-теме** тени переопределены в `tokens.css` через
 переопределение `--shadow-*` переменных (см. раздел 8.1).
 
+### 5.4 Исключение для оптических микро-подгонок
+
+Строгое правило кратности 4px/8px (раздел 5.1) имеет **одно исключение**.
+
+Если для идеального визуального центрирования иконки относительно текста
+или компенсации толщины штриха SVG требуется отступ в `1px`, `2px` или
+`3px`, это допускается. Такие значения должны быть снабжены комментарием
+в CSS, чтобы следующий разработчик понимал причину отклонения:
+
+```css
+.header-icon-btn {
+  padding: 2px;  /* optical alignment — компенсация толщины рамки */
+}
+
+.main-nav-link {
+  gap: 5px;      /* visual centering — иконка bi-person-vcard */
+}
+```
+
+**Критерии допустимости микро-подгонки:**
+- Значение от `1px` до `3px` (включительно).
+- Без комментария `/* optical alignment */` или `/* visual centering */`
+  правило считается нарушением и блокируется CI (если такой guardrail
+  будет добавлен в будущем).
+- Для значений `4px` и выше всегда используется токен `--space-*`.
+
+**Не допускается** использовать микро-подгонки как регулярный инструмент
+раскладки — это исключение для пиксельных деталей, а не замена токенов.
+
 ---
 
 ## 6. Компоненты
@@ -461,16 +506,27 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 
 ```css
 .card {
-  background: var(--bg-primary);
+  /* Используем var(--bg-secondary), а не --bg-primary — карточки должны
+     визуально отделяться от основного фона страницы. var(--bg-secondary)
+     создаёт необходимую глубину и контраст, что подтверждено аудитом
+     как лучшее решение (см. git log: audit(design)). */
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-6);
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-base), border-color var(--t-base),
+              box-shadow var(--t-base);
 }
 
 .card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
+  /* Декоративный акцент реализован через .card::before
+     (цветная полоса слева), а border-color усиливается до
+     --border-strong. var(--accent) не задаётся напрямую на границу,
+     чтобы не конфликтовать с акцентными кнопками в карточке. */
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-hover);
 }
 ```
 
@@ -530,9 +586,88 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 
 ---
 
-## 7. Доступность (a11y)
+## 7. Автоматический контроль качества (CI Guardrails)
 
-### 7.1 Базовые требования (WCAG 2.1 AA)
+Все PR проходят автоматическую проверку через
+`.github/workflows/css-guardrails.yml`. Workflow запускается на
+`pull_request` и `push` в `main` при изменении файлов в `src/styles/`.
+
+### 7.1 Что проверяется
+
+| Проверка | Файл | Что блокирует / предупреждает |
+|---|---|---|
+| **Размер CSS-бандла** | `src/styles/*.css` | Регресс > +5% от baseline в `.github/css-baseline.json` блокирует мерж. Обновление baseline — отдельным PR с обоснованием. |
+| **`:root` в `components.css`** | `components.css` | Блокирует (error) — токены объявляются только в `tokens.css`. |
+| **`[data-theme="X"] { ... }`** (без компонента) | `components.css` | Блокирует (error) — темы переопределяются только в `tokens.css`. |
+| **Hex/rgb в `components.css`** | `components.css` | Предупреждает (warning) — текущий долг 37 hex. Используйте `var(--token)`. |
+| **Утилиты отступов** (`.mt-*`, `.mb-*`, `.pt-*`, `.pb-*`) | `layout.css` | Блокирует (error) — отступы задаются внутри компонентов через `margin-block` / `padding-inline`. |
+| **Локальный `:focus-visible`** (кроме исключений) | `components.css` | Блокирует (error). Разрешён только для `.btn-primary`, `.home-carousel__*`, `[data-theme="high-contrast"] :focus-visible`. |
+| **Deprecated-алиасы** (`--color-bg`, `--color-text` и т.д.) | все 4 CSS | Предупреждает (warning) — замены на новые имена (см. раздел 2.2). |
+
+### 7.2 Стратегия guardrails
+
+**Блокируем НОВЫЕ нарушения, не существующий долг.** Это означает:
+
+- Если в PR появляется новый `:root` в `components.css` — мерж блокируется.
+- Если в PR появляется новый hex в `components.css` — warning
+  (текущие 37 hex оставлены как долг, новый guardrail для них введётся
+  после полного перехода на токены — см. issue P2).
+- Если PR увеличивает CSS-бандл на 6% — мерж блокируется, автор
+  должен либо обосновать рост и обновить baseline в этом же PR,
+  либо оптимизировать код.
+
+### 7.3 Локальная эмуляция
+
+Перед push можно проверить код локально:
+
+```bash
+# Все 7 проверок из workflow:
+grep -qE '^[[:space:]]*:root[[:space:]]*\{' src/styles/components.css && echo "FAIL: :root" || echo "OK: no :root"
+grep -qE '^\[data-theme="[^"]+"\][[:space:]]*\{' src/styles/components.css && echo "FAIL: [data-theme]" || echo "OK: no top-level [data-theme]"
+grep -nE '^\.(mt|mb|pt|pb)-[0-9]' src/styles/layout.css && echo "FAIL: utilities" || echo "OK: no utilities"
+CURRENT=$(find src/styles -name '*.css' -exec cat {} + | wc -c)
+BASELINE=$(jq -r '.bytes' .github/css-baseline.json)
+MAX=$((BASELINE * 105 / 100))
+echo "CSS size: $CURRENT (baseline $BASELINE, max $MAX)"
+[ "$CURRENT" -gt "$MAX" ] && echo "FAIL: size" || echo "OK: size"
+npm run build  # должно быть без ошибок
+```
+
+### 7.4 Обновление baseline
+
+Если легитимный рост CSS-бандла (например, добавлен новый компонент
+с полным набором токенов):
+
+1. Запустите `find src/styles -name '*.css' -exec cat {} + | wc -c`
+   и запишите новое значение.
+2. Обновите `.github/css-baseline.json`:
+   ```json
+   {
+     "bytes": <новое_значение>,
+     "updated": "<дата ISO>",
+     "source": "<причина обновления>",
+     "comment": "...",
+     "history": [...]
+   }
+   ```
+3. В том же PR добавьте запись в `history` массив с описанием причины.
+4. Commit message должен содержать `chore(baseline): обновление CSS baseline` —
+   это позволит ревьюеру сразу увидеть характер изменения.
+
+### 7.5 Что НЕ покрывает CI (на 2026-10-18)
+
+| Проверка | Статус | Issue |
+|---|---|---|
+| Запрет хардкод `font-size` в `rem`/`px` | не внедрён | P2 |
+| Запрет micro-paddings 1-3px без комментария `/* optical alignment */` | не внедрён | P3 (после устранения долга) |
+| Проверка контраста через `axe-core` | не внедрена | P3 |
+| Автоматический запуск Playwright a11y-smoke | не внедрён | P3 (скрипт `scripts/a11y-smoke.mjs` есть, нужен CI job) |
+
+---
+
+## 8. Доступность (a11y)
+
+### 8.1 Базовые требования (WCAG 2.1 AA)
 
 - **Контраст:** минимум 4.5:1 для текста, 3:1 для UI.
 - **Кликабельные зоны:** минимум 44×44px.
@@ -544,7 +679,7 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 - **Формы:** `<label>` для каждого поля, `aria-describedby` для ошибок.
 - **Анимации:** уважать `prefers-reduced-motion`.
 
-### 7.2 Режим для слабовидящих (high-contrast)
+### 8.2 Режим для слабовидящих (high-contrast)
 
 Соответствует **ГОСТ Р 52872-2019** и WCAG 2.1 AAA.
 
@@ -565,9 +700,9 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 
 ---
 
-## 8. Технические решения
+## 9. Технические решения
 
-### 8.1 Как реализуются темы
+### 9.1 Как реализуются темы
 
 **Атрибут на `<html>`:**
 ```html
@@ -584,7 +719,7 @@ CSS-переменные переключаются через селектор 
 **запрещены** (см. раздел «CSS: архитектура и код-стайл» в конце
 документа и CI-guardrails в `.github/workflows/css-guardrails.yml`).
 
-### 8.2 Хранение выбора: Cookie + localStorage
+### 9.2 Хранение выбора: Cookie + localStorage
 
 **Почему оба:**
 - **Cookie** — доступна на сервере, закладывает основу на вырост
@@ -606,7 +741,7 @@ function setTheme(theme) {
 }
 ```
 
-### 8.3 Inline-скрипт в `<head>` (защита от FOUC)
+### 9.3 Inline-скрипт в `<head>` (защита от FOUC)
 
 **Критично:** тема должна установиться **до** первого рендера,
 иначе будет «мигание» (FOUC). Скрипт вставляется **до** любых
@@ -627,14 +762,14 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 </script>
 ```
 
-### 8.4 Приоритет тем
+### 9.4 Приоритет тем
 
 - Light / Dark — по системной теме (`prefers-color-scheme`).
 - VI — **никогда** не включается автоматически, только вручную.
 
 ---
 
-## 9. Чек-лист перед коммитом
+## 10. Чек-лист перед коммитом
 
 - [ ] Все новые цвета — через семантические токены, не хардкод.
 - [ ] Контраст проверен в WebAIM Contrast Checker.
@@ -649,9 +784,9 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 
 ---
 
-## 10. CSS: архитектура и код-стайл
+## 11. CSS: архитектура и код-стайл
 
-### 10.1 Карта файлов и зоны ответственности (SRP)
+### 11.1 Карта файлов и зоны ответственности (SRP)
 
 | Файл | Отвечает за | Что НЕ должно быть |
 |---|---|---|
@@ -661,7 +796,7 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 | `a11y.css` | глобальный `:focus-visible`, `.skip-link`, `prefers-reduced-motion`, скроллбары | цвета компонентов |
 | `components.css` | всё, что относится к конкретным UI-компонентам | `:root`, `[data-theme]`, hex, утилиты |
 
-### 10.2 Правила
+### 11.2 Правила
 
 1. **Токены — единственный источник значений.** Hex/rgb в `components.css` запрещены. Если значения нет — добавьте токен в `tokens.css`, а не хардкодьте.
 
@@ -684,7 +819,7 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
    Всё остальное — удаляется. `-webkit-text-size-adjust` и `-webkit-overflow-scrolling` уже удалены (заменены стандартными свойствами или вообще убраны как устаревшие).
 6. **Deprecated-алиасы — с датой удаления.** Каждый алиас обратной совместимости (`--color-surface` → `--bg-primary`) помечается комментарием `/* @deprecated since 2.1.0 — use --bg-primary */` и удаляется не позже чем через один релизный цикл. Список актуальных deprecated-алиасов — в разделе 2.2.
 
-### 10.3 UNIFIED INTERACTIONS блок
+### 11.3 UNIFIED INTERACTIONS блок
 
 В конце `components.css` определён унифицированный блок `UNIFIED INTERACTIONS`, который задаёт единое поведение hover/focus/active для 11 интерактивных классов:
 
@@ -703,7 +838,7 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 
 `.btn-primary` — особый случай: меняет `background-color` на `--accent-hover`, `color` на `--color-on-accent`, получает усиленный `box-shadow: 0 8px 16px -4px var(--accent-ring)`. Persistent state (`[aria-current="page"]`, `[aria-pressed="true"]`) — без `transform`, только цвет/фон/граница.
 
-### 10.4 CI-guardrails
+### 11.4 CI-guardrails
 
 Нарушения правил 1–4 блокируются workflow `.github/workflows/css-guardrails.yml`:
 
