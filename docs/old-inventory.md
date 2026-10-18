@@ -119,7 +119,7 @@ old/
 | PDF/DOCX документы | `new-stack/site/assets/docs/` | `src/assets/docs/` |
 | Структура меню | `new-stack/site/assets/components/header.html` | `src/_data/navigation.json` |
 | Контакты | `new-stack/site/obo-mne/kontakty.html` | `src/_data/contacts.json` |
-| Дизайн-токены | `old/DESIGN.md` | `src/styles/tokens.css` |
+| Дизайн-токены | `docs/DESIGN.md` | `src/styles/tokens.css` |
 | URL для редиректов | `joomla/sitemap.xml` | `src/_data/redirects.csv` |
 | Правила .htaccess | `joomla/.htaccess` | `public/.htaccess` (новый) |
 | robots.txt | `joomla/robots.txt`, `new-stack/site/robots.txt` | `src/content/robots.txt` |
