@@ -71,8 +71,10 @@ jobs:
           #   - .btn-primary (усиливает hover, не дублирует outline)
           #   - .home-carousel__* (позиционирование фокуса на стрелках)
           #   - [data-theme="high-contrast"] :focus-visible (усиление для VI-режима)
-          VIOLATIONS=$(grep -nE '^[^@[:space:]].*:focus-visible' src/styles/components.css \
-            | grep -vE '\.btn-primary|\.home-carousel|data-theme' || true)
+          # Комментарии (строки, начинающиеся с /* или содержащие только /* ... */)
+          # исключаются автоматически через фильтр.
+          VIOLATIONS=$(grep -nE '^[^@[:space:]/].*:focus-visible' src/styles/components.css \
+            | grep -vE '^\s*/\*|\.btn-primary|\.home-carousel|data-theme' || true)
           if [ -n "$VIOLATIONS" ]; then
             echo "::error file=src/styles/components.css::Локальный :focus-visible без исключения:"
             echo "$VIOLATIONS"
