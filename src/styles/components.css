@@ -2516,6 +2516,22 @@ body.menu-open { overflow: hidden; }
    Здесь остаются только специфичные для offcanvas элементы.
    ═══════════════════════════════════════════════════════════ */
 
+.close-btn,
+.oc-split-row,
+.oc-split-row__link,
+.oc-split-row__toggle,
+.oc-sub-list a,
+.oc-panel-open-link,
+.oc-footer__link,
+.oc-footer__email,
+.oc-back-btn {
+  transition:
+    color var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    transform var(--t-fast);
+}
+
 .close-btn:hover,
 .oc-split-row__link:hover,
 .oc-split-row__link.active,
@@ -2526,6 +2542,50 @@ body.menu-open { overflow: hidden; }
   color: var(--accent);
   background-color: var(--accent-soft);
   border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.oc-split-row:not(.is-active):hover,
+.oc-sub-list a:not(.active):hover,
+.oc-panel-open-link:hover,
+.oc-footer__link:hover,
+.oc-footer__email:hover,
+.oc-back-btn:hover,
+.close-btn:hover {
+  transform: translateY(-2px);
+}
+
+.oc-split-row:not(.is-active):active,
+.oc-sub-list a:not(.active):active,
+.oc-panel-open-link:active,
+.oc-footer__link:active,
+.oc-footer__email:active,
+.oc-back-btn:active,
+.close-btn:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-split-row,
+  .oc-split-row__link,
+  .oc-split-row__toggle,
+  .oc-sub-list a,
+  .oc-panel-open-link,
+  .oc-footer__link,
+  .oc-footer__email,
+  .oc-back-btn,
+  .close-btn {
+    transition-duration: 0.01ms;
+  }
+
+  .oc-split-row:not(.is-active):hover,
+  .oc-sub-list a:not(.active):hover,
+  .oc-panel-open-link:hover,
+  .oc-footer__link:hover,
+  .oc-footer__email:hover,
+  .oc-back-btn:hover,
+  .close-btn:hover {
+    transform: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════ */
