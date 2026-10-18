@@ -308,10 +308,16 @@
 ```
 
 Все размеры умножаются на `--font-scale` (по умолчанию `1`,
-в VI-теме `1.5`).
+в a11y-режиме `1.5` или `2`).
+
+> ⚠️ `--font-scale` **не объявлен в `tokens.css`** — значение устанавливается
+> inline-стилем через JS (`a11y.js:139`,
+> `document.documentElement.style.setProperty('--font-scale', scale)`).
+> В CSS используется с fallback: `var(--font-scale, 1)` — см. `typography.css:86`.
+> Возможные значения: 0.9 / 1 / 1.5 / 2 (см. `a11y-panel.njk`).
 
 ```css
-font-size: calc(var(--text-base) * var(--font-scale));
+font-size: calc(var(--text-base) * var(--font-scale, 1));
 ```
 
 ### 4.3 Межстрочные интервалы
@@ -502,8 +508,13 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 Клик → смена `data-theme` на `<html>` + запись в cookie/localStorage.
 
 > ⚠️ Тема `vi` (visually impaired) переименована в `high-contrast`.
-> Старые ссылки на `[data-theme="vi"]` сохранены для совместимости
-> в `a11y.css`, но в HTML всегда используется `high-contrast`.
+> JS (`theme.js:16`) и HTML (`header.njk`, `a11y-panel.njk`) используют
+> только `high-contrast`. Однако в `a11y.css` осталось 9 правил
+> `[data-theme="vi"]` (строки 41, 102, 110, 116, 117, 251, 252, 253, 254) —
+> это legacy-селекторы, которые **никогда не срабатывают**, т.к. JS не
+> выставляет `data-theme="vi"`. Запланированы к удалению в issue P2
+> (после проверки, что все необходимые правила уже есть в
+> `[data-theme="high-contrast"]`).
 
 ### 6.5 Панель доступности
 
@@ -653,6 +664,13 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 ### 10.2 Правила
 
 1. **Токены — единственный источник значений.** Hex/rgb в `components.css` запрещены. Если значения нет — добавьте токен в `tokens.css`, а не хардкодьте.
+
+   **Допустимые hex-исключения в `components.css`** (37 вхождений, существующий долг — фиксируется в issue P2):
+   - `#fff` — текст на залитых кнопках (`.skip-link:focus`, `.btn-primary`, `.theme-btn[aria-pressed="true"]`, `.eyebrow::before` и т.д.). Эквивалентен `var(--color-on-accent)`.
+   - `#000` / `#fff` — `[data-theme="high-contrast"]` переопределения (`.site-header`, `.btn-primary`, `.btn-outline`, `.btn-secondary`, `.card:hover`, `.site-footer`, `.offcanvas`, `.oc-side-panel`, `.oc-split-row`, `.oc-sub-list a`, `.oc-footer__email`, `.oc-panel-open-link`). High-contrast тема использует чистый чёрный/белый — это намеренно отличается от токенов `--bg-primary` / `--text-primary` (которые в high-contrast дают жёлтый/голубой).
+   - `#000` / `#555` — `@media print` (принудительная чёрно-белая печать).
+
+   CI guardrail для hex сейчас работает как `::warning::` (не блокирует мерж). После замены всех 37 hex на `var(--color-on-accent)` / явные токены для high-contrast — переключить на `::error::`.
 2. **Тёмная тема — через токены.** Не пишите `[data-theme="dark"] .card { background: #222 }`. Переопределите `--bg-primary` в `tokens.css` — компонент подхватит автоматически.
 3. **Фокус — только в `a11y.css`.** Любой локальный `:focus-visible` в компоненте — нарушение. Исключение: `.btn-primary` (усиливает hover-состояние, не дублирует outline) и `.home-carousel__*` (позиционирование фокуса на стрелках).
 4. **Утилиты запрещены.** `.mt-2` и подобные — антипаттерн. Отступы задаются в компоненте через `margin-block` / `padding-inline` (логические свойства для RTL-совместимости).

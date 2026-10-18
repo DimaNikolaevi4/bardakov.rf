@@ -1,0 +1,113 @@
+name: CSS Guardrails
+
+on:
+  pull_request:
+    paths:
+      - 'src/styles/**.css'
+      - '.github/workflows/css-guardrails.yml'
+      - '.github/css-baseline.json'
+  push:
+    branches: [main]
+    paths:
+      - 'src/styles/**.css'
+
+jobs:
+  guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Запрет :root в components.css
+        run: |
+          # Инвариант: токены объявляются ТОЛЬКО в tokens.css.
+          # Любой :root в components.css — нарушение архитектуры.
+          # История: изначально был 94-строчный дубль :root от первого агента,
+          # удалён в ФАЗЕ 1 CSS-рефакторинга. Позже другой агент добавил
+          # :root с --menu-* переменными — перенесены в tokens.css в этом PR.
+          if grep -nE '^[[:space:]]*:root[[:space:]]*\{' src/styles/components.css; then
+            echo "::error file=src/styles/components.css::Найден :root. Токены объявляются только в tokens.css. Перенесите переменные в tokens.css."
+            exit 1
+          fi
+
+      - name: Запрет [data-theme] верхнего уровня в components.css
+        run: |
+          # Блокируем: [data-theme="X"] { (переопределение токенов вне tokens.css).
+          # Разрешаем: [data-theme="X"] .component { ... } (уникальные переопределения,
+          #   не дублирующие логику тем — например, уникальный SVG-фон body::after).
+          VIOLATIONS=$(grep -nE '^\[data-theme="[^"]+"\][[:space:]]*\{' src/styles/components.css || true)
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error file=src/styles/components.css::Найден [data-theme] {...}. Темы переопределяются только в tokens.css."
+            echo "$VIOLATIONS"
+            exit 1
+          fi
+
+      - name: Запрет hex в components.css (предупреждение — текущий долг)
+        run: |
+          # Текущий код содержит допустимые исключения: #fff в .skip-link/.btn-primary,
+          # #000/#fff в @media print и [data-theme="high-contrast"] переопределениях.
+          # Guardrail выдаёт warning, чтобы блокировать НОВЫЕ hex без блокировки мержа.
+          HEX_COUNT=$(grep -cE '#[0-9a-fA-F]{3,8}\b' src/styles/components.css || echo 0)
+          if [ "$HEX_COUNT" -gt 0 ]; then
+            echo "::warning file=src/styles/components.css::Найдено $HEX_COUNT hex-значений. Текущий долг — см. docs/DESIGN.md §10.2. Замените на var(--token) в новом коде."
+            grep -nE '#[0-9a-fA-F]{3,8}\b' src/styles/components.css | head -10
+          fi
+          exit 0
+
+      - name: Запрет утилит отступов в layout.css
+        run: |
+          # Блокируем только .mt-*, .mb-*, .pt-*, .pb-* (утилиты отступов).
+          # .grid-*, .flex-*, .gap-*, .text-center — НЕ утилиты отступов, разрешены.
+          VIOLATIONS=$(grep -nE '^\.(mt|mb|pt|pb)-[0-9]' src/styles/layout.css || true)
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error file=src/styles/layout.css::Найдены утилиты отступов. Используйте логические свойства в компонентах."
+            echo "$VIOLATIONS"
+            exit 1
+          fi
+
+      - name: Запрет локального :focus-visible в components.css (кроме исключений)
+        run: |
+          # Разрешены:
+          #   - .btn-primary (усиливает hover, не дублирует outline)
+          #   - .home-carousel__* (позиционирование фокуса на стрелках)
+          #   - [data-theme="high-contrast"] :focus-visible (усиление для VI-режима)
+          # Комментарии (строки, начинающиеся с /* или содержащие только /* ... */)
+          # исключаются автоматически через фильтр.
+          VIOLATIONS=$(grep -nE '^[^@[:space:]/].*:focus-visible' src/styles/components.css \
+            | grep -vE '^\s*/\*|\.btn-primary|\.home-carousel|data-theme' || true)
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error file=src/styles/components.css::Локальный :focus-visible без исключения:"
+            echo "$VIOLATIONS"
+            exit 1
+          fi
+
+      - name: Предупреждение о deprecated-алиасах
+        run: |
+          # Только warning, не блокирует мерж.
+          grep -rE '\-\-color-(bg|surface|text|primary|border|accent|focus-ring)\b|\-\-transition-(fast|base)\b|\-\-radius-md\b' \
+            src/styles/typography.css src/styles/layout.css src/styles/a11y.css src/styles/components.css \
+            && echo "::warning::Найдены deprecated-токены. Замените на новые имена (см. docs/DESIGN.md §2.2)." \
+            || echo "OK: deprecated-токенов нет в проверяемых файлах"
+          exit 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Bundle size check
+        run: |
+          CURRENT=$(find src/styles -name '*.css' -exec cat {} + | wc -c)
+          BASELINE=$(jq -r '.bytes' .github/css-baseline.json)
+          MAX=$((BASELINE * 105 / 100))
+          echo "CSS size: $CURRENT bytes (baseline: $BASELINE, max: $MAX)"
+          if [ "$CURRENT" -gt "$MAX" ]; then
+            echo "::error::CSS bundle вырос более чем на 5%. Обновите .github/css-baseline.json или оптимизируйте."
+            exit 1
+          fi

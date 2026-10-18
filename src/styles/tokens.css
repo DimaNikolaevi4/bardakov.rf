@@ -109,17 +109,24 @@
   --target-min: var(--target);
   --target-vi:  56px;
 
-  /* === ДОБАВЛЕНО: Масштаб шрифта для a11y-панели ===
-     Управляется через JS: a11y-panel.njk устанавливает
-     data-font-scale на кнопках, JS записывает значение в
-     document.documentElement.style.setProperty('--font-scale', ...).
-     По умолчанию 1; в a11y-режиме может быть 1.5 или 2. */
-  --font-scale: 1;
+  /* --font-scale — НЕ объявляется в tokens.css. Значение устанавливается
+     из JS (a11y.js:139) через document.documentElement.style.setProperty('--font-scale', scale).
+     В CSS используется с fallback: var(--font-scale, 1) — см. typography.css:86.
+     Возможные значения из a11y-panel.njk: 0.9 / 1 / 1.5 / 2. */
 
-  /* === ДОБАВЛЕНО ФАЗА 1: Токены-алиасы теней (для совместимости со старым кодом) === */
+  /* === ДОБАВЛЕНО: Токены-алиасы теней (для совместимости со старым кодом) === */
   --shadow-md:  var(--shadow);
   --shadow-lg:  var(--shadow-hover);
   --shadow-air: var(--shadow-hover);
+
+  /* === ДОБАВЛЕНО: Локальные переменные меню (offcanvas/header) ===
+     Перенесены из components.css:2245 — единый источник правды для
+     тёплой бумажной поверхности меню и ширины offcanvas-панели.
+     Все три токена вычисляются от базовых палитрных --bg-primary /
+     --highlight / --accent, поэтому автоматически подхватывают смену темы. */
+  --menu-paper:        color-mix(in srgb, var(--bg-primary) 96%, var(--highlight) 4%);
+  --menu-wash:         color-mix(in srgb, var(--bg-primary) 88%, var(--accent) 12%);
+  --menu-panel-width:  420px;
 
   /* === ДОБАВЛЕНО ФАЗА 1: Цветовой токен для <mark> === */
   --blue-100: var(--accent-soft);
