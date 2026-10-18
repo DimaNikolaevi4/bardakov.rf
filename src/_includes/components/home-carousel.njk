@@ -1,3 +1,14 @@
+{# home-carousel.njk — 3D Flip карусель с blob-формой и оверлеями
+   Источник: docs/DESIGN.md §6 + креативный дизайн (blob-morph, 3D flip)
+   Создано: 2026-10-18 (blob + 3D flip + overlays)
+
+   Особенности:
+   - Blob-форма для фото (CSS-анимация morph 12s)
+   - 3D Flip переход (1.2s, centered rotation с perspective)
+   - Информативные оверлеи на слайдах 2 и 3
+   - Автопрокрутка 8s, задержка запуска 3s
+   - Пауза при наведении мыши
+#}
 <section
   class="home-carousel home-carousel--showcase"
   data-home-carousel
@@ -6,11 +17,13 @@
   aria-live="polite"
 >
   <div class="home-carousel__slides">
+    {# Слайд 1: Обо мне (без оверлея) #}
     <article
       class="home-carousel__slide is-active"
       aria-roledescription="слайд"
       aria-label="1 из 3"
       aria-hidden="false"
+      data-slide="0"
     >
       <img
         class="home-carousel__image"
@@ -21,12 +34,13 @@
       >
     </article>
 
+    {# Слайд 2: Воспитание (с оверлеем) #}
     <article
       class="home-carousel__slide"
       aria-roledescription="слайд"
       aria-label="2 из 3"
       aria-hidden="true"
-      inert
+      data-slide="1"
     >
       <img
         class="home-carousel__image"
@@ -35,14 +49,21 @@
         loading="lazy"
         decoding="async"
       >
+      <div class="slide-overlay">
+        <i class="bi bi-heart-pulse" aria-hidden="true"></i>
+        <h3>Воспитание</h3>
+        <p>Для родителей, советы студентам, разговоры о важном и нормативные документы</p>
+        <a href="/vospitanie/">Подробнее <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+      </div>
     </article>
 
+    {# Слайд 3: Обучение (с оверлеем) #}
     <article
       class="home-carousel__slide"
       aria-roledescription="слайд"
       aria-label="3 из 3"
       aria-hidden="true"
-      inert
+      data-slide="2"
     >
       <img
         class="home-carousel__image"
@@ -51,6 +72,12 @@
         loading="lazy"
         decoding="async"
       >
+      <div class="slide-overlay">
+        <i class="bi bi-journal-bookmark" aria-hidden="true"></i>
+        <h3>Обучение</h3>
+        <p>Лекции, практические работы по КИП и КСК, электромонтёр, ПМ.02</p>
+        <a href="/obuchenie/">Материалы <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+      </div>
     </article>
   </div>
 
@@ -65,6 +92,11 @@
         <path d="m15 18-6-6 6-6"></path>
       </svg>
     </button>
+    <div class="home-carousel__pagination" role="group" aria-label="Выбрать слайд">
+      <button class="home-carousel__dot" type="button" data-carousel-slide="0" aria-label="Показать фотографию 1" aria-current="true"></button>
+      <button class="home-carousel__dot" type="button" data-carousel-slide="1" aria-label="Показать фотографию 2" aria-current="false"></button>
+      <button class="home-carousel__dot" type="button" data-carousel-slide="2" aria-label="Показать фотографию 3" aria-current="false"></button>
+    </div>
     <button
       class="home-carousel__arrow home-carousel__arrow--next"
       type="button"
@@ -75,10 +107,5 @@
         <path d="m9 18 6-6-6-6"></path>
       </svg>
     </button>
-    <div class="home-carousel__pagination" role="group" aria-label="Выбрать слайд">
-      <button class="home-carousel__dot" type="button" data-carousel-slide="0" aria-label="Показать фотографию 1" aria-current="true"></button>
-      <button class="home-carousel__dot" type="button" data-carousel-slide="1" aria-label="Показать фотографию 2" aria-current="false"></button>
-      <button class="home-carousel__dot" type="button" data-carousel-slide="2" aria-label="Показать фотографию 3" aria-current="false"></button>
-    </div>
   </div>
 </section>

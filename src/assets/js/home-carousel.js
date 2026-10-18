@@ -1,263 +1,173 @@
-const carousel = document.querySelector("[data-home-carousel]");
+/* ============================================================
+ * home-carousel.js — 3D Flip карусель с blob-формой и оверлеями
+ *
+ * Особенности:
+ * - 3D flip переход (1.2s, centered rotation с perspective)
+ * - Автопрокрутка 8 секунд между слайдами
+ * - Задержка 3 секунды перед первым автозапуском
+ * - Пауза при наведении мыши и клике
+ * - Обновление aria-hidden для доступности
+ *
+ * Источник: docs/DESIGN.md §6 + креативный дизайн
+ * Создано: 2026-10-18 (blob + 3D flip + overlays)
+ * ============================================================ */
 
-if (carousel) {
-  const slides = Array.from(carousel.querySelectorAll(".home-carousel__slide"));
-  const dots = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
-  const previousButton = carousel.querySelector("[data-carousel-previous]");
-  const nextButton = carousel.querySelector("[data-carousel-next]");
-  const toggleButton = carousel.querySelector("[data-carousel-toggle]");
-  const pauseIcon = carousel.querySelector("[data-carousel-pause-icon]");
-  const playIcon = carousel.querySelector("[data-carousel-play-icon]");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const autoplayInterval = Number(carousel.dataset.autoplayInterval);
-  const autoplayEnabled = Number.isFinite(autoplayInterval) && autoplayInterval > 0;
-  const interval = autoplayEnabled ? autoplayInterval : 6000;
-  const turnDuration = 320;
+(function () {
+  "use strict";
 
-  let activeIndex = 0;
-  let timerId;
-  let turnTimerId;
-  let isAnimating = false;
-  let currentTurn;
-  let swipeStart;
-  let manuallyPaused =
-    !autoplayEnabled ||
-    reducedMotion.matches ||
-    document.documentElement.dataset.animations === "off";
-  let hovered = false;
-  let focused = false;
-  let resumeWhileHovered = false;
-  let resumeWhileFocused = false;
+  class Carousel3D {
+    constructor(carousel) {
+      this.carousel = carousel;
+      this.slides = Array.from(carousel.querySelectorAll(".home-carousel__slide"));
+      this.dots = Array.from(carousel.querySelectorAll(".home-carousel__dot"));
+      this.prevBtn = carousel.querySelector("[data-carousel-previous]");
+      this.nextBtn = carousel.querySelector("[data-carousel-next]");
 
-  function animationsDisabled() {
-    return (
-      reducedMotion.matches ||
-      document.documentElement.dataset.animations === "off"
-    );
-  }
+      this.currentIndex = 0;
+      this.totalSlides = this.slides.length;
+      this.autoPlay = null;
+      this.autoPlayDelay = 8000;      // 8 секунд между слайдами
+      this.initialDelay = 3000;        // 3 секунды перед первым автозапуском
+      this.isAnimating = false;        // блокировка двойных кликов во время перехода
 
-  function normalizeIndex(index) {
-    return (index + slides.length) % slides.length;
-  }
-
-  function updateAccessibleSlide(index) {
-    slides.forEach((slide, slideIndex) => {
-      const isActive = slideIndex === index;
-      slide.classList.toggle("is-active", isActive);
-      slide.setAttribute("aria-hidden", String(!isActive));
-      slide.inert = !isActive;
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      dot.setAttribute("aria-current", String(dotIndex === index));
-    });
-  }
-
-  function updateDots(index) {
-    dots.forEach((dot, dotIndex) => {
-      dot.setAttribute("aria-current", String(dotIndex === index));
-    });
-  }
-
-  function finishPageTurn() {
-    if (!currentTurn) return;
-
-    window.clearTimeout(turnTimerId);
-    const { outgoing, incoming } = currentTurn;
-    outgoing.classList.remove("is-turning-out", "is-turning-forward", "is-turning-backward");
-    incoming.classList.remove("is-turning-in");
-    incoming.classList.add("is-active");
-    currentTurn = undefined;
-    isAnimating = false;
-    updateAccessibleSlide(activeIndex);
-  }
-
-  function showSlide(index, direction = "forward") {
-    if (slides.length < 2 || isAnimating) return;
-
-    const nextIndex = normalizeIndex(index);
-    if (nextIndex === activeIndex) return;
-
-    const outgoing = slides[activeIndex];
-    const incoming = slides[nextIndex];
-    activeIndex = nextIndex;
-    updateDots(activeIndex);
-
-    if (animationsDisabled()) {
-      updateAccessibleSlide(activeIndex);
-      return;
+      this.init();
     }
 
-    isAnimating = true;
-    outgoing.classList.remove("is-active");
-    outgoing.classList.add(
-      "is-turning-out",
-      direction === "forward" ? "is-turning-forward" : "is-turning-backward",
-    );
-    outgoing.setAttribute("aria-hidden", "true");
-    outgoing.inert = true;
+    init() {
+      // Обработчики кнопок навигации
+      if (this.prevBtn) {
+        this.prevBtn.addEventListener("click", () => {
+          this.handleInteraction();
+          this.goToSlide(this.currentIndex - 1);
+        });
+      }
 
-    incoming.classList.add("is-turning-in");
-    incoming.setAttribute("aria-hidden", "false");
-    incoming.inert = false;
+      if (this.nextBtn) {
+        this.nextBtn.addEventListener("click", () => {
+          this.handleInteraction();
+          this.goToSlide(this.currentIndex + 1);
+        });
+      }
 
-    currentTurn = { outgoing, incoming };
-    turnTimerId = window.setTimeout(finishPageTurn, turnDuration);
-  }
+      // Обработчики точек пагинации
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          if (index === this.currentIndex) return;
+          this.handleInteraction();
+          this.goToSlide(index);
+        });
+      });
 
-  function updateToggle() {
-    if (!toggleButton) {
-      carousel.setAttribute("aria-live", "polite");
-      return;
+      // Пауза при наведении мыши
+      this.carousel.addEventListener("mouseenter", () => this.stopAutoPlay());
+      this.carousel.addEventListener("mouseleave", () => this.startAutoPlay());
+
+      // Пауза при потере видимости (вкладка неактивна)
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          this.stopAutoPlay();
+        } else {
+          this.startAutoPlay();
+        }
+      });
+
+      // Уважение prefers-reduced-motion
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return; // не запускаем автопрокрутку
+      }
+
+      // Запуск автопрокрутки с задержкой
+      setTimeout(() => this.startAutoPlay(), this.initialDelay);
     }
 
-    toggleButton.setAttribute("aria-pressed", String(manuallyPaused));
-    toggleButton.setAttribute(
-      "aria-label",
-      manuallyPaused
-        ? "Запустить автоматическую смену слайдов"
-        : "Приостановить автоматическую смену слайдов",
-    );
-    carousel.setAttribute("aria-live", manuallyPaused ? "polite" : "off");
-    pauseIcon.toggleAttribute("hidden", manuallyPaused);
-    playIcon.toggleAttribute("hidden", !manuallyPaused);
-  }
+    handleInteraction() {
+      this.stopAutoPlay();
+      // Перезапуск автопрокрутки через 10 секунд после последнего взаимодействия
+      clearTimeout(this._restartTimer);
+      this._restartTimer = setTimeout(() => this.startAutoPlay(), this.autoPlayDelay + 2000);
+    }
 
-  function stopTimer() {
-    window.clearInterval(timerId);
-    timerId = undefined;
-  }
+    startAutoPlay() {
+      this.stopAutoPlay();
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      this.autoPlay = setInterval(() => {
+        this.goToSlide(this.currentIndex + 1);
+      }, this.autoPlayDelay);
+    }
 
-  function syncTimer() {
-    stopTimer();
+    stopAutoPlay() {
+      if (this.autoPlay) {
+        clearInterval(this.autoPlay);
+        this.autoPlay = null;
+      }
+    }
 
-    const pausedByHover = hovered && !resumeWhileHovered;
-    const pausedByFocus = focused && !resumeWhileFocused;
+    goToSlide(index) {
+      if (this.isAnimating) return;
+      if (index < 0) index = this.totalSlides - 1;
+      if (index >= this.totalSlides) index = 0;
+      if (index === this.currentIndex) return;
 
-    if (!manuallyPaused && !pausedByHover && !pausedByFocus && !document.hidden) {
-      timerId = window.setInterval(() => showSlide(activeIndex + 1), interval);
+      this.isAnimating = true;
+
+      // Определяем направление (вперёд/назад) для правильного flip
+      const direction = index > this.currentIndex ||
+        (this.currentIndex === this.totalSlides - 1 && index === 0)
+        ? "forward"
+        : "backward";
+
+      // Обновляем классы слайдов
+      this.slides.forEach((slide, i) => {
+        slide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
+
+        if (i === index) {
+          slide.classList.add("is-active");
+          slide.setAttribute("aria-hidden", "false");
+        } else {
+          slide.setAttribute("aria-hidden", "true");
+          // prev/next для боковых слайдов
+          const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
+          const nextIndex = (index + 1) % this.totalSlides;
+          if (i === prevIndex) slide.classList.add("is-prev");
+          else if (i === nextIndex) slide.classList.add("is-next");
+        }
+
+        // Убираем inert после завершения анимации
+        if (i === index) {
+          slide.removeAttribute("inert");
+        } else {
+          // Оставляем неактивные слайды без inert для плавности 3D-анимации
+          // (inert мешает CSS transition)
+        }
+      });
+
+      // Обновляем точки пагинации
+      this.dots.forEach((dot, i) => {
+        dot.setAttribute("aria-current", i === index ? "true" : "false");
+      });
+
+      this.currentIndex = index;
+
+      // Разблокировка через 1.3с (чуть больше чем 1.2s transition)
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 1300);
     }
   }
 
-  function navigateTo(index, direction) {
-    const nextIndex = normalizeIndex(index);
-    const forwardDistance = normalizeIndex(nextIndex - activeIndex);
-    const turnDirection =
-      direction || (forwardDistance <= slides.length / 2 ? "forward" : "backward");
-
-    manuallyPaused = true;
-    resumeWhileHovered = false;
-    resumeWhileFocused = false;
-    showSlide(nextIndex, turnDirection);
-    updateToggle();
-    syncTimer();
-  }
-
-  previousButton.addEventListener("click", () => navigateTo(activeIndex - 1, "backward"));
-  nextButton.addEventListener("click", () => navigateTo(activeIndex + 1, "forward"));
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => navigateTo(index));
-  });
-
-  if (toggleButton) {
-    toggleButton.addEventListener("click", () => {
-      manuallyPaused = !manuallyPaused;
-      resumeWhileHovered = !manuallyPaused && hovered;
-      resumeWhileFocused = !manuallyPaused && focused;
-      updateToggle();
-      syncTimer();
+  // Инициализация всех каруселей на странице
+  function initCarousels() {
+    document.querySelectorAll("[data-home-carousel]").forEach((carousel) => {
+      if (!carousel._carouselInstance) {
+        carousel._carouselInstance = new Carousel3D(carousel);
+      }
     });
   }
 
-  carousel.addEventListener("mouseenter", () => {
-    hovered = true;
-    syncTimer();
-  });
-
-  carousel.addEventListener("mouseleave", () => {
-    hovered = false;
-    resumeWhileHovered = false;
-    syncTimer();
-  });
-
-  carousel.addEventListener("focusin", () => {
-    focused = true;
-    resumeWhileFocused = false;
-    syncTimer();
-  });
-
-  carousel.addEventListener("focusout", (event) => {
-    if (!carousel.contains(event.relatedTarget)) {
-      focused = false;
-      resumeWhileFocused = false;
-      syncTimer();
-    }
-  });
-
-  carousel.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      navigateTo(activeIndex - 1, "backward");
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      navigateTo(activeIndex + 1, "forward");
-    }
-  });
-
-  carousel.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "touch") {
-      swipeStart = { x: event.clientX, y: event.clientY };
-    }
-  });
-
-  carousel.addEventListener("pointerup", (event) => {
-    if (!swipeStart) return;
-
-    const deltaX = event.clientX - swipeStart.x;
-    const deltaY = event.clientY - swipeStart.y;
-    swipeStart = undefined;
-
-    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
-
-    navigateTo(activeIndex + (deltaX < 0 ? 1 : -1), deltaX < 0 ? "forward" : "backward");
-  });
-
-  carousel.addEventListener("pointercancel", () => {
-    swipeStart = undefined;
-  });
-
-  document.addEventListener("visibilitychange", syncTimer);
-
-  reducedMotion.addEventListener("change", (event) => {
-    if (event.matches) {
-      manuallyPaused = true;
-      resumeWhileHovered = false;
-      resumeWhileFocused = false;
-      finishPageTurn();
-    }
-
-    updateToggle();
-    syncTimer();
-  });
-
-  const animationPreferenceObserver = new MutationObserver(() => {
-    if (document.documentElement.dataset.animations === "off") {
-      manuallyPaused = true;
-      resumeWhileHovered = false;
-      resumeWhileFocused = false;
-      finishPageTurn();
-    }
-
-    updateToggle();
-    syncTimer();
-  });
-
-  animationPreferenceObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-animations"],
-  });
-
-  updateToggle();
-  syncTimer();
-}
+  // Запуск после DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCarousels);
+  } else {
+    initCarousels();
+  }
+})();

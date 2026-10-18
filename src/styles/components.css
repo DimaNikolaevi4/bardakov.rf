@@ -2999,3 +2999,286 @@ body.menu-open { overflow: hidden; }
   transform: translateY(0);
 }
 
+/* ============================================================
+   HERO 3D FLIP CAROUSEL — Blob + 3D Flip + Overlays
+   Креативный дизайн: жидкая форма фото, 3D-переворот,
+   информативные оверлеи на слайдах 2 и 3.
+   ============================================================ */
+
+/* === 1. Blob-форма для изображения === */
+.home-carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blob-morph 12s ease-in-out infinite;
+  box-shadow: 0 20px 60px rgba(67, 56, 202, 0.2);
+  transition: box-shadow var(--t-fast);
+}
+
+.home-carousel:hover .home-carousel__image {
+  box-shadow: 0 30px 80px rgba(67, 56, 202, 0.3);
+}
+
+@keyframes blob-morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  75% {
+    border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%;
+  }
+}
+
+/* === 2. 3D Flip карусель (замедленная, 1.2s) === */
+.home-carousel__slides {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.home-carousel__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
+  opacity: 0;
+}
+
+.home-carousel__slide.is-active {
+  opacity: 1;
+  transform: rotateY(0deg) translateZ(250px);
+}
+
+.home-carousel__slide.is-prev {
+  transform: rotateY(-120deg) translateZ(250px);
+  opacity: 0;
+}
+
+.home-carousel__slide.is-next {
+  transform: rotateY(120deg) translateZ(250px);
+  opacity: 0;
+}
+
+/* === 3. Информативные оверлеи для слайдов 2 и 3 === */
+.slide-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+  pointer-events: none;
+  border-radius: 0 0 60% 40% 30% 70% / 0 0 30% 70%;
+  overflow: hidden;
+}
+
+.home-carousel__slide.is-active .slide-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Скрываем оверлей на первом слайде */
+.home-carousel__slide[data-slide="0"] .slide-overlay {
+  display: none;
+}
+
+.slide-overlay i {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-3);
+  color: #818CF8;
+  display: block;
+}
+
+.slide-overlay h3 {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: white;
+}
+
+.slide-overlay p {
+  font-size: var(--text-base);
+  opacity: 0.95;
+  margin-bottom: var(--space-3);
+  line-height: 1.5;
+}
+
+.slide-overlay a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--highlight);
+  font-weight: 600;
+  text-decoration: none;
+  transition: gap 0.3s ease;
+  pointer-events: auto;
+}
+
+.slide-overlay a:hover {
+  gap: var(--space-4);
+}
+
+.slide-overlay a i {
+  font-size: 1rem;
+  margin: 0;
+  color: inherit;
+}
+
+/* === 4. Контейнер и управление === */
+.home-carousel--showcase {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home-carousel__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.home-carousel__arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--t-fast), color var(--t-fast),
+              border-color var(--t-fast), transform var(--t-fast);
+}
+
+.home-carousel__arrow:hover {
+  background: var(--accent);
+  color: var(--color-on-accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.home-carousel__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.home-carousel__pagination {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.home-carousel__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.home-carousel__dot[aria-current="true"] {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+
+/* === 5. Адаптивность === */
+@media (max-width: 768px) {
+  .home-carousel__slides {
+    height: 350px;
+  }
+
+  .home-carousel__slide.is-active {
+    transform: rotateY(0deg) translateZ(175px);
+  }
+
+  .home-carousel__slide.is-prev {
+    transform: rotateY(-120deg) translateZ(175px);
+  }
+
+  .home-carousel__slide.is-next {
+    transform: rotateY(120deg) translateZ(175px);
+  }
+
+  .slide-overlay {
+    padding: var(--space-6) var(--space-4) var(--space-4);
+  }
+
+  .slide-overlay i {
+    font-size: 2rem;
+  }
+
+  .slide-overlay h3 {
+    font-size: var(--text-xl);
+  }
+
+  .slide-overlay p {
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-carousel__slides {
+    height: 280px;
+  }
+
+  .home-carousel__slide.is-active {
+    transform: rotateY(0deg) translateZ(140px);
+  }
+
+  .home-carousel__slide.is-prev {
+    transform: rotateY(-120deg) translateZ(140px);
+  }
+
+  .home-carousel__slide.is-next {
+    transform: rotateY(120deg) translateZ(140px);
+  }
+
+  .slide-overlay {
+    padding: var(--space-4) var(--space-3) var(--space-3);
+  }
+
+  .slide-overlay i {
+    font-size: 1.5rem;
+  }
+
+  .slide-overlay h3 {
+    font-size: var(--text-lg);
+  }
+}
+
+/* === 6. Уважение prefers-reduced-motion === */
+@media (prefers-reduced-motion: reduce) {
+  .home-carousel__image {
+    animation: none;
+    border-radius: var(--radius);
+  }
+
+  .home-carousel__slide {
+    transition: opacity 0.3s ease;
+  }
+
+  .slide-overlay {
+    transition: opacity 0.3s ease;
+  }
+}
+
