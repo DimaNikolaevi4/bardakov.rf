@@ -1,100 +1,9 @@
 /* ============================================================
-   1. ТОКЕНЫ И ТЕМЫ — «Золотой день / Ночное небо»
+   1. ТОКЕНЫ И ТЕМЫ
+   ------------------------------------------------------------
+   Все токены и темы вынесены в src/styles/tokens.css (ФАЗА 4).
+   Здесь остаются только компонентные правила.
    ============================================================ */
-:root {
-  --bg-primary:     #FFFFF5;
-  --bg-secondary:   #E5E1DC;
-  --bg-subtle:      #FEF9E7;
-  
-  --text-primary:   #0F172A;
-  --text-secondary: #475569;
-  --text-muted:     #78716C;
-  
-  --accent:         #4338CA;
-  --accent-hover:   #3730A3;
-  --accent-soft:    rgba(67, 56, 202, 0.08);
-  --accent-ring:    rgba(67, 56, 202, 0.30);
-  
-  --highlight:      #CA8A04;
-  --highlight-hover:#B45309;
-  --highlight-soft: rgba(254, 249, 231, 0.6);
-  
-  --border:         #D4CFC7;
-  --border-strong:  #B8B0A5;
-  
-  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow:         0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -1px rgba(0, 0, 0, 0.08);
-  --shadow-hover:   0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.10);
-  
-  --card-glow:      rgb(251 142 34 / 31%);
-  
-  --radius:         16px;
-  --radius-sm:      10px;
-  --radius-full:    9999px;
-  
-  --font-main:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif:     "Merriweather", Georgia, serif;
-  --font-hand:      "Caveat", cursive;
-  
-  --container:      1160px;
-  --target:         44px;
-  --t-fast:         160ms cubic-bezier(.4, 0, .2, 1);
-  --t-base:         260ms cubic-bezier(.4, 0, .2, 1);
-}
-
-[data-theme="dark"] {
-  --bg-primary:     #050A1F;
-  --bg-secondary:   #0F172A;
-  --bg-subtle:      #1E293B;
-  
-  --text-primary:   #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted:     #64748B;
-  
-  --accent:         #818CF8;
-  --accent-hover:   #A5B4FC;
-  --accent-soft:    rgba(129, 140, 248, 0.15);
-  --accent-ring:    rgba(129, 140, 248, 0.40);
-  
-  --highlight:      #FACC15;
-  --highlight-hover:#FDE047;
-  --highlight-soft: rgba(250, 204, 21, 0.15);
-  
-  --border:         #2A3555;
-  --border-strong:  #3D4C73;
-  
-  --shadow-sm:      0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow:         0 4px 10px rgba(0, 0, 0, 0.5);
-  --shadow-hover:   0 24px 48px -12px rgba(129, 140, 248, 0.25);
-  
-  --card-glow:      rgba(79, 130, 252, 0.31);
-}
-
-[data-theme="high-contrast"] {
-  --bg-primary:     #000000;
-  --bg-secondary:   #000000;
-  --bg-subtle:      #0A0A0A;
-  --text-primary:   #FFFF00;
-  --text-secondary: #FFFFFF;
-  --text-muted:     #DDDDDD;
-  --accent:         #00FFFF;
-  --accent-hover:   #66FFFF;
-  --accent-soft:    transparent;
-  --accent-ring:    #FFFF00;
-  --highlight:      #FFFF00;
-  --highlight-hover:#FFFF00;
-  --highlight-soft: transparent;
-  --border:         #FFFFFF;
-  --border-strong:  #FFFFFF;
-  --shadow-sm:      none;
-  --shadow:         none;
-  --shadow-hover:   none;
-  --card-glow:      transparent;
-  --radius:         0px;
-  --radius-sm:      0px;
-  --radius-full:    0px;
-  --target:         56px;
-}
 
 /* ============================================================
    2. БАЗА
@@ -104,7 +13,7 @@
 
 html {
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   scroll-padding-top: 88px;
 }
 
@@ -264,10 +173,7 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius-sm);
   transition: background-color var(--t-fast), color var(--t-fast);
 }
-.main-nav a:hover, .main-nav a[aria-current="page"] {
-  color: var(--text-primary); background: var(--bg-subtle);
-}
-[data-theme="high-contrast"] .main-nav a:hover { background: #fff; color: #000; }
+/* .main-nav a:hover, .main-nav a[aria-current="page"] — moved to UNIFIED INTERACTIONS block at EOF */
 
 .header-actions { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
 @media (min-width: 992px) { .header-actions { margin-left: 0; } }
@@ -418,11 +324,7 @@ a:hover { color: var(--accent-hover); }
   background: var(--accent); color: #fff;
   box-shadow: 0 10px 24px -10px var(--accent-ring);
 }
-.btn-primary:hover {
-  background: var(--accent-hover); color: #fff;
-  transform: translateY(-2px); box-shadow: 0 16px 32px -12px var(--accent-ring);
-}
-.btn-primary:active { transform: translateY(0); }
+/* .btn-primary:hover/:active — moved to UNIFIED INTERACTIONS block at EOF */
 
 .btn-outline {
   background: transparent; color: var(--text-primary);
@@ -1208,12 +1110,7 @@ a:hover { color: var(--accent-hover); }
   transition: transform var(--t-fast), border-color var(--t-fast), background-color var(--t-fast), color var(--t-fast);
 }
 
-.site-footer .footer-social-link:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent);
-}
+/* .footer-social-link:hover — moved to UNIFIED INTERACTIONS block at EOF */
 
 .site-footer .footer-corp-card {
   height: 100%;
@@ -1412,12 +1309,7 @@ a:hover { color: var(--accent-hover); }
   transition: transform var(--t-fast), border-color var(--t-fast), background-color var(--t-fast), box-shadow var(--t-fast);
 }
 
-.site-footer .footer-resource:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  box-shadow: var(--shadow-sm);
-}
+/* .footer-resource:hover — moved to UNIFIED INTERACTIONS block at EOF */
 
 .site-footer .footer-resource-icon {
   display: inline-flex;
@@ -1450,7 +1342,7 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.4;
 }
 
-.site-footer .footer-resource:hover .footer-resource-text { color: var(--text-primary); }
+/* .footer-resource:hover .footer-resource-text — moved to UNIFIED INTERACTIONS block at EOF */
 
 .footer-bottom {
   display: flex;
@@ -2348,7 +2240,7 @@ body.menu-open { overflow: hidden; }
   backdrop-filter: saturate(125%) blur(18px);
   -webkit-backdrop-filter: saturate(125%) blur(18px);
 }
-.site-header.is-scrolled { box-shadow: 0 8px 24px rgba(47, 42, 69, .08); }
+.site-header.is-scrolled { box-shadow: var(--shadow); }
 .nav-wrapper {
   min-height: 72px;
   gap: clamp(8px, 1.2vw, 18px);
@@ -2436,7 +2328,7 @@ body.menu-open { overflow: hidden; }
   width: min(var(--menu-panel-width), 100vw);
   background: var(--menu-paper);
   border-color: color-mix(in srgb, var(--border) 82%, var(--highlight) 18%);
-  box-shadow: -18px 0 48px rgba(37, 32, 57, .14);
+  box-shadow: var(--shadow-hover);
 }
 .offcanvas-header,
 .oc-side-panel__header {
@@ -2606,23 +2498,16 @@ body.menu-open { overflow: hidden; }
 
 
 /* ═══════════════════════════════════════════════════════════
-   УНИФИЦИРОВАННЫЕ ПРАВИЛА ИНТЕРАКТИВНЫХ ЭЛЕМЕНТОВ ШАПКИ (DRY)
-   Единое поведение hover/focus/active для всех кнопок и ссылок
+   УНИФИЦИРОВАННЫЕ ПРАВИЛА ИНТЕРАКТИВНЫХ ЭЛЕМЕНТОВ OFFCANVAS (DRY)
+   Правила для шапки (.logo, .main-nav-link, .header-icon-btn, .theme-btn,
+   .burger, .rubrics-toggle, .footer-resource, .footer-social-link, .btn-*)
+   вынесены в блок UNIFIED INTERACTIONS в конце файла — токены тем
+   подхватываются автоматически из tokens.css, отдельных [data-theme="dark"]
+   правил не требуется. Focus-visible тоже управляется глобально в a11y.css.
+   Здесь остаются только специфичные для offcanvas элементы.
    ═══════════════════════════════════════════════════════════ */
 
-/* Светлая тема (по умолчанию) */
-.logo:hover,
-.logo:focus-visible,
-.main-nav-link:hover,
-.main-nav-link[aria-current="page"],
-.header-icon-btn:hover,
-.header-icon-btn[aria-expanded="true"],
-.theme-btn:hover,
-.theme-btn[aria-pressed="true"],
-.burger:hover,
-.rubrics-toggle:hover,
 .close-btn:hover,
-.close-btn:focus-visible,
 .oc-split-row__link:hover,
 .oc-split-row__link.active,
 .oc-split-row__toggle:hover,
@@ -2634,60 +2519,15 @@ body.menu-open { overflow: hidden; }
   border-color: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-/* Focus-visible — outline для доступности */
-.logo:focus-visible,
-.close-btn:focus-visible,
-.header-icon-btn:focus-visible,
-.theme-btn:focus-visible,
-.main-nav-link:focus-visible,
-.oc-split-row__link:focus-visible,
-.oc-split-row__toggle:focus-visible,
-.oc-sub-list a:focus-visible,
-.oc-panel-open-link:focus-visible {
-  outline: 2px solid var(--accent-ring);
-  outline-offset: 2px;
-}
-
-/* Тёмная тема — те же правила, токены меняются автоматически */
-[data-theme="dark"] .logo:hover,
-[data-theme="dark"] .logo:focus-visible,
-[data-theme="dark"] .main-nav-link:hover,
-[data-theme="dark"] .main-nav-link[aria-current="page"],
-[data-theme="dark"] .header-icon-btn:hover,
-[data-theme="dark"] .header-icon-btn[aria-expanded="true"],
-[data-theme="dark"] .theme-btn:hover,
-[data-theme="dark"] .theme-btn[aria-pressed="true"],
-[data-theme="dark"] .burger:hover,
-[data-theme="dark"] .rubrics-toggle:hover,
-[data-theme="dark"] .close-btn:hover,
-[data-theme="dark"] .close-btn:focus-visible,
-[data-theme="dark"] .oc-split-row__link:hover,
-[data-theme="dark"] .oc-split-row__link.active,
-[data-theme="dark"] .oc-split-row__toggle:hover,
-[data-theme="dark"] .oc-sub-list a:hover,
-[data-theme="dark"] .oc-sub-list a.active,
-[data-theme="dark"] .oc-panel-open-link:hover {
-  color: var(--accent);
-  background-color: var(--accent-soft);
-  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-[data-theme="dark"] .logo:focus-visible,
-[data-theme="dark"] .close-btn:focus-visible,
-[data-theme="dark"] .header-icon-btn:focus-visible,
-[data-theme="dark"] .theme-btn:focus-visible,
-[data-theme="dark"] .main-nav-link:focus-visible {
-  outline: 2px solid var(--accent-ring);
-  outline-offset: 2px;
-}
-
 /* ═══════════════════════════════════════════════════════════ */
 
 [data-theme="dark"] .site-header {
   background: color-mix(in srgb, var(--bg-primary) 90%, var(--bg-secondary));
   box-shadow: 0 1px 0 color-mix(in srgb, var(--highlight) 18%, transparent);
 }
-[data-theme="dark"] .site-header.is-scrolled { box-shadow: 0 8px 24px rgba(0, 0, 0, .28); }
+/* [data-theme="dark"] .site-header.is-scrolled удалено:
+   используется глобальное правило .site-header.is-scrolled { box-shadow: var(--shadow); }
+   где --shadow уже переопределён для тёмной темы в tokens.css. */
 /* dark logo-mark handled in main rules */
 [data-theme="dark"] .oc-section-icon,
 [data-theme="dark"] .oc-footer__link svg,
@@ -2703,11 +2543,8 @@ body.menu-open { overflow: hidden; }
   border: 2px solid #fff;
 }
 [data-theme="high-contrast"] .main-nav a.main-nav-link::after { background: var(--highlight); }
-[data-theme="high-contrast"] .main-nav a.main-nav-link:hover,
-[data-theme="high-contrast"] .main-nav a.main-nav-link[aria-current="page"] {
-  color: #000;
-  background: #fff;
-}
+/* [data-theme="high-contrast"] .main-nav a.main-nav-link:hover / [aria-current="page"]
+   removed: covered by UNIFIED INTERACTIONS block at EOF + high-contrast tokens in tokens.css */
 [data-theme="high-contrast"] .offcanvas,
 [data-theme="high-contrast"] .oc-side-panel {
   background: #000;
@@ -2783,4 +2620,65 @@ body.menu-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .main-nav a.main-nav-link::after { transition: none; }
+}
+
+/* ============================================================
+   UNIFIED INTERACTIONS (Единый источник истины)
+   Смена темы работает автоматически через переопределение
+   токенов --accent, --accent-soft, --accent-ring в tokens.css.
+   Фокус (outline) управляется глобально в a11y.css.
+   ============================================================ */
+
+/* 1. Плавные переходы для всех интерактивных элементов */
+.logo,
+.main-nav-link,
+.header-icon-btn,
+.theme-btn,
+.burger,
+.rubrics-toggle,
+.footer-resource,
+.footer-social-link,
+.btn {
+  transition:
+    color var(--t-fast),
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    transform var(--t-fast);
+}
+
+/* 2. Hover (транзиторное состояние) — единый эффект для «прозрачных» элементов */
+.logo:hover,
+.main-nav-link:hover,
+.header-icon-btn:hover,
+.theme-btn:hover,
+.burger:hover,
+.rubrics-toggle:hover,
+.footer-resource:hover,
+.footer-social-link:hover,
+.btn-secondary:hover {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* 3. Persistent states (постоянное состояние) — отделены от :hover */
+.main-nav-link[aria-current="page"],
+.theme-btn[aria-pressed="true"] {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* 4. Primary button — особая визуальная иерархия (НЕ получает --accent-soft) */
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--accent-hover);
+  color: var(--color-on-accent);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px var(--accent-ring);
+}
+.btn-primary:active {
+  transform: translateY(0);
 }

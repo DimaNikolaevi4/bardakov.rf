@@ -19,7 +19,7 @@
 html {
   scroll-behavior: smooth;
   /* Контроль типографского ритма */
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -81,9 +81,9 @@ select {
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  transition: box-shadow var(--transition-fast);
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--t-fast);
 }
 
 .site-header.is-scrolled {
@@ -305,8 +305,8 @@ select {
 /* Footer — прижат к низу */
 .site-footer {
   flex-shrink: 0;
-  background-color: var(--color-surface-alt);
-  border-top: 1px solid var(--color-border);
+  background-color: var(--bg-subtle);
+  border-top: 1px solid var(--border);
   padding-block: var(--space-12) var(--space-6);
   margin-top: auto;
 }
@@ -381,31 +381,11 @@ select {
   gap: var(--space-6);
 }
 
-/* === 6. ОТСТУПЫ (утилиты) === */
-
-.mt-0 { margin-top: 0; }
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
-.mt-12 { margin-top: var(--space-12); }
-
-.mb-0 { margin-bottom: 0; }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
-.mb-12 { margin-bottom: var(--space-12); }
-
-.pt-0 { padding-top: 0; }
-.pt-4 { padding-top: var(--space-4); }
-.pt-8 { padding-top: var(--space-8); }
-.pt-12 { padding-top: var(--space-12); }
-
-.pb-0 { padding-bottom: 0; }
-.pb-4 { padding-bottom: var(--space-4); }
-.pb-8 { padding-bottom: var(--space-8); }
-.pb-12 { padding-bottom: var(--space-12); }
+/* === 6. ОТСТУПЫ ===
+   Утилитарные классы отступов (.mt-0, .mb-4, .pt-8 и т. д.) удалены
+   в рамках ФАЗЫ 3 CSS-рефакторинга. Отступы должны задаваться внутри
+   компонентов, а не через utility-классы. Используйте --space-* токены
+   из tokens.css. */
 
 /* === 7. ЦЕНТРИРОВАНИЕ === */
 

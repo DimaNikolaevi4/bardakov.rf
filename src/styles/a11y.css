@@ -14,32 +14,32 @@
   left: var(--space-4);
   z-index: var(--z-tooltip);
   padding: var(--space-3) var(--space-6);
-  background-color: var(--color-primary);
-  color: var(--color-primary-text);
+  background-color: var(--accent);
+  color: var(--color-on-accent);
   font-weight: var(--weight-semibold);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   text-decoration: none;
-  transition: top var(--transition-fast);
+  transition: top var(--t-fast);
 }
 
 .skip-link:focus,
 .skip-link:focus-visible {
   top: var(--space-4);
-  outline: 3px solid var(--color-focus-ring);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 2px;
 }
 
 /* === 2. ВИДИМЫЙ ФОКУС === */
 
 :focus-visible {
-  outline: 3px solid var(--color-focus-ring);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
 /* В VI-режиме фокус более контрастный */
 [data-theme="vi"] :focus-visible {
-  outline: 4px solid var(--color-focus-ring);
+  outline: 4px solid var(--accent-ring);
   outline-offset: 3px;
 }
 
@@ -128,11 +128,11 @@
   bottom: 0;
   width: min(360px, 100vw);
   z-index: var(--z-modal);
-  background-color: var(--color-surface);
-  border-left: 1px solid var(--color-border);
+  background-color: var(--bg-primary);
+  border-left: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   transform: translateX(100%);
-  transition: transform var(--transition-base);
+  transition: transform var(--t-base);
   display: flex;
   flex-direction: column;
 }
@@ -148,7 +148,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility var(--transition-base);
+  transition: opacity var(--t-base), visibility var(--t-base);
 }
 
 .a11y-panel__backdrop[aria-hidden="false"] {
@@ -166,21 +166,18 @@
   height: var(--target-min);
   border: none;
   background: transparent;
-  color: var(--color-text);
+  color: var(--text-primary);
   font-size: var(--text-xl);
   cursor: pointer;
-  border-radius: var(--radius-md);
-  transition: background-color var(--transition-fast);
+  border-radius: var(--radius);
+  transition: background-color var(--t-fast);
 }
 
 .close-btn:hover {
-  background-color: var(--color-surface-alt);
+  background-color: var(--bg-subtle);
 }
 
-.close-btn:focus-visible {
-  outline: 3px solid var(--color-focus-ring);
-  outline-offset: 2px;
-}
+/* .close-btn:focus-visible — удалено: покрывается глобальным :focus-visible выше */
 
 /* === 9. OFFCANVAS (мобильное меню) === */
 
@@ -191,13 +188,12 @@
   bottom: 0;
   width: min(420px, 100vw);
   z-index: var(--z-offcanvas);
-  background-color: var(--color-surface);
-  border-left: 1px solid var(--color-border);
+  background-color: var(--bg-primary);
+  border-left: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   transform: translateX(100%);
-  transition: transform var(--transition-base);
+  transition: transform var(--t-base);
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .offcanvas.is-open {
@@ -211,7 +207,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility var(--transition-base);
+  transition: opacity var(--t-base), visibility var(--t-base);
 }
 
 .offcanvas-backdrop.is-open {
@@ -223,15 +219,15 @@
 
 @media (prefers-contrast: more) {
   :root {
-    --color-text: #000000;
-    --color-text-muted: #1c1917;
-    --color-border: #000000;
+    --text-primary: #000000;
+    --text-muted: #1c1917;
+    --border: #000000;
   }
 
   [data-theme="dark"] {
-    --color-text: #ffffff;
-    --color-text-muted: #f5f5f4;
-    --color-border: #ffffff;
+    --text-primary: #ffffff;
+    --text-muted: #f5f5f4;
+    --border: #ffffff;
   }
 }
 
@@ -266,13 +262,13 @@ label {
   display: block;
   margin-bottom: var(--space-2);
   font-weight: var(--weight-medium);
-  color: var(--color-text);
+  color: var(--text-primary);
 }
 
 /* Обязательные поля */
 [required] + .form-required,
 label .required {
-  color: var(--color-accent);
+  color: var(--accent);
   margin-left: var(--space-1);
 }
 
@@ -281,29 +277,29 @@ textarea,
 select {
   width: 100%;
   padding: var(--space-3) var(--space-4);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   font-size: var(--text-base);
-  color: var(--color-text);
-  transition: border-color var(--transition-fast);
+  color: var(--text-primary);
+  transition: border-color var(--t-fast);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--color-primary);
-  outline: 3px solid var(--color-focus-ring);
+  border-color: var(--accent);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 1px;
 }
 
 input[aria-invalid="true"],
 textarea[aria-invalid="true"] {
-  border-color: var(--color-accent);
+  border-color: var(--accent);
 }
 
 .form-error {
-  color: var(--color-accent);
+  color: var(--accent);
   font-size: var(--text-sm);
   margin-top: var(--space-2);
 }
@@ -317,17 +313,17 @@ textarea[aria-invalid="true"] {
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-surface-alt);
+    background: var(--bg-subtle);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-text-muted);
+    background: var(--text-muted);
     border-radius: var(--radius-full);
-    border: 3px solid var(--color-surface-alt);
+    border: 3px solid var(--bg-subtle);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text);
+    background: var(--text-primary);
   }
 }
 

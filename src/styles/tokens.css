@@ -55,8 +55,89 @@
   --z-modal: 1060;
   --z-tooltip: 1070;
 
-  /* Цвет focus-ring для :focus-visible */
+  /* === ДОБАВЛЕНО ФАЗА 1: Токен для текста на залитых кнопках === */
+  --color-on-accent: #ffffff;
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Шкала отступов (--space-*) ===
+     Единая система spacing-токенов для компонентов и раскладки. */
+  --space-1:  0.25rem;   /* 4px  */
+  --space-2:  0.5rem;    /* 8px  */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.5rem;    /* 24px */
+  --space-6:  2rem;      /* 32px */
+  --space-8:  3rem;      /* 48px */
+  --space-10: 4rem;      /* 64px */
+  --space-12: 6rem;      /* 96px */
+  --space-16: 8rem;      /* 128px */
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Типографская шкала (--text-*) === */
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  1.875rem;   /* 30px */
+  --text-4xl:  2.25rem;    /* 36px */
+  --text-5xl:  3rem;       /* 48px */
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Начертания (--weight-*) === */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Интерлиньяж (--leading-*) === */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Семейства шрифтов (семантические алиасы) === */
+  --font-body:    var(--font-main);
+  --font-heading: var(--font-main);
+  --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Контейнеры === */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: var(--container);
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Цели клика (a11y) === */
+  --target-min: var(--target);
+  --target-vi:  56px;
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Токены-алиасы теней (для совместимости со старым кодом) === */
+  --shadow-md:  var(--shadow);
+  --shadow-lg:  var(--shadow-hover);
+  --shadow-air: var(--shadow-hover);
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Цветовой токен для <mark> === */
+  --blue-100: var(--accent-soft);
+
+  /* Цвет focus-ring для :focus-visible (алиас) */
   --color-focus-ring: var(--accent-ring);
+
+  /* === ДОБАВЛЕНО ФАЗА 1: Обратная совместимость со старыми именами токенов ===
+     Эти алиасы позволяют не править разом все старые использования
+     (--color-bg, --color-surface, --color-text и т. д.) в a11y/typography/layout.
+     При возможности предпочтительно использовать новые имена напрямую. */
+  --color-bg:           var(--bg-primary);
+  --color-surface:      var(--bg-primary);
+  --color-surface-alt: var(--bg-subtle);
+  --color-text:         var(--text-primary);
+  --color-text-muted:   var(--text-muted);
+  --color-primary:      var(--accent);
+  --color-primary-hover:var(--accent-hover);
+  --color-primary-text: var(--color-on-accent);
+  --color-border:       var(--border);
+  --color-accent:       var(--accent);
+
+  /* Алиасы для radius/transition (старые имена) */
+  --radius-md:   var(--radius);
+  --transition-fast: var(--t-fast);
+  --transition-base: var(--t-base);
 }
 
 /* === Тёмная тема «Ночное небо» === */
