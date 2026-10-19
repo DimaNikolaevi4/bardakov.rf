@@ -163,54 +163,74 @@
       if (index === this.currentIndex) return;
 
       this.isAnimating = true;
-
-      // direction: "forward" (вправо) или "backward" (влево)
-      // Если не передано — определяем по индексу
-      if (!direction) {
-        direction = index > this.currentIndex ? "forward" : "backward";
-      }
       const goingForward = direction === "forward";
       const goingBackward = direction === "backward";
 
-      // Обновляем классы слайдов
-      this.slides.forEach((slide, i) => {
-        slide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
+      // Шаг 1: Предварительно позиционируем входящий слайд
+      // на правильной стартовой позиции БЕЗ анимации.
+      // Для forward: входящий слайд стартует слева (is-next = translateX(-100%))
+      // Для backward: входящий слайд стартует справа (is-prev = translateX(100%))
+      const incomingSlide = this.slides[index];
+      const startPosClass = goingForward ? "is-next" : "is-prev";
 
-        if (i === index) {
-          slide.classList.add("is-active");
-          slide.setAttribute("aria-hidden", "false");
-        } else {
-          slide.setAttribute("aria-hidden", "true");
-          const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
-          const nextIndex = (index + 1) % this.totalSlides;
-          if (i === prevIndex) {
-            // При движении назад: предыдущий слайд приходит справа (is-next)
-            // При движении вперёд: предыдущий слайд уходит влево (is-prev)
-            slide.classList.add(goingBackward ? "is-next" : "is-prev");
-          } else if (i === nextIndex) {
-            // При движении назад: следующий слайд уходит влево (is-prev)
-            // При движении вперёд: следующий слайд приходит справа (is-next)
-            slide.classList.add(goingBackward ? "is-prev" : "is-next");
+      // Убираем transition временно (через setProperty с important,
+      // т.к. CSS имеет transition-property: ... !important)
+      incomingSlide.style.setProperty("transition", "none", "important");
+      incomingSlide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
+      incomingSlide.classList.add(startPosClass);
+
+      // Принудительный reflow — браузер применит стартовую позицию
+      void incomingSlide.offsetHeight;
+
+      // Возвращаем transition (убираем inline important, CSS !important снова работает)
+      incomingSlide.style.removeProperty("transition");
+
+      // Шаг 2: В следующем кадре меняем классы → запускаем анимацию
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+        this.slides.forEach((slide, i) => {
+          slide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
+
+          if (i === index) {
+            slide.classList.add("is-active");
+            slide.setAttribute("aria-hidden", "false");
+          } else {
+            slide.setAttribute("aria-hidden", "true");
+            const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
+            const nextIndex = (index + 1) % this.totalSlides;
+            if (i === prevIndex) {
+              // prevIndex = слайд ПЕРЕД новым активным
+              // forward: этот слайд только что был активным → уходит вправо (is-prev)
+              // backward: этот слайд будет следующим → ждёт слева (is-next)
+              slide.classList.add(goingForward ? "is-prev" : "is-next");
+            } else if (i === nextIndex) {
+              // nextIndex = слайд ПОСЛЕ нового активного
+              // forward: этот слайд будет следующим → ждёт слева (is-next)
+              // backward: этот слайд только что был активным → уходит влево (is-next)
+              //           (НЕ is-prev, т.к. is-prev = вправо, а нам нужно влево!)
+              slide.classList.add(goingForward ? "is-next" : "is-next");
+            }
           }
+        });
+
+        // Обновляем точки пагинации
+        this.dots.forEach((dot, i) => {
+          dot.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+
+        this.currentIndex = index;
+
+        // Обновляем текст в hero-секции (если на главной странице)
+        if (this.hasHeroText) {
+          this.updateHeroText(index);
         }
+
+        // Разблокировка через 0.9с
+        setTimeout(() => {
+          this.isAnimating = false;
+        }, 900);
+        });
       });
-
-      // Обновляем точки пагинации
-      this.dots.forEach((dot, i) => {
-        dot.setAttribute("aria-current", i === index ? "true" : "false");
-      });
-
-      this.currentIndex = index;
-
-      // Обновляем текст в hero-секции (если на главной странице)
-      if (this.hasHeroText) {
-        this.updateHeroText(index);
-      }
-
-      // Разблокировка через 0.9с (чуть больше transition 0.8s)
-      setTimeout(() => {
-        this.isAnimating = false;
-      }, 900);
     }
 
     updateHeroText(index) {
