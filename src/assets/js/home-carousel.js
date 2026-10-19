@@ -1,16 +1,15 @@
 /* ============================================================
- * home-carousel.js — Веерная карусель с blob-формой и динамическим текстом
+ * home-carousel.js — 3D Flip карусель с blob-формой + динамический текст
+ *
+ * Гибрид: 3D flip из 7dc6b76a + динамический текст из 4d88098d
  *
  * Особенности:
- * - Веерная раскладка: все 3 слайда видны одновременно
+ * - 3D flip переход (1.2s, centered rotation с perspective)
  * - Blob-форма с анимацией морфинга
  * - Динамическая смена текста в левом блоке при переключении слайда
  * - Stagger-анимация появления текста (каскад 100мс)
  * - Автопрокрутка 8 секунд, задержка 3 секунды перед стартом
  * - Пауза при наведении мыши
- *
- * Источник: docs/DESIGN.md §6 + креативный дизайн
- * Создано: 2026-10-18 (fan carousel + dynamic text)
  * ============================================================ */
 
 (function () {
@@ -62,7 +61,7 @@
     },
   ];
 
-  class FanCarousel {
+  class Carousel3D {
     constructor(carousel) {
       this.carousel = carousel;
       this.slides = Array.from(carousel.querySelectorAll(".home-carousel__slide"));
@@ -73,8 +72,8 @@
       this.currentIndex = 0;
       this.totalSlides = this.slides.length;
       this.autoPlay = null;
-      this.autoPlayDelay = 8000; // 8 секунд между слайдами
-      this.initialDelay = 3000; // 3 секунды перед первым автозапуском
+      this.autoPlayDelay = 8000;      // 8 секунд между слайдами
+      this.initialDelay = 3000;        // 3 секунды перед первым автозапуском
       this.isAnimating = false;
 
       // Проверяем, на главной ли мы странице (есть ли hero-текст для обновления)
@@ -84,7 +83,7 @@
     }
 
     init() {
-      // Обработчики кнопок
+      // Обработчики кнопок навигации
       if (this.prevBtn) {
         this.prevBtn.addEventListener("click", () => {
           this.handleInteraction();
@@ -110,12 +109,9 @@
 
       // Пауза при наведении мыши
       this.carousel.addEventListener("mouseenter", () => this.stopAutoPlay());
-      this.carousel.addEventListener("mouseleave", () => {
-        // Возобновление через 1с после ухода мыши
-        setTimeout(() => this.startAutoPlay(), 1000);
-      });
+      this.carousel.addEventListener("mouseleave", () => this.startAutoPlay());
 
-      // Пауза при потере видимости вкладки
+      // Пауза при потере видимости (вкладка неактивна)
       document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
           this.stopAutoPlay();
@@ -165,18 +161,19 @@
 
       this.isAnimating = true;
 
-      // Обновляем классы слайдов для веерной раскладки
+      // Обновляем классы слайдов
       this.slides.forEach((slide, i) => {
-        slide.classList.remove("is-active", "is-prev", "is-next");
-        slide.setAttribute("aria-hidden", "true");
+        slide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
 
         if (i === index) {
           slide.classList.add("is-active");
           slide.setAttribute("aria-hidden", "false");
-        } else if (i === (index - 1 + this.totalSlides) % this.totalSlides) {
-          slide.classList.add("is-prev");
-        } else if (i === (index + 1) % this.totalSlides) {
-          slide.classList.add("is-next");
+        } else {
+          slide.setAttribute("aria-hidden", "true");
+          const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
+          const nextIndex = (index + 1) % this.totalSlides;
+          if (i === prevIndex) slide.classList.add("is-prev");
+          else if (i === nextIndex) slide.classList.add("is-next");
         }
       });
 
@@ -192,17 +189,16 @@
         this.updateHeroText(index);
       }
 
-      // Разблокировка через 1.1с (чуть больше transition 1s)
+      // Разблокировка через 1.3с
       setTimeout(() => {
         this.isAnimating = false;
-      }, 1100);
+      }, 1300);
     }
 
     updateHeroText(index) {
       const data = heroSlideData[index];
       if (!data) return;
 
-      // Элементы текста для stagger-анимации
       const textItems = document.querySelectorAll(
         ".page-showcase__copy > .eyebrow, " +
           ".page-showcase__copy > h1, " +
@@ -214,7 +210,7 @@
       // Скрываем все элементы
       textItems.forEach((item) => item.classList.remove("visible"));
 
-      // Меняем содержимое пока скрыто (через 300мс после скрытия)
+      // Меняем содержимое через 300мс
       setTimeout(() => {
         const eyebrow = document.getElementById("hero-eyebrow");
         const h1 = document.getElementById("hero-h1");
@@ -230,7 +226,7 @@
         if (quoteCite) quoteCite.textContent = data.cite;
         if (actions) actions.innerHTML = data.buttons;
 
-        // Stagger-анимация появления (каскад с задержкой 100мс)
+        // Stagger-анимация (каскад 100мс)
         textItems.forEach((item, i) => {
           setTimeout(() => {
             item.classList.add("visible");
@@ -244,7 +240,7 @@
   function initCarousels() {
     document.querySelectorAll("[data-home-carousel]").forEach((carousel) => {
       if (!carousel._carouselInstance) {
-        carousel._carouselInstance = new FanCarousel(carousel);
+        carousel._carouselInstance = new Carousel3D(carousel);
       }
     });
   }
