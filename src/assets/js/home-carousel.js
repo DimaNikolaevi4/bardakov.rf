@@ -161,6 +161,13 @@
 
       this.isAnimating = true;
 
+      // Определяем направление для правильной анимации скольжения
+      // forward = вперёд (next кнопка), backward = назад (prev кнопка)
+      const goingForward = index > this.currentIndex ||
+        (this.currentIndex === this.totalSlides - 1 && index === 0);
+      const goingBackward = index < this.currentIndex ||
+        (this.currentIndex === 0 && index === this.totalSlides - 1);
+
       // Обновляем классы слайдов
       this.slides.forEach((slide, i) => {
         slide.classList.remove("is-active", "is-prev", "is-next", "is-turning-in", "is-turning-out");
@@ -172,8 +179,13 @@
           slide.setAttribute("aria-hidden", "true");
           const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
           const nextIndex = (index + 1) % this.totalSlides;
-          if (i === prevIndex) slide.classList.add("is-prev");
-          else if (i === nextIndex) slide.classList.add("is-next");
+          if (i === prevIndex) {
+            // При движении назад меняем классы: предыдущий слайд
+            // должен прийти справа (is-next), а не уйти влево (is-prev)
+            slide.classList.add(goingBackward ? "is-next" : "is-prev");
+          } else if (i === nextIndex) {
+            slide.classList.add(goingBackward ? "is-prev" : "is-next");
+          }
         }
       });
 

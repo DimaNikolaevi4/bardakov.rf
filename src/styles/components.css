@@ -3071,16 +3071,16 @@ body.menu-open { overflow: hidden; }
   z-index: 5;
 }
 
-/* Предыдущий слайд — уехал влево */
+/* Предыдущий слайд — уехал вправо */
 .home-carousel__slide.is-prev {
-  transform: translateX(-100%) scale(0.85);
+  transform: translateX(100%) scale(0.85);
   opacity: 0;
   z-index: 1;
 }
 
-/* Следующий слайд — ждёт справа */
+/* Следующий слайд — ждёт слева */
 .home-carousel__slide.is-next {
-  transform: translateX(100%) scale(0.85);
+  transform: translateX(-100%) scale(0.85);
   opacity: 0;
   z-index: 1;
 }
