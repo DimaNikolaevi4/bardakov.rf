@@ -87,14 +87,14 @@
       if (this.prevBtn) {
         this.prevBtn.addEventListener("click", () => {
           this.handleInteraction();
-          this.goToSlide(this.currentIndex - 1);
+          this.goToSlide(this.currentIndex - 1, "backward");
         });
       }
 
       if (this.nextBtn) {
         this.nextBtn.addEventListener("click", () => {
           this.handleInteraction();
-          this.goToSlide(this.currentIndex + 1);
+          this.goToSlide(this.currentIndex + 1, "forward");
         });
       }
 
@@ -103,7 +103,10 @@
         dot.addEventListener("click", () => {
           if (index === this.currentIndex) return;
           this.handleInteraction();
-          this.goToSlide(index);
+          // Определяем направление по кратчайшему пути
+          const diff = index - this.currentIndex;
+          const direction = diff > 0 ? "forward" : "backward";
+          this.goToSlide(index, direction);
         });
       });
 
@@ -142,7 +145,7 @@
       this.stopAutoPlay();
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       this.autoPlay = setInterval(() => {
-        this.goToSlide(this.currentIndex + 1);
+        this.goToSlide(this.currentIndex + 1, "forward");
       }, this.autoPlayDelay);
     }
 
@@ -153,7 +156,7 @@
       }
     }
 
-    goToSlide(index) {
+    goToSlide(index, direction) {
       if (this.isAnimating) return;
       if (index < 0) index = this.totalSlides - 1;
       if (index >= this.totalSlides) index = 0;
@@ -161,12 +164,13 @@
 
       this.isAnimating = true;
 
-      // Определяем направление для правильной анимации скольжения
-      // forward = вперёд (next кнопка), backward = назад (prev кнопка)
-      const goingForward = index > this.currentIndex ||
-        (this.currentIndex === this.totalSlides - 1 && index === 0);
-      const goingBackward = index < this.currentIndex ||
-        (this.currentIndex === 0 && index === this.totalSlides - 1);
+      // direction: "forward" (вправо) или "backward" (влево)
+      // Если не передано — определяем по индексу
+      if (!direction) {
+        direction = index > this.currentIndex ? "forward" : "backward";
+      }
+      const goingForward = direction === "forward";
+      const goingBackward = direction === "backward";
 
       // Обновляем классы слайдов
       this.slides.forEach((slide, i) => {
@@ -180,10 +184,12 @@
           const prevIndex = (index - 1 + this.totalSlides) % this.totalSlides;
           const nextIndex = (index + 1) % this.totalSlides;
           if (i === prevIndex) {
-            // При движении назад меняем классы: предыдущий слайд
-            // должен прийти справа (is-next), а не уйти влево (is-prev)
+            // При движении назад: предыдущий слайд приходит справа (is-next)
+            // При движении вперёд: предыдущий слайд уходит влево (is-prev)
             slide.classList.add(goingBackward ? "is-next" : "is-prev");
           } else if (i === nextIndex) {
+            // При движении назад: следующий слайд уходит влево (is-prev)
+            // При движении вперёд: следующий слайд приходит справа (is-next)
             slide.classList.add(goingBackward ? "is-prev" : "is-next");
           }
         }
