@@ -189,10 +189,10 @@
         this.updateHeroText(index);
       }
 
-      // Разблокировка через 1.3с
+      // Разблокировка через 0.9с (чуть больше transition 0.8s)
       setTimeout(() => {
         this.isAnimating = false;
-      }, 1300);
+      }, 900);
     }
 
     updateHeroText(index) {
