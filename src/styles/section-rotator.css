@@ -61,6 +61,43 @@
 
 .section-rotator__number {
   line-height: 1.1;
+  opacity: 0;
+  transition: opacity var(--rotator-duration) ease;
+}
+
+.section-rotator__card.is-center .section-rotator__number {
+  opacity: 1;
+}
+
+.section-rotator__arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: clamp(1.125rem, 2.5vw, 1.75rem);
+  aspect-ratio: 1;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--rotator-duration) ease,
+    transform var(--rotator-duration) ease;
+}
+
+.section-rotator__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.section-rotator__card.is-left .section-rotator__arrow,
+.section-rotator__card.is-right .section-rotator__arrow {
+  opacity: 1;
+}
+
+.section-rotator__card.is-right .section-rotator__arrow {
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .section-rotator__eyebrow {
