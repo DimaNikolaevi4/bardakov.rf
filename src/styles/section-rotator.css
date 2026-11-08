@@ -1,15 +1,17 @@
 .section-rotator {
   --rotator-duration: 900ms;
   width: 100%;
-  max-width: 70rem;
-  margin-inline: auto;
+  max-width: none;
+  margin: 0;
 }
 
-.section-rotator__hint {
-  margin-block-end: 0.75rem;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  text-align: center;
+.page-scaffold__body-block--rotator {
+  padding-block: 0;
+}
+
+.page-scaffold__body-block--rotator > .container {
+  max-width: none;
+  padding-inline: 0;
 }
 
 .section-rotator__stage {
@@ -63,9 +65,9 @@
 
 .section-rotator__card.is-left,
 .section-rotator__card.is-right {
-  top: 10%;
+  top: 0;
   width: 10%;
-  height: 80%;
+  height: 100%;
   z-index: 1;
   font-size: clamp(0.875rem, 1.5vw, 1.125rem);
 }
@@ -79,10 +81,10 @@
 }
 
 .section-rotator__card.is-center {
-  top: 10%;
+  top: 0;
   left: 10%;
   width: 80%;
-  height: 80%;
+  height: 100%;
   z-index: 2;
   font-size: clamp(2rem, 5vw, 3.25rem);
   cursor: default;
