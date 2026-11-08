@@ -22,45 +22,54 @@
 }
 
 .section-rotator__card {
+  --rotator-accent: var(--accent);
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.25rem;
   overflow: hidden;
-  border: 1px solid rgb(30 41 59 / 35%);
-  border-radius: var(--radius-md);
-  color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  box-shadow:
-    0.25rem 0.35rem 1rem rgb(15 23 42 / 18%),
-    0.5rem 0.75rem 2rem rgb(15 23 42 / 12%);
+  box-shadow: var(--shadow-sm);
   transition:
-    inset 900ms ease,
     left var(--rotator-duration) ease,
     top var(--rotator-duration) ease,
     width var(--rotator-duration) ease,
     height var(--rotator-duration) ease,
     font-size var(--rotator-duration) ease,
-    box-shadow var(--rotator-duration) ease;
+    background-color var(--t-base),
+    color var(--t-base),
+    border-color var(--t-base),
+    box-shadow var(--t-base);
+}
+
+.section-rotator__card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--rotator-accent);
+  content: "";
+  pointer-events: none;
 }
 
 .section-rotator__card--4 {
-  background: #6c5ce7;
+  --rotator-accent: var(--accent);
 }
 
 .section-rotator__card--5 {
-  background: #00cec9;
-  color: #1e1e2e;
+  --rotator-accent: var(--highlight);
 }
 
 .section-rotator__card--6 {
-  background: #e17055;
-  color: #1e1e2e;
+  --rotator-accent: var(--accent-hover);
 }
 
 .section-rotator__card.is-left,
@@ -88,9 +97,7 @@
   z-index: 2;
   font-size: clamp(2rem, 5vw, 3.25rem);
   cursor: default;
-  box-shadow:
-    0.75rem 1rem 2rem rgb(15 23 42 / 23%),
-    1.25rem 1.75rem 3.5rem rgb(15 23 42 / 15%);
+  box-shadow: var(--shadow);
 }
 
 .section-rotator__card[aria-disabled="true"]:not(.is-center) {
@@ -99,13 +106,17 @@
 
 .section-rotator__card:focus-visible {
   z-index: 4;
-  outline: 3px solid var(--text-primary);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 3px;
 }
 
 [data-theme="high-contrast"] .section-rotator__card {
   border: 2px solid currentColor;
   box-shadow: none;
+}
+
+.section-rotator__card:not(.is-center):not([aria-disabled="true"]):hover {
+  border-color: var(--rotator-accent);
 }
 
 @media (max-width: 480px) {
