@@ -31,8 +31,10 @@
   --rotator-accent: var(--accent);
   position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
   padding: 0.25rem;
   overflow: hidden;
   border: 1px solid var(--border);
@@ -55,6 +57,24 @@
     color var(--t-base),
     border-color var(--t-base),
     box-shadow var(--t-base);
+}
+
+.section-rotator__number {
+  line-height: 1.1;
+}
+
+.section-rotator__eyebrow {
+  display: none;
+  max-width: min(90%, 48rem);
+  margin: 0;
+  text-align: center;
+  justify-content: center;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.section-rotator__card.is-center .section-rotator__eyebrow {
+  display: inline-flex;
 }
 
 .section-rotator__card::before {

@@ -63,6 +63,10 @@
                     ? "is-after"
                     : "is-hidden";
         const isVisible = accessiblePositions.has(position);
+        const label = card.querySelector("[data-rotator-eyebrow]")?.textContent.trim();
+        const cardName = label
+          ? `Карточка ${card.dataset.rotatorCard}: ${label}`
+          : `Карточка ${card.dataset.rotatorCard}`;
 
         card.classList.remove(...positionClasses);
         card.classList.add(position);
@@ -76,17 +80,17 @@
         if (position === "is-left") {
           card.setAttribute(
             "aria-label",
-            `Карточка ${card.dataset.rotatorCard}, слева. Показать предыдущие карточки.`,
+            `${cardName}, слева. Показать предыдущие карточки.`,
           );
         } else if (position === "is-center") {
           card.setAttribute(
             "aria-label",
-            `Карточка ${card.dataset.rotatorCard}, в центре.`,
+            `${cardName}, в центре.`,
           );
         } else if (position === "is-right") {
           card.setAttribute(
             "aria-label",
-            `Карточка ${card.dataset.rotatorCard}, справа. Показать следующие карточки.`,
+            `${cardName}, справа. Показать следующие карточки.`,
           );
         }
       });
@@ -108,8 +112,12 @@
           this.cards[(this.centerIndex - 1 + count) % count].dataset.rotatorCard,
           this.cards[this.centerIndex].dataset.rotatorCard,
           this.cards[(this.centerIndex + 1) % count].dataset.rotatorCard,
-        ];
-        this.status.textContent = `Показаны карточки ${visibleCards[0]}, ${visibleCards[1]} и ${visibleCards[2]} из 1–6.`;
+        ].map((cardId) => {
+          const card = this.cards.find((item) => item.dataset.rotatorCard === cardId);
+          const label = card.querySelector("[data-rotator-eyebrow]")?.textContent.trim();
+          return label ? `${cardId} — ${label}` : cardId;
+        });
+        this.status.textContent = `Показаны карточки ${visibleCards[0]}, ${visibleCards[1]} и ${visibleCards[2]}.`;
       }
 
       const duration = Number.parseFloat(
