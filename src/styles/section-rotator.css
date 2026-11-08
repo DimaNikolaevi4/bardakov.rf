@@ -65,8 +65,63 @@
   transition: opacity var(--rotator-duration) ease;
 }
 
+.section-rotator__copy {
+  display: flex;
+  flex: 0 0 60%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  min-width: 0;
+}
+
 .section-rotator__card.is-center .section-rotator__number {
   opacity: 1;
+}
+
+.section-rotator__visual {
+  display: none;
+  flex: 0 0 40%;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.section-rotator__card.is-center .section-rotator__visual {
+  display: flex;
+}
+
+.section-rotator__image-placeholder {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background:
+    radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 42%),
+    linear-gradient(145deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--text-secondary);
+  font-size: clamp(0.65rem, 1.1vw, 0.875rem);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  box-shadow: 0 1.25rem 3.75rem color-mix(in srgb, var(--accent) 20%, transparent);
+  animation: blob-morph 12s ease-in-out infinite;
+}
+
+.section-rotator__image-placeholder svg {
+  width: clamp(1.75rem, 4vw, 3rem);
+  height: clamp(1.75rem, 4vw, 3rem);
+  flex: 0 0 auto;
+  opacity: 0.72;
 }
 
 .section-rotator__arrow {
@@ -182,6 +237,10 @@
   width: var(--rotator-center-width);
   height: 100%;
   z-index: 2;
+  flex-direction: row;
+  justify-content: stretch;
+  gap: 0;
+  padding: 0;
   font-size: clamp(2rem, 5vw, 3.25rem);
   cursor: default;
   box-shadow: var(--shadow);
@@ -202,6 +261,13 @@
   box-shadow: none;
 }
 
+[data-theme="high-contrast"] .section-rotator__image-placeholder {
+  border: 2px solid currentColor;
+  background: var(--bg-primary);
+  color: currentColor;
+  box-shadow: none;
+}
+
 .section-rotator__card:not(.is-center):not([aria-disabled="true"]):hover {
   border-color: var(--rotator-accent);
 }
@@ -219,5 +285,10 @@
 @media (prefers-reduced-motion: reduce) {
   .section-rotator {
     --rotator-duration: 0ms;
+  }
+
+  .section-rotator__image-placeholder {
+    border-radius: var(--radius);
+    animation: none;
   }
 }
