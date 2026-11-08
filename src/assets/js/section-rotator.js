@@ -22,9 +22,9 @@
       );
       this.busy = false;
 
-      if (this.centerIndex < 1 || this.centerIndex >= this.cards.length - 1) {
+      if (this.centerIndex < 0 || this.cards.length < 3) {
         throw new Error(
-          "[section-rotator] The initial center card needs a card on each side.",
+          "[section-rotator] The carousel needs a valid center card and at least three cards.",
         );
       }
 
@@ -44,7 +44,12 @@
 
     render() {
       this.cards.forEach((card, index) => {
-        const offset = index - this.centerIndex;
+        const rawOffset =
+          (index - this.centerIndex + this.cards.length) % this.cards.length;
+        const offset =
+          rawOffset > this.cards.length / 2
+            ? rawOffset - this.cards.length
+            : rawOffset;
         const position =
           offset === -2
             ? "is-before"
@@ -58,8 +63,6 @@
                     ? "is-after"
                     : "is-hidden";
         const isVisible = accessiblePositions.has(position);
-        const atStart = this.centerIndex === 1;
-        const atEnd = this.centerIndex === this.cards.length - 2;
 
         card.classList.remove(...positionClasses);
         card.classList.add(position);
@@ -67,17 +70,13 @@
         card.setAttribute("aria-hidden", String(!isVisible));
         card.setAttribute("tabindex", isVisible ? "0" : "-1");
 
-        const canShift =
-          (position === "is-left" && !atStart) ||
-          (position === "is-right" && !atEnd);
+        const canShift = position === "is-left" || position === "is-right";
         card.setAttribute("aria-disabled", String(this.busy || !canShift));
 
         if (position === "is-left") {
           card.setAttribute(
             "aria-label",
-            atStart
-              ? `Карточка ${card.dataset.rotatorCard}, слева. Начало списка.`
-              : `Карточка ${card.dataset.rotatorCard}, слева. Показать предыдущие карточки.`,
+            `Карточка ${card.dataset.rotatorCard}, слева. Показать предыдущие карточки.`,
           );
         } else if (position === "is-center") {
           card.setAttribute(
@@ -87,9 +86,7 @@
         } else if (position === "is-right") {
           card.setAttribute(
             "aria-label",
-            atEnd
-              ? `Карточка ${card.dataset.rotatorCard}, справа. Конец списка.`
-              : `Карточка ${card.dataset.rotatorCard}, справа. Показать следующие карточки.`,
+            `Карточка ${card.dataset.rotatorCard}, справа. Показать следующие карточки.`,
           );
         }
       });
@@ -100,17 +97,18 @@
     shift(direction) {
       if (this.busy) return;
 
-      const nextCenter = this.centerIndex + direction;
-      if (nextCenter < 1 || nextCenter >= this.cards.length - 1) return;
-
-      this.centerIndex = nextCenter;
+      this.centerIndex =
+        (this.centerIndex + direction + this.cards.length) % this.cards.length;
       this.busy = true;
       this.render();
 
       if (this.status) {
-        const visibleCards = this.cards
-          .slice(this.centerIndex - 1, this.centerIndex + 2)
-          .map((card) => card.dataset.rotatorCard);
+        const count = this.cards.length;
+        const visibleCards = [
+          this.cards[(this.centerIndex - 1 + count) % count].dataset.rotatorCard,
+          this.cards[this.centerIndex].dataset.rotatorCard,
+          this.cards[(this.centerIndex + 1) % count].dataset.rotatorCard,
+        ];
         this.status.textContent = `Показаны карточки ${visibleCards[0]}, ${visibleCards[1]} и ${visibleCards[2]} из 1–6.`;
       }
 
