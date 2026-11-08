@@ -1,0 +1,129 @@
+.section-rotator {
+  --rotator-duration: 900ms;
+  width: 100%;
+  max-width: 70rem;
+  margin-inline: auto;
+}
+
+.section-rotator__hint {
+  margin-block-end: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.section-rotator__stage {
+  position: relative;
+  width: 100%;
+  height: clamp(12rem, 30vw, 22rem);
+  isolation: isolate;
+}
+
+.section-rotator__card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  overflow: hidden;
+  border: 1px solid rgb(30 41 59 / 35%);
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    0.25rem 0.35rem 1rem rgb(15 23 42 / 18%),
+    0.5rem 0.75rem 2rem rgb(15 23 42 / 12%);
+  transition:
+    inset 900ms ease,
+    left var(--rotator-duration) ease,
+    top var(--rotator-duration) ease,
+    width var(--rotator-duration) ease,
+    height var(--rotator-duration) ease,
+    font-size var(--rotator-duration) ease,
+    box-shadow var(--rotator-duration) ease;
+}
+
+.section-rotator__card--4 {
+  background: #6c5ce7;
+}
+
+.section-rotator__card--5 {
+  background: #00cec9;
+  color: #1e1e2e;
+}
+
+.section-rotator__card--6 {
+  background: #e17055;
+  color: #1e1e2e;
+}
+
+.section-rotator__card.is-left,
+.section-rotator__card.is-right {
+  top: 10%;
+  width: 10%;
+  height: 80%;
+  z-index: 1;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+}
+
+.section-rotator__card.is-left {
+  left: 0;
+}
+
+.section-rotator__card.is-right {
+  left: 90%;
+}
+
+.section-rotator__card.is-center {
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  z-index: 2;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  cursor: default;
+  box-shadow:
+    0.75rem 1rem 2rem rgb(15 23 42 / 23%),
+    1.25rem 1.75rem 3.5rem rgb(15 23 42 / 15%);
+}
+
+.section-rotator__card[aria-disabled="true"]:not(.is-center) {
+  cursor: wait;
+}
+
+.section-rotator__card:focus-visible {
+  z-index: 4;
+  outline: 3px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+[data-theme="high-contrast"] .section-rotator__card {
+  border: 2px solid currentColor;
+  box-shadow: none;
+}
+
+@media (max-width: 480px) {
+  .section-rotator__card.is-left,
+  .section-rotator__card.is-right {
+    width: 12%;
+  }
+
+  .section-rotator__card.is-right {
+    left: 88%;
+  }
+
+  .section-rotator__card.is-center {
+    left: 12%;
+    width: 76%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-rotator {
+    --rotator-duration: 0ms;
+  }
+}

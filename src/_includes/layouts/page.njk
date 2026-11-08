@@ -63,8 +63,12 @@
   {# Блок 4: Верхняя часть тела страницы #}
   <section class="page-scaffold__body-block" data-page-block="body-upper" aria-label="Верхний блок тела">
     <div class="container">
-      <div class="page-scaffold__slot{% if not pageBlocks.upper %} page-scaffold__slot--empty{% endif %}">
-        {% if pageBlocks.upper %}{{ pageBlocks.upper | safe }}{% endif %}
+      <div class="page-scaffold__slot{% if not pageBlocks.upper and page.url != '/' %} page-scaffold__slot--empty{% endif %}">
+        {% if pageBlocks.upper %}
+          {{ pageBlocks.upper | safe }}
+        {% elif page.url == "/" %}
+          {% include "components/section-rotator.njk" %}
+        {% endif %}
       </div>
     </div>
   </section>

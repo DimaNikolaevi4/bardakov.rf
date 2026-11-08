@@ -1,0 +1,31 @@
+<div class="section-rotator" data-section-rotator>
+  <p class="section-rotator__hint">Нажмите на боковую карточку, чтобы повернуть их по кругу.</p>
+
+  <div class="section-rotator__stage" role="group" aria-label="Ротатор карточек 4, 5 и 6">
+    <button
+      class="section-rotator__card section-rotator__card--4 is-left"
+      type="button"
+      data-rotator-card="4"
+      aria-label="Карточка 4, слева. Нажмите, чтобы повернуть карточки."
+      aria-disabled="false"
+    >4</button>
+    <button
+      class="section-rotator__card section-rotator__card--5 is-center"
+      type="button"
+      data-rotator-card="5"
+      aria-label="Карточка 5, в центре. Нажмите на боковую карточку, чтобы повернуть."
+      aria-disabled="true"
+    >5</button>
+    <button
+      class="section-rotator__card section-rotator__card--6 is-right"
+      type="button"
+      data-rotator-card="6"
+      aria-label="Карточка 6, справа. Нажмите, чтобы повернуть карточки."
+      aria-disabled="false"
+    >6</button>
+  </div>
+
+  <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-rotator-status>
+    В центре карточка 5.
+  </p>
+</div>
