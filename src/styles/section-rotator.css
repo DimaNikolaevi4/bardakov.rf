@@ -1,5 +1,10 @@
 .section-rotator {
   --rotator-duration: 900ms;
+  --rotator-side-width: 10%;
+  --rotator-center-left: 10%;
+  --rotator-center-width: 80%;
+  --rotator-right-left: 90%;
+  --rotator-before-left: -10%;
   width: 100%;
   max-width: none;
   margin: 0;
@@ -18,6 +23,7 @@
   position: relative;
   width: 100%;
   height: clamp(12rem, 30vw, 22rem);
+  overflow: hidden;
   isolation: isolate;
 }
 
@@ -60,22 +66,46 @@
   pointer-events: none;
 }
 
-.section-rotator__card--4 {
-  --rotator-accent: var(--accent);
-}
-
+.section-rotator__card--1,
 .section-rotator__card--5 {
   --rotator-accent: var(--highlight);
 }
 
+.section-rotator__card--2,
 .section-rotator__card--6 {
   --rotator-accent: var(--accent-hover);
+}
+
+.section-rotator__card--3,
+.section-rotator__card--4 {
+  --rotator-accent: var(--accent);
+}
+
+.section-rotator__card.is-hidden {
+  display: none;
+}
+
+.section-rotator__card.is-before,
+.section-rotator__card.is-after {
+  top: 0;
+  width: var(--rotator-side-width);
+  height: 100%;
+  z-index: 0;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+}
+
+.section-rotator__card.is-before {
+  left: var(--rotator-before-left);
+}
+
+.section-rotator__card.is-after {
+  left: 100%;
 }
 
 .section-rotator__card.is-left,
 .section-rotator__card.is-right {
   top: 0;
-  width: 10%;
+  width: var(--rotator-side-width);
   height: 100%;
   z-index: 1;
   font-size: clamp(0.875rem, 1.5vw, 1.125rem);
@@ -86,13 +116,13 @@
 }
 
 .section-rotator__card.is-right {
-  left: 90%;
+  left: var(--rotator-right-left);
 }
 
 .section-rotator__card.is-center {
   top: 0;
-  left: 10%;
-  width: 80%;
+  left: var(--rotator-center-left);
+  width: var(--rotator-center-width);
   height: 100%;
   z-index: 2;
   font-size: clamp(2rem, 5vw, 3.25rem);
@@ -100,14 +130,14 @@
   box-shadow: var(--shadow);
 }
 
-.section-rotator__card[aria-disabled="true"]:not(.is-center) {
-  cursor: wait;
+.section-rotator__card[aria-disabled="true"] {
+  cursor: default;
 }
 
 .section-rotator__card:focus-visible {
   z-index: 4;
   outline: 3px solid var(--accent-ring);
-  outline-offset: 3px;
+  outline-offset: -4px;
 }
 
 [data-theme="high-contrast"] .section-rotator__card {
@@ -120,18 +150,12 @@
 }
 
 @media (max-width: 480px) {
-  .section-rotator__card.is-left,
-  .section-rotator__card.is-right {
-    width: 12%;
-  }
-
-  .section-rotator__card.is-right {
-    left: 88%;
-  }
-
-  .section-rotator__card.is-center {
-    left: 12%;
-    width: 76%;
+  .section-rotator {
+    --rotator-side-width: 12%;
+    --rotator-center-left: 12%;
+    --rotator-center-width: 76%;
+    --rotator-right-left: 88%;
+    --rotator-before-left: -12%;
   }
 }
 
