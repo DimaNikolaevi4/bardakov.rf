@@ -9,6 +9,16 @@
       "why": "последняя активность репо - секция rotator, её надо закрыть",
       "link": "docs/DESIGN.md",
       "source": "agent"
+    },
+    {
+      "id": "old-inventory",
+      "title": "Пройтись по docs/old-inventory.md: что из старого контента переносим в статику",
+      "when": "2026-11-21",
+      "time": null,
+      "status": "todo",
+      "why": "без отбора контента не спланировать этап миграции",
+      "link": "docs/old-inventory.md",
+      "source": "agent"
     }
   ]
 }
