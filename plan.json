@@ -3,9 +3,9 @@
     {
       "id": "rotator-review",
       "title": "Ревью секции rotator: довести до финального вида",
-      "when": "2026-11-18",
+      "when": null,
       "time": null,
-      "status": "todo",
+      "status": "backlog",
       "why": "последняя активность репо - секция rotator, её надо закрыть",
       "link": "docs/DESIGN.md",
       "source": "agent"
