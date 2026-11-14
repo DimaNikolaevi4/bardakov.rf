@@ -13,9 +13,9 @@
     {
       "id": "old-inventory",
       "title": "Пройтись по docs/old-inventory.md: что из старого контента переносим в статику",
-      "when": "2026-11-21",
+      "when": null,
       "time": null,
-      "status": "todo",
+      "status": "backlog",
       "why": "без отбора контента не спланировать этап миграции",
       "link": "docs/old-inventory.md",
       "source": "agent"
