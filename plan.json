@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "rotator-review",
+      "title": "Ревью секции rotator: довести до финального вида",
+      "when": "2026-11-18",
+      "time": null,
+      "status": "todo",
+      "why": "последняя активность репо - секция rotator, её надо закрыть",
+      "link": "docs/DESIGN.md",
+      "source": "agent"
+    }
+  ]
+}
