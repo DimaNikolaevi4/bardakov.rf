@@ -19,6 +19,16 @@
       "why": "без отбора контента не спланировать этап миграции",
       "link": "docs/old-inventory.md",
       "source": "agent"
+    },
+    {
+      "id": "migration-stage",
+      "title": "Определить следующий этап переноса: выборка страниц под миграцию",
+      "when": null,
+      "time": null,
+      "status": "backlog",
+      "why": "начинать после ревью rotator и отбора контента",
+      "link": "docs/DESIGN.md",
+      "source": "agent"
     }
   ]
 }
