@@ -656,7 +656,12 @@ border-radius: var(--radius-sm), font, transition). Модификаторы
 
 ## 7. Автоматический контроль качества (CI Guardrails)
 
-Все PR проходят автоматическую проверку через
+> ⚠️ **Статус на 17.11.2026:** workflow `css-guardrails.yml` временно снят из репозитория —
+> для загрузки файла нужен токен со scope `workflow`. Baseline (`.github/css-baseline.json`) сохранён,
+> правила ниже действуют как регламент и проверяются вручную/локально. Вернуть workflow — из истории
+> (`255df52` — добавление, `32ae033` и `d405f16` — снятие).
+
+После восстановления: все PR проходят автоматическую проверку через
 `.github/workflows/css-guardrails.yml`. Workflow запускается на
 `pull_request` и `push` в `main` при изменении файлов в `src/styles/`.
 
@@ -908,7 +913,7 @@ CSS-подключений в `<head>`. Размер — меньше 300 бай
 
 ### 11.4 CI-guardrails
 
-Нарушения правил 1–4 блокируются workflow `.github/workflows/css-guardrails.yml`:
+Нарушения правил 1–4 блокирует workflow `.github/workflows/css-guardrails.yml` (сейчас снят — см. примечание в §7):
 
 | Проверка | Файл | Что блокирует |
 |---|---|---|

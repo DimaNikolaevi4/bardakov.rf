@@ -289,7 +289,11 @@ bardakov.rf/
 - глобальные `:focus-visible` / `:focus` (живут в `a11y.css`);
 - утилиты (`.mt-*`, `.mb-*`, `.pt-*`, `.pb-*`).
 
-Нарушения блокируются CI (см. `.github/workflows/css-guardrails.yml`).
+Нарушения ловит guardrails-проверка CSS (правила — в `docs/DESIGN.md`, §7).
+GitHub Actions workflow `css-guardrails.yml` **сейчас снят**: файл убран из репозитория, потому что
+для его загрузки нужен токен со scope `workflow`. Baseline размеров бандла сохранён в
+`.github/css-baseline.json`; workflow восстанавливается из истории (коммиты `255df52`, `32ae033`) после
+выдачи токена с нужными правами.
 
 ---
 
